@@ -1,0 +1,17 @@
+﻿[
+  {
+    "id": "evt-demo-1",
+    "slug": "demo-fiesta",
+    "title": "Casamiento Sofi & Nico",
+    "date": "2026-12-15",
+    "location": "Salón Los Robles, Pilar",
+    "adminToken": "token-sofi-nico-2026",
+    "enabledModules": {
+      "invitacion": true,
+      "trivia": true,
+      "fotos": true
+    },
+    "createdAt": "2026-11-08T17:28:16.208Z",
+    "updatedAt": "2026-11-08T17:28:16.216Z"
+  }
+]
