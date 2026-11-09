@@ -30,3 +30,4 @@ export default async function AdminEventPage({ params }: PageProps) {
 
   return <OrganizerDashboard event={event} />;
 }
+

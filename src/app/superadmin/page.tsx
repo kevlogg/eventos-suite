@@ -29,3 +29,4 @@ export default async function SuperAdminPage({ searchParams }: SuperAdminPagePro
 
   return <SuperAdminDashboard events={events} />;
 }
+

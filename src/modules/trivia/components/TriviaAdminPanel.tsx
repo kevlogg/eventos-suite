@@ -347,3 +347,4 @@ export default function TriviaAdminPanel({ event }: Props) {
     </div>
   );
 }
+

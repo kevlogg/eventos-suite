@@ -177,3 +177,4 @@ export default function LiveMuralClient({ event }: Props) {
     </div>
   );
 }
+

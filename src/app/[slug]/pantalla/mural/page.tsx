@@ -29,3 +29,4 @@ export default async function EventLiveMuralPage({ params }: PageProps) {
 
   return <LiveMuralClient event={event} />;
 }
+

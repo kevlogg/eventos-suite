@@ -271,3 +271,4 @@ export default function FotosAdminPanel({ event }: Props) {
     </div>
   );
 }
+

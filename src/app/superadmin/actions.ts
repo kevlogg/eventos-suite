@@ -49,3 +49,4 @@ export async function handleCreateEvent(formData: FormData) {
   revalidatePath("/superadmin");
   redirect("/superadmin");
 }
+

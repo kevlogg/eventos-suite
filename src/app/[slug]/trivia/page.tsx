@@ -29,3 +29,4 @@ export default async function EventTriviaPage({ params }: PageProps) {
 
   return <TriviaPlayerClient event={event} />;
 }
+

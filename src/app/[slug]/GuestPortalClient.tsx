@@ -341,3 +341,4 @@ export default function GuestPortalClient({ event }: Props) {
     </div>
   );
 }
+

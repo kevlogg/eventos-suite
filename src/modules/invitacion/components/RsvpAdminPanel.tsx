@@ -236,3 +236,4 @@ export default function RsvpAdminPanel({ event }: Props) {
     </div>
   );
 }
+

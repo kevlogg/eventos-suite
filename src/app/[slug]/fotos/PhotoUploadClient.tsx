@@ -265,3 +265,4 @@ export default function PhotoUploadClient({ event }: Props) {
     </div>
   );
 }
+

@@ -29,3 +29,4 @@ export default async function EventGuestPage({ params }: PageProps) {
 
   return <GuestPortalClient event={event} />;
 }
+

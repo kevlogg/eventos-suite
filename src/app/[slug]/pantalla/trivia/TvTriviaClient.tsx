@@ -173,3 +173,4 @@ export default function TvTriviaClient({ event }: Props) {
     </div>
   );
 }
+

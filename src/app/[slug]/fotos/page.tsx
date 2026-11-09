@@ -29,3 +29,4 @@ export default async function EventFotosPage({ params }: PageProps) {
 
   return <PhotoUploadClient event={event} />;
 }
+

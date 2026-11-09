@@ -66,3 +66,4 @@ export interface EventPhoto {
   approved: boolean;
   createdAt: string;
 }
+
