@@ -34,14 +34,24 @@ export default function NuevoEventoClient() {
     setError(null);
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    formData.set("mod_invitacion", hasInvitacion ? "on" : "off");
-    formData.set("mod_trivia", hasTrivia ? "on" : "off");
-    formData.set("mod_fotos", hasFotos ? "on" : "off");
+    try {
+      const formData = new FormData(e.currentTarget);
+      formData.set("mod_invitacion", hasInvitacion ? "on" : "off");
+      formData.set("mod_trivia", hasTrivia ? "on" : "off");
+      formData.set("mod_fotos", hasFotos ? "on" : "off");
 
-    const res = await handleCreateEvent(formData);
-    if (res?.error) {
-      setError(res.error);
+      const res = await handleCreateEvent(formData);
+      if (res?.error) {
+        setError(res.error);
+        setLoading(false);
+      }
+    } catch (err: unknown) {
+      console.error("Error creating event:", err);
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes("NEXT_REDIRECT")) {
+        return;
+      }
+      setError(msg || "Ocurrió un error inesperado al crear el evento.");
       setLoading(false);
     }
   }

@@ -1,18 +1,34 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 import { TriviaQuestion, TriviaPlayer } from "@/types";
 
-const dataDir = path.join(process.cwd(), "data");
-
-function getTriviaFilePath(eventId: string): string {
-  if (!fs.existsSync(dataDir)) {
+function getDataDir(): string {
+  if (process.env.VERCEL) {
+    const tmp = path.join(os.tmpdir(), "data");
+    if (!fs.existsSync(tmp)) {
+      try {
+        fs.mkdirSync(tmp, { recursive: true });
+      } catch {
+        // ignore
+      }
+    }
+    return tmp;
+  }
+  const local = path.join(process.cwd(), "data");
+  if (!fs.existsSync(local)) {
     try {
-      fs.mkdirSync(dataDir, { recursive: true });
+      fs.mkdirSync(local, { recursive: true });
     } catch {
-      // ignore
+      return os.tmpdir();
     }
   }
-  return path.join(dataDir, `trivia_${eventId}.json`);
+  return local;
+}
+
+function getTriviaFilePath(eventId: string): string {
+  const dir = getDataDir();
+  return path.join(dir, `trivia_${eventId}.json`);
 }
 
 interface TriviaStore {
@@ -108,7 +124,11 @@ export function getTriviaData(eventId: string): TriviaStore {
         },
       ],
     };
-    fs.writeFileSync(filePath, JSON.stringify(initial, null, 2), "utf-8");
+    try {
+      fs.writeFileSync(filePath, JSON.stringify(initial, null, 2), "utf-8");
+    } catch {
+      // ignore
+    }
     return initial;
   }
 
@@ -129,14 +149,22 @@ export function saveTriviaQuestions(eventId: string, questions: TriviaQuestion[]
   const data = getTriviaData(eventId);
   data.questions = questions;
   if (timerSeconds) data.timerSeconds = timerSeconds;
-  fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  try {
+    fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  } catch {
+    // ignore
+  }
 }
 
 export function resetTriviaPlayers(eventId: string): void {
   const data = getTriviaData(eventId);
   data.players = [];
   data.status = "idle";
-  fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  try {
+    fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  } catch {
+    // ignore
+  }
 }
 
 export function registerPlayer(
@@ -160,7 +188,11 @@ export function registerPlayer(
   };
 
   data.players.push(newPlayer);
-  fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  try {
+    fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  } catch {
+    // ignore
+  }
   return newPlayer;
 }
 
@@ -182,6 +214,10 @@ export function recordPlayerScore(
   }
   player.updatedAt = new Date().toISOString();
 
-  fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  try {
+    fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  } catch {
+    // ignore
+  }
   return player;
 }

@@ -1,18 +1,34 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 import { EventPhoto } from "@/types";
 
-const dataDir = path.join(process.cwd(), "data");
-
-function getPhotosFilePath(eventId: string): string {
-  if (!fs.existsSync(dataDir)) {
+function getDataDir(): string {
+  if (process.env.VERCEL) {
+    const tmp = path.join(os.tmpdir(), "data");
+    if (!fs.existsSync(tmp)) {
+      try {
+        fs.mkdirSync(tmp, { recursive: true });
+      } catch {
+        // ignore
+      }
+    }
+    return tmp;
+  }
+  const local = path.join(process.cwd(), "data");
+  if (!fs.existsSync(local)) {
     try {
-      fs.mkdirSync(dataDir, { recursive: true });
+      fs.mkdirSync(local, { recursive: true });
     } catch {
-      // ignore
+      return os.tmpdir();
     }
   }
-  return path.join(dataDir, `photos_${eventId}.json`);
+  return local;
+}
+
+function getPhotosFilePath(eventId: string): string {
+  const dir = getDataDir();
+  return path.join(dir, `photos_${eventId}.json`);
 }
 
 const DEMO_PHOTOS: Omit<EventPhoto, "eventId">[] = [
@@ -52,7 +68,11 @@ export function getEventPhotos(eventId: string): EventPhoto[] {
       ...p,
       eventId,
     }));
-    fs.writeFileSync(filePath, JSON.stringify(initial, null, 2), "utf-8");
+    try {
+      fs.writeFileSync(filePath, JSON.stringify(initial, null, 2), "utf-8");
+    } catch {
+      // ignore
+    }
     return initial;
   }
 
@@ -86,7 +106,11 @@ export function addEventPhoto(
   };
 
   photos.unshift(newPhoto);
-  fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
+  try {
+    fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
+  } catch {
+    // ignore
+  }
   return newPhoto;
 }
 
@@ -95,12 +119,20 @@ export function updatePhotoStatus(eventId: string, photoId: string, approved: bo
   const p = photos.find((x) => x.id === photoId);
   if (p) {
     p.approved = approved;
-    fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
+    try {
+      fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
+    } catch {
+      // ignore
+    }
   }
 }
 
 export function deletePhoto(eventId: string, photoId: string): void {
   let photos = getEventPhotos(eventId);
   photos = photos.filter((x) => x.id !== photoId);
-  fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
+  try {
+    fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
+  } catch {
+    // ignore
+  }
 }

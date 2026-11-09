@@ -34,17 +34,27 @@ export async function handleCreateEvent(formData: FormData) {
     return { error: "Por favor completá los campos obligatorios." };
   }
 
-  await createEvent({
-    title,
-    slug,
-    date,
-    location,
-    enabledModules: {
-      invitacion: hasInvitacion,
-      trivia: hasTrivia,
-      fotos: hasFotos,
-    },
-  });
+  try {
+    await createEvent({
+      title,
+      slug,
+      date,
+      location,
+      enabledModules: {
+        invitacion: hasInvitacion,
+        trivia: hasTrivia,
+        fotos: hasFotos,
+      },
+    });
+  } catch (err: unknown) {
+    console.error("Error creating event:", err);
+    return {
+      error:
+        err instanceof Error
+          ? err.message
+          : "Error al guardar el evento en la base de datos.",
+    };
+  }
 
   revalidatePath("/superadmin");
   redirect("/superadmin");

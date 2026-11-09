@@ -1,18 +1,34 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 import { RSVP } from "@/types";
 
-const dataDir = path.join(process.cwd(), "data");
-
-function getFilePath(eventId: string): string {
-  if (!fs.existsSync(dataDir)) {
+function getDataDir(): string {
+  if (process.env.VERCEL) {
+    const tmp = path.join(os.tmpdir(), "data");
+    if (!fs.existsSync(tmp)) {
+      try {
+        fs.mkdirSync(tmp, { recursive: true });
+      } catch {
+        // ignore
+      }
+    }
+    return tmp;
+  }
+  const local = path.join(process.cwd(), "data");
+  if (!fs.existsSync(local)) {
     try {
-      fs.mkdirSync(dataDir, { recursive: true });
+      fs.mkdirSync(local, { recursive: true });
     } catch {
-      // ignore
+      return os.tmpdir();
     }
   }
-  return path.join(dataDir, `rsvps_${eventId}.json`);
+  return local;
+}
+
+function getFilePath(eventId: string): string {
+  const dir = getDataDir();
+  return path.join(dir, `rsvps_${eventId}.json`);
 }
 
 export function getRsvps(eventId: string): RSVP[] {
@@ -52,7 +68,11 @@ export function getRsvps(eventId: string): RSVP[] {
         createdAt: new Date().toISOString(),
       },
     ];
-    fs.writeFileSync(filePath, JSON.stringify(demoRsvps, null, 2), "utf-8");
+    try {
+      fs.writeFileSync(filePath, JSON.stringify(demoRsvps, null, 2), "utf-8");
+    } catch {
+      // ignore
+    }
     return demoRsvps;
   }
 
@@ -89,6 +109,10 @@ export function addRsvp(
   };
 
   rsvps.unshift(newRsvp);
-  fs.writeFileSync(getFilePath(eventId), JSON.stringify(rsvps, null, 2), "utf-8");
+  try {
+    fs.writeFileSync(getFilePath(eventId), JSON.stringify(rsvps, null, 2), "utf-8");
+  } catch {
+    // ignore
+  }
   return newRsvp;
 }
