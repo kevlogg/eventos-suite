@@ -116,3 +116,4 @@ export async function ensureSuiteSchema(): Promise<void> {
     console.error("Error creating suite tables in Turso:", err);
   }
 }
+

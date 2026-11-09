@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import os from "os";
 import { TriviaQuestion, TriviaPlayer } from "@/types";
+import { getTursoClient, ensureSuiteSchema } from "@/lib/turso";
 
 function getDataDir(): string {
   if (process.env.VERCEL) {
@@ -31,7 +32,7 @@ function getTriviaFilePath(eventId: string): string {
   return path.join(dir, `trivia_${eventId}.json`);
 }
 
-interface TriviaStore {
+export interface TriviaStore {
   timerSeconds: number;
   status: "idle" | "active" | "finished";
   questions: TriviaQuestion[];
@@ -49,44 +50,90 @@ const DEFAULT_QUESTIONS = [
   {
     orderNum: 2,
     question: "¿Qué fobia o miedo secreto confiesa cuando entra en confianza?",
-    options: ["A las cucarachas voladoras", "A quedarse sin batería en el celular", "A las alturas", "A los payasos"],
+    options: ["A las cucarachas voladoras", "A las alturas / montañas rusas", "A la oscuridad absoluta", "A los payasos"],
     correctIndex: 0,
-    explanation: "¡Aparece una cucaracha volando y corre más rápido que Usain Bolt!",
+    explanation: "¡Pánico total cuando una cucaracha abre las alas!",
   },
   {
     orderNum: 3,
-    question: "¿Cuál es su bebida o trago predilecto para arrancar la fiesta?",
-    options: ["Fernet con Coca bien espumoso", "Cerveza rubia bien helada", "Gin Tonic con frutos rojos", "Vino Malbec"],
-    correctIndex: 0,
-    explanation: "¡El 70/30 con hielo hasta el tope es su marca registrada!",
+    question: "¿Cuál es el destino de vacaciones soñado que todavía no visitaron?",
+    options: ["Playas de Tailandia", "Costa Amalfitana (Italia)", "Tokio (Japón)", "Bora Bora (Polinesia)"],
+    correctIndex: 1,
+    explanation: "¡Recorrer los pueblitos italianos en auto comiendo pasta!",
   },
   {
     orderNum: 4,
-    question: "¿Qué suele hacer siempre cuando suena su tema favorito en la pista?",
-    options: [
-      "Canta a los gritos abrazando a quien tenga al lado",
-      "Va al medio a tirar sus pasos prohibidos",
-      "Saca el celular para filmar stories",
-      "Va a la barra a pedir otro trago",
-    ],
+    question: "¿Quién es más probable que se quede dormido/a en una película?",
+    options: ["Siempre el novio / agasajado", "Siempre la novia / agasajada", "Ambos por igual a los 10 minutos", "Ninguno, son cinéfilos"],
     correctIndex: 0,
-    explanation: "¡Se transforma en cantante de recital y deja la garganta en el tema!",
+    explanation: "Apenas apagan la luz, empieza a cabecear.",
   },
   {
     orderNum: 5,
-    question: "¿Cuál es su mayor talento oculto que pocos conocen?",
-    options: [
-      "Imitar voces y personajes",
-      "Cocinar el mejor chimichurri casero",
-      "Recordar anécdotas de hace 15 años",
-      "Armar playlists temáticas perfectas",
-    ],
-    correctIndex: 0,
-    explanation: "¡Las imitaciones en reuniones son de nivel profesional!",
+    question: "¿Cuál es su comida / delivery infalible de un domingo a la noche?",
+    options: ["Pizza a la piedra", "Sushi variado", "Hamburguesas con papas", "Empanadas de carne cortada a cuchillo"],
+    correctIndex: 2,
+    explanation: "¡Una buena smash burger con fritas no falla nunca!",
   },
 ];
 
-export function getTriviaData(eventId: string): TriviaStore {
+export async function getTriviaData(eventId: string): Promise<TriviaStore> {
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+
+      // 1. Fetch questions
+      const qRes = await turso.execute({
+        sql: "SELECT * FROM suite_trivia_questions WHERE event_id = ? ORDER BY order_num ASC;",
+        args: [eventId],
+      });
+
+      let questions: TriviaQuestion[] = [];
+      if (qRes.rows.length === 0) {
+        // Seed default questions into Turso for this event
+        for (const dq of DEFAULT_QUESTIONS) {
+          await turso.execute({
+            sql: `INSERT INTO suite_trivia_questions (event_id, order_num, question, options, correct_index, explanation)
+                  VALUES (?, ?, ?, ?, ?, ?);`,
+            args: [
+              eventId,
+              dq.orderNum,
+              dq.question,
+              JSON.stringify(dq.options),
+              dq.correctIndex,
+              dq.explanation,
+            ],
+          });
+        }
+        const seededRes = await turso.execute({
+          sql: "SELECT * FROM suite_trivia_questions WHERE event_id = ? ORDER BY order_num ASC;",
+          args: [eventId],
+        });
+        questions = seededRes.rows.map(mapRowToQuestion);
+      } else {
+        questions = qRes.rows.map(mapRowToQuestion);
+      }
+
+      // 2. Fetch players
+      const pRes = await turso.execute({
+        sql: "SELECT * FROM suite_trivia_players WHERE event_id = ? ORDER BY score DESC, total_time_ms ASC;",
+        args: [eventId],
+      });
+      const players: TriviaPlayer[] = pRes.rows.map(mapRowToPlayer);
+
+      return {
+        timerSeconds: 15,
+        status: "active",
+        questions,
+        players,
+      };
+    } catch (err) {
+      console.error("Turso error in getTriviaData, falling back:", err);
+    }
+  }
+
+  // Fallback to JSON
   const filePath = getTriviaFilePath(eventId);
   if (!fs.existsSync(filePath)) {
     const initial: TriviaStore = {
@@ -101,23 +148,11 @@ export function getTriviaData(eventId: string): TriviaStore {
         {
           id: "ply-1",
           eventId,
-          firstName: "Lucas",
-          lastName: "Mendoza",
-          avatar: "🔥",
+          firstName: "Martín",
+          lastName: "Gómez",
+          avatar: "😎",
           score: 450,
           totalTimeMs: 12500,
-          isFinished: true,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        },
-        {
-          id: "ply-2",
-          eventId,
-          firstName: "Camila",
-          lastName: "Rossi",
-          avatar: "🥳",
-          score: 380,
-          totalTimeMs: 14200,
           isFinished: true,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
@@ -145,35 +180,115 @@ export function getTriviaData(eventId: string): TriviaStore {
   }
 }
 
-export function saveTriviaQuestions(eventId: string, questions: TriviaQuestion[], timerSeconds?: number): void {
-  const data = getTriviaData(eventId);
-  data.questions = questions;
-  if (timerSeconds) data.timerSeconds = timerSeconds;
+function mapRowToQuestion(r: Record<string, unknown>): TriviaQuestion {
+  let options: string[] = [];
   try {
-    fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+    options = typeof r.options === "string" ? JSON.parse(r.options) : (r.options as string[]) || [];
   } catch {
-    // ignore
+    options = [];
+  }
+  return {
+    id: Number(r.id),
+    eventId: String(r.event_id),
+    orderNum: Number(r.order_num),
+    question: String(r.question),
+    options,
+    correctIndex: Number(r.correct_index),
+    explanation: String(r.explanation || ""),
+  };
+}
+
+function mapRowToPlayer(r: Record<string, unknown>): TriviaPlayer {
+  return {
+    id: String(r.id),
+    eventId: String(r.event_id),
+    firstName: String(r.first_name),
+    lastName: String(r.last_name),
+    avatar: String(r.avatar || "🎉"),
+    score: Number(r.score || 0),
+    totalTimeMs: Number(r.total_time_ms || 0),
+    isFinished: Boolean(r.is_finished),
+    createdAt: String(r.created_at),
+    updatedAt: String(r.updated_at),
+  };
+}
+
+export async function saveTriviaQuestions(
+  eventId: string,
+  questions: TriviaQuestion[],
+  timerSeconds?: number
+): Promise<void> {
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+      await turso.execute({
+        sql: "DELETE FROM suite_trivia_questions WHERE event_id = ?;",
+        args: [eventId],
+      });
+      for (const q of questions) {
+        await turso.execute({
+          sql: `INSERT INTO suite_trivia_questions (event_id, order_num, question, options, correct_index, explanation)
+                VALUES (?, ?, ?, ?, ?, ?);`,
+          args: [
+            eventId,
+            q.orderNum,
+            q.question,
+            JSON.stringify(q.options),
+            q.correctIndex,
+            q.explanation || "",
+          ],
+        });
+      }
+      return;
+    } catch (err) {
+      console.error("Turso error in saveTriviaQuestions:", err);
+    }
+  }
+
+  // Fallback to JSON
+  try {
+    const data = await getTriviaData(eventId);
+    data.questions = questions;
+    if (timerSeconds) data.timerSeconds = timerSeconds;
+    fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  } catch (err) {
+    console.error("Fallback error in saveTriviaQuestions:", err);
   }
 }
 
-export function resetTriviaPlayers(eventId: string): void {
-  const data = getTriviaData(eventId);
-  data.players = [];
-  data.status = "idle";
+export async function resetTriviaPlayers(eventId: string): Promise<void> {
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+      await turso.execute({
+        sql: "DELETE FROM suite_trivia_players WHERE event_id = ?;",
+        args: [eventId],
+      });
+      return;
+    } catch (err) {
+      console.error("Turso error in resetTriviaPlayers:", err);
+    }
+  }
+
+  // Fallback to JSON
   try {
+    const data = await getTriviaData(eventId);
+    data.players = [];
+    data.status = "idle";
     fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
-  } catch {
-    // ignore
+  } catch (err) {
+    console.error("Fallback error in resetTriviaPlayers:", err);
   }
 }
 
-export function registerPlayer(
+export async function registerPlayer(
   eventId: string,
   firstName: string,
   lastName: string,
   avatar: string
-): TriviaPlayer {
-  const data = getTriviaData(eventId);
+): Promise<TriviaPlayer> {
   const newPlayer: TriviaPlayer = {
     id: "ply_" + Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
     eventId,
@@ -187,37 +302,96 @@ export function registerPlayer(
     updatedAt: new Date().toISOString(),
   };
 
-  data.players.push(newPlayer);
-  try {
-    fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
-  } catch {
-    // ignore
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+      await turso.execute({
+        sql: `INSERT INTO suite_trivia_players (
+          id, event_id, first_name, last_name, avatar, score, total_time_ms, is_finished, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+        args: [
+          newPlayer.id,
+          newPlayer.eventId,
+          newPlayer.firstName,
+          newPlayer.lastName,
+          newPlayer.avatar,
+          newPlayer.score,
+          newPlayer.totalTimeMs,
+          newPlayer.isFinished ? 1 : 0,
+          newPlayer.createdAt,
+          newPlayer.updatedAt,
+        ],
+      });
+      return newPlayer;
+    } catch (err) {
+      console.error("Turso error in registerPlayer, falling back:", err);
+    }
   }
+
+  // Fallback to JSON
+  try {
+    const data = await getTriviaData(eventId);
+    data.players.push(newPlayer);
+    fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
+  } catch (err) {
+    console.error("Fallback error in registerPlayer:", err);
+  }
+
   return newPlayer;
 }
 
-export function recordPlayerScore(
+export async function recordPlayerScore(
   eventId: string,
   playerId: string,
   addedScore: number,
   timeMs: number,
   isFinal: boolean
-): TriviaPlayer | null {
-  const data = getTriviaData(eventId);
-  const player = data.players.find((p) => p.id === playerId);
-  if (!player) return null;
+): Promise<TriviaPlayer | null> {
+  const now = new Date().toISOString();
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+      await turso.execute({
+        sql: `UPDATE suite_trivia_players 
+              SET score = score + ?, 
+                  total_time_ms = total_time_ms + ?, 
+                  is_finished = CASE WHEN ? = 1 THEN 1 ELSE is_finished END,
+                  updated_at = ?
+              WHERE id = ? AND event_id = ?;`,
+        args: [addedScore, timeMs, isFinal ? 1 : 0, now, playerId, eventId],
+      });
 
-  player.score += addedScore;
-  player.totalTimeMs += timeMs;
-  if (isFinal) {
-    player.isFinished = true;
+      const res = await turso.execute({
+        sql: "SELECT * FROM suite_trivia_players WHERE id = ? AND event_id = ? LIMIT 1;",
+        args: [playerId, eventId],
+      });
+
+      if (res.rows.length > 0) {
+        return mapRowToPlayer(res.rows[0] as Record<string, unknown>);
+      }
+    } catch (err) {
+      console.error("Turso error in recordPlayerScore, falling back:", err);
+    }
   }
-  player.updatedAt = new Date().toISOString();
 
+  // Fallback to JSON
   try {
+    const data = await getTriviaData(eventId);
+    const player = data.players.find((p) => p.id === playerId);
+    if (!player) return null;
+
+    player.score += addedScore;
+    player.totalTimeMs += timeMs;
+    if (isFinal) {
+      player.isFinished = true;
+    }
+    player.updatedAt = now;
     fs.writeFileSync(getTriviaFilePath(eventId), JSON.stringify(data, null, 2), "utf-8");
-  } catch {
-    // ignore
+    return player;
+  } catch (err) {
+    console.error("Fallback error in recordPlayerScore:", err);
+    return null;
   }
-  return player;
 }

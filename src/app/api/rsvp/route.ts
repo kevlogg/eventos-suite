@@ -8,7 +8,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "eventId is required" }, { status: 400 });
   }
 
-  const data = getRsvps(eventId);
+  const data = await getRsvps(eventId);
   return NextResponse.json({ rsvps: data });
 }
 
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Faltan campos obligatorios" }, { status: 400 });
     }
 
-    const saved = addRsvp(body.eventId, {
+    const saved = await addRsvp(body.eventId, {
       guestName: body.guestName,
       attending: Boolean(body.attending),
       companionsCount: Number(body.companionsCount) || 0,

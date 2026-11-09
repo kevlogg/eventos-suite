@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 import os from "os";
 import { EventPhoto } from "@/types";
+import { getTursoClient, ensureSuiteSchema } from "@/lib/turso";
+import { getSupabaseAdmin } from "@/lib/supabase";
 
 function getDataDir(): string {
   if (process.env.VERCEL) {
@@ -61,19 +63,89 @@ const DEMO_PHOTOS: Omit<EventPhoto, "eventId">[] = [
   },
 ];
 
-export function getEventPhotos(eventId: string): EventPhoto[] {
+async function uploadToSupabaseStorage(
+  eventId: string,
+  dataUrl: string
+): Promise<string> {
+  const supabase = getSupabaseAdmin();
+  if (!supabase) return dataUrl;
+
+  try {
+    const match = dataUrl.match(/^data:(image\/[a-zA-Z0-9.+]+);base64,(.+)$/);
+    if (!match) return dataUrl;
+
+    const mimeType = match[1];
+    const base64Data = match[2];
+    const buffer = Buffer.from(base64Data, "base64");
+
+    const extension = mimeType.split("/")[1]?.replace("jpeg", "jpg") || "jpg";
+    const storagePath = `${eventId}/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${extension}`;
+
+    const { data, error } = await supabase.storage
+      .from("event-photos")
+      .upload(storagePath, buffer, {
+        contentType: mimeType,
+        upsert: true,
+      });
+
+    if (error) {
+      console.error("Supabase Storage error, keeping original URL:", error);
+      return dataUrl;
+    }
+
+    const { data: pubData } = supabase.storage
+      .from("event-photos")
+      .getPublicUrl(data.path);
+
+    return pubData.publicUrl;
+  } catch (err) {
+    console.error("Error processing photo upload to Supabase Storage:", err);
+    return dataUrl;
+  }
+}
+
+export async function getEventPhotos(eventId: string): Promise<EventPhoto[]> {
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+      const res = await turso.execute({
+        sql: "SELECT * FROM suite_photos WHERE event_id = ? ORDER BY created_at DESC;",
+        args: [eventId],
+      });
+      if (res.rows.length > 0) {
+        return res.rows.map((r: Record<string, unknown>) => ({
+          id: String(r.id),
+          eventId: String(r.event_id),
+          photoUrl: String(r.photo_url),
+          authorName: String(r.author_name),
+          tableNumber: r.table_number ? Number(r.table_number) : undefined,
+          caption: r.caption ? String(r.caption) : undefined,
+          approved: Boolean(r.approved),
+          createdAt: String(r.created_at),
+        }));
+      }
+    } catch (err) {
+      console.error("Turso error in getEventPhotos, falling back to JSON:", err);
+    }
+  }
+
+  // Fallback to JSON
   const filePath = getPhotosFilePath(eventId);
   if (!fs.existsSync(filePath)) {
-    const initial: EventPhoto[] = DEMO_PHOTOS.map((p) => ({
-      ...p,
-      eventId,
-    }));
-    try {
-      fs.writeFileSync(filePath, JSON.stringify(initial, null, 2), "utf-8");
-    } catch {
-      // ignore
+    if (eventId === "evt-demo-1") {
+      const initial: EventPhoto[] = DEMO_PHOTOS.map((p) => ({
+        ...p,
+        eventId,
+      }));
+      try {
+        fs.writeFileSync(filePath, JSON.stringify(initial, null, 2), "utf-8");
+      } catch {
+        // ignore
+      }
+      return initial;
     }
-    return initial;
+    return [];
   }
 
   try {
@@ -84,7 +156,7 @@ export function getEventPhotos(eventId: string): EventPhoto[] {
   }
 }
 
-export function addEventPhoto(
+export async function addEventPhoto(
   eventId: string,
   data: {
     photoUrl: string;
@@ -92,12 +164,16 @@ export function addEventPhoto(
     tableNumber?: number;
     caption?: string;
   }
-): EventPhoto {
-  const photos = getEventPhotos(eventId);
+): Promise<EventPhoto> {
+  let photoUrl = data.photoUrl;
+  if (photoUrl.startsWith("data:image/")) {
+    photoUrl = await uploadToSupabaseStorage(eventId, photoUrl);
+  }
+
   const newPhoto: EventPhoto = {
     id: "ph_" + Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
     eventId,
-    photoUrl: data.photoUrl,
+    photoUrl,
     authorName: data.authorName.trim(),
     tableNumber: data.tableNumber,
     caption: data.caption?.trim(),
@@ -105,34 +181,96 @@ export function addEventPhoto(
     createdAt: new Date().toISOString(),
   };
 
-  photos.unshift(newPhoto);
-  try {
-    fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
-  } catch {
-    // ignore
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+      await turso.execute({
+        sql: `INSERT INTO suite_photos (
+          id, event_id, photo_url, author_name, table_number, caption, approved, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?);`,
+        args: [
+          newPhoto.id,
+          newPhoto.eventId,
+          newPhoto.photoUrl,
+          newPhoto.authorName,
+          newPhoto.tableNumber || null,
+          newPhoto.caption || null,
+          newPhoto.approved ? 1 : 0,
+          newPhoto.createdAt,
+        ],
+      });
+      return newPhoto;
+    } catch (err) {
+      console.error("Turso error in addEventPhoto, falling back:", err);
+    }
   }
+
+  // Fallback to JSON
+  try {
+    const photos = await getEventPhotos(eventId);
+    photos.unshift(newPhoto);
+    fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
+  } catch (err) {
+    console.error("Fallback error in addEventPhoto:", err);
+  }
+
   return newPhoto;
 }
 
-export function updatePhotoStatus(eventId: string, photoId: string, approved: boolean): void {
-  const photos = getEventPhotos(eventId);
-  const p = photos.find((x) => x.id === photoId);
-  if (p) {
-    p.approved = approved;
+export async function updatePhotoStatus(
+  eventId: string,
+  photoId: string,
+  approved: boolean
+): Promise<void> {
+  const turso = getTursoClient();
+  if (turso) {
     try {
-      fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
-    } catch {
-      // ignore
+      await ensureSuiteSchema();
+      await turso.execute({
+        sql: "UPDATE suite_photos SET approved = ? WHERE id = ? AND event_id = ?;",
+        args: [approved ? 1 : 0, photoId, eventId],
+      });
+      return;
+    } catch (err) {
+      console.error("Turso error in updatePhotoStatus:", err);
     }
+  }
+
+  // Fallback to JSON
+  try {
+    const photos = await getEventPhotos(eventId);
+    const p = photos.find((x) => x.id === photoId);
+    if (p) {
+      p.approved = approved;
+      fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
+    }
+  } catch (err) {
+    console.error("Fallback error in updatePhotoStatus:", err);
   }
 }
 
-export function deletePhoto(eventId: string, photoId: string): void {
-  let photos = getEventPhotos(eventId);
-  photos = photos.filter((x) => x.id !== photoId);
+export async function deletePhoto(eventId: string, photoId: string): Promise<void> {
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+      await turso.execute({
+        sql: "DELETE FROM suite_photos WHERE id = ? AND event_id = ?;",
+        args: [photoId, eventId],
+      });
+      return;
+    } catch (err) {
+      console.error("Turso error in deletePhoto:", err);
+    }
+  }
+
+  // Fallback to JSON
   try {
+    let photos = await getEventPhotos(eventId);
+    photos = photos.filter((x) => x.id !== photoId);
     fs.writeFileSync(getPhotosFilePath(eventId), JSON.stringify(photos, null, 2), "utf-8");
-  } catch {
-    // ignore
+  } catch (err) {
+    console.error("Fallback error in deletePhoto:", err);
   }
 }

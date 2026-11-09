@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "eventId is required" }, { status: 400 });
   }
 
-  const photos = getEventPhotos(eventId);
+  const photos = await getEventPhotos(eventId);
   return NextResponse.json({ photos });
 }
 
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
       if (!body.photoUrl || !body.authorName) {
         return NextResponse.json({ error: "Foto y nombre son obligatorios" }, { status: 400 });
       }
-      const saved = addEventPhoto(eventId, {
+      const saved = await addEventPhoto(eventId, {
         photoUrl: body.photoUrl,
         authorName: body.authorName,
         tableNumber: body.tableNumber ? Number(body.tableNumber) : undefined,
@@ -40,12 +40,12 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === "moderate") {
-      updatePhotoStatus(eventId, body.photoId, Boolean(body.approved));
+      await updatePhotoStatus(eventId, body.photoId, Boolean(body.approved));
       return NextResponse.json({ success: true });
     }
 
     if (action === "delete") {
-      deletePhoto(eventId, body.photoId);
+      await deletePhoto(eventId, body.photoId);
       return NextResponse.json({ success: true });
     }
 

@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "eventId is required" }, { status: 400 });
   }
 
-  const data = getTriviaData(eventId);
+  const data = await getTriviaData(eventId);
   return NextResponse.json(data);
 }
 
@@ -28,22 +28,22 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === "save_questions") {
-      saveTriviaQuestions(eventId, body.questions, body.timerSeconds);
+      await saveTriviaQuestions(eventId, body.questions, body.timerSeconds);
       return NextResponse.json({ success: true });
     }
 
     if (action === "reset_players") {
-      resetTriviaPlayers(eventId);
+      await resetTriviaPlayers(eventId);
       return NextResponse.json({ success: true });
     }
 
     if (action === "register") {
-      const player = registerPlayer(eventId, body.firstName, body.lastName, body.avatar);
+      const player = await registerPlayer(eventId, body.firstName, body.lastName, body.avatar);
       return NextResponse.json({ success: true, player });
     }
 
     if (action === "submit_score") {
-      const updated = recordPlayerScore(
+      const updated = await recordPlayerScore(
         eventId,
         body.playerId,
         body.addedScore || 0,
