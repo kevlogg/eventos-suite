@@ -413,12 +413,20 @@ export default function HomePage() {
         {/* ─── DETALLE SERVICIO 03: FOTOS POR QR & MURAL DE PANTALLA ─── */}
         <section
           id="servicio-fotos"
-          className="border-t border-white/10 py-20 sm:py-28 relative overflow-hidden bg-transparent"
+          className="border-y border-white/20 py-20 sm:py-28 relative overflow-hidden bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-white/[0.08] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),inset_0_-1px_1px_rgba(255,255,255,0.2),0_15px_45px_rgba(0,0,0,0.4)]"
         >
-          {/* Ambient Glow */}
+          {/* Ambient Frosted Glass Luminous Glazes */}
           <div
             aria-hidden="true"
-            className="absolute bottom-1/4 left-1/3 w-96 h-96 rounded-full bg-pink-600/10 blur-3xl pointer-events-none"
+            className="absolute -top-32 left-1/2 -translate-x-1/2 w-3/4 max-w-4xl h-64 bg-white/[0.06] rounded-full blur-3xl pointer-events-none"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-pink-500/12 blur-3xl pointer-events-none"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute bottom-10 right-1/4 w-80 h-80 rounded-full bg-rose-500/10 blur-3xl pointer-events-none"
           />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
