@@ -488,7 +488,7 @@ export default function DiscoBallHero() {
       {/* ─── PANTALLA 1: HERO SCREEN PINNED (STICKY TOP-0 H-SCREEN) ─── */}
       <section
         ref={heroRef}
-        className="sticky top-0 h-screen w-full z-10 flex flex-col justify-between items-center py-8 px-4 select-none cursor-grab active:cursor-grabbing bg-transparent"
+        className="sticky top-0 h-screen w-full max-w-full overflow-hidden z-10 flex flex-col justify-between items-center py-8 px-4 select-none cursor-grab active:cursor-grabbing bg-transparent"
         style={{ touchAction: "pan-y" }}
       >
         {/* Top Hint: Fades out on drag or scroll */}
@@ -510,7 +510,7 @@ export default function DiscoBallHero() {
           {/* Sombra ambiental oscura de respaldo para aislar el texto de los rayos de luz */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 -inset-x-8 -inset-y-12 bg-radial from-black/90 via-black/60 to-transparent rounded-full blur-3xl pointer-events-none -z-10"
+            className="absolute inset-0 inset-x-0 -inset-y-12 bg-radial from-black/90 via-black/60 to-transparent rounded-full blur-3xl pointer-events-none -z-10"
           />
 
           <h1

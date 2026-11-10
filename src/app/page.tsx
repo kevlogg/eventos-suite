@@ -56,17 +56,17 @@ function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
 
 export default function HomePage() {
   return (
-    <div className="relative bg-transparent text-slate-100 selection:bg-indigo-500 selection:text-white min-h-screen">
+    <div className="relative bg-transparent text-slate-100 selection:bg-indigo-500 selection:text-white min-h-screen w-full max-w-full overflow-x-hidden">
       {/* ─── PANTALLA 1: BOLA DE BOLICHE 3D & CANVAS DE LUCES PERSISTENTE ─── */}
       <DiscoBallHero />
 
       {/* ─── EFECTO CORTINA: SECCIÓN QUE SUBE AL HACER SCROLL SOBRE EL HERO (Z-20) ─── */}
       <div
         id="servicios"
-        className="relative z-20 bg-[#06060c]/95 md:bg-gradient-to-b md:from-[#020205]/45 md:via-[#020205]/55 md:to-[#020205]/65 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/15 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-none md:backdrop-blur-[6px] min-h-screen"
+        className="relative z-20 bg-[#06060c]/95 md:bg-gradient-to-b md:from-[#020205]/45 md:via-[#020205]/55 md:to-[#020205]/65 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/15 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-none md:backdrop-blur-[6px] min-h-screen w-full max-w-full overflow-x-hidden"
       >
         {/* ─── SECCIÓN 2: PRESENTACIÓN DE LOS 3 SERVICIOS PRINCIPALES ─── */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20 w-full overflow-hidden">
           <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-6 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               Servicios interactivos para{" "}
@@ -294,7 +294,7 @@ export default function HomePage() {
             </div>
 
             {/* Carrusel Horizontal de Mockups de Celulares con Auto-Scroll */}
-            <div className="w-full pt-4">
+            <div className="w-full max-w-full overflow-hidden pt-4">
               <TemplatesPhoneCarousel />
             </div>
           </div>
@@ -531,7 +531,7 @@ export default function HomePage() {
         </section>
 
         {/* ─── FOOTER & SUPERADMIN CTA ─── */}
-        <footer className="border-t border-white/10 py-12 sm:py-16 bg-black/35 backdrop-blur-md">
+        <footer className="border-t border-white/10 py-12 sm:py-16 bg-black/35 backdrop-blur-md w-full max-w-full overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-8">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">

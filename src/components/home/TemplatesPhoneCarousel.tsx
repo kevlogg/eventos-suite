@@ -380,7 +380,7 @@ export default function TemplatesPhoneCarousel() {
   };
 
   return (
-    <div className="w-full flex flex-col gap-8 relative">
+    <div className="w-full max-w-full overflow-hidden flex flex-col gap-8 relative">
       {/* ─── CATEGORY FILTER PILLS & CONTROLS ─── */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2.5">
