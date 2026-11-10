@@ -514,6 +514,8 @@ export default function TemplatesPhoneCarousel() {
                           <img
                             src="/images/characters/messi.png"
                             alt="Messi Campeón"
+                            loading="lazy"
+                            decoding="async"
                             className="h-36 w-auto object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.65)] select-none group-hover/phone:scale-105 transition-transform duration-500"
                           />
                         </div>
@@ -524,11 +526,15 @@ export default function TemplatesPhoneCarousel() {
                           <img
                             src="/images/characters/woody.png"
                             alt="Woody"
+                            loading="lazy"
+                            decoding="async"
                             className="h-34 w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] select-none"
                           />
                           <img
                             src="/images/characters/buzz.png"
                             alt="Buzz Lightyear"
+                            loading="lazy"
+                            decoding="async"
                             className="h-28 w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] select-none transform rotate-6"
                           />
                         </div>
@@ -539,6 +545,8 @@ export default function TemplatesPhoneCarousel() {
                           <img
                             src="/images/characters/cinderella.png"
                             alt="Cenicienta Real"
+                            loading="lazy"
+                            decoding="async"
                             className="h-36 w-auto object-contain drop-shadow-[0_15px_30px_rgba(244,114,182,0.55)] select-none group-hover/phone:scale-105 transition-transform duration-500"
                           />
                         </div>
@@ -549,6 +557,8 @@ export default function TemplatesPhoneCarousel() {
                           <img
                             src="/images/characters/kpop_animated.png"
                             alt="K-Pop Idols"
+                            loading="lazy"
+                            decoding="async"
                             className="h-36 w-auto object-contain drop-shadow-[0_15px_35px_rgba(236,72,153,0.7)] select-none rounded-2xl border-2 border-pink-400/50 group-hover/phone:scale-105 transition-transform duration-500"
                           />
                         </div>
@@ -560,6 +570,8 @@ export default function TemplatesPhoneCarousel() {
                             <img
                               src="/images/characters/dj_party.jpg"
                               alt="DJ Stage"
+                              loading="lazy"
+                              decoding="async"
                               className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-purple-950/85 via-transparent to-transparent flex items-end justify-center pb-1">
@@ -574,6 +586,8 @@ export default function TemplatesPhoneCarousel() {
                           <img
                             src="/images/characters/gatsby.png"
                             alt="Gran Gatsby"
+                            loading="lazy"
+                            decoding="async"
                             className="h-36 w-auto object-contain drop-shadow-[0_15px_35px_rgba(212,175,55,0.75)] select-none rounded-2xl border-2 border-amber-400/60 group-hover/phone:scale-105 transition-transform duration-500"
                           />
                         </div>
@@ -585,6 +599,8 @@ export default function TemplatesPhoneCarousel() {
                             <img
                               src="/images/characters/casino_vip.jpg"
                               alt="Casino VIP"
+                              loading="lazy"
+                              decoding="async"
                               className="w-full h-full object-cover"
                             />
                             <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/85 border border-amber-400/70 text-[8px] font-black text-amber-300 tracking-wider whitespace-nowrap">

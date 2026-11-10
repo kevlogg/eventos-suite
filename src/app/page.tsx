@@ -322,6 +322,8 @@ export default function HomePage() {
                       src="/images/services/trivia_show_event.jpg"
                       alt="Presentador en vivo en pantalla gigante con podio y mesas de invitados jugando con código QR"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                      decoding="async"
                     />
 
                     {/* Live Badge Overlay */}
@@ -423,11 +425,6 @@ export default function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               {/* Text & Features */}
               <div className="lg:col-span-6 flex flex-col gap-6">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-bold uppercase tracking-widest w-fit">
-                  <Camera size={14} className="text-pink-400" />
-                  Servicio 03 · Transmisión en Vivo
-                </div>
-
                 <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
                   Mural de Fotos en Vivo:{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-400 to-cyan-400">
@@ -490,65 +487,32 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Visual Mockup Mural Wall */}
+              {/* Visual: Mural de Fotos en Vivo en Pantalla Gigante & Mesa con QR */}
               <div className="lg:col-span-6">
-                <div className="relative rounded-3xl p-1 bg-gradient-to-br from-pink-500/40 via-cyan-500/30 to-purple-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
-                  <div className="rounded-[22px] bg-slate-900/90 p-6 sm:p-8 border border-slate-800 flex flex-col gap-6">
-                    {/* Header */}
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                      <div className="flex items-center gap-2 text-pink-400 text-xs font-bold uppercase tracking-wider">
-                        <Camera size={16} />
-                        <span>Mural en Pantalla · Transmisión en Vivo</span>
-                      </div>
-                      <span className="text-xs font-mono text-cyan-400">
-                        148 fotos compartidas
+                <div className="relative rounded-[32px] p-1.5 bg-gradient-to-br from-pink-500/50 via-rose-500/30 to-purple-500/40 shadow-[0_25px_60px_rgba(0,0,0,0.85)] group">
+                  <div className="relative rounded-[26px] overflow-hidden bg-slate-950 aspect-[4/3] sm:aspect-[16/11]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/images/services/mural_fotos_event.jpg"
+                      alt="Mural de fotos en vivo proyectado en pantalla gigante con invitados escaneando el código QR de la mesa"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                      decoding="async"
+                    />
+
+                    {/* Live Badge Overlay */}
+                    <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-pink-400/50 flex items-center gap-2 text-[11px] font-black tracking-wider uppercase text-pink-200 shadow-lg">
+                      <span className="w-2 h-2 rounded-full bg-pink-500 animate-ping" />
+                      <span>Transmisión en Vivo</span>
+                    </div>
+
+                    {/* Caption Banner at bottom */}
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent p-4 sm:p-5 flex flex-col gap-1">
+                      <span className="text-xs sm:text-sm font-black text-white drop-shadow-md">
+                        📸 QR en Cada Mesa + Fotos Proyectadas al Instante en Pantalla
                       </span>
-                    </div>
-
-                    {/* Photo Grid Preview */}
-                    <div className="grid grid-cols-2 gap-3.5">
-                      <div className="rounded-2xl overflow-hidden bg-slate-800/80 border border-pink-500/30 relative aspect-square flex flex-col justify-end p-3 shadow-md group">
-                        <div
-                          className="absolute inset-0 bg-cover bg-center"
-                          style={{ backgroundImage: "url('/images/wedding/wedding-1.jpg')" }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                        <div className="relative z-10">
-                          <span className="text-[10px] text-pink-300 font-bold block">Camila & Nico</span>
-                          <span className="text-[11px] text-white font-medium line-clamp-1">
-                            ¡Qué noche increíble! Viva los novios 🥂
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="rounded-2xl overflow-hidden bg-slate-800/80 border border-cyan-500/30 relative aspect-square flex flex-col justify-end p-3 shadow-md group">
-                        <div
-                          className="absolute inset-0 bg-cover bg-center"
-                          style={{ backgroundImage: "url('/images/wedding/wedding-2.jpg')" }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                        <div className="relative z-10">
-                          <span className="text-[10px] text-cyan-300 font-bold block">Mesa 8 · Los de Siempre</span>
-                          <span className="text-[11px] text-white font-medium line-clamp-1">
-                            No paramos de bailar 🕺💃
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* QR Code Scan Bar */}
-                    <div className="p-3.5 rounded-2xl bg-black/60 border border-slate-800 flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center">
-                          <QrCode className="w-full h-full text-slate-950" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-bold text-white">Escaneá para subir tu foto</div>
-                          <div className="text-[10px] text-slate-400">Se proyecta en tiempo real</div>
-                        </div>
-                      </div>
-                      <span className="text-xs font-semibold px-3 py-1 rounded-full bg-pink-500/20 text-pink-300">
-                        En Vivo
+                      <span className="text-[10px] sm:text-xs text-pink-200/90 font-medium drop-shadow-sm">
+                        Los invitados capturan momentos únicos desde sus celulares y se proyectan al instante con dedicatorias.
                       </span>
                     </div>
                   </div>
@@ -594,28 +558,35 @@ export default function HomePage() {
               </a>
             </div>
 
-            <div className="border-t border-slate-900 w-full pt-8 text-xs text-slate-600">
-              Eventos Suite &copy; {new Date().getFullYear()} — Diseñado para fiestas inolvidables.
+            <div className="border-t border-white/10 w-full pt-8 text-xs text-slate-400">
+              Servicios digitales desarrollados por{" "}
+              <a
+                href="https://kevdev.net.ar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-white hover:text-indigo-400 transition-colors underline decoration-indigo-500/50 underline-offset-4"
+              >
+                kevdev
+              </a>
             </div>
           </div>
         </footer>
-
-        {/* Botón flotante de WhatsApp */}
-        <a
-          href="https://wa.me/5492235851419?text=Hola!%20Quisiera%20consultar%20sobre%20los%20servicios%20de%20Eventos%20Suite."
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Contactar por WhatsApp"
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black text-sm shadow-[0_10px_35px_rgba(37,211,102,0.55)] transition-all transform hover:scale-105 active:scale-95 group"
-        >
-          <span className="relative flex h-3.5 w-3.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white" />
-          </span>
-          <WhatsAppIcon className="w-6 h-6 text-slate-950 shrink-0" />
-          <span className="hidden sm:inline-block tracking-wide">¿Tenés dudas? Chateá con nosotros</span>
-        </a>
       </div>
+
+      {/* Botón flotante de WhatsApp circular y fijo en el viewport (solo icono, sin texto) */}
+      <a
+        href="https://wa.me/5492235851419?text=Hola!%20Quisiera%20consultar%20sobre%20los%20servicios%20de%20Eventos%20Suite."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Contactar por WhatsApp"
+        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-[0_10px_35px_rgba(37,211,102,0.6)] transition-all transform hover:scale-110 active:scale-95 group"
+      >
+        <span className="relative flex h-3.5 w-3.5 absolute top-1 right-1">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white" />
+        </span>
+        <WhatsAppIcon className="w-8 h-8 text-white shrink-0 drop-shadow-md" />
+      </a>
     </div>
   );
 }

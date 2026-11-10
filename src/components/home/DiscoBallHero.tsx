@@ -74,7 +74,7 @@ export default function DiscoBallHero() {
     });
     renderer.setClearColor(0x020205, 1);
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.35;
 
@@ -348,10 +348,13 @@ export default function DiscoBallHero() {
 
     const tempColor = new THREE.Color();
     const clock = new THREE.Clock();
+    let lastTileUpdate = 0;
 
     // ─── 9. ANIMATION LOOP ───
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
+
+      if (document.hidden) return;
 
       const elapsedTime = clock.getElapsedTime();
 
@@ -377,27 +380,31 @@ export default function DiscoBallHero() {
 
       starField.rotation.y = elapsedTime * 0.012;
 
-      // Dynamic shifting neon tiles on top of silver base
-      for (let i = 0; i < tilesData.length; i++) {
-        const t = tilesData[i];
+      // Dynamic shifting neon tiles (throttled to ~25fps, skipped when disco ball is scrolled past)
+      const isBallVisible = window.scrollY < window.innerHeight * 1.1;
+      if (isBallVisible && elapsedTime - lastTileUpdate > 0.04) {
+        lastTileUpdate = elapsedTime;
+        for (let i = 0; i < tilesData.length; i++) {
+          const t = tilesData[i];
 
-        const wave1 = Math.sin(t.ring * 0.65 - elapsedTime * 2.2 + t.col * 0.35);
-        const wave2 = Math.cos(t.col * 0.5 + elapsedTime * 1.8 - t.ring * 0.4);
-        const wave3 = Math.sin(t.ring * 0.9 + t.col * 0.2 + elapsedTime * 1.5);
+          const wave1 = Math.sin(t.ring * 0.65 - elapsedTime * 2.2 + t.col * 0.35);
+          const wave2 = Math.cos(t.col * 0.5 + elapsedTime * 1.8 - t.ring * 0.4);
+          const wave3 = Math.sin(t.ring * 0.9 + t.col * 0.2 + elapsedTime * 1.5);
 
-        const isColoredCluster = wave1 > 0.72 && wave2 > 0.35;
-        const isRunnerBeam = wave3 > 0.88;
+          const isColoredCluster = wave1 > 0.72 && wave2 > 0.35;
+          const isRunnerBeam = wave3 > 0.88;
 
-        if (isColoredCluster || isRunnerBeam) {
-          const colorIdx =
-            Math.floor(Math.abs(t.ring * 3 + t.col + elapsedTime * 2)) % neonPalette.length;
-          tempColor.copy(neonPalette[colorIdx]);
-          instancedTiles.setColorAt(i, tempColor);
-        } else {
-          instancedTiles.setColorAt(i, t.baseColor);
+          if (isColoredCluster || isRunnerBeam) {
+            const colorIdx =
+              Math.floor(Math.abs(t.ring * 3 + t.col + elapsedTime * 2)) % neonPalette.length;
+            tempColor.copy(neonPalette[colorIdx]);
+            instancedTiles.setColorAt(i, tempColor);
+          } else {
+            instancedTiles.setColorAt(i, t.baseColor);
+          }
         }
+        instancedTiles.instanceColor!.needsUpdate = true;
       }
-      instancedTiles.instanceColor!.needsUpdate = true;
 
       renderer.render(scene, camera);
     };
