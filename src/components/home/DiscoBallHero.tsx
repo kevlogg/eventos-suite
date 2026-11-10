@@ -425,7 +425,7 @@ export default function DiscoBallHero() {
       <div
         ref={canvasContainerRef}
         aria-hidden="true"
-        className="fixed inset-0 w-full h-full -z-10 pointer-events-none"
+        className="fixed inset-0 w-full h-full z-0 pointer-events-none"
       />
 
       {/* ─── PANTALLA 1: HERO SCREEN PINNED (STICKY TOP-0 H-SCREEN) ─── */}
