@@ -235,20 +235,20 @@ export default function DiscoMirrorHover({
           const shade = SILVER_SHADES[Math.abs(r * 5 + colId * 3) % SILVER_SHADES.length];
 
           if (dist > spotlightRadius) {
-            // ─── RESTING ROTATING MIRROR TILE ───
+            // ─── RESTING ROTATING MIRROR TILE (DARK SUBTLE CHROME TO KEEP TEXT READABLE) ───
             drawTilePath(ctx, x, y, tileSize, cornerRadius);
 
-            const restAlpha = 0.28 * hoverAlpha;
+            const restAlpha = 0.17 * hoverAlpha;
             const grad = ctx.createLinearGradient(x, y, x + tileSize, y + tileSize);
-            grad.addColorStop(0, `rgba(${shade.r}, ${shade.g}, ${shade.b}, ${restAlpha + 0.1})`);
-            grad.addColorStop(0.5, `rgba(${Math.floor(shade.r * 0.7)}, ${Math.floor(shade.g * 0.7)}, ${Math.floor(shade.b * 0.7)}, ${restAlpha})`);
-            grad.addColorStop(1, `rgba(18, 22, 32, ${restAlpha + 0.12})`);
+            grad.addColorStop(0, `rgba(${shade.r}, ${shade.g}, ${shade.b}, ${restAlpha + 0.08})`);
+            grad.addColorStop(0.5, `rgba(${Math.floor(shade.r * 0.6)}, ${Math.floor(shade.g * 0.6)}, ${Math.floor(shade.b * 0.6)}, ${restAlpha})`);
+            grad.addColorStop(1, `rgba(10, 12, 18, ${restAlpha + 0.1})`);
 
             ctx.fillStyle = grad;
             ctx.fill();
 
             // Top specular bevel line
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.35 * hoverAlpha})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.22 * hoverAlpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(x + cornerRadius, y + 0.5);
@@ -256,7 +256,7 @@ export default function DiscoMirrorHover({
             ctx.stroke();
 
             // Left specular bevel line
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.22 * hoverAlpha})`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.16 * hoverAlpha})`;
             ctx.beginPath();
             ctx.moveTo(x + 0.5, y + cornerRadius);
             ctx.lineTo(x + 0.5, y + tileSize - cornerRadius);
