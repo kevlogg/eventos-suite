@@ -22,6 +22,38 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+function InstagramIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.04 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.04 20.16C10.66 20.16 9.3 19.8 8.1 19.11L7.81 18.94L4.69 19.76L5.52 16.72L5.33 16.42C4.58 15.22 4.19 13.82 4.19 11.91C4.19 7.37 7.89 3.67 12.04 3.67ZM8.63 7.33C8.44 7.33 8.24 7.34 8.06 7.69C7.87 8.04 7.33 8.56 7.33 9.61C7.33 10.66 8.1 11.67 8.21 11.82C8.32 11.97 9.71 14.11 11.83 15.03C13.59 15.79 13.95 15.64 14.33 15.6C14.71 15.56 15.57 15.09 15.75 14.59C15.93 14.09 15.93 13.66 15.88 13.57C15.83 13.48 15.69 13.43 15.46 13.31C15.23 13.19 14.12 12.65 13.91 12.58C13.7 12.5 13.55 12.46 13.4 12.69C13.25 12.92 12.82 13.43 12.69 13.58C12.56 13.73 12.43 13.75 12.2 13.63C11.97 13.51 11.23 13.27 10.35 12.49C9.66 11.88 9.2 11.13 9.07 10.9C8.94 10.67 9.06 10.55 9.17 10.44C9.27 10.34 9.39 10.18 9.51 10.04C9.63 9.9 9.67 9.79 9.75 9.63C9.83 9.47 9.79 9.33 9.73 9.21C9.67 9.09 9.21 7.97 9.02 7.51C8.83 7.06 8.64 7.12 8.5 7.11L8.63 7.33Z" />
+    </svg>
+  );
+}
+
 export default function HomePage() {
   return (
     <div className="relative bg-transparent text-slate-100 selection:bg-indigo-500 selection:text-white min-h-screen">
@@ -176,6 +208,29 @@ export default function HomePage() {
                     Decile adiós a las tarjetas de papel o los PDFs estáticos. Diseñamos invitaciones web totalmente interactivas, con sobre virtual con sello de lacre, música de fondo, animaciones y personajes integrados a la temática.
                   </p>
                 </div>
+
+                {/* Botones de acción: Instagram & WhatsApp */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1">
+                  <a
+                    href="https://www.instagram.com/p/De5SsnIRwwI/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] hover:opacity-95 text-white font-black text-sm sm:text-base shadow-[0_10px_25px_rgba(253,29,29,0.35)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 shrink-0"
+                  >
+                    <InstagramIcon className="w-5 h-5 text-white shrink-0" />
+                    <span>Ver en Instagram</span>
+                  </a>
+
+                  <a
+                    href="https://wa.me/5492235851419?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20el%20servicio%20de%20Invitaciones%20Digitales%20Interactivas."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black text-sm sm:text-base shadow-[0_10px_25px_rgba(37,211,102,0.3)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    <WhatsAppIcon className="w-5 h-5 shrink-0" />
+                    <span>Quiero saber más sobre este servicio</span>
+                  </a>
+                </div>
               </div>
 
               {/* 4 Cards descriptivas del servicio con hover de espejos giratorios */}
@@ -258,65 +313,31 @@ export default function HomePage() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Visual Mockup TV & Mobile */}
+              {/* Visual: Presentador en Vivo, Pantalla Gigante con Podio y Mesas con QR */}
               <div className="lg:col-span-6 order-2 lg:order-1">
-                <div className="relative rounded-3xl p-1 bg-gradient-to-br from-purple-500/40 via-indigo-500/30 to-pink-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
-                  <div className="rounded-[22px] bg-slate-900/90 p-6 sm:p-8 border border-slate-800 flex flex-col gap-6">
-                    {/* TV Screen Display Mockup */}
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-                      <div className="flex items-center gap-2 text-purple-400 text-xs font-bold uppercase tracking-wider">
-                        <Tv size={16} />
-                        <span>Pantalla Gigante del Salón</span>
-                      </div>
-                      <span className="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-semibold animate-pulse">
-                        ● EN VIVO
+                <div className="relative rounded-[32px] p-1.5 bg-gradient-to-br from-purple-500/50 via-indigo-500/30 to-pink-500/40 shadow-[0_25px_60px_rgba(0,0,0,0.85)] group">
+                  <div className="relative rounded-[26px] overflow-hidden bg-slate-950 aspect-[4/3] sm:aspect-[16/11]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/images/services/trivia_show_event.jpg"
+                      alt="Presentador en vivo en pantalla gigante con podio y mesas de invitados jugando con código QR"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+
+                    {/* Live Badge Overlay */}
+                    <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-purple-400/50 flex items-center gap-2 text-[11px] font-black tracking-wider uppercase text-purple-200 shadow-lg">
+                      <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+                      <span>En Vivo en el Evento</span>
+                    </div>
+
+                    {/* Caption Banner at bottom */}
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/95 via-black/75 to-transparent p-4 sm:p-5 flex flex-col gap-1">
+                      <span className="text-xs sm:text-sm font-black text-white drop-shadow-md">
+                        🎤 Conducción en Vivo + Pantalla Gigante LED + Mesas Jugando por QR
                       </span>
-                    </div>
-
-                    {/* Question on Screen */}
-                    <div className="p-5 rounded-2xl bg-purple-950/40 border border-purple-500/30">
-                      <div className="text-xs font-semibold text-purple-300 mb-1">
-                        Pregunta 4 de 10 · 15 segundos restantes
-                      </div>
-                      <h5 className="text-lg font-bold text-white mb-3">
-                        ¿En qué viaje se conocieron los novios?
-                      </h5>
-                      <div className="grid grid-cols-2 gap-2 text-xs">
-                        <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-slate-300">
-                          A) Bariloche
-                        </div>
-                        <div className="p-2.5 rounded-xl bg-purple-600/40 border border-purple-400 text-white font-semibold">
-                          B) Río de Janeiro ✓
-                        </div>
-                        <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-slate-300">
-                          C) Mendoza
-                        </div>
-                        <div className="p-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-slate-300">
-                          D) Cancún
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Live Leaderboard */}
-                    <div className="flex flex-col gap-2">
-                      <div className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
-                        <span>Podio en Tiempo Real</span>
-                        <span>Puntos</span>
-                      </div>
-                      <div className="flex items-center justify-between p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs font-semibold text-amber-200">
-                        <span className="flex items-center gap-2">
-                          <span>🥇</span>
-                          <span>Mesa 4 · Los Primos</span>
-                        </span>
-                        <span>4.850 pts</span>
-                      </div>
-                      <div className="flex items-center justify-between p-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-xs text-slate-300">
-                        <span className="flex items-center gap-2">
-                          <span>🥈</span>
-                          <span>Mesa 7 · Amigos del Club</span>
-                        </span>
-                        <span>4.420 pts</span>
-                      </div>
+                      <span className="text-[10px] sm:text-xs text-purple-200/90 font-medium drop-shadow-sm">
+                        Los invitados compiten en tiempo real desde sus celulares mientras el podio se actualiza al instante en la pantalla.
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -324,11 +345,6 @@ export default function HomePage() {
 
               {/* Text & Features */}
               <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col gap-6">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold uppercase tracking-widest w-fit">
-                  <Trophy size={14} className="text-purple-400" />
-                  Servicio 02 · Animación Interactiva
-                </div>
-
                 <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
                   Trivia Fiesta:{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400">
@@ -373,6 +389,19 @@ export default function HomePage() {
                       <p className="text-xs text-slate-200 font-medium mt-0.5">Puntajes calculados por rapidez y acierto, con animación de coronación en pantalla gigante.</p>
                     </div>
                   </div>
+                </div>
+
+                {/* Botón WhatsApp de contacto */}
+                <div className="pt-2">
+                  <a
+                    href="https://wa.me/5492235851419?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20el%20servicio%20de%20Trivia%20Fiesta%20en%20Vivo."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black text-sm sm:text-base shadow-[0_10px_25px_rgba(37,211,102,0.3)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto"
+                  >
+                    <WhatsAppIcon className="w-5 h-5 shrink-0" />
+                    <span>Quiero saber más sobre este servicio</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -445,6 +474,19 @@ export default function HomePage() {
                       <p className="text-xs text-slate-200 font-medium mt-1">Los anfitriones descargan todas las fotos en alta resolución.</p>
                     </div>
                   </div>
+                </div>
+
+                {/* Botón WhatsApp de contacto */}
+                <div className="pt-2">
+                  <a
+                    href="https://wa.me/5492235851419?text=Hola!%20Quiero%20saber%20m%C3%A1s%20sobre%20el%20servicio%20de%20Mural%20de%20Fotos%20Din%C3%A1micas%20por%20QR."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black text-sm sm:text-base shadow-[0_10px_25px_rgba(37,211,102,0.3)] transition-all transform hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto"
+                  >
+                    <WhatsAppIcon className="w-5 h-5 shrink-0" />
+                    <span>Quiero saber más sobre este servicio</span>
+                  </a>
                 </div>
               </div>
 
@@ -557,6 +599,22 @@ export default function HomePage() {
             </div>
           </div>
         </footer>
+
+        {/* Botón flotante de WhatsApp */}
+        <a
+          href="https://wa.me/5492235851419?text=Hola!%20Quisiera%20consultar%20sobre%20los%20servicios%20de%20Eventos%20Suite."
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contactar por WhatsApp"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black text-sm shadow-[0_10px_35px_rgba(37,211,102,0.55)] transition-all transform hover:scale-105 active:scale-95 group"
+        >
+          <span className="relative flex h-3.5 w-3.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white" />
+          </span>
+          <WhatsAppIcon className="w-6 h-6 text-slate-950 shrink-0" />
+          <span className="hidden sm:inline-block tracking-wide">¿Tenés dudas? Chateá con nosotros</span>
+        </a>
       </div>
     </div>
   );
