@@ -143,12 +143,20 @@ export default function HomePage() {
         {/* ─── DETALLE SERVICIO 01: INVITACIONES DIGITALES ─── */}
         <section
           id="servicio-invitaciones"
-          className="border-t border-white/10 py-20 sm:py-28 relative overflow-hidden bg-transparent"
+          className="border-y border-white/20 py-20 sm:py-28 relative overflow-hidden bg-gradient-to-b from-white/[0.08] via-white/[0.04] to-white/[0.08] backdrop-blur-xl shadow-[inset_0_1px_1px_rgba(255,255,255,0.35),inset_0_-1px_1px_rgba(255,255,255,0.2),0_15px_45px_rgba(0,0,0,0.4)]"
         >
-          {/* Ambient Glow */}
+          {/* Ambient Frosted Glass Luminous Glazes */}
           <div
             aria-hidden="true"
-            className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"
+            className="absolute -top-32 left-1/2 -translate-x-1/2 w-3/4 max-w-4xl h-64 bg-white/[0.06] rounded-full blur-3xl pointer-events-none"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-amber-500/12 blur-3xl pointer-events-none"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute bottom-10 -right-32 w-96 h-96 rounded-full bg-yellow-400/8 blur-3xl pointer-events-none"
           />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col gap-12 sm:gap-16">
@@ -156,9 +164,9 @@ export default function HomePage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Text & Intro */}
               <div className="lg:col-span-6 flex flex-col gap-6">
-                <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+                <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
                   Invitaciones Digitales que{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 drop-shadow-[0_2px_10px_rgba(245,158,11,0.3)]">
                     enamoran a tus invitados
                   </span>
                 </h3>
