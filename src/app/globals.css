@@ -3,6 +3,8 @@
 @theme {
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-cormorant: var(--font-cormorant), Georgia, serif;
+  --font-jakarta: var(--font-jakarta), system-ui, sans-serif;
 }
 
 :root {
@@ -13,7 +15,105 @@
   --accent: #ec4899;
   --surface: #131b2e;
   --surface-border: rgba(255, 255, 255, 0.08);
+
+  /* Invitation Theme Tokens */
+  --cream:        #FDFBF7;
+  --cream-2:      #FAF5EE;
+  --cream-3:      #F5EDD9;
+  --gold:         #C59B27;
+  --gold-light:   #D4A373;
+  --gold-pale:    #EDD9A3;
+  --terracotta:   #8B4513;
+  --terracotta-2: #A0522D;
+  --dark-brown:   #2B2118;
+  --dark-brown-70: rgba(43,33,24,0.7);
+  --dark-brown-40: rgba(43,33,24,0.4);
+  --white-glass:  rgba(253,251,247,0.85);
 }
+
+.font-cormorant {
+  font-family: var(--font-cormorant);
+}
+
+.font-jakarta {
+  font-family: var(--font-jakarta);
+}
+
+/* Glass Card */
+.glass-card {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box !important;
+  padding: clamp(1.25rem, 4vw, 3rem) !important;
+  background: var(--white-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(197, 155, 39, 0.35);
+  border-radius: 1.75rem;
+  box-shadow: 
+    0 30px 70px -15px rgba(43, 33, 24, 0.1),
+    0 10px 30px -10px rgba(197, 155, 39, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--dark-brown);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.025em;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid rgba(197, 155, 39, 0.4);
+  border-radius: 1rem;
+  color: var(--dark-brown);
+  font-family: var(--font-jakarta);
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.form-input:focus {
+  border-color: var(--gold);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(197, 155, 39, 0.2);
+}
+
+/* Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(197,155,39,0.4); }
+  50%       { box-shadow: 0 0 0 12px rgba(197,155,39,0); }
+}
+
+@keyframes waxPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 2px 8px rgba(139,69,19,0.5)); }
+  50%       { transform: scale(1.04); filter: drop-shadow(0 4px 16px rgba(139,69,19,0.7)); }
+}
+
+@keyframes envelopeLidOpen {
+  0%   { transform: rotateX(0deg); }
+  100% { transform: rotateX(-180deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-wax-pulse { animation: waxPulse 2s ease-in-out infinite; }
+.animate-slide-up { animation: slideUp 0.7s ease forwards; }
 
 body {
   background: var(--background);

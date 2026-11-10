@@ -110,6 +110,36 @@ export async function ensureSuiteSchema(): Promise<void> {
           updated_at TEXT NOT NULL
         );
       `),
+      client.execute(`
+        CREATE TABLE IF NOT EXISTS suite_invitations (
+          id TEXT PRIMARY KEY,
+          event_id TEXT NOT NULL,
+          slug TEXT UNIQUE NOT NULL,
+          person_name TEXT NOT NULL,
+          headline TEXT NOT NULL,
+          subheadline TEXT NOT NULL,
+          event_number TEXT,
+          badge_text TEXT NOT NULL,
+          target_date TEXT NOT NULL,
+          venue_name TEXT NOT NULL,
+          venue_address TEXT NOT NULL,
+          venue_maps_url TEXT,
+          venue_calendar_url TEXT,
+          gift_bank_name TEXT,
+          gift_alias TEXT,
+          gift_cbu TEXT,
+          gift_holder_name TEXT,
+          audio_track_path TEXT,
+          footer_phrase TEXT,
+          carousel_images TEXT,
+          template TEXT NOT NULL DEFAULT 'classic-gold',
+          allow_companions INTEGER NOT NULL DEFAULT 1,
+          allow_dietary INTEGER NOT NULL DEFAULT 1,
+          is_default INTEGER NOT NULL DEFAULT 0,
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL
+        );
+      `),
     ]);
     global.__tursoSuiteSchemaEnsured = true;
   } catch (err) {

@@ -1,6 +1,8 @@
 "use client";
 
 import { SuiteEvent } from "@/types";
+import type { InvitationRecord } from "@/lib/schemas/invitation.schema";
+import { TEMPLATES } from "@/lib/schemas/invitation.schema";
 import { logoutSuperadmin } from "./actions";
 import Link from "next/link";
 import { useState } from "react";
@@ -18,20 +20,33 @@ import {
   PartyPopper,
   Trophy,
   Camera,
-  Layers
+  Layers,
+  Palette
 } from "lucide-react";
+import InvitationFormModal from "@/components/superadmin/InvitationFormModal";
 
 interface Props {
   events: SuiteEvent[];
+  invitationsMap?: Record<string, InvitationRecord>;
 }
 
-export default function SuperAdminDashboard({ events }: Props) {
+export default function SuperAdminDashboard({ events, invitationsMap = {} }: Props) {
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
+  const [editingEvent, setEditingEvent] = useState<SuiteEvent | null>(null);
+  const [localInvitations, setLocalInvitations] = useState<Record<string, InvitationRecord>>(invitationsMap);
 
   function copyToClipboard(text: string, id: string) {
     navigator.clipboard.writeText(text);
     setCopiedToken(id);
     setTimeout(() => setCopiedToken(null), 2000);
+  }
+
+  function handleInvitationSaved(updated: InvitationRecord) {
+    setLocalInvitations((prev) => ({
+      ...prev,
+      [updated.slug.toLowerCase()]: updated,
+      [updated.id]: updated,
+    }));
   }
 
   return (
@@ -77,7 +92,7 @@ export default function SuperAdminDashboard({ events }: Props) {
           <div>
             <h2 className="text-2xl font-bold tracking-tight text-white">Eventos Activos</h2>
             <p className="text-sm text-slate-400 mt-1">
-              Administrá los accesos, tokens y pantallas de cada cliente.
+              Administrá los accesos, tokens, plantillas y pantallas de cada cliente.
             </p>
           </div>
           <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
@@ -105,6 +120,9 @@ export default function SuperAdminDashboard({ events }: Props) {
             {events.map((evt) => {
               const adminUrl = `/admin/${evt.adminToken}`;
               const guestUrl = `/${evt.slug}`;
+
+              const inv = localInvitations[evt.slug.toLowerCase()] || localInvitations[evt.id];
+              const templateDef = inv?.template ? TEMPLATES.find((t) => t.id === inv.template) : null;
 
               return (
                 <div
@@ -143,7 +161,11 @@ export default function SuperAdminDashboard({ events }: Props) {
                             : "bg-slate-800/40 text-slate-500 border-slate-800 line-through"
                         }`}
                       >
-                        <PartyPopper className="w-3 h-3" /> Invitación
+                        <PartyPopper className="w-3 h-3" />
+                        <span>Invitación</span>
+                        {evt.enabledModules.invitacion && templateDef && (
+                          <span className="font-normal opacity-90">({templateDef.name})</span>
+                        )}
                       </span>
 
                       <span
@@ -188,6 +210,17 @@ export default function SuperAdminDashboard({ events }: Props) {
                         )}
                       </button>
                     </div>
+
+                    {/* Edit Invitation Button if Invitacion is active */}
+                    {evt.enabledModules.invitacion && (
+                      <button
+                        onClick={() => setEditingEvent(evt)}
+                        className="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center gap-2 text-xs font-semibold transition-all cursor-pointer shadow-sm"
+                      >
+                        <Palette className="w-3.5 h-3.5" />
+                        <span>Editar Invitación & Plantilla</span>
+                      </button>
+                    )}
 
                     {/* Navigation Buttons */}
                     <div className="grid grid-cols-2 gap-2 text-xs">
@@ -244,6 +277,22 @@ export default function SuperAdminDashboard({ events }: Props) {
           </div>
         )}
       </main>
+
+      {/* Invitation Edit Modal */}
+      {editingEvent && (
+        <InvitationFormModal
+          title={`Editar Invitación: ${editingEvent.title}`}
+          eventId={editingEvent.id}
+          slug={editingEvent.slug}
+          invitation={
+            localInvitations[editingEvent.slug.toLowerCase()] ||
+            localInvitations[editingEvent.id] ||
+            null
+          }
+          onClose={() => setEditingEvent(null)}
+          onSaved={handleInvitationSaved}
+        />
+      )}
     </div>
   );
 }
