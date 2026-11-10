@@ -305,11 +305,20 @@ export default function DiscoBallHero() {
       const deltaX = clientX - prevPointerX;
       const deltaY = clientY - prevPointerY;
 
+      // On mobile screens, if user is moving vertically to scroll,
+      // release dragging immediately so Android Chrome can perform native scroll!
+      if (isMobile && Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 6) {
+        isDragging = false;
+        return;
+      }
+
       velocityY = deltaX * 0.0035;
-      velocityX = deltaY * 0.0035;
+      velocityX = isMobile ? 0 : deltaY * 0.0035;
 
       ballGroup.rotation.y += velocityY;
-      ballGroup.rotation.x += velocityX;
+      if (!isMobile) {
+        ballGroup.rotation.x += velocityX;
+      }
 
       prevPointerX = clientX;
       prevPointerY = clientY;
@@ -422,8 +431,15 @@ export default function DiscoBallHero() {
 
     animate();
 
+    let lastWidth = window.innerWidth;
     const handleResize = () => {
       const w = window.innerWidth;
+      // In mobile Chrome, scrolling hides and shows the address bar, firing resize events on height only.
+      // Resizing WebGL canvas on every scroll frame causes Android Chrome to flicker and halts scroll!
+      if (Math.abs(w - lastWidth) < 12) {
+        return;
+      }
+      lastWidth = w;
       const h = window.innerHeight;
       camera.aspect = w / h;
       const mobile = w < 768;

@@ -399,7 +399,7 @@ export default function DiscoMirrorHover({
   return (
     <div
       aria-hidden="true"
-      className="absolute inset-0 z-0 rounded-3xl overflow-hidden pointer-events-none"
+      className="absolute inset-0 z-0 rounded-3xl overflow-hidden pointer-events-none hidden md:block"
     >
       <canvas
         ref={canvasRef}

@@ -63,7 +63,7 @@ export default function HomePage() {
       {/* ─── EFECTO CORTINA: SECCIÓN QUE SUBE AL HACER SCROLL SOBRE EL HERO (Z-20) ─── */}
       <div
         id="servicios"
-        className="relative z-20 bg-gradient-to-b from-[#020205]/45 via-[#020205]/55 to-[#020205]/65 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/15 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-[6px] min-h-screen"
+        className="relative z-20 bg-[#06060c]/95 md:bg-gradient-to-b md:from-[#020205]/45 md:via-[#020205]/55 md:to-[#020205]/65 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/15 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-none md:backdrop-blur-[6px] min-h-screen"
       >
         {/* ─── SECCIÓN 2: PRESENTACIÓN DE LOS 3 SERVICIOS PRINCIPALES ─── */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20">
