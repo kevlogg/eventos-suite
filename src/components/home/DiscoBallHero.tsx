@@ -6,7 +6,7 @@ import { ChevronDown, Sparkles } from "lucide-react";
 
 export default function DiscoBallHero() {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
-  const heroInteractionRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   const [isInteracting, setIsInteracting] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
 
@@ -33,7 +33,7 @@ export default function DiscoBallHero() {
 
   useEffect(() => {
     const canvasContainer = canvasContainerRef.current;
-    const heroEl = heroInteractionRef.current;
+    const heroEl = heroRef.current;
     if (!canvasContainer) return;
 
     let animationFrameId: number;
@@ -42,14 +42,12 @@ export default function DiscoBallHero() {
 
     // ─── 1. SCENE, CAMERA & RENDERER ───
     const scene = new THREE.Scene();
-    // Gentle fog that doesn't abruptly clip the long downward light rays
-    scene.fog = new THREE.FogExp2(0x020205, 0.012);
+    scene.fog = new THREE.FogExp2(0x020205, 0.01);
 
-    const camera = new THREE.PerspectiveCamera(48, width / height, 0.1, 120);
-    // Position camera looking slightly upwards towards the hanging disco ball
+    const camera = new THREE.PerspectiveCamera(46, width / height, 0.1, 150);
     const isMobile = width < 768;
-    camera.position.set(0, 0.2, isMobile ? 6.8 : 6.0);
-    camera.lookAt(0, 0.3, 0);
+    camera.position.set(0, 0.25, isMobile ? 6.6 : 5.8);
+    camera.lookAt(0, 0.4, 0);
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -59,37 +57,36 @@ export default function DiscoBallHero() {
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.3;
+    renderer.toneMappingExposure = 1.35;
 
     canvasContainer.appendChild(renderer.domElement);
 
-    // ─── 2. HIERARCHY ROOT & DISCO BALL GROUP ───
-    // Base Y position: hanging in the upper half of the screen like a club ceiling ball
-    const baseY = isMobile ? 1.15 : 1.35;
+    // ─── 2. HIERARCHY ROOT & DISCO BALL ───
+    // Positioned at top hanging from ceiling (as in user reference)
+    const baseY = isMobile ? 1.25 : 1.45;
     const rootGroup = new THREE.Group();
     rootGroup.position.set(0, baseY, 0);
     scene.add(rootGroup);
 
     const ballGroup = new THREE.Group();
-    // Stylish slight tilt
-    ballGroup.rotation.z = THREE.MathUtils.degToRad(7);
+    ballGroup.rotation.z = THREE.MathUtils.degToRad(6);
     ballGroup.rotation.x = THREE.MathUtils.degToRad(12);
     rootGroup.add(ballGroup);
 
-    // Ball dimensions: more balanced & refined size (not giant)
-    const ballRadius = isMobile ? 1.35 : 1.55;
+    // Well-balanced ball radius
+    const ballRadius = isMobile ? 1.25 : 1.45;
 
-    // Inner dark sphere (for authentic dark grout/seams between tiles)
+    // Inner dark sphere (dark seams between tiles)
     const innerGeo = new THREE.SphereGeometry(ballRadius * 0.985, 32, 32);
-    const innerMat = new THREE.MeshBasicMaterial({ color: 0x08080c });
+    const innerMat = new THREE.MeshBasicMaterial({ color: 0x050508 });
     const innerSphere = new THREE.Mesh(innerGeo, innerMat);
     ballGroup.add(innerSphere);
 
-    // ─── 3. DISCO MIRROR TILES (INSTANCED MESH) ───
-    const rings = 24;
+    // ─── 3. DISCO MIRROR TILES (PLATEADOS / SILVER) ───
+    const rings = 23;
     const tileWidth = 0.145;
     const tileHeight = 0.145;
-    const tileDepth = 0.028;
+    const tileDepth = 0.026;
 
     interface TileData {
       index: number;
@@ -105,15 +102,15 @@ export default function DiscoBallHero() {
 
     // Natural plateado / chrome mirror variations
     const silverShades = [
-      new THREE.Color(0xdce3eb),
+      new THREE.Color(0xdbe2ea),
       new THREE.Color(0xd0d7e2),
       new THREE.Color(0xeef3f8),
-      new THREE.Color(0xc2cad6),
-      new THREE.Color(0xe4ebf3),
+      new THREE.Color(0xc4cbd5),
+      new THREE.Color(0xe5ebf2),
     ];
 
     for (let r = 2; r < rings - 2; r++) {
-      const phi = (r / (rings - 1)) * Math.PI; // 0 to PI
+      const phi = (r / (rings - 1)) * Math.PI;
       const ringRadius = ballRadius * Math.sin(phi);
       const y = ballRadius * Math.cos(phi);
 
@@ -143,8 +140,8 @@ export default function DiscoBallHero() {
     const tileGeo = new THREE.BoxGeometry(tileWidth, tileHeight, tileDepth);
     const tileMat = new THREE.MeshStandardMaterial({
       color: 0xffffff,
-      metalness: 0.94,
-      roughness: 0.12,
+      metalness: 0.95,
+      roughness: 0.11,
       envMapIntensity: 2.2,
     });
 
@@ -163,59 +160,45 @@ export default function DiscoBallHero() {
     instancedTiles.instanceMatrix.needsUpdate = true;
     ballGroup.add(instancedTiles);
 
-    // ─── 4. DOWNWARD FOCUS VOLUMETRIC LIGHT BEAMS (LIKE USER REFERENCE) ───
+    // ─── 4. SEPARATE, DISTINCT DOWNWARD LIGHT BEAMS (LIKE USER REFERENCE) ───
     const lightRaysGroup = new THREE.Group();
     rootGroup.add(lightRaysGroup);
 
-    const rayColors = [
-      new THREE.Color(0x00f5ff), // Electric Cyan
-      new THREE.Color(0xff007f), // Hot Magenta
-      new THREE.Color(0xffb700), // Laser Yellow / Amber (seen in ref image)
-      new THREE.Color(0x00ff88), // Club Lime Green (seen in ref image)
-      new THREE.Color(0x9d00ff), // Deep Violet
-      new THREE.Color(0xff3d00), // Neon Orange
-      new THREE.Color(0x3b82f6), // Electric Blue
-      new THREE.Color(0xff00aa), // Hot Pink
-      new THREE.Color(0x10b981), // Emerald
-      new THREE.Color(0xfacc15), // Gold
+    // Explicit separate downward directions spreading out into the room
+    const beamsConfig = [
+      { dir: new THREE.Vector3(-0.65, -0.75, 0.15).normalize(), color: 0x00f5ff, opacity: 0.17 }, // Cyan down-left
+      { dir: new THREE.Vector3(0.65, -0.72, 0.22).normalize(), color: 0xff007f, opacity: 0.17 },  // Magenta down-right
+      { dir: new THREE.Vector3(-0.25, -0.92, -0.3).normalize(), color: 0xffb700, opacity: 0.19 }, // Amber/Yellow down-center (as in ref)
+      { dir: new THREE.Vector3(0.28, -0.9, -0.32).normalize(), color: 0x00ff88, opacity: 0.17 },  // Lime Green down-forward (as in ref)
+      { dir: new THREE.Vector3(-0.75, -0.55, -0.35).normalize(), color: 0x9d00ff, opacity: 0.15 },// Deep Violet down-left
+      { dir: new THREE.Vector3(0.78, -0.52, 0.35).normalize(), color: 0xff3d00, opacity: 0.15 },  // Orange down-right
     ];
 
-    // Long downward shafts of light (35 units long to project across the whole page!)
-    const beamLength = 36;
-    const beamGeo = new THREE.CylinderGeometry(0.12, 3.2, beamLength, 24, 1, true);
-    // Anchor pivot so the narrow top is at (0, 0, 0) right at the ball
-    beamGeo.translate(0, -beamLength / 2, 0);
+    const coneLength = 40; // Long shafts reaching all the way down
+    const defaultDown = new THREE.Vector3(0, -1, 0);
 
-    const rayCount = 10;
-    for (let i = 0; i < rayCount; i++) {
-      const color = rayColors[i % rayColors.length];
-      const beamMat = new THREE.MeshBasicMaterial({
-        color: color,
+    beamsConfig.forEach((cfg) => {
+      // Individual cone geometry translated so apex is at (0, 0, 0)
+      const coneGeo = new THREE.ConeGeometry(2.2, coneLength, 20, 1, true);
+      coneGeo.translate(0, -coneLength / 2, 0);
+
+      const mat = new THREE.MeshBasicMaterial({
+        color: cfg.color,
         transparent: true,
-        opacity: 0.16,
+        opacity: cfg.opacity,
         blending: THREE.AdditiveBlending,
         side: THREE.DoubleSide,
         depthWrite: false,
       });
 
-      const beamMesh = new THREE.Mesh(beamGeo, beamMat);
+      const cone = new THREE.Mesh(coneGeo, mat);
+      // Perfect rotation using quaternion from down vector to cfg.dir:
+      cone.quaternion.setFromUnitVectors(defaultDown, cfg.dir);
+      lightRaysGroup.add(cone);
+    });
 
-      // Downward conical distribution:
-      // Angles flare away from straight-down (-Y) between 22° and 54°
-      const pitchAwayFromDown = THREE.MathUtils.degToRad(22 + (i % 5) * 8);
-      const azimuthAngle = (i / rayCount) * Math.PI * 2;
-
-      // Group to orient the beam downward and fanning outwards
-      const pivot = new THREE.Group();
-      pivot.rotation.y = azimuthAngle;
-      pivot.rotation.x = pitchAwayFromDown; // tilts outwards from straight down
-      pivot.add(beamMesh);
-
-      lightRaysGroup.add(pivot);
-    }
-
-    // ─── 5. BACKGROUND STARFIELD / PARTICLES ───
-    const starCount = 500;
+    // ─── 5. BACKGROUND STARFIELD ───
+    const starCount = 450;
     const starGeo = new THREE.BufferGeometry();
     const starPositions = new Float32Array(starCount * 3);
     const starColors = new Float32Array(starCount * 3);
@@ -252,24 +235,23 @@ export default function DiscoBallHero() {
     scene.add(starField);
 
     // ─── 6. LIGHTING ───
-    // Warm top spotlight for authentic upper-curve specular reflection
-    const topSpot = new THREE.DirectionalLight(0xfff0dd, 3.4);
+    // Warm top spotlight for specular reflection on upper curve
+    const topSpot = new THREE.DirectionalLight(0xfff0dd, 3.5);
     topSpot.position.set(1.2, 4.2, 3.2);
     scene.add(topSpot);
 
-    const ambientLight = new THREE.AmbientLight(0x222230, 1.1);
+    const ambientLight = new THREE.AmbientLight(0x202028, 1.1);
     scene.add(ambientLight);
 
-    // Colored accent rim lights
-    const pinkRim = new THREE.PointLight(0xff0088, 4.0, 16);
+    const pinkRim = new THREE.PointLight(0xff0088, 3.8, 15);
     pinkRim.position.set(-4, -0.5, 2);
     scene.add(pinkRim);
 
-    const cyanRim = new THREE.PointLight(0x00f0ff, 4.0, 16);
+    const cyanRim = new THREE.PointLight(0x00f0ff, 3.8, 15);
     cyanRim.position.set(4, 1.5, 2);
     scene.add(cyanRim);
 
-    // ─── 7. INTERACTIVE ROTATION & MOMENTUM (ATTACHED TO HERO) ───
+    // ─── 7. INTERACTIVE ROTATION & MOMENTUM (HERO BOUND) ───
     let isDragging = false;
     let prevPointerX = 0;
     let prevPointerY = 0;
@@ -331,7 +313,7 @@ export default function DiscoBallHero() {
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("touchend", handleTouchEnd);
 
-    // ─── 8. NEON TILES CLUSTER PATTERNS ───
+    // ─── 8. NEON CLUSTER TILES PALETTE ───
     const neonPalette = [
       new THREE.Color(0xff007f), // Hot Magenta
       new THREE.Color(0x00f5ff), // Electric Cyan
@@ -346,7 +328,7 @@ export default function DiscoBallHero() {
     const tempColor = new THREE.Color();
     const clock = new THREE.Clock();
 
-    // ─── 9. ANIMATION LOOP & SCROLL TRACKING ───
+    // ─── 9. ANIMATION LOOP ───
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
@@ -360,16 +342,9 @@ export default function DiscoBallHero() {
         ballGroup.rotation.x += velocityX;
       }
 
-      // Smooth scroll parallax:
-      // As user scrolls down, the ball gently rises up so it stays hidden above,
-      // while the long downward beams continue casting downwards across the page!
-      const currentScrollY = window.scrollY;
-      const scrollOffset = currentScrollY * 0.0035;
-      rootGroup.position.y = baseY + scrollOffset;
-
-      // Rotate downward light rays continuously like dancefloor moving lights
-      lightRaysGroup.rotation.y = elapsedTime * 0.15;
-      lightRaysGroup.rotation.z = Math.sin(elapsedTime * 0.12) * 0.08;
+      // Rotate light rays gently around Y axis (sweeping through 3D space)
+      lightRaysGroup.rotation.y = elapsedTime * 0.12;
+      lightRaysGroup.rotation.z = Math.sin(elapsedTime * 0.08) * 0.05;
 
       // Orbit rim lights
       pinkRim.position.x = Math.sin(elapsedTime * 0.55) * 4.2;
@@ -378,10 +353,9 @@ export default function DiscoBallHero() {
       cyanRim.position.x = -Math.sin(elapsedTime * 0.45) * 4.2;
       cyanRim.position.z = -Math.cos(elapsedTime * 0.45) * 3.2;
 
-      // Twinkle starfield
       starField.rotation.y = elapsedTime * 0.012;
 
-      // Dynamic shifting neon tiles
+      // Dynamic shifting neon tiles on top of silver base
       for (let i = 0; i < tilesData.length; i++) {
         const t = tilesData[i];
 
@@ -413,7 +387,7 @@ export default function DiscoBallHero() {
       const h = window.innerHeight;
       camera.aspect = w / h;
       const mobile = w < 768;
-      camera.position.set(0, 0.2, mobile ? 6.8 : 6.0);
+      camera.position.set(0, 0.25, mobile ? 6.6 : 5.8);
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
     };
@@ -434,7 +408,6 @@ export default function DiscoBallHero() {
 
       tileGeo.dispose();
       tileMat.dispose();
-      beamGeo.dispose();
       starGeo.dispose();
       starMat.dispose();
       innerGeo.dispose();
@@ -448,17 +421,17 @@ export default function DiscoBallHero() {
 
   return (
     <>
-      {/* ─── FIXED BACKGROUND 3D CANVAS (EXTENDS ACROSS ENTIRE PAGE) ─── */}
+      {/* ─── FIXED 3D CANVAS IN BACKGROUND ACROSS THE ENTIRE PAGE ─── */}
       <div
         ref={canvasContainerRef}
         aria-hidden="true"
-        className="fixed inset-0 w-full h-full z-0 pointer-events-none"
+        className="fixed inset-0 w-full h-full -z-10 pointer-events-none"
       />
 
-      {/* ─── PANTALLA 1: HERO OVERLAY (CAPTURES DRAG INTERACTION) ─── */}
+      {/* ─── PANTALLA 1: HERO SCREEN PINNED (STICKY TOP-0 H-SCREEN) ─── */}
       <section
-        ref={heroInteractionRef}
-        className="relative z-10 w-full h-screen flex flex-col justify-between items-center py-8 px-4 select-none cursor-grab active:cursor-grabbing"
+        ref={heroRef}
+        className="sticky top-0 h-screen w-full z-10 flex flex-col justify-between items-center py-8 px-4 select-none cursor-grab active:cursor-grabbing bg-transparent"
         style={{ touchAction: "none" }}
       >
         {/* Top Hint: Fades out on drag or scroll */}
@@ -467,7 +440,7 @@ export default function DiscoBallHero() {
             isInteracting || hasScrolled ? "opacity-0 -translate-y-3" : "opacity-80"
           }`}
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/60 border border-slate-700/50 text-slate-300 text-xs font-medium tracking-wide backdrop-blur-md shadow-lg">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/15 text-slate-300 text-xs font-medium tracking-wide backdrop-blur-md shadow-lg">
             <Sparkles size={13} className="text-amber-400 animate-pulse" />
             <span>Arrastrá para hacer girar la bola</span>
           </div>
@@ -484,7 +457,7 @@ export default function DiscoBallHero() {
           <span className="text-[11px] sm:text-xs uppercase tracking-widest font-semibold text-slate-400 group-hover:text-white transition-colors drop-shadow-md">
             Deslizá para descubrir
           </span>
-          <div className="w-9 h-9 rounded-full bg-slate-900/70 border border-slate-700/70 flex items-center justify-center text-slate-300 group-hover:text-white group-hover:border-indigo-500/70 group-hover:bg-indigo-950/50 transition-all shadow-[0_0_20px_rgba(99,102,241,0.25)] animate-bounce">
+          <div className="w-9 h-9 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-slate-300 group-hover:text-white group-hover:border-indigo-400/70 group-hover:bg-indigo-950/50 transition-all shadow-[0_0_20px_rgba(99,102,241,0.25)] animate-bounce">
             <ChevronDown size={18} />
           </div>
         </button>

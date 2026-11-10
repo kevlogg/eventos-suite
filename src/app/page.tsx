@@ -26,13 +26,13 @@ export default function HomePage() {
       {/* ─── PANTALLA 1: BOLA DE BOLICHE 3D & CANVAS DE LUCES PERSISTENTE ─── */}
       <DiscoBallHero />
 
-      {/* ─── EFECTO CORTINA: SECCIÓN QUE SUBE AL HACER SCROLL CON FONDO TRASLÚCIDO (Z-20) ─── */}
+      {/* ─── EFECTO CORTINA: SECCIÓN QUE SUBE AL HACER SCROLL SOBRE EL HERO (Z-20) ─── */}
       <div
         id="servicios"
-        className="relative z-20 bg-slate-950/80 rounded-t-[36px] sm:rounded-t-[56px] border-t border-slate-800/80 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-2xl min-h-screen"
+        className="relative z-20 bg-[#020205]/75 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/10 shadow-[0_-30px_90px_rgba(0,0,0,0.98)] backdrop-blur-2xl min-h-screen"
       >
         {/* Barra superior de navegación dentro de la cortina */}
-        <header className="border-b border-slate-800/60 sticky top-0 z-40 bg-slate-950/90 backdrop-blur-xl">
+        <header className="border-b border-white/10 sticky top-0 z-40 bg-[#020205]/85 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
@@ -89,7 +89,7 @@ export default function HomePage() {
             {/* Tarjeta Servicio 1 */}
             <a
               href="#servicio-invitaciones"
-              className="group p-8 rounded-3xl bg-slate-900/60 border border-slate-800/80 hover:border-amber-400/50 transition-all duration-300 hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)] flex flex-col justify-between"
+              className="group p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-amber-400/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)] flex flex-col justify-between"
             >
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform">
@@ -115,7 +115,7 @@ export default function HomePage() {
             {/* Tarjeta Servicio 2 */}
             <a
               href="#servicio-trivia"
-              className="group p-8 rounded-3xl bg-slate-900/60 border border-slate-800/80 hover:border-purple-400/50 transition-all duration-300 hover:shadow-[0_15px_40px_rgba(168,85,247,0.15)] flex flex-col justify-between"
+              className="group p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-purple-400/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_15px_40px_rgba(168,85,247,0.15)] flex flex-col justify-between"
             >
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/25 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform">
@@ -141,7 +141,7 @@ export default function HomePage() {
             {/* Tarjeta Servicio 3 */}
             <a
               href="#servicio-fotos"
-              className="group p-8 rounded-3xl bg-slate-900/60 border border-slate-800/80 hover:border-pink-400/50 transition-all duration-300 hover:shadow-[0_15px_40px_rgba(236,72,153,0.15)] flex flex-col justify-between"
+              className="group p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-pink-400/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_15px_40px_rgba(236,72,153,0.15)] flex flex-col justify-between"
             >
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-500/25 flex items-center justify-center text-pink-400 mb-6 group-hover:scale-110 transition-transform">
