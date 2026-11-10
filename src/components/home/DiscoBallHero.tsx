@@ -4,6 +4,15 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { ChevronDown, Sparkles } from "lucide-react";
 
+const WORDS = [
+  { text: "Tres", isGradient: false },
+  { text: "experiencias", isGradient: false },
+  { text: "que", isGradient: false },
+  { text: "transforman", isGradient: false },
+  { text: "tu", isGradient: true },
+  { text: "celebración", isGradient: true },
+];
+
 export default function DiscoBallHero() {
   const canvasContainerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -15,7 +24,7 @@ export default function DiscoBallHero() {
     // Appear a few seconds after initial load
     const timer = setTimeout(() => {
       setShowHeadline(true);
-    }, 1800);
+    }, 1500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -459,23 +468,31 @@ export default function DiscoBallHero() {
           </div>
         </div>
 
-        {/* Center Phrase: Appears smoothly a few seconds after initial load below the disco ball */}
+        {/* Center Phrase: Appears smoothly word-by-word clearly below the disco ball */}
         <div
-          className={`my-auto text-center max-w-3xl px-4 pointer-events-none transition-all duration-1000 ease-out transform ${
-            showHeadline && !hasScrolled
-              ? "opacity-100 translate-y-0 scale-100"
-              : "opacity-0 translate-y-8 scale-95"
-          }`}
+          className="absolute top-[58%] sm:top-[60%] left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 text-center pointer-events-none z-20"
         >
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)]">
-            Tres experiencias que transforman{" "}
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              tu celebración
-            </span>
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+            {WORDS.map((w, i) => (
+              <span
+                key={i}
+                className={`inline-block mr-[0.25em] transition-all duration-700 ease-out transform ${
+                  showHeadline && !hasScrolled
+                    ? "opacity-100 translate-y-0 filter blur-0 scale-100"
+                    : "opacity-0 translate-y-6 filter blur-[4px] scale-95"
+                } ${
+                  w.isGradient
+                    ? "bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-400 bg-clip-text text-transparent font-black"
+                    : "text-white"
+                }`}
+                style={{
+                  transitionDelay: `${i * 150}ms`,
+                }}
+              >
+                {w.text}
+              </span>
+            ))}
           </h1>
-          <p className="mt-4 text-sm sm:text-base text-slate-300 max-w-xl mx-auto font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-            Invitaciones inteligentes, trivias en vivo y transmisión de fotos en pantallas gigantes.
-          </p>
         </div>
 
         {/* Bottom Floating Scroll Prompt */}
