@@ -74,9 +74,9 @@ export default function HomePage() {
               <Flame className="w-4 h-4 text-amber-400" /> Ecosistema Completo para Fiestas
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-6 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              Tres experiencias que transforman{" "}
+              Servicios interactivos para{" "}
               <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                tu celebración
+                eventos inolvidables
               </span>
             </h2>
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed drop-shadow-sm">

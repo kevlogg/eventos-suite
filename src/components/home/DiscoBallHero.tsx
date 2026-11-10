@@ -9,6 +9,15 @@ export default function DiscoBallHero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [isInteracting, setIsInteracting] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [showHeadline, setShowHeadline] = useState(false);
+
+  useEffect(() => {
+    // Appear a few seconds after initial load
+    const timer = setTimeout(() => {
+      setShowHeadline(true);
+    }, 1800);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -448,6 +457,25 @@ export default function DiscoBallHero() {
             <Sparkles size={13} className="text-amber-400 animate-pulse" />
             <span>Arrastrá para hacer girar la bola</span>
           </div>
+        </div>
+
+        {/* Center Phrase: Appears smoothly a few seconds after initial load below the disco ball */}
+        <div
+          className={`my-auto text-center max-w-3xl px-4 pointer-events-none transition-all duration-1000 ease-out transform ${
+            showHeadline && !hasScrolled
+              ? "opacity-100 translate-y-0 scale-100"
+              : "opacity-0 translate-y-8 scale-95"
+          }`}
+        >
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)]">
+            Tres experiencias que transforman{" "}
+            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              tu celebración
+            </span>
+          </h1>
+          <p className="mt-4 text-sm sm:text-base text-slate-300 max-w-xl mx-auto font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
+            Invitaciones inteligentes, trivias en vivo y transmisión de fotos en pantallas gigantes.
+          </p>
         </div>
 
         {/* Bottom Floating Scroll Prompt */}
