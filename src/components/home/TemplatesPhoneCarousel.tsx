@@ -257,6 +257,9 @@ const TEMPLATES_DATA: PhoneTemplate[] = [
 export default function TemplatesPhoneCarousel() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftStartRef = useRef(0);
 
   const filteredTemplates =
     selectedCategory === "all"
@@ -265,21 +268,49 @@ export default function TemplatesPhoneCarousel() {
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -320, behavior: "smooth" });
+      scrollContainerRef.current.scrollBy({ left: -360, behavior: "smooth" });
     }
   };
 
   const scrollRight = () => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 320, behavior: "smooth" });
+      scrollContainerRef.current.scrollBy({ left: 360, behavior: "smooth" });
+    }
+  };
+
+  // Drag-to-scroll mouse handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollContainerRef.current) return;
+    isDraggingRef.current = true;
+    startXRef.current = e.pageX - scrollContainerRef.current.offsetLeft;
+    scrollLeftStartRef.current = scrollContainerRef.current.scrollLeft;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggingRef.current || !scrollContainerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startXRef.current) * 1.5;
+    scrollContainerRef.current.scrollLeft = scrollLeftStartRef.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    isDraggingRef.current = false;
+  };
+
+  // Wheel horizontal scroll handler
+  const handleWheel = (e: React.WheelEvent) => {
+    if (!scrollContainerRef.current) return;
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && Math.abs(e.deltaY) > 5) {
+      scrollContainerRef.current.scrollLeft += e.deltaY;
     }
   };
 
   return (
-    <div className="w-full flex flex-col gap-6 relative">
+    <div className="w-full flex flex-col gap-8 relative">
       {/* ─── CATEGORY FILTER PILLS & CONTROLS ─── */}
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2.5">
           {[
             { id: "all", label: "Todas las plantillas" },
             { id: "bodas", label: "💍 Bodas" },
@@ -291,10 +322,10 @@ export default function TemplatesPhoneCarousel() {
               key={cat.id}
               type="button"
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all ${
+              className={`px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold tracking-wide transition-all shadow-md active:scale-95 ${
                 selectedCategory === cat.id
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-500/25 scale-105"
-                  : "bg-black/40 text-slate-300 hover:text-white hover:bg-black/70 border border-white/10"
+                  ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-indigo-500/30 scale-105 border border-white/30"
+                  : "bg-[#0b0c16]/90 text-slate-200 hover:text-white hover:bg-slate-800 border border-white/15"
               }`}
             >
               {cat.label}
@@ -302,51 +333,59 @@ export default function TemplatesPhoneCarousel() {
           ))}
         </div>
 
-        {/* Carousel Arrow Controls */}
-        <div className="flex items-center gap-2 ml-auto">
+        {/* Carousel Arrow Controls & Drag hint */}
+        <div className="flex items-center gap-3 ml-auto">
+          <span className="hidden sm:inline-block text-xs font-semibold text-slate-400">
+            Deslizá o arrastrá con el mouse →
+          </span>
           <button
             type="button"
             onClick={scrollLeft}
             aria-label="Anterior plantilla"
-            className="w-9 h-9 rounded-full bg-black/60 border border-white/15 flex items-center justify-center text-slate-300 hover:text-white hover:bg-black/80 hover:border-white/30 transition-all shadow-md active:scale-95"
+            className="w-10 h-10 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-slate-200 hover:text-white hover:bg-black/90 hover:border-white/40 transition-all shadow-md active:scale-95"
           >
-            <ChevronLeft size={18} />
+            <ChevronLeft size={20} />
           </button>
           <button
             type="button"
             onClick={scrollRight}
             aria-label="Siguiente plantilla"
-            className="w-9 h-9 rounded-full bg-black/60 border border-white/15 flex items-center justify-center text-slate-300 hover:text-white hover:bg-black/80 hover:border-white/30 transition-all shadow-md active:scale-95"
+            className="w-10 h-10 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-slate-200 hover:text-white hover:bg-black/90 hover:border-white/40 transition-all shadow-md active:scale-95"
           >
-            <ChevronRight size={18} />
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>
 
-      {/* ─── HORIZONTAL SCROLL OF PHONE MOCKUPS ─── */}
+      {/* ─── HORIZONTAL SCROLL OF PHONE MOCKUPS (DRAGGABLE + WHEEL + ARROWS) ─── */}
       <div
         ref={scrollContainerRef}
-        className="flex gap-6 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent select-none"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUpOrLeave}
+        onMouseLeave={handleMouseUpOrLeave}
+        onWheel={handleWheel}
+        className="flex gap-7 overflow-x-auto pb-6 pt-2 snap-x snap-mandatory select-none cursor-grab active:cursor-grabbing scrollbar-thin scrollbar-thumb-indigo-500/40 scrollbar-track-white/5 hover:scrollbar-thumb-indigo-500/70"
         style={{ scrollBehavior: "smooth" }}
       >
         {filteredTemplates.map((template) => (
           <div
             key={template.id}
-            className="snap-center shrink-0 w-[260px] sm:w-[280px] flex flex-col items-center gap-3 group"
+            className="snap-center shrink-0 w-[270px] sm:w-[290px] flex flex-col items-center gap-3.5 group"
           >
-            {/* Template Header Badge */}
-            <div className="flex items-center justify-between w-full px-2 text-xs">
-              <span className="font-bold text-white flex items-center gap-1.5">
-                <span>{template.emoji}</span>
+            {/* Template Header Badge (Bigger and more visible) */}
+            <div className="flex items-center justify-between w-full px-2.5">
+              <span className="font-black text-sm sm:text-base text-white flex items-center gap-2">
+                <span className="text-lg">{template.emoji}</span>
                 <span className="line-clamp-1">{template.name}</span>
               </span>
-              <span className="text-[10px] uppercase font-bold text-slate-400 bg-white/10 px-2 py-0.5 rounded-full">
+              <span className="text-xs uppercase font-extrabold text-amber-300 bg-amber-950/80 border border-amber-400/50 px-3 py-1 rounded-full shadow-sm shrink-0">
                 {template.categoryLabel}
               </span>
             </div>
 
             {/* ─── IPHONE CHASSIS FRAME ─── */}
-            <div className="relative w-full h-[500px] sm:h-[530px] rounded-[44px] bg-[#0c0d14] p-3 border-[6px] border-[#1f2333] shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:shadow-[0_25px_60px_rgba(99,102,241,0.25)] hover:border-indigo-500/50 transition-all duration-500 overflow-hidden group/phone">
+            <div className="relative w-full h-[510px] sm:h-[540px] rounded-[44px] bg-[#0c0d14] p-3 border-[6px] border-[#1f2333] shadow-[0_20px_50px_rgba(0,0,0,0.85)] hover:shadow-[0_25px_60px_rgba(99,102,241,0.25)] hover:border-indigo-500/50 transition-all duration-500 overflow-hidden group/phone">
               {/* Dynamic Island Notch */}
               <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-4 rounded-full bg-black z-30 flex items-center justify-end px-2 pointer-events-none shadow-sm">
                 <div className="w-2 h-2 rounded-full bg-[#182030]" />
@@ -370,9 +409,9 @@ export default function TemplatesPhoneCarousel() {
                     animation: "phoneScrollLoop 14s ease-in-out infinite alternate",
                   }}
                 >
-                  {/* Badge */}
-                  <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-black/40 border border-white/20 text-[10px] font-bold uppercase tracking-wider mx-auto text-amber-200">
-                    <Sparkles size={11} className="text-amber-400" />
+                  {/* Badge (Bigger and bolder) */}
+                  <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-black/75 border-2 border-amber-400/70 text-xs font-black uppercase tracking-wider mx-auto text-amber-200 shadow-lg">
+                    <Sparkles size={13} className="text-amber-400" />
                     <span>{template.badge}</span>
                   </div>
 

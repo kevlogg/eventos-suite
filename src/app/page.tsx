@@ -36,9 +36,6 @@ export default function HomePage() {
         {/* ─── SECCIÓN 2: PRESENTACIÓN DE LOS 3 SERVICIOS PRINCIPALES ─── */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20">
           <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 text-xs font-bold uppercase tracking-wider mb-5 shadow-sm">
-              <Flame className="w-4 h-4 text-amber-400" /> Ecosistema Completo para Fiestas
-            </div>
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-6 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               Servicios interactivos para{" "}
               <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
@@ -156,14 +153,9 @@ export default function HomePage() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col gap-12 sm:gap-16">
             {/* Cabecera & Características */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Text & Intro */}
               <div className="lg:col-span-6 flex flex-col gap-6">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-widest w-fit">
-                  <Sparkles size={14} className="text-amber-400" />
-                  Servicio 01 · Experiencia de Entrada
-                </div>
-
                 <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
                   Invitaciones Digitales que{" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500">
@@ -176,49 +168,63 @@ export default function HomePage() {
                     Decile adiós a las tarjetas de papel o los PDFs estáticos. Diseñamos invitaciones web totalmente interactivas, con sobre virtual con sello de lacre, música de fondo, animaciones y personajes integrados a la temática.
                   </p>
                 </div>
-
-                <div>
-                  <Link
-                    href="/superadmin/nuevo-evento"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold text-sm tracking-wide shadow-lg shadow-amber-500/25 transition-all"
-                  >
-                    <span>Crear Evento con Invitación</span>
-                    <ArrowRight size={18} />
-                  </Link>
-                </div>
               </div>
 
-              {/* Bullets */}
-              <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                  <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-sm font-bold text-white">Confirmación RSVP en Vivo</h4>
-                    <p className="text-xs text-slate-200 font-medium mt-1">Dietas, acompañantes y asistencia en tiempo real.</p>
+              {/* 4 Cards descriptivas del servicio con hover de espejos giratorios */}
+              <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {/* Card 1 */}
+                <div className="group relative p-6 sm:p-7 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.12)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden">
+                  <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={120} />
+                  <div className="relative z-10 flex flex-col gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0 shadow-md shadow-amber-500/10 group-hover:scale-110 transition-transform">
+                      <CheckCircle2 className="w-6 h-6 text-amber-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-base sm:text-lg font-bold text-white mb-1 group-hover:text-amber-200 transition-colors">Confirmación RSVP en Vivo</h4>
+                      <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">Dietas especiales, acompañantes y asistencia confirmada en tiempo real.</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                  <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-sm font-bold text-white">Salón & Geolocalización</h4>
-                    <p className="text-xs text-slate-200 font-medium mt-1">Un clic para abrir Google Maps o Waze directo.</p>
+                {/* Card 2 */}
+                <div className="group relative p-6 sm:p-7 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.12)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden">
+                  <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={120} />
+                  <div className="relative z-10 flex flex-col gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0 shadow-md shadow-amber-500/10 group-hover:scale-110 transition-transform">
+                      <MapPin className="w-6 h-6 text-amber-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-base sm:text-lg font-bold text-white mb-1 group-hover:text-amber-200 transition-colors">Salón & Geolocalización</h4>
+                      <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">Un clic para abrir Google Maps o Waze y llegar directo sin perderse.</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                  <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-sm font-bold text-white">Cofre de Regalos & Alias</h4>
-                    <p className="text-xs text-slate-200 font-medium mt-1">Copia de CBU/Alias con un solo toque.</p>
+                {/* Card 3 */}
+                <div className="group relative p-6 sm:p-7 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.12)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden">
+                  <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={120} />
+                  <div className="relative z-10 flex flex-col gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0 shadow-md shadow-amber-500/10 group-hover:scale-110 transition-transform">
+                      <Gift className="w-6 h-6 text-amber-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-base sm:text-lg font-bold text-white mb-1 group-hover:text-amber-200 transition-colors">Cofre de Regalos & Alias</h4>
+                      <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">Copia de CBU/Alias con un solo toque o enlace a lista de regalos.</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                  <Music className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-sm font-bold text-white">Música & Efectos Visuales</h4>
-                    <p className="text-xs text-slate-200 font-medium mt-1">Audio track personalizado y animación de apertura.</p>
+                {/* Card 4 */}
+                <div className="group relative p-6 sm:p-7 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.12)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden">
+                  <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={120} />
+                  <div className="relative z-10 flex flex-col gap-3">
+                    <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0 shadow-md shadow-amber-500/10 group-hover:scale-110 transition-transform">
+                      <Music className="w-6 h-6 text-amber-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-base sm:text-lg font-bold text-white mb-1 group-hover:text-amber-200 transition-colors">Música & Efectos Visuales</h4>
+                      <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed">Audio track personalizado y animación de apertura temática inmersiva.</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -360,16 +366,6 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
-
-                <div className="pt-4">
-                  <Link
-                    href="/superadmin"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm tracking-wide shadow-lg shadow-purple-500/25 transition-all"
-                  >
-                    <span>Configurar Trivia de Evento</span>
-                    <ArrowRight size={18} />
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
@@ -441,16 +437,6 @@ export default function HomePage() {
                       <p className="text-xs text-slate-200 font-medium mt-1">Los anfitriones descargan todas las fotos en alta resolución.</p>
                     </div>
                   </div>
-                </div>
-
-                <div className="pt-4">
-                  <Link
-                    href="/superadmin"
-                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-sm tracking-wide shadow-lg shadow-pink-500/25 transition-all"
-                  >
-                    <span>Ver Mural y Galería del Evento</span>
-                    <ArrowRight size={18} />
-                  </Link>
                 </div>
               </div>
 
@@ -556,10 +542,6 @@ export default function HomePage() {
               <a href="#servicio-fotos" className="hover:text-white transition-colors">
                 Fotos QR
               </a>
-              <span>·</span>
-              <Link href="/superadmin" className="text-indigo-400 hover:text-indigo-300 transition-colors">
-                Panel Superadmin
-              </Link>
             </div>
 
             <div className="border-t border-slate-900 w-full pt-8 text-xs text-slate-600">

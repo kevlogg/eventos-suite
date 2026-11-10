@@ -5,10 +5,12 @@ import { useEffect, useRef } from "react";
 interface DiscoMirrorHoverProps {
   /** Size in pixels of each square mirror tile (default: 18) */
   tileSize?: number;
-  /** Gap in pixels between mirror tiles (default: 2) */
+  /** Gap in pixels between mirror tiles (default: 2.5) */
   gap?: number;
   /** Radius in pixels of the spotlight glow around mouse (default: 130) */
   spotlightRadius?: number;
+  /** Speed of horizontal rotation illusion in pixels per second (default: 32) */
+  spinSpeed?: number;
   /** Legacy compatibility props */
   rows?: number;
   cols?: number;
@@ -47,6 +49,7 @@ export default function DiscoMirrorHover({
   tileSize = 18,
   gap = 2.5,
   spotlightRadius = 130,
+  spinSpeed = 32,
 }: DiscoMirrorHoverProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -54,7 +57,7 @@ export default function DiscoMirrorHover({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Attach event listeners to the card (the <a> link or outer parent)
+    // Attach event listeners to the card container
     const card =
       (canvas.closest("a") as HTMLElement) ||
       (canvas.closest(".group") as HTMLElement) ||
@@ -68,7 +71,7 @@ export default function DiscoMirrorHover({
 
     let animationFrameId: number;
     let isHovered = false;
-    let hoverAlpha = 0; // 0 (idle) to 1 (active spotlight)
+    let hoverAlpha = 0; // 0 (hidden at rest) to 1 (fully active on hover)
 
     const targetMouse = { x: -9999, y: -9999 };
     const currentMouse = { x: -9999, y: -9999 };
@@ -98,15 +101,15 @@ export default function DiscoMirrorHover({
     });
     ro.observe(card);
 
-    // Mouse & Touch listeners on the CARD (which has full pointer events)
+    // Mouse & Touch listeners on the card
     const handleMouseMove = (e: MouseEvent) => {
       const rect = card.getBoundingClientRect();
       targetMouse.x = e.clientX - rect.left;
       targetMouse.y = e.clientY - rect.top;
-      isHovered = true;
-      if (currentMouse.x < -1000) {
-        currentMouse.x = targetMouse.x;
-        currentMouse.y = targetMouse.y;
+      if (!isHovered) {
+        isHovered = true;
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = requestAnimationFrame(render);
       }
     };
 
@@ -117,6 +120,8 @@ export default function DiscoMirrorHover({
       currentMouse.x = targetMouse.x;
       currentMouse.y = targetMouse.y;
       isHovered = true;
+      cancelAnimationFrame(animationFrameId);
+      animationFrameId = requestAnimationFrame(render);
     };
 
     const handleMouseLeave = () => {
@@ -128,7 +133,11 @@ export default function DiscoMirrorHover({
         const rect = card.getBoundingClientRect();
         targetMouse.x = e.touches[0].clientX - rect.left;
         targetMouse.y = e.touches[0].clientY - rect.top;
-        isHovered = true;
+        if (!isHovered) {
+          isHovered = true;
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = requestAnimationFrame(render);
+        }
       }
     };
 
@@ -142,26 +151,32 @@ export default function DiscoMirrorHover({
     card.addEventListener("touchmove", handleTouchMove, { passive: true });
     card.addEventListener("touchend", handleTouchEnd, { passive: true });
 
-    // ─── RENDER LOOP ───
+    // ─── RENDER LOOP WITH SPINNING DISCO BALL ILLUSION ───
     const step = tileSize + gap;
     const cornerRadius = 1.6;
 
     const render = () => {
-      // Ensure dimensions are valid
       if (width <= 0 || height <= 0) {
         updateSize();
       }
 
-      // Smooth hover alpha transition
+      // Smooth hover alpha fade in / out
       if (isHovered) {
         hoverAlpha += (1 - hoverAlpha) * 0.18;
       } else {
-        hoverAlpha += (0 - hoverAlpha) * 0.08;
+        hoverAlpha += (0 - hoverAlpha) * 0.1;
+      }
+
+      // Completely idle when not hovered and faded out (zero CPU/GPU at rest)
+      if (!isHovered && hoverAlpha < 0.002) {
+        hoverAlpha = 0;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return;
       }
 
       // Smooth mouse tracking
-      currentMouse.x += (targetMouse.x - currentMouse.x) * 0.32;
-      currentMouse.y += (targetMouse.y - currentMouse.y) * 0.32;
+      currentMouse.x += (targetMouse.x - currentMouse.x) * 0.35;
+      currentMouse.y += (targetMouse.y - currentMouse.y) * 0.35;
 
       ctx.save();
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -169,8 +184,13 @@ export default function DiscoMirrorHover({
 
       const time = performance.now() * 0.001;
 
-      // ─── 1. SPOTLIGHT GLOW UNDER TILES ───
-      if (hoverAlpha > 0.01 && currentMouse.x > -500) {
+      // ─── ROTATION SHIFT (DISCO BALL HORIZONTAL SPIN) ───
+      const shift = time * spinSpeed;
+      const subPixelShift = shift % step;
+      const baseColOffset = Math.floor(shift / step);
+
+      // ─── 1. SPOTLIGHT POOL AROUND MOUSE ───
+      if (currentMouse.x > -500 && hoverAlpha > 0.01) {
         const glow = ctx.createRadialGradient(
           currentMouse.x,
           currentMouse.y,
@@ -179,27 +199,27 @@ export default function DiscoMirrorHover({
           currentMouse.y,
           spotlightRadius * 1.15
         );
-        glow.addColorStop(0, `rgba(255, 255, 255, ${0.32 * hoverAlpha})`);
-        glow.addColorStop(0.35, `rgba(226, 232, 240, ${0.16 * hoverAlpha})`);
-        glow.addColorStop(0.75, `rgba(148, 163, 184, ${0.06 * hoverAlpha})`);
+        glow.addColorStop(0, `rgba(255, 255, 255, ${0.35 * hoverAlpha})`);
+        glow.addColorStop(0.35, `rgba(226, 232, 240, ${0.18 * hoverAlpha})`);
+        glow.addColorStop(0.75, `rgba(148, 163, 184, ${0.07 * hoverAlpha})`);
         glow.addColorStop(1, "rgba(0, 0, 0, 0)");
 
         ctx.fillStyle = glow;
         ctx.fillRect(0, 0, width, height);
       }
 
-      // Grid calculations centered in card
-      const cols = Math.ceil(width / step) + 1;
+      // Grid bounds with extra columns for seamless rotation wrapping
+      const cols = Math.ceil(width / step) + 3;
       const rows = Math.ceil(height / step) + 1;
-      const totalW = cols * step - gap;
       const totalH = rows * step - gap;
-      const startX = Math.floor((width - totalW) / 2);
+      const startX = -step;
       const startY = Math.floor((height - totalH) / 2);
 
-      // ─── 2. DRAW DISCO BALL MIRROR TILES ───
+      // ─── 2. DRAW ROTATING DISCO BALL MIRROR TILES ───
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
-          const x = startX + c * step;
+          // Horizontal translation to the right simulating disco ball rotation
+          const x = startX + c * step + subPixelShift;
           const y = startY + r * step;
 
           if (x + tileSize < 0 || x > width || y + tileSize < 0 || y > height) {
@@ -210,87 +230,78 @@ export default function DiscoMirrorHover({
           const cy = y + tileSize / 2;
           const dist = Math.hypot(cx - currentMouse.x, cy - currentMouse.y);
 
-          // Tile base shade from disco ball palette
-          const shade = SILVER_SHADES[(r * 5 + c * 3) % SILVER_SHADES.length];
+          // Unique wrapped column ID ensuring continuous texture pattern as it spins
+          const colId = c - baseColOffset;
+          const shade = SILVER_SHADES[Math.abs(r * 5 + colId * 3) % SILVER_SHADES.length];
 
-          // Resting ambient glint (subtle sparkle across random tiles)
-          const ambientWave = Math.sin(time * 1.2 + c * 0.9 + r * 1.4);
-          const hasGlint = ambientWave > 0.9;
-          const glintBoost = hasGlint ? (ambientWave - 0.9) * 2.5 : 0;
-
-          if (!isHovered || dist > spotlightRadius) {
-            // ─── RESTING DISCO MIRROR TILE (ALWAYS VISIBLE & CRISP) ───
+          if (dist > spotlightRadius) {
+            // ─── RESTING ROTATING MIRROR TILE ───
             drawTilePath(ctx, x, y, tileSize, cornerRadius);
 
-            // Metallic dark-silver face
-            const restAlpha = 0.22 + glintBoost * 0.25;
+            const restAlpha = 0.28 * hoverAlpha;
             const grad = ctx.createLinearGradient(x, y, x + tileSize, y + tileSize);
-            grad.addColorStop(0, `rgba(${shade.r}, ${shade.g}, ${shade.b}, ${restAlpha + 0.08})`);
+            grad.addColorStop(0, `rgba(${shade.r}, ${shade.g}, ${shade.b}, ${restAlpha + 0.1})`);
             grad.addColorStop(0.5, `rgba(${Math.floor(shade.r * 0.7)}, ${Math.floor(shade.g * 0.7)}, ${Math.floor(shade.b * 0.7)}, ${restAlpha})`);
-            grad.addColorStop(1, `rgba(18, 22, 32, ${restAlpha + 0.1})`);
+            grad.addColorStop(1, `rgba(18, 22, 32, ${restAlpha + 0.12})`);
 
             ctx.fillStyle = grad;
             ctx.fill();
 
-            // Top bevel highlight (1px glass edge)
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.32 + glintBoost * 0.5})`;
+            // Top specular bevel line
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.35 * hoverAlpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(x + cornerRadius, y + 0.5);
             ctx.lineTo(x + tileSize - cornerRadius, y + 0.5);
             ctx.stroke();
 
-            // Left bevel highlight
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 + glintBoost * 0.4})`;
+            // Left specular bevel line
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.22 * hoverAlpha})`;
             ctx.beginPath();
             ctx.moveTo(x + 0.5, y + cornerRadius);
             ctx.lineTo(x + 0.5, y + tileSize - cornerRadius);
             ctx.stroke();
 
-            // Bottom dark seam
-            ctx.strokeStyle = "rgba(0, 0, 0, 0.65)";
+            // Bottom & right dark seams
+            ctx.strokeStyle = `rgba(0, 0, 0, ${0.65 * hoverAlpha})`;
             ctx.beginPath();
             ctx.moveTo(x + cornerRadius, y + tileSize - 0.5);
             ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.5);
             ctx.stroke();
-
-            // Right dark seam
             ctx.beginPath();
             ctx.moveTo(x + tileSize - 0.5, y + cornerRadius);
             ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.5);
             ctx.stroke();
           } else {
             // ─── ACTIVE SPOTLIGHT TILE (UNDER / NEAR MOUSE) ───
-            const normDist = dist / spotlightRadius; // 0 at cursor, 1 at boundary
+            const normDist = dist / spotlightRadius;
             const proximity = 1 - normDist;
 
             if (dist < 24) {
-              // DIRECT HIT UNDER MOUSE: Pure glowing white mirror facet (like the white tile on the disco ball)
+              // Direct hit under cursor: Pure bright white specular hotspot!
               drawTilePath(ctx, x, y, tileSize, cornerRadius);
 
               ctx.fillStyle = `rgba(255, 255, 255, ${0.98 * hoverAlpha})`;
               ctx.fill();
 
-              // Pure bright white bevel
               ctx.strokeStyle = `rgba(255, 255, 255, ${hoverAlpha})`;
               ctx.lineWidth = 1.2;
               ctx.stroke();
 
-              // Specular center hot spot
-              ctx.fillStyle = `rgba(255, 255, 255, ${0.9 * hoverAlpha})`;
+              ctx.fillStyle = `rgba(255, 255, 255, ${0.92 * hoverAlpha})`;
               ctx.fillRect(x + 2, y + 2, tileSize - 4, tileSize - 4);
             } else {
               // Neighboring tiles catching the reflection
               const falloff = Math.pow(proximity, 1.3);
-              const facetOffset = Math.sin(c * 11.7 + r * 17.3) * 0.22;
+              const facetOffset = Math.sin(colId * 11.7 + r * 17.3) * 0.22;
               const intensity = Math.min(1, Math.max(0, falloff + facetOffset * falloff));
 
               drawTilePath(ctx, x, y, tileSize, cornerRadius);
 
               const grad = ctx.createLinearGradient(x, y, x + tileSize, y + tileSize);
-              const brightA = (0.3 + 0.68 * intensity) * hoverAlpha;
-              const midA = (0.24 + 0.62 * intensity) * hoverAlpha;
-              const darkA = (0.16 + 0.42 * intensity) * hoverAlpha;
+              const brightA = (0.35 + 0.65 * intensity) * hoverAlpha;
+              const midA = (0.28 + 0.62 * intensity) * hoverAlpha;
+              const darkA = (0.18 + 0.45 * intensity) * hoverAlpha;
 
               grad.addColorStop(0, `rgba(255, 255, 255, ${brightA})`);
               grad.addColorStop(0.4, `rgba(${shade.r}, ${shade.g}, ${shade.b}, ${midA})`);
@@ -300,26 +311,24 @@ export default function DiscoMirrorHover({
               ctx.fill();
 
               // 3D Mirror Bevel highlights
-              ctx.strokeStyle = `rgba(255, 255, 255, ${(0.4 + 0.6 * intensity) * hoverAlpha})`;
+              ctx.strokeStyle = `rgba(255, 255, 255, ${(0.42 + 0.58 * intensity) * hoverAlpha})`;
               ctx.lineWidth = 1;
               ctx.beginPath();
               ctx.moveTo(x + cornerRadius, y + 0.5);
               ctx.lineTo(x + tileSize - cornerRadius, y + 0.5);
               ctx.stroke();
 
-              ctx.strokeStyle = `rgba(255, 255, 255, ${(0.28 + 0.55 * intensity) * hoverAlpha})`;
+              ctx.strokeStyle = `rgba(255, 255, 255, ${(0.3 + 0.55 * intensity) * hoverAlpha})`;
               ctx.beginPath();
               ctx.moveTo(x + 0.5, y + cornerRadius);
               ctx.lineTo(x + 0.5, y + tileSize - cornerRadius);
               ctx.stroke();
 
-              // Shadow edges
-              ctx.strokeStyle = `rgba(0, 0, 0, ${0.55 - 0.25 * intensity})`;
+              ctx.strokeStyle = `rgba(0, 0, 0, ${(0.55 - 0.25 * intensity) * hoverAlpha})`;
               ctx.beginPath();
               ctx.moveTo(x + cornerRadius, y + tileSize - 0.5);
               ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.5);
               ctx.stroke();
-
               ctx.beginPath();
               ctx.moveTo(x + tileSize - 0.5, y + cornerRadius);
               ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.5);
@@ -334,9 +343,6 @@ export default function DiscoMirrorHover({
       animationFrameId = requestAnimationFrame(render);
     };
 
-    // Start render loop immediately
-    animationFrameId = requestAnimationFrame(render);
-
     return () => {
       cancelAnimationFrame(animationFrameId);
       ro.disconnect();
@@ -346,7 +352,7 @@ export default function DiscoMirrorHover({
       card.removeEventListener("touchmove", handleTouchMove);
       card.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [tileSize, gap, spotlightRadius]);
+  }, [tileSize, gap, spotlightRadius, spinSpeed]);
 
   return (
     <div
