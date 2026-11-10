@@ -573,7 +573,7 @@ export default function HomePage() {
         </footer>
       </div>
 
-      {/* Botón flotante de WhatsApp circular y fijo en el viewport (solo icono, sin texto) */}
+      {/* Botón flotante de WhatsApp circular y fijo en el viewport (solo icono, limpio) */}
       <a
         href="https://wa.me/5492235851419?text=Hola!%20Quisiera%20consultar%20sobre%20los%20servicios%20de%20Eventos%20Suite."
         target="_blank"
@@ -581,10 +581,6 @@ export default function HomePage() {
         aria-label="Contactar por WhatsApp"
         className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-[0_10px_35px_rgba(37,211,102,0.6)] transition-all transform hover:scale-110 active:scale-95 group"
       >
-        <span className="relative flex h-3.5 w-3.5 absolute top-1 right-1">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-          <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-white" />
-        </span>
         <WhatsAppIcon className="w-8 h-8 text-white shrink-0 drop-shadow-md" />
       </a>
     </div>
