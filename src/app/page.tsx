@@ -45,9 +45,11 @@ export default function HomePage() {
                 eventos inolvidables
               </span>
             </h2>
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed drop-shadow-sm">
-              Unificamos la experiencia previa, durante y posterior de tu fiesta con tecnología web interactiva en tiempo real.
-            </p>
+            <div className="inline-block max-w-2xl mx-auto px-6 py-3.5 rounded-2xl bg-black/60 border border-white/15 backdrop-blur-md shadow-[0_10px_30px_rgba(0,0,0,0.7)]">
+              <p className="text-base sm:text-lg text-slate-100 font-medium leading-relaxed drop-shadow-md">
+                Unificamos la experiencia previa, durante y posterior de tu fiesta con tecnología web interactiva en tiempo real.
+              </p>
+            </div>
           </div>
 
           {/* Cards resumen de los 3 servicios */}
@@ -69,7 +71,7 @@ export default function HomePage() {
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-amber-200 transition-colors">
                     Invitaciones Digitales & RSVP
                   </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                  <p className="text-sm text-slate-200 font-normal leading-relaxed mb-6">
                     Plantillas temáticas premium con apertura de sobre interactivo, cuenta regresiva, confirmación de asistencia en vivo, mapas y cofre de regalos.
                   </p>
                 </div>
@@ -98,7 +100,7 @@ export default function HomePage() {
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-purple-200 transition-colors">
                     Trivia Fiesta en Vivo
                   </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                  <p className="text-sm text-slate-200 font-normal leading-relaxed mb-6">
                     Un juego interactivo donde los invitados compiten desde sus celulares en vivo. Preguntas personalizadas y ranking proyectado en pantalla gigante.
                   </p>
                 </div>
@@ -127,7 +129,7 @@ export default function HomePage() {
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-pink-200 transition-colors">
                     Fotos Dinámicas por QR
                   </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                  <p className="text-sm text-slate-200 font-normal leading-relaxed mb-6">
                     Cada mesa tiene su código QR. Los invitados suben fotos con dedicatorias al instante y se proyectan en el mural rotativo del salón con moderación en vivo.
                   </p>
                 </div>
@@ -169,9 +171,11 @@ export default function HomePage() {
                   </span>
                 </h3>
 
-                <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-                  Decile adiós a las tarjetas de papel o los PDFs estáticos. Diseñamos invitaciones web totalmente interactivas, con sobre virtual con sello de lacre, música de fondo, animaciones y personajes integrados a la temática.
-                </p>
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#080812]/85 border-l-4 border-amber-400 border border-white/12 backdrop-blur-md shadow-lg shadow-black/50">
+                  <p className="text-base sm:text-lg text-slate-100 font-medium leading-relaxed drop-shadow-sm">
+                    Decile adiós a las tarjetas de papel o los PDFs estáticos. Diseñamos invitaciones web totalmente interactivas, con sobre virtual con sello de lacre, música de fondo, animaciones y personajes integrados a la temática.
+                  </p>
+                </div>
 
                 <div>
                   <Link
@@ -190,7 +194,7 @@ export default function HomePage() {
                   <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-white">Confirmación RSVP en Vivo</h4>
-                    <p className="text-xs text-slate-300 mt-1">Dietas, acompañantes y asistencia en tiempo real.</p>
+                    <p className="text-xs text-slate-200 font-medium mt-1">Dietas, acompañantes y asistencia en tiempo real.</p>
                   </div>
                 </div>
 
@@ -198,7 +202,7 @@ export default function HomePage() {
                   <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-white">Salón & Geolocalización</h4>
-                    <p className="text-xs text-slate-300 mt-1">Un clic para abrir Google Maps o Waze directo.</p>
+                    <p className="text-xs text-slate-200 font-medium mt-1">Un clic para abrir Google Maps o Waze directo.</p>
                   </div>
                 </div>
 
@@ -206,7 +210,7 @@ export default function HomePage() {
                   <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-white">Cofre de Regalos & Alias</h4>
-                    <p className="text-xs text-slate-300 mt-1">Copia de CBU/Alias con un solo toque.</p>
+                    <p className="text-xs text-slate-200 font-medium mt-1">Copia de CBU/Alias con un solo toque.</p>
                   </div>
                 </div>
 
@@ -214,7 +218,7 @@ export default function HomePage() {
                   <Music className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-white">Música & Efectos Visuales</h4>
-                    <p className="text-xs text-slate-300 mt-1">Audio track personalizado y animación de apertura.</p>
+                    <p className="text-xs text-slate-200 font-medium mt-1">Audio track personalizado y animación de apertura.</p>
                   </div>
                 </div>
               </div>
@@ -318,39 +322,41 @@ export default function HomePage() {
                   </span>
                 </h3>
 
-                <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-                  Transformá el momento de la cena o la recepción en un programa de televisión interactivo. Los invitados escanean el código QR proyectado en la pantalla gigante y responden preguntas desde su smartphone contra el reloj.
-                </p>
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#080812]/85 border-l-4 border-purple-400 border border-white/12 backdrop-blur-md shadow-lg shadow-black/50">
+                  <p className="text-base sm:text-lg text-slate-100 font-medium leading-relaxed drop-shadow-sm">
+                    Transformá el momento de la cena o la recepción en un programa de televisión interactivo. Los invitados escanean el código QR proyectado en la pantalla gigante y responden preguntas desde su smartphone contra el reloj.
+                  </p>
+                </div>
 
                 {/* Steps */}
                 <div className="flex flex-col gap-3.5 pt-2">
-                  <div className="flex items-start gap-3.5">
-                    <div className="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                  <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
+                    <div className="w-8 h-8 rounded-full bg-purple-600/25 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                       1
                     </div>
                     <div>
                       <h4 className="text-sm font-bold text-white">Escanean el QR desde la mesa</h4>
-                      <p className="text-xs text-slate-400">Sin instalar nada. Solo abren la cámara, eligen su apodo o mesa e ingresan al juego.</p>
+                      <p className="text-xs text-slate-200 font-medium mt-0.5">Sin instalar nada. Solo abren la cámara, eligen su apodo o mesa e ingresan al juego.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3.5">
-                    <div className="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                  <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
+                    <div className="w-8 h-8 rounded-full bg-purple-600/25 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                       2
                     </div>
                     <div>
                       <h4 className="text-sm font-bold text-white">Preguntas personalizadas y divertidas</h4>
-                      <p className="text-xs text-slate-400">Anécdotas de la pareja, secretos del homenajeado, momentos graciosos con tiempo límite.</p>
+                      <p className="text-xs text-slate-200 font-medium mt-0.5">Anécdotas de la pareja, secretos del homenajeado, momentos graciosos con tiempo límite.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3.5">
-                    <div className="w-8 h-8 rounded-full bg-purple-600/20 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                  <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
+                    <div className="w-8 h-8 rounded-full bg-purple-600/25 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                       3
                     </div>
                     <div>
                       <h4 className="text-sm font-bold text-white">Podio y ranking proyectado en vivo</h4>
-                      <p className="text-xs text-slate-400">Puntajes calculados por rapidez y acierto, con animación de coronación en pantalla gigante.</p>
+                      <p className="text-xs text-slate-200 font-medium mt-0.5">Puntajes calculados por rapidez y acierto, con animación de coronación en pantalla gigante.</p>
                     </div>
                   </div>
                 </div>
@@ -396,9 +402,11 @@ export default function HomePage() {
                   </span>
                 </h3>
 
-                <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-                  Colocamos identificadores con códigos QR en cada mesa del salón. Los invitados capturan selfies, brindis y momentos únicos con su celular, les agregan una dedicatoria y las fotos aparecen al instante proyectadas en pantalla gigante.
-                </p>
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#080812]/85 border-l-4 border-pink-400 border border-white/12 backdrop-blur-md shadow-lg shadow-black/50">
+                  <p className="text-base sm:text-lg text-slate-100 font-medium leading-relaxed drop-shadow-sm">
+                    Colocamos identificadores con códigos QR en cada mesa del salón. Los invitados capturan selfies, brindis y momentos únicos con su celular, les agregan una dedicatoria y las fotos aparecen al instante proyectadas en pantalla gigante.
+                  </p>
+                </div>
 
                 {/* Bullets */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -406,7 +414,7 @@ export default function HomePage() {
                     <QrCode className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">QR Exclusivo por Mesa</h4>
-                      <p className="text-xs text-slate-300">Escaneo instantáneo sin login ni registros pesados.</p>
+                      <p className="text-xs text-slate-200 font-medium mt-1">Escaneo instantáneo sin login ni registros pesados.</p>
                     </div>
                   </div>
 
@@ -414,7 +422,7 @@ export default function HomePage() {
                     <Shield className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Panel de Moderación</h4>
-                      <p className="text-xs text-slate-300">Aprobá fotos antes de salir a pantalla si lo preferís.</p>
+                      <p className="text-xs text-slate-200 font-medium mt-1">Aprobá fotos antes de salir a pantalla si lo preferís.</p>
                     </div>
                   </div>
 
@@ -422,7 +430,7 @@ export default function HomePage() {
                     <Tv className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Mural Rotativo Animado</h4>
-                      <p className="text-xs text-slate-300">Transiciones modernas para proyectores y Smart TVs.</p>
+                      <p className="text-xs text-slate-200 font-medium mt-1">Transiciones modernas para proyectores y Smart TVs.</p>
                     </div>
                   </div>
 
@@ -430,7 +438,7 @@ export default function HomePage() {
                     <Smartphone className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Descarga Completa al Final</h4>
-                      <p className="text-xs text-slate-300">Los anfitriones descargan todas las fotos en alta resolución.</p>
+                      <p className="text-xs text-slate-200 font-medium mt-1">Los anfitriones descargan todas las fotos en alta resolución.</p>
                     </div>
                   </div>
                 </div>
@@ -526,9 +534,11 @@ export default function HomePage() {
               </span>
             </div>
 
-            <p className="text-slate-400 text-sm max-w-md">
-              Plataforma integral de invitaciones digitales interactivas, trivias en vivo y transmisión de fotos por QR en pantallas gigantes.
-            </p>
+            <div className="p-3 px-6 rounded-2xl bg-black/60 border border-white/12 backdrop-blur-md shadow-md">
+              <p className="text-slate-200 text-sm max-w-md font-medium leading-relaxed">
+                Plataforma integral de invitaciones digitales interactivas, trivias en vivo y transmisión de fotos por QR en pantallas gigantes.
+              </p>
+            </div>
 
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-slate-400">
               <a href="#servicios" className="hover:text-white transition-colors">

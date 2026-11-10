@@ -472,7 +472,19 @@ export default function DiscoBallHero() {
         <div
           className="absolute top-[58%] sm:top-[60%] left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 text-center pointer-events-none z-20"
         >
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
+          {/* Sombra ambiental oscura de respaldo para aislar el texto de los rayos de luz */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 -inset-x-8 -inset-y-12 bg-radial from-black/90 via-black/60 to-transparent rounded-full blur-3xl pointer-events-none -z-10"
+          />
+
+          <h1
+            className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight select-none"
+            style={{
+              filter:
+                "drop-shadow(0 2px 4px rgba(0, 0, 0, 1)) drop-shadow(0 4px 12px rgba(0, 0, 0, 1)) drop-shadow(0 10px 30px rgba(0, 0, 0, 1)) drop-shadow(0 0 50px rgba(0, 0, 0, 0.95))",
+            }}
+          >
             {WORDS.map((w, i) => (
               <span
                 key={i}
@@ -487,6 +499,9 @@ export default function DiscoBallHero() {
                 }`}
                 style={{
                   transitionDelay: `${i * 150}ms`,
+                  textShadow: w.isGradient
+                    ? undefined
+                    : "0 2px 6px rgba(0,0,0,1), 0 4px 18px rgba(0,0,0,1), 0 0 35px rgba(0,0,0,0.9)",
                 }}
               >
                 {w.text}
