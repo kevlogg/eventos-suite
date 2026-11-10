@@ -127,21 +127,19 @@ export default function PrincesasTemplate({ invitation }: TemplateProps) {
           {/* ─── HERO SECTION WITH INTEGRATED PRINCESSES ─── */}
           <section className="relative flex flex-col items-center gap-5 sm:gap-7 text-center py-4 w-full">
             {/* Authentic Cinderella cutout floating on top-left */}
-            <div className="absolute -top-12 -left-4 sm:left-2 md:-left-16 w-28 sm:w-44 md:w-56 pointer-events-none z-20 transform -rotate-6 transition-transform duration-700 hover:rotate-0">
+            <div className="absolute -top-12 -left-4 sm:left-2 md:-left-16 w-32 sm:w-48 md:w-60 pointer-events-none z-20 transform -rotate-6 transition-transform duration-700 hover:rotate-0">
               <img
                 src="/images/characters/cinderella.png"
-                alt="Cenicienta"
-                className="w-full h-auto drop-shadow-[0_15px_30px_rgba(244,114,182,0.4)] select-none"
+                alt="Cenicienta Real"
+                className="w-full h-auto drop-shadow-[0_18px_35px_rgba(244,114,182,0.5)] select-none"
               />
             </div>
 
-            {/* Authentic Disney Princesses group cutout on bottom-right */}
-            <div className="absolute -bottom-12 -right-4 sm:right-0 md:-right-16 w-36 sm:w-56 md:w-72 pointer-events-none z-20 transition-transform duration-700 hover:scale-105">
-              <img
-                src="/images/characters/princesses.png"
-                alt="Princesas Disney"
-                className="w-full h-auto drop-shadow-[0_18px_35px_rgba(244,114,182,0.45)] select-none"
-              />
+            {/* Royal Castle Fairy Emblem on bottom-right */}
+            <div className="absolute -bottom-10 -right-4 sm:right-2 md:-right-12 w-28 sm:w-40 md:w-48 pointer-events-none z-20 flex flex-col items-center justify-center p-3 rounded-3xl bg-white/70 border-2 border-pink-300 shadow-xl backdrop-blur-sm transform rotate-6">
+              <Castle size={36} className="text-pink-600 mb-1" />
+              <span className="text-[10px] font-bold text-pink-900 uppercase tracking-widest">Castillo Real</span>
+              <span className="text-[8px] text-pink-600 font-semibold">Gran Baile</span>
             </div>
 
             {/* Fairy tale ornament */}
@@ -320,9 +318,9 @@ function PrincessEnvelopeModal({
             <img src="/images/characters/cinderella.png" alt="Cenicienta" className="w-full h-auto drop-shadow-xl" />
           </div>
 
-          {/* Authentic Princesses group cutout peeking */}
-          <div className="absolute -bottom-10 -right-8 w-28 sm:w-36 h-auto pointer-events-none z-20">
-            <img src="/images/characters/princesses.png" alt="Princesas" className="w-full h-auto drop-shadow-xl" />
+          {/* Golden Crown Ornament */}
+          <div className="absolute -bottom-8 -right-6 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-amber-400 border-2 border-white shadow-xl flex items-center justify-center text-amber-950 pointer-events-none z-20">
+            <Crown size={28} className="fill-amber-300" />
           </div>
 
           {/* Top Badge & Header */}

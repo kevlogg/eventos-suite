@@ -61,8 +61,7 @@ const REAL_TEMPLATES: RealTemplateConfig[] = [
     personName: "Bautista 10",
     eventSubtitle: "Festejamos mi cumple con un super torneo y trofeo oficial",
     dorsalNumber: "10",
-    characterImg: "/images/characters/messi_trophy.png",
-    characterCutout: "/images/characters/messi.png",
+    characterImg: "/images/characters/messi.png",
     countdownBg: "bg-white text-emerald-950",
     countdownBorder: "border-2 border-emerald-400 shadow-lg",
     venueName: "Estadio Monumental Eventos",
@@ -90,8 +89,8 @@ const REAL_TEMPLATES: RealTemplateConfig[] = [
     subtextColor: "text-blue-800",
     personName: "Benjamín Cumple 5",
     eventSubtitle: "Acompañame a celebrar mi cumpleaños en una gran misión",
-    characterImg: "/images/characters/buzz.png",
-    characterCutout: "/images/characters/woody.png",
+    characterImg: "/images/characters/woody.png",
+    characterCutout: "/images/characters/buzz.png",
     countdownBg: "bg-white/95 text-blue-950",
     countdownBorder: "border-3 border-amber-400 shadow-md",
     venueName: "Salón Magic Kingdom",
@@ -119,8 +118,7 @@ const REAL_TEMPLATES: RealTemplateConfig[] = [
     subtextColor: "text-pink-800",
     personName: "Mis 15 · Sofía",
     eventSubtitle: "Una noche mágica donde los cuentos de hadas se hacen realidad",
-    characterImg: "/images/characters/princesses.png",
-    characterCutout: "/images/characters/cinderella.png",
+    characterImg: "/images/characters/cinderella.png",
     countdownBg: "bg-white/95 text-pink-950",
     countdownBorder: "border-2 border-pink-300 shadow-md",
     venueName: "Palacio de las Hadas & Salón Real",
@@ -148,8 +146,7 @@ const REAL_TEMPLATES: RealTemplateConfig[] = [
     subtextColor: "text-pink-200",
     personName: "Mía · Mis 15 Tour",
     eventSubtitle: "Vení a vibrar la mejor noche con lightsticks, photocards y K-Pop",
-    characterImg: "/images/characters/kpop_group.png",
-    characterCutout: "/images/characters/kpop_animated.png",
+    characterImg: "/images/characters/kpop_animated.png",
     countdownBg: "bg-black/70 text-white",
     countdownBorder: "border-2 border-pink-500/60 shadow-[0_0_15px_rgba(236,72,153,0.3)]",
     venueName: "Live Stage Arena · Salón VIP",
@@ -178,7 +175,6 @@ const REAL_TEMPLATES: RealTemplateConfig[] = [
     personName: "Felipe · 18 Años Party",
     eventSubtitle: "Glitter bar, luces UV, cotillón neón y los mejores DJs en vivo",
     characterImg: "/images/characters/dj_party.jpg",
-    characterCutout: "/images/characters/dj_party.jpg",
     countdownBg: "bg-black/80 text-white",
     countdownBorder: "border-2 border-cyan-400/60 shadow-[0_0_15px_rgba(6,182,212,0.35)]",
     venueName: "Quinta El Bosque · Stage Neón",
@@ -207,7 +203,6 @@ const REAL_TEMPLATES: RealTemplateConfig[] = [
     personName: "Alejandro · Gran Gala",
     eventSubtitle: "Celebrando medio siglo de vida entre champagne, swing y jazz",
     characterImg: "/images/characters/gatsby.png",
-    characterCutout: "/images/characters/gatsby.png",
     countdownBg: "bg-black/75 text-amber-200",
     countdownBorder: "border-2 border-amber-400/60 shadow-lg",
     venueName: "Salón Dorado de Versailles",
@@ -236,7 +231,6 @@ const REAL_TEMPLATES: RealTemplateConfig[] = [
     personName: "Mariano · Noche VIP",
     eventSubtitle: "Mesas de Blackjack, Ruleta VIP, cócteles clásicos y dress code Black Tie",
     characterImg: "/images/characters/casino_vip.jpg",
-    characterCutout: "/images/characters/casino_vip.jpg",
     countdownBg: "bg-black/75 text-emerald-200",
     countdownBorder: "border-2 border-emerald-500/60 shadow-lg",
     venueName: "Casino Monte Carlo Lounge",
@@ -513,26 +507,120 @@ export default function TemplatesPhoneCarousel() {
                       <span>{template.badge}</span>
                     </div>
 
-                    {/* Authentic Hero Cutout / Watermark Artwork */}
+                    {/* Authentic Thematic Hero Artwork (Tailored per template, no ugly cropped square boxes) */}
                     <div className="relative w-full py-1 flex items-center justify-center">
-                      <div className="w-32 h-32 rounded-2xl overflow-hidden shadow-xl border-2 border-white/30 relative bg-black/20 group-hover/phone:scale-105 transition-transform duration-500">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={template.characterImg}
-                          alt={template.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-
-                      {/* Floating Official Cutout if present (like Messi or Woody) */}
-                      {template.characterCutout && template.characterCutout !== template.characterImg && (
-                        <div className="absolute -bottom-2 -right-1 w-20 h-20 pointer-events-none drop-shadow-xl z-10 animate-bounce duration-1000">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                      {template.id === "futbol-infantil" && (
+                        <div className="relative w-full h-36 flex items-center justify-center">
                           <img
-                            src={template.characterCutout}
-                            alt=""
-                            className="w-full h-full object-contain"
+                            src="/images/characters/messi.png"
+                            alt="Messi Campeón"
+                            className="h-36 w-auto object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.65)] select-none group-hover/phone:scale-105 transition-transform duration-500"
                           />
+                        </div>
+                      )}
+
+                      {template.id === "toy-story" && (
+                        <div className="relative w-full h-36 flex items-center justify-center gap-2">
+                          <img
+                            src="/images/characters/woody.png"
+                            alt="Woody"
+                            className="h-34 w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] select-none"
+                          />
+                          <img
+                            src="/images/characters/buzz.png"
+                            alt="Buzz Lightyear"
+                            className="h-28 w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.35)] select-none transform rotate-6"
+                          />
+                        </div>
+                      )}
+
+                      {template.id === "princesas" && (
+                        <div className="relative w-full h-36 flex items-center justify-center">
+                          <img
+                            src="/images/characters/cinderella.png"
+                            alt="Cenicienta Real"
+                            className="h-36 w-auto object-contain drop-shadow-[0_15px_30px_rgba(244,114,182,0.55)] select-none group-hover/phone:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      )}
+
+                      {template.id === "k-pop" && (
+                        <div className="relative w-full h-36 flex items-center justify-center">
+                          <img
+                            src="/images/characters/kpop_animated.png"
+                            alt="K-Pop Idols"
+                            className="h-36 w-auto object-contain drop-shadow-[0_15px_35px_rgba(236,72,153,0.7)] select-none rounded-2xl border-2 border-pink-400/50 group-hover/phone:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      )}
+
+                      {template.id === "fiesta-neon-dj" && (
+                        <div className="relative w-full h-36 flex items-center justify-center">
+                          <div className="h-32 w-48 rounded-2xl overflow-hidden border-2 border-cyan-400/80 shadow-[0_0_25px_rgba(6,182,212,0.6)] relative group-hover/phone:scale-105 transition-transform duration-500">
+                            <img
+                              src="/images/characters/dj_party.jpg"
+                              alt="DJ Stage"
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-purple-950/85 via-transparent to-transparent flex items-end justify-center pb-1">
+                              <span className="text-[9px] font-black uppercase tracking-widest text-cyan-300">★ VIP STAGE PASS ★</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {template.id === "gatsby-glamour" && (
+                        <div className="relative w-full h-36 flex items-center justify-center">
+                          <img
+                            src="/images/characters/gatsby.png"
+                            alt="Gran Gatsby"
+                            className="h-36 w-auto object-contain drop-shadow-[0_15px_35px_rgba(212,175,55,0.75)] select-none rounded-2xl border-2 border-amber-400/60 group-hover/phone:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      )}
+
+                      {template.id === "casino-royale" && (
+                        <div className="relative w-full h-36 flex items-center justify-center">
+                          <div className="h-32 w-48 rounded-2xl overflow-hidden border-2 border-amber-400/80 shadow-[0_10px_30px_rgba(16,185,129,0.55)] relative group-hover/phone:scale-105 transition-transform duration-500">
+                            <img
+                              src="/images/characters/casino_vip.jpg"
+                              alt="Casino VIP"
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-black/85 border border-amber-400/70 text-[8px] font-black text-amber-300 tracking-wider whitespace-nowrap">
+                              ♠ MONTE CARLO VIP ♠
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {template.id === "boda-botanica" && (
+                        <div className="relative w-full h-36 flex items-center justify-center">
+                          <div className="w-32 h-32 rounded-full border-2 border-[#556B2F]/40 bg-white/70 backdrop-blur-sm flex flex-col items-center justify-center shadow-lg relative group-hover/phone:scale-105 transition-transform duration-500">
+                            <span className="text-2xl mb-1">💍</span>
+                            <span className="font-serif text-2xl font-bold text-[#2D3E1E] tracking-widest">C & N</span>
+                            <span className="text-[8px] uppercase tracking-[0.25em] text-[#556B2F] font-bold mt-0.5">Nuestra Boda</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {template.id === "boda-clasica" && (
+                        <div className="relative w-full h-36 flex items-center justify-center">
+                          <div className="w-32 h-32 rounded-full border-2 border-[#D4AF37]/70 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.4)] relative group-hover/phone:scale-105 transition-transform duration-500">
+                            <Crown size={22} className="text-[#D4AF37] mb-1" />
+                            <span className="font-serif text-2xl font-bold text-[#FAF5EE] tracking-widest">V & M</span>
+                            <span className="text-[8px] uppercase tracking-[0.3em] text-[#D4AF37] font-bold mt-0.5">Black Tie Gala</span>
+                          </div>
+                        </div>
+                      )}
+
+                      {template.id === "boda-boho" && (
+                        <div className="relative w-full h-36 flex items-center justify-center">
+                          <div className="w-28 h-36 rounded-t-full border-2 border-[#C86D51]/50 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center shadow-md relative pt-2 group-hover/phone:scale-105 transition-transform duration-500">
+                            <span className="text-xl mb-1">🌾</span>
+                            <span className="font-serif text-2xl font-bold text-[#6D2B19] tracking-widest">L & J</span>
+                            <span className="text-[8px] uppercase tracking-[0.2em] text-[#8C4632] font-bold mt-0.5">Golden Hour</span>
+                          </div>
                         </div>
                       )}
                     </div>
