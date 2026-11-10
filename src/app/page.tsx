@@ -1,5 +1,7 @@
 import Link from "next/link";
 import DiscoBallHero from "@/components/home/DiscoBallHero";
+import DiscoMirrorHover from "@/components/home/DiscoMirrorHover";
+import TemplatesPhoneCarousel from "@/components/home/TemplatesPhoneCarousel";
 import {
   PartyPopper,
   Camera,
@@ -31,42 +33,6 @@ export default function HomePage() {
         id="servicios"
         className="relative z-20 bg-gradient-to-b from-[#020205]/45 via-[#020205]/55 to-[#020205]/65 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/15 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-[6px] min-h-screen"
       >
-        {/* Barra superior de navegación dentro de la cortina */}
-        <header className="border-b border-white/10 sticky top-0 z-40 bg-[#020205]/75 backdrop-blur-xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-extrabold text-lg sm:text-xl tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                Eventos Suite
-              </span>
-            </Link>
-
-            <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-200">
-              <a href="#servicio-invitaciones" className="hover:text-amber-300 transition-colors">
-                Invitaciones
-              </a>
-              <a href="#servicio-trivia" className="hover:text-purple-300 transition-colors">
-                Trivia en Vivo
-              </a>
-              <a href="#servicio-fotos" className="hover:text-pink-300 transition-colors">
-                Fotos por QR
-              </a>
-            </nav>
-
-            <div className="flex items-center gap-3">
-              <Link
-                href="/superadmin"
-                className="px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 transition-all shadow-md shadow-indigo-500/25 flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
-              >
-                <Shield className="w-4 h-4" />
-                <span>Panel Superadmin</span>
-              </Link>
-            </div>
-          </div>
-        </header>
-
         {/* ─── SECCIÓN 2: PRESENTACIÓN DE LOS 3 SERVICIOS PRINCIPALES ─── */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20">
           <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
@@ -89,78 +55,87 @@ export default function HomePage() {
             {/* Tarjeta Servicio 1 */}
             <a
               href="#servicio-invitaciones"
-              className="group p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-amber-400/60 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_20px_50px_rgba(245,158,11,0.2)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between"
+              className="group relative p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.15)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden"
             >
-              <div>
-                <div className="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-amber-500/10">
-                  <PartyPopper className="w-7 h-7" />
+              <DiscoMirrorHover rows={7} cols={9} />
+              <div className="relative z-10 flex flex-col justify-between h-full">
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-amber-500/10">
+                    <PartyPopper className="w-7 h-7" />
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-2">
+                    Servicio 01
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-amber-200 transition-colors">
+                    Invitaciones Digitales & RSVP
+                  </h3>
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                    Plantillas temáticas premium con apertura de sobre interactivo, cuenta regresiva, confirmación de asistencia en vivo, mapas y cofre de regalos.
+                  </p>
                 </div>
-                <div className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-2">
-                  Servicio 01
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-amber-200 transition-colors">
-                  Invitaciones Digitales & RSVP
-                </h3>
-                <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                  Plantillas temáticas premium con apertura de sobre interactivo, cuenta regresiva, confirmación de asistencia en vivo, mapas y cofre de regalos.
-                </p>
-              </div>
 
-              <div className="flex items-center gap-2 text-sm font-semibold text-amber-400 group-hover:translate-x-1 transition-transform">
-                <span>Ver detalles del servicio</span>
-                <ChevronRight size={16} />
+                <div className="flex items-center gap-2 text-sm font-semibold text-amber-400 group-hover:translate-x-1 transition-transform">
+                  <span>Ver detalles del servicio</span>
+                  <ChevronRight size={16} />
+                </div>
               </div>
             </a>
 
             {/* Tarjeta Servicio 2 */}
             <a
               href="#servicio-trivia"
-              className="group p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-purple-400/60 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_20px_50px_rgba(168,85,247,0.2)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between"
+              className="group relative p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.15)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden"
             >
-              <div>
-                <div className="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-purple-500/10">
-                  <Trophy className="w-7 h-7" />
+              <DiscoMirrorHover rows={7} cols={9} />
+              <div className="relative z-10 flex flex-col justify-between h-full">
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-purple-500/10">
+                    <Trophy className="w-7 h-7" />
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-2">
+                    Servicio 02
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-purple-200 transition-colors">
+                    Trivia Fiesta en Vivo
+                  </h3>
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                    Un juego interactivo donde los invitados compiten desde sus celulares en vivo. Preguntas personalizadas y ranking proyectado en pantalla gigante.
+                  </p>
                 </div>
-                <div className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-2">
-                  Servicio 02
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-purple-200 transition-colors">
-                  Trivia Fiesta en Vivo
-                </h3>
-                <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                  Un juego interactivo donde los invitados compiten desde sus celulares en vivo. Preguntas personalizadas y ranking proyectado en pantalla gigante.
-                </p>
-              </div>
 
-              <div className="flex items-center gap-2 text-sm font-semibold text-purple-400 group-hover:translate-x-1 transition-transform">
-                <span>Ver detalles del servicio</span>
-                <ChevronRight size={16} />
+                <div className="flex items-center gap-2 text-sm font-semibold text-purple-400 group-hover:translate-x-1 transition-transform">
+                  <span>Ver detalles del servicio</span>
+                  <ChevronRight size={16} />
+                </div>
               </div>
             </a>
 
             {/* Tarjeta Servicio 3 */}
             <a
               href="#servicio-fotos"
-              className="group p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-pink-400/60 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_20px_50px_rgba(236,72,153,0.2)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between"
+              className="group relative p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.15)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden"
             >
-              <div>
-                <div className="w-14 h-14 rounded-2xl bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-pink-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-pink-500/10">
-                  <Camera className="w-7 h-7" />
+              <DiscoMirrorHover rows={7} cols={9} />
+              <div className="relative z-10 flex flex-col justify-between h-full">
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-pink-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-pink-500/10">
+                    <Camera className="w-7 h-7" />
+                  </div>
+                  <div className="text-xs font-bold uppercase tracking-widest text-pink-400 mb-2">
+                    Servicio 03
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-pink-200 transition-colors">
+                    Fotos Dinámicas por QR
+                  </h3>
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                    Cada mesa tiene su código QR. Los invitados suben fotos con dedicatorias al instante y se proyectan en el mural rotativo del salón con moderación en vivo.
+                  </p>
                 </div>
-                <div className="text-xs font-bold uppercase tracking-widest text-pink-400 mb-2">
-                  Servicio 03
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-pink-200 transition-colors">
-                  Fotos Dinámicas por QR
-                </h3>
-                <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                  Cada mesa tiene su código QR. Los invitados suben fotos con dedicatorias al instante y se proyectan en el mural rotativo del salón con moderación en vivo.
-                </p>
-              </div>
 
-              <div className="flex items-center gap-2 text-sm font-semibold text-pink-400 group-hover:translate-x-1 transition-transform">
-                <span>Ver detalles del servicio</span>
-                <ChevronRight size={16} />
+                <div className="flex items-center gap-2 text-sm font-semibold text-pink-400 group-hover:translate-x-1 transition-transform">
+                  <span>Ver detalles del servicio</span>
+                  <ChevronRight size={16} />
+                </div>
               </div>
             </a>
           </div>
@@ -177,9 +152,10 @@ export default function HomePage() {
             className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"
           />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              {/* Text & Features */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col gap-12 sm:gap-16">
+            {/* Cabecera & Características */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+              {/* Text & Intro */}
               <div className="lg:col-span-6 flex flex-col gap-6">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold uppercase tracking-widest w-fit">
                   <Sparkles size={14} className="text-amber-400" />
@@ -197,81 +173,7 @@ export default function HomePage() {
                   Decile adiós a las tarjetas de papel o los PDFs estáticos. Diseñamos invitaciones web totalmente interactivas, con sobre virtual con sello de lacre, música de fondo, animaciones y personajes integrados a la temática.
                 </p>
 
-                {/* Bullets */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-sm font-bold text-white">Confirmación RSVP en Vivo</h4>
-                      <p className="text-xs text-slate-300">Dietas, acompañantes y asistencia en tiempo real.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-sm font-bold text-white">Salón & Geolocalización</h4>
-                      <p className="text-xs text-slate-300">Un clic para abrir Google Maps o Waze directo.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-sm font-bold text-white">Cofre de Regalos & Alias</h4>
-                      <p className="text-xs text-slate-300">Copia de CBU/Alias con un solo toque.</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <Music className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-sm font-bold text-white">Música & Efectos Visuales</h4>
-                      <p className="text-xs text-slate-300">Audio track personalizado y animación de apertura.</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Temas pills */}
-                <div className="pt-2">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
-                    Plantillas temáticas incluidas:
-                  </div>
-                  <div className="flex flex-wrap gap-2 text-xs">
-                    <span className="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-300">
-                      🌿 Boda Botánica
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-zinc-900 border border-amber-400/50 text-amber-300">
-                      🥂 Boda Clásica Black Tie
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-amber-950/60 border border-amber-600/40 text-amber-200">
-                      🌾 Boda Boho Chic
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-sky-950/60 border border-sky-500/40 text-sky-300">
-                      🚀 Toy Story Aventura
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-pink-950/60 border border-pink-500/40 text-pink-300">
-                      👑 Princesas Disney
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-emerald-950/60 border border-yellow-400/50 text-yellow-300">
-                      ⚽ Fútbol Messi Campeón
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-purple-950/60 border border-pink-400/50 text-pink-300">
-                      💖 K-Pop Idol & Tour
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-cyan-950/60 border border-purple-400/50 text-cyan-300">
-                      🪩 Fiesta Neón & DJ Bresh
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-zinc-900 border border-yellow-500/50 text-yellow-200">
-                      🍸 Gran Gatsby 1920s
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-400/50 text-emerald-300">
-                      ♠️ Casino Royale VIP
-                    </span>
-                  </div>
-                </div>
-
-                <div className="pt-4">
+                <div>
                   <Link
                     href="/superadmin/nuevo-evento"
                     className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold text-sm tracking-wide shadow-lg shadow-amber-500/25 transition-all"
@@ -282,67 +184,45 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Visual Mockup Card */}
-              <div className="lg:col-span-6">
-                <div className="relative rounded-3xl p-1 bg-gradient-to-br from-amber-500/40 via-purple-500/30 to-pink-500/30 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
-                  <div className="rounded-[22px] bg-slate-900/90 p-6 sm:p-8 border border-slate-800 flex flex-col gap-6">
-                    {/* Mockup Header */}
-                    <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-                      <div className="flex items-center gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                        <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                        <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                      </div>
-                      <span className="text-xs font-mono text-slate-400">
-                        eventos-suite.com/fiesta-vip
-                      </span>
-                      <div className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-semibold">
-                        Preview
-                      </div>
-                    </div>
+              {/* Bullets */}
+              <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
+                  <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold text-white">Confirmación RSVP en Vivo</h4>
+                    <p className="text-xs text-slate-300 mt-1">Dietas, acompañantes y asistencia en tiempo real.</p>
+                  </div>
+                </div>
 
-                    {/* Mockup Card Content */}
-                    <div className="p-6 rounded-2xl bg-gradient-to-b from-amber-950/40 via-slate-900/80 to-slate-950 border border-amber-500/30 text-center flex flex-col items-center gap-4">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-400 to-yellow-300 text-slate-950 flex items-center justify-center font-serif text-2xl font-bold shadow-lg shadow-amber-500/30">
-                        👑
-                      </div>
-                      <div>
-                        <div className="text-xs uppercase tracking-widest text-amber-300 font-serif">
-                          ✦ GRAN GALA DE CELEBRACIÓN ✦
-                        </div>
-                        <h4 className="text-2xl font-bold text-white mt-1">Martina & Santiago</h4>
-                        <p className="text-xs text-amber-200/80 mt-1">Sábado 14 de Noviembre · 20:30 hs</p>
-                      </div>
+                <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
+                  <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold text-white">Salón & Geolocalización</h4>
+                    <p className="text-xs text-slate-300 mt-1">Un clic para abrir Google Maps o Waze directo.</p>
+                  </div>
+                </div>
 
-                      {/* Mockup Timer */}
-                      <div className="grid grid-cols-4 gap-2 w-full max-w-xs mt-2">
-                        <div className="p-2 rounded-xl bg-black/60 border border-amber-500/30 text-center">
-                          <div className="text-base font-bold text-amber-300">12</div>
-                          <div className="text-[9px] uppercase text-slate-400">Días</div>
-                        </div>
-                        <div className="p-2 rounded-xl bg-black/60 border border-amber-500/30 text-center">
-                          <div className="text-base font-bold text-amber-300">08</div>
-                          <div className="text-[9px] uppercase text-slate-400">Hs</div>
-                        </div>
-                        <div className="p-2 rounded-xl bg-black/60 border border-amber-500/30 text-center">
-                          <div className="text-base font-bold text-amber-300">45</div>
-                          <div className="text-[9px] uppercase text-slate-400">Min</div>
-                        </div>
-                        <div className="p-2 rounded-xl bg-black/60 border border-amber-500/30 text-center">
-                          <div className="text-base font-bold text-amber-300">19</div>
-                          <div className="text-[9px] uppercase text-slate-400">Seg</div>
-                        </div>
-                      </div>
+                <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
+                  <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold text-white">Cofre de Regalos & Alias</h4>
+                    <p className="text-xs text-slate-300 mt-1">Copia de CBU/Alias con un solo toque.</p>
+                  </div>
+                </div>
 
-                      {/* Mockup RSVP status */}
-                      <div className="w-full pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800">
-                        <span>Estado de confirmación:</span>
-                        <span className="text-emerald-400 font-semibold">✓ Confirmado (2 pers.)</span>
-                      </div>
-                    </div>
+                <div className="flex items-start gap-3 p-4 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
+                  <Music className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold text-white">Música & Efectos Visuales</h4>
+                    <p className="text-xs text-slate-300 mt-1">Audio track personalizado y animación de apertura.</p>
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Carrusel Horizontal de Mockups de Celulares con Auto-Scroll */}
+            <div className="w-full pt-4">
+              <TemplatesPhoneCarousel />
             </div>
           </div>
         </section>
