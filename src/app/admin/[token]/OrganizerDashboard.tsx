@@ -26,16 +26,20 @@ interface Props {
 }
 
 export default function OrganizerDashboard({ event }: Props) {
-  // Determine available tabs
+  // Determine available tabs strictly based on enabled modules
   const availableTabs = [
     { id: "overview", label: "Resumen", icon: LayoutDashboard, enabled: true },
-    { id: "invitacion", label: "Invitación & RSVP", icon: PartyPopper, enabled: event.enabledModules.invitacion },
-    { id: "trivia", label: "Trivia Fiesta", icon: Trophy, enabled: event.enabledModules.trivia },
-    { id: "fotos", label: "Fotos QR", icon: Camera, enabled: event.enabledModules.fotos },
+    { id: "invitacion", label: "Invitación & RSVP", icon: PartyPopper, enabled: Boolean(event.enabledModules?.invitacion) },
+    { id: "trivia", label: "Trivia Fiesta", icon: Trophy, enabled: Boolean(event.enabledModules?.trivia) },
+    { id: "fotos", label: "Fotos QR", icon: Camera, enabled: Boolean(event.enabledModules?.fotos) },
   ].filter((t) => t.enabled);
 
   const [activeTab, setActiveTab] = useState<string>("overview");
   const [copied, setCopied] = useState<string | null>(null);
+
+  // Fallback if activeTab is not enabled for this event
+  const isCurrentTabValid = availableTabs.some((t) => t.id === activeTab);
+  const currentTab = isCurrentTabValid ? activeTab : "overview";
 
   function copyText(text: string, id: string) {
     navigator.clipboard.writeText(text);
@@ -64,14 +68,25 @@ export default function OrganizerDashboard({ event }: Props) {
 
           {/* Quick links to guest view / TV */}
           <div className="flex items-center gap-2">
-            <Link
-              href={guestUrl}
-              target="_blank"
-              className="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 transition-colors"
-            >
-              <span>Ver Invitación</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </Link>
+            {event.enabledModules.invitacion ? (
+              <Link
+                href={guestUrl}
+                target="_blank"
+                className="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 transition-colors"
+              >
+                <span>Ver Invitación</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
+            ) : (event.enabledModules.trivia || event.enabledModules.fotos) ? (
+              <Link
+                href={guestUrl}
+                target="_blank"
+                className="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-1.5 transition-colors"
+              >
+                <span>Portal Invitados</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </Link>
+            ) : null}
 
             {event.enabledModules.trivia && (
               <Link
@@ -103,7 +118,7 @@ export default function OrganizerDashboard({ event }: Props) {
         <div className="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto py-2 scrollbar-none">
           {availableTabs.map((tab) => {
             const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
+            const isActive = currentTab === tab.id;
             return (
               <button
                 key={tab.id}
@@ -124,7 +139,7 @@ export default function OrganizerDashboard({ event }: Props) {
 
       {/* Main Tab Content */}
       <main className="max-w-7xl mx-auto px-4 py-8 flex-1 w-full">
-        {activeTab === "overview" && (
+        {currentTab === "overview" && (
           <div className="space-y-6">
             {/* Event Welcome Banner */}
             <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-slate-900 border border-indigo-500/20 shadow-xl">
@@ -231,76 +246,94 @@ export default function OrganizerDashboard({ event }: Props) {
               )}
             </div>
 
-            {/* Quick Share Links Card */}
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
-              <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
-                Enlaces Rápidos para el Salón y los Invitados
-              </h3>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {/* Link Invitados */}
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
-                  <div>
-                    <span className="text-xs text-slate-400 font-semibold block mb-1">Link de los Invitados</span>
-                    <span className="text-xs font-mono text-indigo-300 break-all">{guestUrl}</span>
-                  </div>
-                  <button
-                    onClick={() => copyText(`${window.location.origin}${guestUrl}`, "guest")}
-                    className="mt-3 py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                  >
-                    {copied === "guest" ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copied === "guest" ? "Copiado" : "Copiar Enlace"}</span>
-                  </button>
-                </div>
-
-                {/* Pantalla TV Trivia */}
-                {event.enabledModules.trivia && (
-                  <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
-                    <div>
-                      <span className="text-xs text-purple-400 font-semibold block mb-1">Proyector / TV Trivia</span>
-                      <span className="text-xs font-mono text-slate-400 break-all">{tvTriviaUrl}</span>
-                    </div>
-                    <Link
-                      href={tvTriviaUrl}
-                      target="_blank"
-                      className="mt-3 py-1.5 px-3 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
-                    >
-                      <Tv className="w-3.5 h-3.5" />
-                      <span>Abrir Pantalla TV</span>
-                    </Link>
-                  </div>
-                )}
-
-                {/* Pantalla Mural Fotos */}
-                {event.enabledModules.fotos && (
-                  <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
-                    <div>
-                      <span className="text-xs text-pink-400 font-semibold block mb-1">Proyector / Mural de Fotos</span>
-                      <span className="text-xs font-mono text-slate-400 break-all">{muralFotosUrl}</span>
-                    </div>
-                    <Link
-                      href={muralFotosUrl}
-                      target="_blank"
-                      className="mt-3 py-1.5 px-3 rounded-lg bg-pink-600/20 hover:bg-pink-600/30 text-pink-300 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
-                    >
-                      <Tv className="w-3.5 h-3.5" />
-                      <span>Abrir Mural en Vivo</span>
-                    </Link>
-                  </div>
-                )}
+            {/* Empty State if no modules enabled */}
+            {!event.enabledModules.invitacion && !event.enabledModules.trivia && !event.enabledModules.fotos && (
+              <div className="p-8 rounded-2xl bg-slate-900/40 border border-dashed border-slate-800 text-center space-y-2">
+                <p className="text-sm text-slate-300 font-semibold">Este evento no tiene servicios activos asignados por el momento.</p>
+                <p className="text-xs text-slate-500">Podés comunicarte con tu coordinador o habilitar los módulos desde el panel de Superadmin.</p>
               </div>
-            </div>
+            )}
+
+            {/* Quick Share Links Card */}
+            {(event.enabledModules.invitacion || event.enabledModules.trivia || event.enabledModules.fotos) && (
+              <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">
+                  Enlaces Rápidos para el Salón y los Invitados
+                </h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {/* Link Invitados */}
+                  <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
+                    <div>
+                      <span className="text-xs text-slate-400 font-semibold block mb-1">
+                        {event.enabledModules.invitacion ? "Link de la Invitación" : "Portal de Invitados"}
+                      </span>
+                      <span className="text-xs font-mono text-indigo-300 break-all">{guestUrl}</span>
+                    </div>
+                    <button
+                      onClick={() => copyText(`${window.location.origin}${guestUrl}`, "guest")}
+                      className="mt-3 py-1.5 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      {copied === "guest" ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      <span>{copied === "guest" ? "Copiado" : "Copiar Enlace"}</span>
+                    </button>
+                  </div>
+
+                  {/* Pantalla TV Trivia */}
+                  {event.enabledModules.trivia && (
+                    <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
+                      <div>
+                        <span className="text-xs text-purple-400 font-semibold block mb-1">Proyector / TV Trivia</span>
+                        <span className="text-xs font-mono text-slate-400 break-all">{tvTriviaUrl}</span>
+                      </div>
+                      <Link
+                        href={tvTriviaUrl}
+                        target="_blank"
+                        className="mt-3 py-1.5 px-3 rounded-lg bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
+                      >
+                        <Tv className="w-3.5 h-3.5" />
+                        <span>Abrir Pantalla TV</span>
+                      </Link>
+                    </div>
+                  )}
+
+                  {/* Pantalla Mural Fotos */}
+                  {event.enabledModules.fotos && (
+                    <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
+                      <div>
+                        <span className="text-xs text-pink-400 font-semibold block mb-1">Proyector / Mural de Fotos</span>
+                        <span className="text-xs font-mono text-slate-400 break-all">{muralFotosUrl}</span>
+                      </div>
+                      <Link
+                        href={muralFotosUrl}
+                        target="_blank"
+                        className="mt-3 py-1.5 px-3 rounded-lg bg-pink-600/20 hover:bg-pink-600/30 text-pink-300 text-xs font-medium flex items-center justify-center gap-1.5 transition-colors"
+                      >
+                        <Tv className="w-3.5 h-3.5" />
+                        <span>Abrir Mural en Vivo</span>
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
         {/* Tab Invitación & RSVP */}
-        {activeTab === "invitacion" && <RsvpAdminPanel event={event} />}
+        {currentTab === "invitacion" && event.enabledModules.invitacion && (
+          <RsvpAdminPanel event={event} />
+        )}
 
         {/* Tab Trivia */}
-        {activeTab === "trivia" && <TriviaAdminPanel event={event} />}
+        {currentTab === "trivia" && event.enabledModules.trivia && (
+          <TriviaAdminPanel event={event} />
+        )}
 
         {/* Tab Fotos */}
-        {activeTab === "fotos" && <FotosAdminPanel event={event} />}
+        {currentTab === "fotos" && event.enabledModules.fotos && (
+          <FotosAdminPanel event={event} />
+        )}
       </main>
     </div>
   );

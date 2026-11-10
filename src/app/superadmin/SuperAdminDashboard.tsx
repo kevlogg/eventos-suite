@@ -21,9 +21,11 @@ import {
   Trophy,
   Camera,
   Layers,
-  Palette
+  Palette,
+  Settings2
 } from "lucide-react";
 import InvitationFormModal from "@/components/superadmin/InvitationFormModal";
+import EditServicesModal from "@/components/superadmin/EditServicesModal";
 
 interface Props {
   events: SuiteEvent[];
@@ -33,6 +35,8 @@ interface Props {
 export default function SuperAdminDashboard({ events, invitationsMap = {} }: Props) {
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
   const [editingEvent, setEditingEvent] = useState<SuiteEvent | null>(null);
+  const [configuringServicesEvent, setConfiguringServicesEvent] = useState<SuiteEvent | null>(null);
+  const [localEvents, setLocalEvents] = useState<SuiteEvent[]>(events);
   const [localInvitations, setLocalInvitations] = useState<Record<string, InvitationRecord>>(invitationsMap);
 
   function copyToClipboard(text: string, id: string) {
@@ -47,6 +51,14 @@ export default function SuperAdminDashboard({ events, invitationsMap = {} }: Pro
       [updated.slug.toLowerCase()]: updated,
       [updated.id]: updated,
     }));
+  }
+
+  function handleServicesSaved(updated: SuiteEvent) {
+    setLocalEvents((prev) => prev.map((e) => (e.id === updated.id ? updated : e)));
+    // Also update editingEvent if open
+    if (editingEvent?.id === updated.id) {
+      setEditingEvent(updated);
+    }
   }
 
   return (
@@ -96,11 +108,11 @@ export default function SuperAdminDashboard({ events, invitationsMap = {} }: Pro
             </p>
           </div>
           <span className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
-            Total: {events.length} evento{events.length === 1 ? "" : "s"}
+            Total: {localEvents.length} evento{localEvents.length === 1 ? "" : "s"}
           </span>
         </div>
 
-        {events.length === 0 ? (
+        {localEvents.length === 0 ? (
           <div className="p-12 text-center border border-dashed border-slate-800 rounded-3xl bg-slate-900/30">
             <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mx-auto mb-3">
               <Sparkles className="w-6 h-6" />
@@ -117,7 +129,7 @@ export default function SuperAdminDashboard({ events, invitationsMap = {} }: Pro
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {events.map((evt) => {
+            {localEvents.map((evt) => {
               const adminUrl = `/admin/${evt.adminToken}`;
               const guestUrl = `/${evt.slug}`;
 
@@ -211,16 +223,26 @@ export default function SuperAdminDashboard({ events, invitationsMap = {} }: Pro
                       </button>
                     </div>
 
-                    {/* Edit Invitation Button if Invitacion is active */}
-                    {evt.enabledModules.invitacion && (
+                    {/* Action buttons: Edit Services & Edit Invitation */}
+                    <div className="space-y-2">
                       <button
-                        onClick={() => setEditingEvent(evt)}
-                        className="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center gap-2 text-xs font-semibold transition-all cursor-pointer shadow-sm"
+                        onClick={() => setConfiguringServicesEvent(evt)}
+                        className="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/80 flex items-center justify-center gap-2 text-xs font-semibold transition-all cursor-pointer shadow-sm"
                       >
-                        <Palette className="w-3.5 h-3.5" />
-                        <span>Editar Invitación & Plantilla</span>
+                        <Settings2 className="w-3.5 h-3.5 text-indigo-400" />
+                        <span>Editar Servicios & Evento</span>
                       </button>
-                    )}
+
+                      {evt.enabledModules.invitacion && (
+                        <button
+                          onClick={() => setEditingEvent(evt)}
+                          className="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center gap-2 text-xs font-semibold transition-all cursor-pointer shadow-sm"
+                        >
+                          <Palette className="w-3.5 h-3.5" />
+                          <span>Editar Invitación & Plantilla</span>
+                        </button>
+                      )}
+                    </div>
 
                     {/* Navigation Buttons */}
                     <div className="grid grid-cols-2 gap-2 text-xs">
@@ -277,6 +299,15 @@ export default function SuperAdminDashboard({ events, invitationsMap = {} }: Pro
           </div>
         )}
       </main>
+
+      {/* Services & Event Edit Modal */}
+      {configuringServicesEvent && (
+        <EditServicesModal
+          event={configuringServicesEvent}
+          onClose={() => setConfiguringServicesEvent(null)}
+          onSaved={handleServicesSaved}
+        />
+      )}
 
       {/* Invitation Edit Modal */}
       {editingEvent && (

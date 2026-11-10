@@ -153,6 +153,27 @@ export async function getEventByToken(token: string): Promise<SuiteEvent | null>
   return events.find((e) => e.adminToken === token) || null;
 }
 
+export async function getEventById(id: string): Promise<SuiteEvent | null> {
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+      const res = await turso.execute({
+        sql: "SELECT * FROM suite_events WHERE id = ? LIMIT 1;",
+        args: [id],
+      });
+      if (res.rows.length > 0) {
+        return mapRowToEvent(res.rows[0] as Record<string, unknown>);
+      }
+    } catch (err) {
+      console.error("Turso error in getEventById:", err);
+    }
+  }
+
+  const events = await getAllEvents();
+  return events.find((e) => e.id === id) || null;
+}
+
 export async function createEvent(data: {
   slug: string;
   title: string;
@@ -223,18 +244,30 @@ export async function createEvent(data: {
   return newEvent;
 }
 
-export async function updateEventModules(
+export async function updateEvent(
   id: string,
-  enabledModules: { invitacion: boolean; trivia: boolean; fotos: boolean }
+  data: {
+    title?: string;
+    date?: string;
+    location?: string;
+    enabledModules: { invitacion: boolean; trivia: boolean; fotos: boolean };
+  }
 ): Promise<SuiteEvent | null> {
   const now = new Date().toISOString();
   const turso = getTursoClient();
   if (turso) {
     try {
       await ensureSuiteSchema();
+      const current = await getEventById(id);
+      if (!current) return null;
+
+      const title = data.title !== undefined ? data.title : current.title;
+      const date = data.date !== undefined ? data.date : current.date;
+      const location = data.location !== undefined ? data.location : (current.location || "");
+
       await turso.execute({
-        sql: `UPDATE suite_events SET enabled_modules = ?, updated_at = ? WHERE id = ?;`,
-        args: [JSON.stringify(enabledModules), now, id],
+        sql: `UPDATE suite_events SET title = ?, date = ?, location = ?, enabled_modules = ?, updated_at = ? WHERE id = ?;`,
+        args: [title, date, location, JSON.stringify(data.enabledModules), now, id],
       });
       const res = await turso.execute({
         sql: `SELECT * FROM suite_events WHERE id = ? LIMIT 1;`,
@@ -244,7 +277,7 @@ export async function updateEventModules(
         return mapRowToEvent(res.rows[0] as Record<string, unknown>);
       }
     } catch (err) {
-      console.error("Turso error in updateEventModules:", err);
+      console.error("Turso error in updateEvent:", err);
     }
   }
 
@@ -254,12 +287,22 @@ export async function updateEventModules(
     const index = events.findIndex((e) => e.id === id);
     if (index === -1) return null;
 
-    events[index].enabledModules = enabledModules;
+    if (data.title !== undefined) events[index].title = data.title;
+    if (data.date !== undefined) events[index].date = data.date;
+    if (data.location !== undefined) events[index].location = data.location;
+    events[index].enabledModules = data.enabledModules;
     events[index].updatedAt = now;
     fs.writeFileSync(getEventsFilePath(), JSON.stringify(events, null, 2), "utf-8");
     return events[index];
   } catch (err) {
-    console.error("Fallback error in updateEventModules:", err);
+    console.error("Fallback error in updateEvent:", err);
     return null;
   }
+}
+
+export async function updateEventModules(
+  id: string,
+  enabledModules: { invitacion: boolean; trivia: boolean; fotos: boolean }
+): Promise<SuiteEvent | null> {
+  return updateEvent(id, { enabledModules });
 }

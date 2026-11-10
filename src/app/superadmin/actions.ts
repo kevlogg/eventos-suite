@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { setSuperadminSession, clearSuperadminSession, timingSafePasswordCheck } from "@/lib/auth";
-import { createEvent } from "@/lib/events-service";
+import { createEvent, updateEvent } from "@/lib/events-service";
 import { saveInvitation, getInvitationBySlug, getInvitationByEventId } from "@/modules/invitacion/services/invitation-service";
 import type { TemplateId } from "@/lib/schemas/invitation.schema";
 import { revalidatePath } from "next/cache";
@@ -183,5 +183,43 @@ export async function handleSaveInvitationAction(
     };
   }
 }
+
+export async function handleUpdateEventServices(
+  eventId: string,
+  data: {
+    title?: string;
+    date?: string;
+    location?: string;
+    enabledModules: {
+      invitacion: boolean;
+      trivia: boolean;
+      fotos: boolean;
+    };
+  }
+) {
+  try {
+    const updated = await updateEvent(eventId, data);
+    if (!updated) {
+      return { success: false, error: "No se encontró el evento para actualizar." };
+    }
+
+    revalidatePath("/superadmin");
+    revalidatePath(`/admin/${updated.adminToken}`);
+    revalidatePath(`/${updated.slug}`);
+
+    return {
+      success: true,
+      message: `¡Servicios de '${updated.title}' actualizados correctamente!`,
+      event: updated,
+    };
+  } catch (err: unknown) {
+    console.error("Error in handleUpdateEventServices:", err);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : "Error al actualizar los servicios del evento.",
+    };
+  }
+}
+
 
 
