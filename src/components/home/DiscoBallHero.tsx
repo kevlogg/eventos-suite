@@ -63,7 +63,7 @@ export default function DiscoBallHero() {
 
     // ─── 2. HIERARCHY ROOT & DISCO BALL ───
     // Positioned at top hanging from ceiling (as in user reference)
-    const baseY = isMobile ? 1.25 : 1.45;
+    const baseY = isMobile ? 1.35 : 1.55;
     const rootGroup = new THREE.Group();
     rootGroup.position.set(0, baseY, 0);
     scene.add(rootGroup);
@@ -73,8 +73,8 @@ export default function DiscoBallHero() {
     ballGroup.rotation.x = THREE.MathUtils.degToRad(12);
     rootGroup.add(ballGroup);
 
-    // Well-balanced ball radius
-    const ballRadius = isMobile ? 1.25 : 1.45;
+    // Delicate & proportional ball radius (much more compact as requested)
+    const ballRadius = isMobile ? 0.95 : 1.08;
 
     // Inner dark sphere (dark seams between tiles)
     const innerGeo = new THREE.SphereGeometry(ballRadius * 0.985, 32, 32);
@@ -83,10 +83,10 @@ export default function DiscoBallHero() {
     ballGroup.add(innerSphere);
 
     // ─── 3. DISCO MIRROR TILES (PLATEADOS / SILVER) ───
-    const rings = 23;
-    const tileWidth = 0.145;
-    const tileHeight = 0.145;
-    const tileDepth = 0.026;
+    const rings = 20;
+    const tileWidth = 0.115;
+    const tileHeight = 0.115;
+    const tileDepth = 0.022;
 
     interface TileData {
       index: number;
@@ -342,9 +342,10 @@ export default function DiscoBallHero() {
         ballGroup.rotation.x += velocityX;
       }
 
-      // Rotate light rays gently around Y axis (sweeping through 3D space)
-      lightRaysGroup.rotation.y = elapsedTime * 0.12;
-      lightRaysGroup.rotation.z = Math.sin(elapsedTime * 0.08) * 0.05;
+      // Rotate light rays in sync with the ball's exact rhythm & inertia
+      lightRaysGroup.rotation.y = ballGroup.rotation.y;
+      lightRaysGroup.rotation.x = ballGroup.rotation.x * 0.4;
+      lightRaysGroup.rotation.z = ballGroup.rotation.z * 0.4;
 
       // Orbit rim lights
       pinkRim.position.x = Math.sin(elapsedTime * 0.55) * 4.2;
