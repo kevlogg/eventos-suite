@@ -22,17 +22,17 @@ import {
 
 export default function HomePage() {
   return (
-    <div className="relative bg-[#020205] text-slate-100 selection:bg-indigo-500 selection:text-white min-h-screen">
+    <div className="relative bg-transparent text-slate-100 selection:bg-indigo-500 selection:text-white min-h-screen">
       {/* ─── PANTALLA 1: BOLA DE BOLICHE 3D & CANVAS DE LUCES PERSISTENTE ─── */}
       <DiscoBallHero />
 
-      {/* ─── EFECTO CORTINA: SECCIÓN QUE SUBE AL HACER SCROLL SOBRE EL HERO (Z-20) ─── */}
+      {/* ─── EFECTO CORTINA TRASLÚCIDO: SECCIÓN QUE SUBE AL HACER SCROLL SOBRE EL HERO (Z-20) ─── */}
       <div
         id="servicios"
-        className="relative z-20 bg-[#020205]/75 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/10 shadow-[0_-30px_90px_rgba(0,0,0,0.98)] backdrop-blur-2xl min-h-screen"
+        className="relative z-20 bg-black/15 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/10 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-[2px] min-h-screen"
       >
         {/* Barra superior de navegación dentro de la cortina */}
-        <header className="border-b border-white/10 sticky top-0 z-40 bg-[#020205]/85 backdrop-blur-xl">
+        <header className="border-b border-white/10 sticky top-0 z-40 bg-black/35 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
@@ -169,7 +169,7 @@ export default function HomePage() {
         {/* ─── DETALLE SERVICIO 01: INVITACIONES DIGITALES ─── */}
         <section
           id="servicio-invitaciones"
-          className="border-t border-slate-800/80 py-20 sm:py-28 relative overflow-hidden"
+          className="border-t border-white/10 py-20 sm:py-28 relative overflow-hidden bg-transparent"
         >
           {/* Ambient Glow */}
           <div
@@ -350,7 +350,7 @@ export default function HomePage() {
         {/* ─── DETALLE SERVICIO 02: TRIVIA FIESTA EN VIVO ─── */}
         <section
           id="servicio-trivia"
-          className="border-t border-slate-800/80 py-20 sm:py-28 relative overflow-hidden bg-slate-950/40"
+          className="border-t border-white/10 py-20 sm:py-28 relative overflow-hidden bg-transparent"
         >
           {/* Ambient Glow */}
           <div
@@ -492,7 +492,7 @@ export default function HomePage() {
         {/* ─── DETALLE SERVICIO 03: FOTOS POR QR & MURAL DE PANTALLA ─── */}
         <section
           id="servicio-fotos"
-          className="border-t border-slate-800/80 py-20 sm:py-28 relative overflow-hidden"
+          className="border-t border-white/10 py-20 sm:py-28 relative overflow-hidden bg-transparent"
         >
           {/* Ambient Glow */}
           <div
@@ -635,7 +635,7 @@ export default function HomePage() {
         </section>
 
         {/* ─── FOOTER & SUPERADMIN CTA ─── */}
-        <footer className="border-t border-slate-800/80 py-12 sm:py-16 bg-slate-950">
+        <footer className="border-t border-white/10 py-12 sm:py-16 bg-black/35 backdrop-blur-md">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-8">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">

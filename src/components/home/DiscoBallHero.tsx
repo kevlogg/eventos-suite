@@ -51,9 +51,10 @@ export default function DiscoBallHero() {
 
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
-      alpha: true,
+      alpha: false,
       powerPreference: "high-performance",
     });
+    renderer.setClearColor(0x020205, 1);
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -166,20 +167,22 @@ export default function DiscoBallHero() {
 
     // Explicit separate downward directions spreading out into the room
     const beamsConfig = [
-      { dir: new THREE.Vector3(-0.65, -0.75, 0.15).normalize(), color: 0x00f5ff, opacity: 0.17 }, // Cyan down-left
-      { dir: new THREE.Vector3(0.65, -0.72, 0.22).normalize(), color: 0xff007f, opacity: 0.17 },  // Magenta down-right
-      { dir: new THREE.Vector3(-0.25, -0.92, -0.3).normalize(), color: 0xffb700, opacity: 0.19 }, // Amber/Yellow down-center (as in ref)
-      { dir: new THREE.Vector3(0.28, -0.9, -0.32).normalize(), color: 0x00ff88, opacity: 0.17 },  // Lime Green down-forward (as in ref)
-      { dir: new THREE.Vector3(-0.75, -0.55, -0.35).normalize(), color: 0x9d00ff, opacity: 0.15 },// Deep Violet down-left
-      { dir: new THREE.Vector3(0.78, -0.52, 0.35).normalize(), color: 0xff3d00, opacity: 0.15 },  // Orange down-right
+      { dir: new THREE.Vector3(-0.65, -0.75, 0.15).normalize(), color: 0x00f5ff, opacity: 0.32 }, // Cyan down-left
+      { dir: new THREE.Vector3(0.65, -0.72, 0.22).normalize(), color: 0xff007f, opacity: 0.32 },  // Magenta down-right
+      { dir: new THREE.Vector3(-0.25, -0.92, -0.3).normalize(), color: 0xffb700, opacity: 0.35 }, // Amber/Yellow down-center (as in ref)
+      { dir: new THREE.Vector3(0.28, -0.9, -0.32).normalize(), color: 0x00ff88, opacity: 0.32 },  // Lime Green down-forward (as in ref)
+      { dir: new THREE.Vector3(-0.75, -0.55, -0.35).normalize(), color: 0x9d00ff, opacity: 0.28 },// Deep Violet down-left
+      { dir: new THREE.Vector3(0.78, -0.52, 0.35).normalize(), color: 0xff3d00, opacity: 0.28 },  // Orange down-right
+      { dir: new THREE.Vector3(0.15, -0.85, 0.45).normalize(), color: 0x3b82f6, opacity: 0.30 },  // Electric Blue
+      { dir: new THREE.Vector3(-0.35, -0.82, 0.42).normalize(), color: 0xd946ef, opacity: 0.30 }, // Radiant Pink
     ];
 
-    const coneLength = 40; // Long shafts reaching all the way down
+    const coneLength = 50; // Long shafts reaching all the way down
     const defaultDown = new THREE.Vector3(0, -1, 0);
 
     beamsConfig.forEach((cfg) => {
       // Individual cone geometry translated so apex is at (0, 0, 0)
-      const coneGeo = new THREE.ConeGeometry(2.2, coneLength, 20, 1, true);
+      const coneGeo = new THREE.ConeGeometry(2.6, coneLength, 20, 1, true);
       coneGeo.translate(0, -coneLength / 2, 0);
 
       const mat = new THREE.MeshBasicMaterial({
