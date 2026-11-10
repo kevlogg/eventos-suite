@@ -16,13 +16,13 @@ interface DiscoMirrorHoverProps {
   cols?: number;
 }
 
-// Silver shades matching the 3D disco ball in DiscoBallHero
+// Silver shades matching the 3D disco ball in DiscoBallHero with subtle cool specular undertones
 const SILVER_SHADES = [
-  { r: 219, g: 226, b: 234 }, // #dbe2ea
-  { r: 208, g: 215, b: 226 }, // #d0d7e2
-  { r: 238, g: 243, b: 248 }, // #eef3f8
-  { r: 196, g: 203, b: 213 }, // #c4cbd5
-  { r: 229, g: 235, b: 242 }, // #e5ebf2
+  { r: 219, g: 226, b: 236 }, // #dbe2ec
+  { r: 202, g: 211, b: 224 }, // #cad3e0
+  { r: 236, g: 242, b: 249 }, // #ecf2f9
+  { r: 194, g: 203, b: 216 }, // #c2cbd8
+  { r: 226, g: 233, b: 242 }, // #e2e9f2
 ];
 
 function drawTilePath(
@@ -199,9 +199,9 @@ export default function DiscoMirrorHover({
           currentMouse.y,
           spotlightRadius * 1.15
         );
-        glow.addColorStop(0, `rgba(255, 255, 255, ${0.35 * hoverAlpha})`);
-        glow.addColorStop(0.35, `rgba(226, 232, 240, ${0.18 * hoverAlpha})`);
-        glow.addColorStop(0.75, `rgba(148, 163, 184, ${0.07 * hoverAlpha})`);
+        glow.addColorStop(0, `rgba(255, 255, 255, ${0.45 * hoverAlpha})`);
+        glow.addColorStop(0.35, `rgba(226, 232, 240, ${0.22 * hoverAlpha})`);
+        glow.addColorStop(0.75, `rgba(148, 163, 184, ${0.08 * hoverAlpha})`);
         glow.addColorStop(1, "rgba(0, 0, 0, 0)");
 
         ctx.fillStyle = glow;
@@ -215,7 +215,7 @@ export default function DiscoMirrorHover({
       const startX = -step;
       const startY = Math.floor((height - totalH) / 2);
 
-      // ─── 2. DRAW ROTATING DISCO BALL MIRROR TILES ───
+      // ─── 2. DRAW 3D BEVELED DISCO MIRROR TILES (NATIVE CARD TEXTURE) ───
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           // Horizontal translation to the right simulating disco ball rotation
@@ -234,51 +234,63 @@ export default function DiscoMirrorHover({
           const colId = c - baseColOffset;
           const shade = SILVER_SHADES[Math.abs(r * 5 + colId * 3) % SILVER_SHADES.length];
 
+          // ─── 3D SUNKEN GROUT DROP SHADOW (Elevates each tile physically above the surface) ───
+          ctx.fillStyle = `rgba(0, 0, 0, ${0.92 * hoverAlpha})`;
+          ctx.fillRect(x + 1.2, y + tileSize, tileSize, gap);
+          ctx.fillRect(x + tileSize, y + 1.2, gap, tileSize);
+
           if (dist > spotlightRadius) {
-            // ─── RESTING ROTATING MIRROR TILE (DARK SUBTLE CHROME TO KEEP TEXT READABLE) ───
+            // ─── RESTING 3D MIRROR TILE (SOLID SMOKED CHROME, DEEP TACTILE RELIEF) ───
             drawTilePath(ctx, x, y, tileSize, cornerRadius);
 
-            const restAlpha = 0.17 * hoverAlpha;
             const grad = ctx.createLinearGradient(x, y, x + tileSize, y + tileSize);
-            grad.addColorStop(0, `rgba(${shade.r}, ${shade.g}, ${shade.b}, ${restAlpha + 0.08})`);
-            grad.addColorStop(0.5, `rgba(${Math.floor(shade.r * 0.6)}, ${Math.floor(shade.g * 0.6)}, ${Math.floor(shade.b * 0.6)}, ${restAlpha})`);
-            grad.addColorStop(1, `rgba(10, 12, 18, ${restAlpha + 0.1})`);
+            // Rich solid titanium chrome gradient - feels native, solid, and physically raised
+            grad.addColorStop(0, `rgba(${Math.round(shade.r * 0.36)}, ${Math.round(shade.g * 0.38)}, ${Math.round(shade.b * 0.44)}, ${0.96 * hoverAlpha})`);
+            grad.addColorStop(0.35, `rgba(24, 28, 40, ${0.98 * hoverAlpha})`);
+            grad.addColorStop(0.7, `rgba(13, 15, 23, ${0.98 * hoverAlpha})`);
+            grad.addColorStop(1, `rgba(5, 6, 11, ${hoverAlpha})`);
 
             ctx.fillStyle = grad;
             ctx.fill();
 
-            // Top specular bevel line
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.22 * hoverAlpha})`;
-            ctx.lineWidth = 1;
+            // Top specular chamfer bevel line
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.52 * hoverAlpha})`;
+            ctx.lineWidth = 1.1;
             ctx.beginPath();
-            ctx.moveTo(x + cornerRadius, y + 0.5);
-            ctx.lineTo(x + tileSize - cornerRadius, y + 0.5);
+            ctx.moveTo(x + cornerRadius, y + 0.55);
+            ctx.lineTo(x + tileSize - cornerRadius, y + 0.55);
             ctx.stroke();
 
-            // Left specular bevel line
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.16 * hoverAlpha})`;
+            // Left specular chamfer bevel line
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.38 * hoverAlpha})`;
             ctx.beginPath();
-            ctx.moveTo(x + 0.5, y + cornerRadius);
-            ctx.lineTo(x + 0.5, y + tileSize - cornerRadius);
+            ctx.moveTo(x + 0.55, y + cornerRadius);
+            ctx.lineTo(x + 0.55, y + tileSize - cornerRadius);
             ctx.stroke();
 
-            // Bottom & right dark seams
-            ctx.strokeStyle = `rgba(0, 0, 0, ${0.65 * hoverAlpha})`;
+            // Bottom recessed seam line
+            ctx.strokeStyle = `rgba(0, 0, 0, ${0.95 * hoverAlpha})`;
             ctx.beginPath();
-            ctx.moveTo(x + cornerRadius, y + tileSize - 0.5);
-            ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.5);
+            ctx.moveTo(x + cornerRadius, y + tileSize - 0.55);
+            ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.55);
             ctx.stroke();
+
+            // Right recessed seam line
             ctx.beginPath();
-            ctx.moveTo(x + tileSize - 0.5, y + cornerRadius);
-            ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.5);
+            ctx.moveTo(x + tileSize - 0.55, y + cornerRadius);
+            ctx.lineTo(x + tileSize - 0.55, y + tileSize - cornerRadius);
             ctx.stroke();
+
+            // Micro-specular glint at top-left facet apex
+            ctx.fillStyle = `rgba(255, 255, 255, ${0.82 * hoverAlpha})`;
+            ctx.fillRect(x + 1.2, y + 1.2, 1.5, 1.5);
           } else {
             // ─── ACTIVE SPOTLIGHT TILE (UNDER / NEAR MOUSE) ───
             const normDist = dist / spotlightRadius;
             const proximity = 1 - normDist;
 
-            if (dist < 24) {
-              // Direct hit under cursor: Pure bright white specular hotspot!
+            if (dist < 26) {
+              // Direct hit under cursor: Pure dazzling white mirror hotspot!
               drawTilePath(ctx, x, y, tileSize, cornerRadius);
 
               ctx.fillStyle = `rgba(255, 255, 255, ${0.98 * hoverAlpha})`;
@@ -288,55 +300,78 @@ export default function DiscoMirrorHover({
               ctx.lineWidth = 1.2;
               ctx.stroke();
 
-              ctx.fillStyle = `rgba(255, 255, 255, ${0.92 * hoverAlpha})`;
-              ctx.fillRect(x + 2, y + 2, tileSize - 4, tileSize - 4);
+              // Specular diamond sparkle inside hotspot facet
+              ctx.fillStyle = `rgba(255, 255, 255, ${hoverAlpha})`;
+              ctx.fillRect(x + 1.5, y + 1.5, tileSize - 3, tileSize - 3);
             } else {
-              // Neighboring tiles catching the reflection
-              const falloff = Math.pow(proximity, 1.3);
-              const facetOffset = Math.sin(colId * 11.7 + r * 17.3) * 0.22;
+              // Neighboring tiles catching the rotating reflection
+              const falloff = Math.pow(proximity, 1.25);
+              const facetOffset = Math.sin(colId * 11.7 + r * 17.3) * 0.18;
               const intensity = Math.min(1, Math.max(0, falloff + facetOffset * falloff));
 
               drawTilePath(ctx, x, y, tileSize, cornerRadius);
 
               const grad = ctx.createLinearGradient(x, y, x + tileSize, y + tileSize);
-              const brightA = (0.35 + 0.65 * intensity) * hoverAlpha;
-              const midA = (0.28 + 0.62 * intensity) * hoverAlpha;
-              const darkA = (0.18 + 0.45 * intensity) * hoverAlpha;
+              const brightR = Math.round(shade.r * (0.36 + 0.64 * intensity));
+              const brightG = Math.round(shade.g * (0.38 + 0.62 * intensity));
+              const brightB = Math.round(shade.b * (0.44 + 0.56 * intensity));
 
-              grad.addColorStop(0, `rgba(255, 255, 255, ${brightA})`);
-              grad.addColorStop(0.4, `rgba(${shade.r}, ${shade.g}, ${shade.b}, ${midA})`);
-              grad.addColorStop(1, `rgba(148, 163, 184, ${darkA})`);
+              grad.addColorStop(0, `rgba(255, 255, 255, ${(0.6 + 0.4 * intensity) * hoverAlpha})`);
+              grad.addColorStop(0.3, `rgba(${brightR}, ${brightG}, ${brightB}, ${0.98 * hoverAlpha})`);
+              grad.addColorStop(0.7, `rgba(${Math.round(24 + (shade.r * 0.6 - 24) * intensity)}, ${Math.round(28 + (shade.g * 0.6 - 28) * intensity)}, ${Math.round(40 + (shade.b * 0.6 - 40) * intensity)}, ${0.98 * hoverAlpha})`);
+              grad.addColorStop(1, `rgba(10, 12, 18, ${hoverAlpha})`);
 
               ctx.fillStyle = grad;
               ctx.fill();
 
-              // 3D Mirror Bevel highlights
+              // 3D Mirror Bevel highlights flare with light
+              ctx.strokeStyle = `rgba(255, 255, 255, ${(0.55 + 0.45 * intensity) * hoverAlpha})`;
+              ctx.lineWidth = 1.1;
+              ctx.beginPath();
+              ctx.moveTo(x + cornerRadius, y + 0.55);
+              ctx.lineTo(x + tileSize - cornerRadius, y + 0.55);
+              ctx.stroke();
+
               ctx.strokeStyle = `rgba(255, 255, 255, ${(0.42 + 0.58 * intensity) * hoverAlpha})`;
-              ctx.lineWidth = 1;
               ctx.beginPath();
-              ctx.moveTo(x + cornerRadius, y + 0.5);
-              ctx.lineTo(x + tileSize - cornerRadius, y + 0.5);
+              ctx.moveTo(x + 0.55, y + cornerRadius);
+              ctx.lineTo(x + 0.55, y + tileSize - cornerRadius);
               ctx.stroke();
 
-              ctx.strokeStyle = `rgba(255, 255, 255, ${(0.3 + 0.55 * intensity) * hoverAlpha})`;
+              // Deep seam recesses preserve 3D bevel depth
+              ctx.strokeStyle = `rgba(0, 0, 0, ${(0.92 - 0.25 * intensity) * hoverAlpha})`;
               ctx.beginPath();
-              ctx.moveTo(x + 0.5, y + cornerRadius);
-              ctx.lineTo(x + 0.5, y + tileSize - cornerRadius);
+              ctx.moveTo(x + cornerRadius, y + tileSize - 0.55);
+              ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.55);
+              ctx.stroke();
+              ctx.beginPath();
+              ctx.moveTo(x + tileSize - 0.55, y + cornerRadius);
+              ctx.lineTo(x + tileSize - 0.55, y + tileSize - cornerRadius);
               ctx.stroke();
 
-              ctx.strokeStyle = `rgba(0, 0, 0, ${(0.55 - 0.25 * intensity) * hoverAlpha})`;
-              ctx.beginPath();
-              ctx.moveTo(x + cornerRadius, y + tileSize - 0.5);
-              ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.5);
-              ctx.stroke();
-              ctx.beginPath();
-              ctx.moveTo(x + tileSize - 0.5, y + cornerRadius);
-              ctx.lineTo(x + tileSize - cornerRadius, y + tileSize - 0.5);
-              ctx.stroke();
+              // Gleaming corner glint
+              ctx.fillStyle = `rgba(255, 255, 255, ${(0.82 + 0.18 * intensity) * hoverAlpha})`;
+              ctx.fillRect(x + 1.2, y + 1.2, 1.6, 1.6);
             }
           }
         }
       }
+
+      // ─── 3. PERIMETER CHASSIS VIGNETTE (Marries tiles seamlessly into card bezel) ───
+      const rimGrad = ctx.createRadialGradient(
+        width / 2,
+        height / 2,
+        Math.min(width, height) * 0.42,
+        width / 2,
+        height / 2,
+        Math.max(width, height) * 0.74
+      );
+      rimGrad.addColorStop(0, "rgba(0, 0, 0, 0)");
+      rimGrad.addColorStop(0.65, "rgba(0, 0, 0, 0.06)");
+      rimGrad.addColorStop(1, `rgba(4, 5, 10, ${0.55 * hoverAlpha})`);
+
+      ctx.fillStyle = rimGrad;
+      ctx.fillRect(0, 0, width, height);
 
       ctx.restore();
 
