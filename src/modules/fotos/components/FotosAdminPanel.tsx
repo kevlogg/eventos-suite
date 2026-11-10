@@ -26,6 +26,7 @@ interface Props {
 export default function FotosAdminPanel({ event }: Props) {
   const [photos, setPhotos] = useState<EventPhoto[]>([]);
   const [loading, setLoading] = useState(true);
+  const [downloadingZip, setDownloadingZip] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
 
   const uploadUrl = typeof window !== "undefined" ? `${window.location.origin}/${event.slug}/fotos` : `/${event.slug}/fotos`;
@@ -64,6 +65,7 @@ export default function FotosAdminPanel({ event }: Props) {
         body: JSON.stringify({
           action: "moderate",
           eventId: event.id,
+          adminToken: event.adminToken,
           photoId,
           approved: !currentApproved,
         }),
@@ -84,6 +86,7 @@ export default function FotosAdminPanel({ event }: Props) {
         body: JSON.stringify({
           action: "delete",
           eventId: event.id,
+          adminToken: event.adminToken,
           photoId,
         }),
       });
@@ -91,6 +94,59 @@ export default function FotosAdminPanel({ event }: Props) {
       setPhotos(photos.filter((p) => p.id !== photoId));
     } catch (err) {
       console.error(err);
+    }
+  }
+
+  async function handleDownloadZip() {
+    if (photos.length === 0) return;
+    setDownloadingZip(true);
+    try {
+      const JSZipModule = await import("jszip");
+      const JSZip = JSZipModule.default;
+      const zip = new JSZip();
+      const folder = zip.folder(`fotos-${event.slug}`) || zip;
+
+      for (let i = 0; i < photos.length; i++) {
+        const p = photos[i];
+        try {
+          let blob: Blob;
+          if (p.photoUrl.startsWith("data:")) {
+            const parts = p.photoUrl.split(",");
+            const mime = parts[0].match(/:(.*?);/)?.[1] || "image/jpeg";
+            const bstr = atob(parts[1]);
+            let n = bstr.length;
+            const u8arr = new Uint8Array(n);
+            while (n--) {
+              u8arr[n] = bstr.charCodeAt(n);
+            }
+            blob = new Blob([u8arr], { type: mime });
+          } else {
+            const res = await fetch(p.photoUrl);
+            blob = await res.blob();
+          }
+
+          const ext = blob.type.includes("png") ? "png" : "jpg";
+          const safeAuthor = (p.authorName || "invitado").replace(/[^a-zA-Z0-9_\-]/g, "_");
+          const filename = `${String(i + 1).padStart(3, "0")}_${safeAuthor}_${p.id.slice(0, 6)}.${ext}`;
+          folder.file(filename, blob);
+        } catch (err) {
+          console.error("Error packaging photo", p.id, err);
+        }
+      }
+
+      const zipBlob = await zip.generateAsync({ type: "blob" });
+      const downloadLink = document.createElement("a");
+      downloadLink.href = URL.createObjectURL(zipBlob);
+      downloadLink.download = `fotos-${event.slug}.zip`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      URL.revokeObjectURL(downloadLink.href);
+    } catch (err) {
+      console.error("Error generating zip:", err);
+      alert("Hubo un error al generar el archivo ZIP.");
+    } finally {
+      setDownloadingZip(false);
     }
   }
 
@@ -116,6 +172,22 @@ export default function FotosAdminPanel({ event }: Props) {
           >
             <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin text-indigo-400" : ""}`} />
           </button>
+
+          {photos.length > 0 && (
+            <button
+              onClick={handleDownloadZip}
+              disabled={downloadingZip}
+              className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+              title="Descargar álbum completo en archivo .ZIP"
+            >
+              {downloadingZip ? (
+                <RefreshCw className="w-4 h-4 animate-spin text-pink-400" />
+              ) : (
+                <Download className="w-4 h-4 text-pink-400" />
+              )}
+              <span>{downloadingZip ? "Empaquetando..." : "Descargar Álbum (ZIP)"}</span>
+            </button>
+          )}
 
           <Link
             href={muralUrl}

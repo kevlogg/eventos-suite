@@ -17,16 +17,39 @@ export async function generateMetadata({ params }: PageProps) {
   if (!event) return { title: "Evento no encontrado" };
 
   const invitation = await getInvitationBySlug(slug);
-  if (invitation) {
-    return {
-      title: invitation.headline || `${event.title} - Invitación`,
-      description: invitation.subheadline || `Te invitamos a ser parte de ${event.title}.`,
-    };
+  const title = invitation?.headline || `${event.title} - Invitación`;
+  const description =
+    invitation?.subheadline ||
+    `Te invitamos a ser parte de ${event.title}. Confirmá tu asistencia y disfrutá de la fiesta.`;
+
+  let image = "/og-image.jpg";
+  if (invitation?.carouselImages) {
+    const firstImg = invitation.carouselImages.split(",")[0]?.trim();
+    if (firstImg) image = firstImg;
   }
 
   return {
-    title: `${event.title} - Invitación y Fiesta`,
-    description: `Te invitamos a ser parte de ${event.title}. Confirmá tu asistencia y disfrutá de la fiesta.`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
   };
 }
 

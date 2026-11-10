@@ -5,6 +5,7 @@ import {
   updatePhotoStatus, 
   deletePhoto 
 } from "@/modules/fotos/services/fotos-service";
+import { getEventById } from "@/lib/events-service";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -39,14 +40,21 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: true, photo: saved });
     }
 
-    if (action === "moderate") {
-      await updatePhotoStatus(eventId, body.photoId, Boolean(body.approved));
-      return NextResponse.json({ success: true });
-    }
+    if (action === "moderate" || action === "delete") {
+      const event = await getEventById(eventId);
+      if (!event || !body.adminToken || event.adminToken !== body.adminToken) {
+        return NextResponse.json({ error: "No autorizado" }, { status: 403 });
+      }
 
-    if (action === "delete") {
-      await deletePhoto(eventId, body.photoId);
-      return NextResponse.json({ success: true });
+      if (action === "moderate") {
+        await updatePhotoStatus(eventId, body.photoId, Boolean(body.approved));
+        return NextResponse.json({ success: true });
+      }
+
+      if (action === "delete") {
+        await deletePhoto(eventId, body.photoId);
+        return NextResponse.json({ success: true });
+      }
     }
 
     return NextResponse.json({ error: "Acción inválida" }, { status: 400 });

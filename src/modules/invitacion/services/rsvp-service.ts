@@ -75,19 +75,17 @@ export async function getRsvps(eventId: string): Promise<RSVP[]> {
         sql: "SELECT * FROM suite_rsvps WHERE event_id = ? ORDER BY created_at DESC;",
         args: [eventId],
       });
-      if (res.rows.length > 0) {
-        return res.rows.map((r: Record<string, unknown>) => ({
-          id: String(r.id),
-          eventId: String(r.event_id),
-          guestName: String(r.guest_name),
-          attending: Boolean(r.attending),
-          companionsCount: Number(r.companions_count || 0),
-          companionNames: r.companion_names ? String(r.companion_names) : "",
-          dietaryRestrictions: r.dietary_restrictions ? String(r.dietary_restrictions) : "",
-          message: r.message ? String(r.message) : "",
-          createdAt: String(r.created_at),
-        }));
-      }
+      return res.rows.map((r: Record<string, unknown>) => ({
+        id: String(r.id),
+        eventId: String(r.event_id),
+        guestName: String(r.guest_name),
+        attending: Boolean(r.attending),
+        companionsCount: Number(r.companions_count || 0),
+        companionNames: r.companion_names ? String(r.companion_names) : "",
+        dietaryRestrictions: r.dietary_restrictions ? String(r.dietary_restrictions) : "",
+        message: r.message ? String(r.message) : "",
+        createdAt: String(r.created_at),
+      }));
     } catch (err) {
       console.error("Turso error in getRsvps, falling back to JSON:", err);
     }

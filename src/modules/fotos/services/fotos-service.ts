@@ -113,18 +113,16 @@ export async function getEventPhotos(eventId: string): Promise<EventPhoto[]> {
         sql: "SELECT * FROM suite_photos WHERE event_id = ? ORDER BY created_at DESC;",
         args: [eventId],
       });
-      if (res.rows.length > 0) {
-        return res.rows.map((r: Record<string, unknown>) => ({
-          id: String(r.id),
-          eventId: String(r.event_id),
-          photoUrl: String(r.photo_url),
-          authorName: String(r.author_name),
-          tableNumber: r.table_number ? Number(r.table_number) : undefined,
-          caption: r.caption ? String(r.caption) : undefined,
-          approved: Boolean(r.approved),
-          createdAt: String(r.created_at),
-        }));
-      }
+      return res.rows.map((r: Record<string, unknown>) => ({
+        id: String(r.id),
+        eventId: String(r.event_id),
+        photoUrl: String(r.photo_url),
+        authorName: String(r.author_name),
+        tableNumber: r.table_number ? Number(r.table_number) : undefined,
+        caption: r.caption ? String(r.caption) : undefined,
+        approved: Boolean(r.approved),
+        createdAt: String(r.created_at),
+      }));
     } catch (err) {
       console.error("Turso error in getEventPhotos, falling back to JSON:", err);
     }

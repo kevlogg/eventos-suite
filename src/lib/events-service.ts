@@ -306,3 +306,49 @@ export async function updateEventModules(
 ): Promise<SuiteEvent | null> {
   return updateEvent(id, { enabledModules });
 }
+
+export async function deleteEvent(id: string): Promise<boolean> {
+  const turso = getTursoClient();
+  if (turso) {
+    try {
+      await ensureSuiteSchema();
+      await Promise.all([
+        turso.execute({ sql: "DELETE FROM suite_events WHERE id = ?;", args: [id] }),
+        turso.execute({ sql: "DELETE FROM suite_invitations WHERE event_id = ?;", args: [id] }),
+        turso.execute({ sql: "DELETE FROM suite_rsvps WHERE event_id = ?;", args: [id] }),
+        turso.execute({ sql: "DELETE FROM suite_photos WHERE event_id = ?;", args: [id] }),
+        turso.execute({ sql: "DELETE FROM suite_trivia_questions WHERE event_id = ?;", args: [id] }),
+        turso.execute({ sql: "DELETE FROM suite_trivia_players WHERE event_id = ?;", args: [id] }),
+      ]);
+    } catch (err) {
+      console.error("Turso error in deleteEvent:", err);
+    }
+  }
+
+  // Fallback to JSON cleanup
+  try {
+    const events = await getAllEvents();
+    const filtered = events.filter((e) => e.id !== id);
+    fs.writeFileSync(getEventsFilePath(), JSON.stringify(filtered, null, 2), "utf-8");
+
+    const dir = getDataDir();
+    const filesToClean = [
+      path.join(dir, `rsvps_${id}.json`),
+      path.join(dir, `photos_${id}.json`),
+      path.join(dir, `trivia_${id}.json`),
+    ];
+    for (const f of filesToClean) {
+      if (fs.existsSync(/*turbopackIgnore: true*/ f)) {
+        try {
+          fs.unlinkSync(/*turbopackIgnore: true*/ f);
+        } catch {
+          // ignore
+        }
+      }
+    }
+    return true;
+  } catch (err) {
+    console.error("Fallback error in deleteEvent:", err);
+    return false;
+  }
+}

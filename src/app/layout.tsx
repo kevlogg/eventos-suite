@@ -17,6 +17,10 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://eventos-suite.vercel.app")
+  ),
   title: "Eventos Suite - Plataforma Todo en Uno para Fiestas",
   description: "Invitaciones digitales, trivia interactiva y fotos en vivo por QR para eventos inolvidables.",
 };

@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { setSuperadminSession, clearSuperadminSession, timingSafePasswordCheck } from "@/lib/auth";
-import { createEvent, updateEvent } from "@/lib/events-service";
+import { createEvent, updateEvent, deleteEvent } from "@/lib/events-service";
 import { saveInvitation, getInvitationBySlug, getInvitationByEventId } from "@/modules/invitacion/services/invitation-service";
 import type { TemplateId } from "@/lib/schemas/invitation.schema";
 import { revalidatePath } from "next/cache";
@@ -217,6 +217,23 @@ export async function handleUpdateEventServices(
     return {
       success: false,
       error: err instanceof Error ? err.message : "Error al actualizar los servicios del evento.",
+    };
+  }
+}
+
+export async function handleDeleteEvent(eventId: string) {
+  try {
+    const success = await deleteEvent(eventId);
+    if (!success) {
+      return { success: false, error: "No se pudo eliminar el evento." };
+    }
+    revalidatePath("/superadmin");
+    return { success: true };
+  } catch (err: unknown) {
+    console.error("Error in handleDeleteEvent:", err);
+    return {
+      success: false,
+      error: err instanceof Error ? err.message : "Error al eliminar el evento.",
     };
   }
 }

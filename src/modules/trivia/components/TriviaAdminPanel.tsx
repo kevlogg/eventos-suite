@@ -58,6 +58,7 @@ export default function TriviaAdminPanel({ event }: Props) {
         body: JSON.stringify({
           action: "save_questions",
           eventId: event.id,
+          adminToken: event.adminToken,
           questions,
           timerSeconds,
         }),
@@ -81,6 +82,7 @@ export default function TriviaAdminPanel({ event }: Props) {
         body: JSON.stringify({
           action: "reset_players",
           eventId: event.id,
+          adminToken: event.adminToken,
         }),
       });
       setPlayers([]);

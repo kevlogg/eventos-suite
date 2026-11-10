@@ -3,7 +3,7 @@
 import { SuiteEvent } from "@/types";
 import type { InvitationRecord } from "@/lib/schemas/invitation.schema";
 import { TEMPLATES } from "@/lib/schemas/invitation.schema";
-import { logoutSuperadmin } from "./actions";
+import { logoutSuperadmin, handleDeleteEvent } from "./actions";
 import Link from "next/link";
 import { useState } from "react";
 import { 
@@ -22,7 +22,10 @@ import {
   Camera,
   Layers,
   Palette,
-  Settings2
+  Settings2,
+  Trash2,
+  AlertTriangle,
+  Loader2
 } from "lucide-react";
 import InvitationFormModal from "@/components/superadmin/InvitationFormModal";
 import EditServicesModal from "@/components/superadmin/EditServicesModal";
@@ -36,8 +39,29 @@ export default function SuperAdminDashboard({ events, invitationsMap = {} }: Pro
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
   const [editingEvent, setEditingEvent] = useState<SuiteEvent | null>(null);
   const [configuringServicesEvent, setConfiguringServicesEvent] = useState<SuiteEvent | null>(null);
+  const [eventToDelete, setEventToDelete] = useState<SuiteEvent | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [localEvents, setLocalEvents] = useState<SuiteEvent[]>(events);
   const [localInvitations, setLocalInvitations] = useState<Record<string, InvitationRecord>>(invitationsMap);
+
+  async function confirmDelete() {
+    if (!eventToDelete) return;
+    setIsDeleting(true);
+    try {
+      const res = await handleDeleteEvent(eventToDelete.id);
+      if (res.success) {
+        setLocalEvents((prev) => prev.filter((e) => e.id !== eventToDelete.id));
+        setEventToDelete(null);
+      } else {
+        alert(res.error || "Error al eliminar el evento");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error al eliminar el evento");
+    } finally {
+      setIsDeleting(false);
+    }
+  }
 
   function copyToClipboard(text: string, id: string) {
     navigator.clipboard.writeText(text);
@@ -148,6 +172,13 @@ export default function SuperAdminDashboard({ events, invitationsMap = {} }: Pro
                         <h3 className="font-bold text-lg text-white leading-snug">{evt.title}</h3>
                         <span className="text-xs text-indigo-400 font-mono mt-0.5 block">/{evt.slug}</span>
                       </div>
+                      <button
+                        onClick={() => setEventToDelete(evt)}
+                        className="p-1.5 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition-colors cursor-pointer"
+                        title="Eliminar evento por completo"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
                     </div>
 
                     {/* Metadata */}
@@ -323,6 +354,47 @@ export default function SuperAdminDashboard({ events, invitationsMap = {} }: Pro
           onClose={() => setEditingEvent(null)}
           onSaved={handleInvitationSaved}
         />
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {eventToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4">
+            <div className="flex items-center gap-3 text-rose-400">
+              <div className="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center shrink-0 border border-rose-500/20">
+                <AlertTriangle className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="font-bold text-white text-base">¿Eliminar este evento?</h3>
+                <p className="text-xs text-slate-400">Esta acción no se puede deshacer.</p>
+              </div>
+            </div>
+
+            <p className="text-sm text-slate-300">
+              Se eliminará definitivamente el evento <strong className="text-white">&quot;{eventToDelete.title}&quot;</strong> (/{eventToDelete.slug}), junto con sus invitaciones, confirmaciones RSVP, fotos subidas y preguntas/puntajes de trivia.
+            </p>
+
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+              <button
+                type="button"
+                onClick={() => setEventToDelete(null)}
+                disabled={isDeleting}
+                className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors cursor-pointer"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={confirmDelete}
+                disabled={isDeleting}
+                className="px-4 py-2 text-xs font-semibold rounded-xl bg-rose-600 hover:bg-rose-500 text-white flex items-center gap-2 shadow-lg shadow-rose-600/20 transition-colors cursor-pointer"
+              >
+                {isDeleting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                <span>{isDeleting ? "Eliminando..." : "Sí, eliminar evento"}</span>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
