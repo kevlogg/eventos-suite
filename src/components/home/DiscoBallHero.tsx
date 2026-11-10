@@ -67,18 +67,29 @@ export default function DiscoBallHero() {
     camera.position.set(0, 0.25, isMobile ? 6.6 : 5.8);
     camera.lookAt(0, 0.4, 0);
 
-    const renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      alpha: false,
-      powerPreference: "high-performance",
-    });
-    renderer.setClearColor(0x020205, 1);
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.35;
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        antialias: !isMobile,
+        alpha: false,
+        powerPreference: "default",
+      });
+      renderer.setClearColor(0x020205, 1);
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.35;
+      canvasContainer.appendChild(renderer.domElement);
+    } catch (err) {
+      console.warn("WebGL initialization failed, falling back gracefully:", err);
+      return;
+    }
 
-    canvasContainer.appendChild(renderer.domElement);
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      cancelAnimationFrame(animationFrameId);
+    };
+    renderer.domElement.addEventListener("webglcontextlost", onContextLost, false);
 
     // ─── 2. HIERARCHY ROOT & DISCO BALL ───
     // Positioned at top hanging from ceiling (as in user reference)
@@ -102,7 +113,7 @@ export default function DiscoBallHero() {
     ballGroup.add(innerSphere);
 
     // ─── 3. DISCO MIRROR TILES (PLATEADOS / SILVER) ───
-    const rings = 20;
+    const rings = isMobile ? 14 : 20;
     const tileWidth = 0.115;
     const tileHeight = 0.115;
     const tileDepth = 0.022;
@@ -219,7 +230,7 @@ export default function DiscoBallHero() {
     });
 
     // ─── 5. BACKGROUND STARFIELD ───
-    const starCount = 450;
+    const starCount = isMobile ? 180 : 450;
     const starGeo = new THREE.BufferGeometry();
     const starPositions = new Float32Array(starCount * 3);
     const starColors = new Float32Array(starCount * 3);
@@ -328,11 +339,11 @@ export default function DiscoBallHero() {
     if (heroEl) {
       heroEl.addEventListener("mousedown", handleMouseDown);
       heroEl.addEventListener("touchstart", handleTouchStart, { passive: true });
+      heroEl.addEventListener("touchmove", handleTouchMove, { passive: true });
+      heroEl.addEventListener("touchend", handleTouchEnd);
     }
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
-    window.addEventListener("touchend", handleTouchEnd);
 
     // ─── 8. NEON CLUSTER TILES PALETTE ───
     const neonPalette = [
@@ -429,12 +440,13 @@ export default function DiscoBallHero() {
       if (heroEl) {
         heroEl.removeEventListener("mousedown", handleMouseDown);
         heroEl.removeEventListener("touchstart", handleTouchStart);
+        heroEl.removeEventListener("touchmove", handleTouchMove);
+        heroEl.removeEventListener("touchend", handleTouchEnd);
       }
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("touchend", handleTouchEnd);
 
+      renderer.domElement.removeEventListener("webglcontextlost", onContextLost);
       tileGeo.dispose();
       tileMat.dispose();
       starGeo.dispose();
@@ -461,7 +473,7 @@ export default function DiscoBallHero() {
       <section
         ref={heroRef}
         className="sticky top-0 h-screen w-full z-10 flex flex-col justify-between items-center py-8 px-4 select-none cursor-grab active:cursor-grabbing bg-transparent"
-        style={{ touchAction: "none" }}
+        style={{ touchAction: "pan-y" }}
       >
         {/* Top Hint: Fades out on drag or scroll */}
         <div

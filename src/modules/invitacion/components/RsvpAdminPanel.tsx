@@ -21,6 +21,7 @@ export default function RsvpAdminPanel({ event }: Props) {
   const [rsvps, setRsvps] = useState<RSVP[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [filterType, setFilterType] = useState<"all" | "attending" | "declined" | "dietary">("all");
 
   async function loadRsvps() {
     setLoading(true);
@@ -49,16 +50,34 @@ export default function RsvpAdminPanel({ event }: Props) {
   );
   const dietaryCount = attendingRsvps.filter((r) => r.dietaryRestrictions && r.dietaryRestrictions.trim().length > 0).length;
 
-  const filtered = rsvps.filter(
-    (r) =>
-      r.guestName.toLowerCase().includes(search.toLowerCase()) ||
-      (r.companionNames && r.companionNames.toLowerCase().includes(search.toLowerCase())) ||
-      (r.dietaryRestrictions && r.dietaryRestrictions.toLowerCase().includes(search.toLowerCase()))
-  );
+  const filtered = rsvps.filter((r) => {
+    const query = search.trim().toLowerCase();
+    const matchesSearch =
+      !query ||
+      r.guestName.toLowerCase().includes(query) ||
+      (r.companionNames && r.companionNames.toLowerCase().includes(query)) ||
+      (r.dietaryRestrictions && r.dietaryRestrictions.toLowerCase().includes(query));
+
+    if (!matchesSearch) return false;
+
+    if (filterType === "attending") return r.attending;
+    if (filterType === "declined") return !r.attending;
+    if (filterType === "dietary") return Boolean(r.dietaryRestrictions && r.dietaryRestrictions.trim());
+    return true;
+  });
 
   function exportCsv() {
-    const headers = ["Nombre", "Asiste", "Acompañantes", "Nombres Acompañantes", "Restricción Alimentaria", "Mensaje", "Fecha"];
-    const rows = rsvps.map((r) => [
+    const listToExport = filtered.length > 0 ? filtered : rsvps;
+    const headers = [
+      "Nombre",
+      "Asiste",
+      "Acompañantes",
+      "Nombres Acompañantes",
+      "Restricción Alimentaria",
+      "Mensaje",
+      "Fecha de Confirmación",
+    ];
+    const rows = listToExport.map((r) => [
       `"${r.guestName.replace(/"/g, '""')}"`,
       r.attending ? "SI" : "NO",
       r.companionsCount || 0,
@@ -68,14 +87,16 @@ export default function RsvpAdminPanel({ event }: Props) {
       `"${new Date(r.createdAt).toLocaleString("es-AR")}"`,
     ]);
 
-    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + [headers.join(","), ...rows.map((e) => e.join(","))].join("\n");
-    const encodedUri = encodeURI(csvContent);
+    const csvContent = "\uFEFF" + [headers.join(","), ...rows.map((e) => e.join(","))].join("\r\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `rsvps_${event.slug}.csv`);
+    link.href = url;
+    link.setAttribute("download", `invitados_${event.slug}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   }
 
   return (
@@ -146,16 +167,74 @@ export default function RsvpAdminPanel({ event }: Props) {
         </div>
       </div>
 
-      {/* Search Input */}
-      <div className="relative">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Buscar por nombre, acompañante o restricción alimentaria..."
-          className="w-full bg-slate-900/80 border border-slate-800 rounded-xl px-4 py-2.5 pl-10 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
-        />
-        <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+      {/* Search & Quick Filter Pills */}
+      <div className="space-y-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setFilterType("all")}
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              filterType === "all"
+                ? "bg-indigo-600 text-white shadow-sm shadow-indigo-600/30"
+                : "bg-slate-900 border border-slate-800 text-slate-400 hover:text-white"
+            }`}
+          >
+            Todos ({rsvps.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setFilterType("attending")}
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              filterType === "attending"
+                ? "bg-emerald-600 text-white shadow-sm shadow-emerald-600/30"
+                : "bg-slate-900 border border-slate-800 text-slate-400 hover:text-emerald-300"
+            }`}
+          >
+            Confirmados ({attendingRsvps.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setFilterType("declined")}
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              filterType === "declined"
+                ? "bg-rose-600 text-white shadow-sm shadow-rose-600/30"
+                : "bg-slate-900 border border-slate-800 text-slate-400 hover:text-rose-300"
+            }`}
+          >
+            No Asisten ({nonAttendingRsvps.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setFilterType("dietary")}
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+              filterType === "dietary"
+                ? "bg-amber-600 text-white shadow-sm shadow-amber-600/30"
+                : "bg-slate-900 border border-slate-800 text-slate-400 hover:text-amber-300"
+            }`}
+          >
+            Menú Especial ({dietaryCount})
+          </button>
+        </div>
+
+        <div className="relative">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar por nombre, acompañante o menú..."
+            className="w-full bg-slate-900/80 border border-slate-800 rounded-xl px-4 py-2.5 pl-10 pr-20 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 shadow-sm"
+          />
+          <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-3" />
+          {search && (
+            <button
+              type="button"
+              onClick={() => setSearch("")}
+              className="text-xs text-slate-400 hover:text-white absolute right-3 top-2.5 bg-slate-800 hover:bg-slate-700 px-2 py-0.5 rounded-md transition-colors cursor-pointer"
+            >
+              Limpiar
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Guests Table */}

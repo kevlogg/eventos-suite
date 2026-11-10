@@ -38,29 +38,58 @@ export default function PhotoUploadClient({ event }: Props) {
     setCompressing(true);
 
     try {
-      // Compress options for fast upload even with poor party hall connection
-      const options = {
-        maxSizeMB: 0.8,
-        maxWidthOrHeight: 1280,
-        useWebWorker: true,
-      };
+      // High-performance native canvas compression (instant on iOS & Android, zero memory spikes)
+      const compressedDataUrl = await new Promise<string>((resolve, reject) => {
+        const img = new Image();
+        const objectUrl = URL.createObjectURL(file);
+        img.onload = () => {
+          URL.revokeObjectURL(objectUrl);
+          const maxDim = 1280;
+          let { width, height } = img;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          if (!ctx) {
+            reject(new Error("Canvas context failed"));
+            return;
+          }
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL("image/jpeg", 0.82));
+        };
+        img.onerror = (err) => {
+          URL.revokeObjectURL(objectUrl);
+          reject(err);
+        };
+        img.src = objectUrl;
+      });
 
-      const compressedFile = await imageCompression(file, options);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhotoPreview(reader.result as string);
-        setCompressing(false);
-      };
-      reader.readAsDataURL(compressedFile);
+      setPhotoPreview(compressedDataUrl);
     } catch (err) {
-      console.error("Compression error:", err);
-      // Fallback to direct read
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPhotoPreview(reader.result as string);
-        setCompressing(false);
-      };
-      reader.readAsDataURL(file);
+      console.warn("Native compression failed, attempting library fallback:", err);
+      try {
+        const options = { maxSizeMB: 0.8, maxWidthOrHeight: 1280, useWebWorker: false };
+        const compressedFile = await imageCompression(file, options);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPhotoPreview(reader.result as string);
+        };
+        reader.readAsDataURL(compressedFile);
+      } catch (fallbackErr) {
+        console.error("All compression attempts failed:", fallbackErr);
+        setError("No se pudo procesar la foto. Intentá con otra imagen.");
+      }
+    } finally {
+      setCompressing(false);
     }
   }
 

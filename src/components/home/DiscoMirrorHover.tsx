@@ -54,6 +54,13 @@ export default function DiscoMirrorHover({
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    // Only run on devices that support mouse pointer hover.
+    // On mobile touchscreens, hover doesn't exist; disabling canvas avoids running 6 extra loops & saves mobile GPU/battery.
+    if (typeof window !== "undefined") {
+      const isTouch = window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+      if (isTouch) return;
+    }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 

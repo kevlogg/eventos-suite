@@ -750,37 +750,6 @@ export default function TemplatesPhoneCarousel() {
           );
         })}
       </div>
-
-      {/* ─── INTERCALATED CSS ANIMATIONS ─── */}
-      <style jsx global>{`
-        @keyframes phoneScrollFromTop {
-          0%,
-          15% {
-            transform: translateY(0%);
-          }
-          50%,
-          65% {
-            transform: translateY(-48%);
-          }
-          100% {
-            transform: translateY(0%);
-          }
-        }
-
-        @keyframes phoneScrollFromBottom {
-          0%,
-          15% {
-            transform: translateY(-48%);
-          }
-          50%,
-          65% {
-            transform: translateY(0%);
-          }
-          100% {
-            transform: translateY(-48%);
-          }
-        }
-      `}</style>
     </div>
   );
 }

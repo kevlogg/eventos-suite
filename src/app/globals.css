@@ -156,6 +156,18 @@ body {
   40%, 80% { transform: translateX(6px); }
 }
 
+@keyframes phoneScrollFromTop {
+  0%, 15% { transform: translateY(0%); }
+  50%, 65% { transform: translateY(-48%); }
+  100% { transform: translateY(0%); }
+}
+
+@keyframes phoneScrollFromBottom {
+  0%, 15% { transform: translateY(-48%); }
+  50%, 65% { transform: translateY(0%); }
+  100% { transform: translateY(-48%); }
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
