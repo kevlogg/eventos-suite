@@ -19,16 +19,6 @@ export default function DiscoBallHero() {
   const [isInteracting, setIsInteracting] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
   const [showHeadline, setShowHeadline] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => {
-      setIsMobile(window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches);
-    };
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
 
   useEffect(() => {
     // Appear a few seconds after initial load
@@ -60,12 +50,6 @@ export default function DiscoBallHero() {
   }, []);
 
   useEffect(() => {
-    // On mobile devices, bypass heavy Three.js WebGL rendering completely
-    // to guarantee 100% stable, instant loading without WebKit GPU reloads
-    if (window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches) {
-      return;
-    }
-
     const canvasContainer = canvasContainerRef.current;
     const heroEl = heroRef.current;
     if (!canvasContainer) return;
@@ -478,32 +462,12 @@ export default function DiscoBallHero() {
 
   return (
     <>
-      {/* ─── DESKTOP: FIXED 3D WEBGL CANVAS IN BACKGROUND ─── */}
+      {/* ─── FIXED 3D CANVAS IN BACKGROUND ACROSS THE ENTIRE PAGE ─── */}
       <div
         ref={canvasContainerRef}
         aria-hidden="true"
-        className="fixed inset-0 w-full h-full z-0 pointer-events-none hidden md:block"
+        className="fixed inset-0 w-full h-full z-0 pointer-events-none"
       />
-
-      {/* ─── MOBILE: LIGHTWEIGHT ACCELERATED HERO BACKGROUND (100% STABLE, ZERO CRASHES) ─── */}
-      <div
-        aria-hidden="true"
-        className="fixed inset-0 w-full h-full z-0 pointer-events-none md:hidden flex flex-col items-center justify-start overflow-hidden bg-[#020205]"
-      >
-        {/* Ambient atmospheric glows */}
-        <div className="absolute top-[8%] w-80 h-80 rounded-full bg-gradient-to-tr from-cyan-500/15 via-purple-500/20 to-pink-500/15 blur-3xl animate-pulse" />
-        <div className="absolute top-[12%] w-56 h-56 rounded-full bg-amber-400/10 blur-2xl" />
-
-        {/* Hanging Disco Ball Image from top */}
-        <div className="relative top-[7%] flex flex-col items-center">
-          <div className="w-[1.5px] h-14 bg-gradient-to-b from-slate-300 to-slate-500/50" />
-          <img
-            src="/icon.png"
-            alt="Bola de espejos"
-            className="w-48 h-48 object-contain drop-shadow-[0_20px_45px_rgba(0,0,0,0.95)] animate-float select-none"
-          />
-        </div>
-      </div>
 
       {/* ─── PANTALLA 1: HERO SCREEN PINNED (STICKY TOP-0 H-SCREEN) ─── */}
       <section
@@ -519,7 +483,7 @@ export default function DiscoBallHero() {
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/15 text-slate-300 text-xs font-medium tracking-wide backdrop-blur-md shadow-lg">
             <Sparkles size={13} className="text-amber-400 animate-pulse" />
-            <span>{isMobile ? "Deslizá para descubrir" : "Arrastrá para hacer girar la bola"}</span>
+            <span>Arrastrá para hacer girar la bola</span>
           </div>
         </div>
 
