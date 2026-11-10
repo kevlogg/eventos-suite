@@ -23,6 +23,14 @@ export const metadata: Metadata = {
   ),
   title: "Eventos Suite - Plataforma Todo en Uno para Fiestas",
   description: "Invitaciones digitales, trivia interactiva y fotos en vivo por QR para eventos inolvidables.",
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico", sizes: "32x32" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
