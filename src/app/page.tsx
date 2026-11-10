@@ -26,13 +26,13 @@ export default function HomePage() {
       {/* ─── PANTALLA 1: BOLA DE BOLICHE 3D & CANVAS DE LUCES PERSISTENTE ─── */}
       <DiscoBallHero />
 
-      {/* ─── EFECTO CORTINA TRASLÚCIDO: SECCIÓN QUE SUBE AL HACER SCROLL SOBRE EL HERO (Z-20) ─── */}
+      {/* ─── EFECTO CORTINA: SECCIÓN QUE SUBE AL HACER SCROLL SOBRE EL HERO (Z-20) ─── */}
       <div
         id="servicios"
-        className="relative z-20 bg-black/15 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/10 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-[2px] min-h-screen"
+        className="relative z-20 bg-gradient-to-b from-[#020205]/45 via-[#020205]/55 to-[#020205]/65 rounded-t-[44px] sm:rounded-t-[64px] border-t border-white/15 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-[6px] min-h-screen"
       >
         {/* Barra superior de navegación dentro de la cortina */}
-        <header className="border-b border-white/10 sticky top-0 z-40 bg-black/35 backdrop-blur-md">
+        <header className="border-b border-white/10 sticky top-0 z-40 bg-[#020205]/75 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2.5 group">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
@@ -43,14 +43,14 @@ export default function HomePage() {
               </span>
             </Link>
 
-            <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
-              <a href="#servicio-invitaciones" className="hover:text-indigo-400 transition-colors">
+            <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-200">
+              <a href="#servicio-invitaciones" className="hover:text-amber-300 transition-colors">
                 Invitaciones
               </a>
-              <a href="#servicio-trivia" className="hover:text-purple-400 transition-colors">
+              <a href="#servicio-trivia" className="hover:text-purple-300 transition-colors">
                 Trivia en Vivo
               </a>
-              <a href="#servicio-fotos" className="hover:text-pink-400 transition-colors">
+              <a href="#servicio-fotos" className="hover:text-pink-300 transition-colors">
                 Fotos por QR
               </a>
             </nav>
@@ -70,16 +70,16 @@ export default function HomePage() {
         {/* ─── SECCIÓN 2: PRESENTACIÓN DE LOS 3 SERVICIOS PRINCIPALES ─── */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20">
           <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-bold uppercase tracking-wider mb-5">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 text-xs font-bold uppercase tracking-wider mb-5 shadow-sm">
               <Flame className="w-4 h-4 text-amber-400" /> Ecosistema Completo para Fiestas
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-6 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               Tres experiencias que transforman{" "}
               <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 tu celebración
               </span>
             </h2>
-            <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+            <p className="text-base sm:text-lg text-slate-300 leading-relaxed drop-shadow-sm">
               Unificamos la experiencia previa, durante y posterior de tu fiesta con tecnología web interactiva en tiempo real.
             </p>
           </div>
@@ -89,10 +89,10 @@ export default function HomePage() {
             {/* Tarjeta Servicio 1 */}
             <a
               href="#servicio-invitaciones"
-              className="group p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-amber-400/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_15px_40px_rgba(245,158,11,0.15)] flex flex-col justify-between"
+              className="group p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-amber-400/60 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_20px_50px_rgba(245,158,11,0.2)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-amber-500/10">
                   <PartyPopper className="w-7 h-7" />
                 </div>
                 <div className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-2">
@@ -101,7 +101,7 @@ export default function HomePage() {
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-amber-200 transition-colors">
                   Invitaciones Digitales & RSVP
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                <p className="text-sm text-slate-300 leading-relaxed mb-6">
                   Plantillas temáticas premium con apertura de sobre interactivo, cuenta regresiva, confirmación de asistencia en vivo, mapas y cofre de regalos.
                 </p>
               </div>
@@ -115,10 +115,10 @@ export default function HomePage() {
             {/* Tarjeta Servicio 2 */}
             <a
               href="#servicio-trivia"
-              className="group p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-purple-400/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_15px_40px_rgba(168,85,247,0.15)] flex flex-col justify-between"
+              className="group p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-purple-400/60 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_20px_50px_rgba(168,85,247,0.2)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/25 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-purple-500/10">
                   <Trophy className="w-7 h-7" />
                 </div>
                 <div className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-2">
@@ -127,7 +127,7 @@ export default function HomePage() {
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-purple-200 transition-colors">
                   Trivia Fiesta en Vivo
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                <p className="text-sm text-slate-300 leading-relaxed mb-6">
                   Un juego interactivo donde los invitados compiten desde sus celulares en vivo. Preguntas personalizadas y ranking proyectado en pantalla gigante.
                 </p>
               </div>
@@ -141,10 +141,10 @@ export default function HomePage() {
             {/* Tarjeta Servicio 3 */}
             <a
               href="#servicio-fotos"
-              className="group p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-pink-400/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_15px_40px_rgba(236,72,153,0.15)] flex flex-col justify-between"
+              className="group p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-pink-400/60 backdrop-blur-xl transition-all duration-300 hover:shadow-[0_20px_50px_rgba(236,72,153,0.2)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-500/25 flex items-center justify-center text-pink-400 mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-2xl bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-pink-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-pink-500/10">
                   <Camera className="w-7 h-7" />
                 </div>
                 <div className="text-xs font-bold uppercase tracking-widest text-pink-400 mb-2">
@@ -153,7 +153,7 @@ export default function HomePage() {
                 <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 group-hover:text-pink-200 transition-colors">
                   Fotos Dinámicas por QR
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed mb-6">
+                <p className="text-sm text-slate-300 leading-relaxed mb-6">
                   Cada mesa tiene su código QR. Los invitados suben fotos con dedicatorias al instante y se proyectan en el mural rotativo del salón con moderación en vivo.
                 </p>
               </div>
@@ -199,35 +199,35 @@ export default function HomePage() {
 
                 {/* Bullets */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
+                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
                     <CheckCircle2 className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Confirmación RSVP en Vivo</h4>
-                      <p className="text-xs text-slate-400">Dietas, acompañantes y asistencia en tiempo real.</p>
+                      <p className="text-xs text-slate-300">Dietas, acompañantes y asistencia en tiempo real.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
+                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
                     <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Salón & Geolocalización</h4>
-                      <p className="text-xs text-slate-400">Un clic para abrir Google Maps o Waze directo.</p>
+                      <p className="text-xs text-slate-300">Un clic para abrir Google Maps o Waze directo.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
+                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
                     <Gift className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Cofre de Regalos & Alias</h4>
-                      <p className="text-xs text-slate-400">Copia de CBU/Alias con un solo toque.</p>
+                      <p className="text-xs text-slate-300">Copia de CBU/Alias con un solo toque.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
+                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
                     <Music className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Música & Efectos Visuales</h4>
-                      <p className="text-xs text-slate-400">Audio track personalizado y animación de apertura.</p>
+                      <p className="text-xs text-slate-300">Audio track personalizado y animación de apertura.</p>
                     </div>
                   </div>
                 </div>
@@ -522,35 +522,35 @@ export default function HomePage() {
 
                 {/* Bullets */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
+                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
                     <QrCode className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">QR Exclusivo por Mesa</h4>
-                      <p className="text-xs text-slate-400">Escaneo instantáneo sin login ni registros pesados.</p>
+                      <p className="text-xs text-slate-300">Escaneo instantáneo sin login ni registros pesados.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
+                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
                     <Shield className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Panel de Moderación</h4>
-                      <p className="text-xs text-slate-400">Aprobá fotos antes de salir a pantalla si lo preferís.</p>
+                      <p className="text-xs text-slate-300">Aprobá fotos antes de salir a pantalla si lo preferís.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
+                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
                     <Tv className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Mural Rotativo Animado</h4>
-                      <p className="text-xs text-slate-400">Transiciones modernas para proyectores y Smart TVs.</p>
+                      <p className="text-xs text-slate-300">Transiciones modernas para proyectores y Smart TVs.</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-slate-900/40 border border-slate-800">
+                  <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
                     <Smartphone className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-white">Descarga Completa al Final</h4>
-                      <p className="text-xs text-slate-400">Los anfitriones descargan todas las fotos en alta resolución.</p>
+                      <p className="text-xs text-slate-300">Los anfitriones descargan todas las fotos en alta resolución.</p>
                     </div>
                   </div>
                 </div>
