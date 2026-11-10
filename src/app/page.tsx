@@ -23,15 +23,13 @@ import {
 export default function HomePage() {
   return (
     <div className="relative bg-[#020205] text-slate-100 selection:bg-indigo-500 selection:text-white min-h-screen">
-      {/* ─── PANTALLA 1: BOLA DE BOLICHE 3D PURA (HERO FULLSCREEN STICKY) ─── */}
-      <section className="sticky top-0 h-screen w-full z-0 overflow-hidden">
-        <DiscoBallHero />
-      </section>
+      {/* ─── PANTALLA 1: BOLA DE BOLICHE 3D & CANVAS DE LUCES PERSISTENTE ─── */}
+      <DiscoBallHero />
 
-      {/* ─── EFECTO CORTINA: SECCIÓN QUE SUBE AL HACER SCROLL (Z-10) ─── */}
+      {/* ─── EFECTO CORTINA: SECCIÓN QUE SUBE AL HACER SCROLL CON FONDO TRASLÚCIDO (Z-20) ─── */}
       <div
         id="servicios"
-        className="relative z-10 bg-slate-950 rounded-t-[36px] sm:rounded-t-[56px] border-t border-slate-800/80 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-3xl min-h-screen"
+        className="relative z-20 bg-slate-950/80 rounded-t-[36px] sm:rounded-t-[56px] border-t border-slate-800/80 shadow-[0_-30px_90px_rgba(0,0,0,0.95)] backdrop-blur-2xl min-h-screen"
       >
         {/* Barra superior de navegación dentro de la cortina */}
         <header className="border-b border-slate-800/60 sticky top-0 z-40 bg-slate-950/90 backdrop-blur-xl">
@@ -352,7 +350,7 @@ export default function HomePage() {
         {/* ─── DETALLE SERVICIO 02: TRIVIA FIESTA EN VIVO ─── */}
         <section
           id="servicio-trivia"
-          className="border-t border-slate-800/80 py-20 sm:py-28 relative overflow-hidden bg-slate-950/70"
+          className="border-t border-slate-800/80 py-20 sm:py-28 relative overflow-hidden bg-slate-950/40"
         >
           {/* Ambient Glow */}
           <div
