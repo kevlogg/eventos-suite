@@ -57,7 +57,7 @@ export default function HomePage() {
               href="#servicio-invitaciones"
               className="group relative p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.15)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden"
             >
-              <DiscoMirrorHover rows={7} cols={9} />
+              <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={140} />
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
                   <div className="w-14 h-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-amber-500/10">
@@ -86,7 +86,7 @@ export default function HomePage() {
               href="#servicio-trivia"
               className="group relative p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.15)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden"
             >
-              <DiscoMirrorHover rows={7} cols={9} />
+              <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={140} />
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
                   <div className="w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-purple-500/10">
@@ -115,7 +115,7 @@ export default function HomePage() {
               href="#servicio-fotos"
               className="group relative p-8 rounded-3xl bg-[#0b0b14]/80 border border-white/12 hover:border-slate-200/60 backdrop-blur-xl transition-all duration-500 hover:shadow-[0_20px_50px_rgba(255,255,255,0.15)] shadow-[0_12px_36px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden"
             >
-              <DiscoMirrorHover rows={7} cols={9} />
+              <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={140} />
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
                   <div className="w-14 h-14 rounded-2xl bg-pink-500/15 border border-pink-500/30 flex items-center justify-center text-pink-400 mb-6 group-hover:scale-110 transition-transform shadow-md shadow-pink-500/10">
