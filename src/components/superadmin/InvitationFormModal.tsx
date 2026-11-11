@@ -237,7 +237,7 @@ export default function InvitationFormModal({
   const initialAudioMode = (): "preset" | "upload" | "url" | "none" | "keep" => {
     if (invitation?.audioTrackPath) {
       if (invitation.audioTrackPath.startsWith("/audio/")) return "preset";
-      if (invitation.audioTrackPath.startsWith("data:")) return "upload";
+      if (invitation.audioTrackPath.includes("/event-audio/")) return "upload";
       if (invitation.audioTrackPath.startsWith("http")) return "url";
       return "keep";
     }
@@ -247,12 +247,19 @@ export default function InvitationFormModal({
   const [audioMode, setAudioMode] = useState<"preset" | "upload" | "url" | "none" | "keep">(
     initialAudioMode()
   );
-  const [uploadedAudioFileName, setUploadedAudioFileName] = useState<string>("");
-  const [uploadedAudioDataUrl, setUploadedAudioDataUrl] = useState<string>(
-    invitation?.audioTrackPath?.startsWith("data:") ? invitation.audioTrackPath : ""
+  const [uploadedAudioFileName, setUploadedAudioFileName] = useState<string>(
+    invitation?.audioTrackPath?.includes("/event-audio/") ? "Canción en la nube" : ""
   );
+  const [uploadedAudioUrl, setUploadedAudioUrl] = useState<string>(
+    invitation?.audioTrackPath && (invitation.audioTrackPath.includes("/event-audio/") || invitation.audioTrackPath.startsWith("http"))
+      ? invitation.audioTrackPath
+      : ""
+  );
+  const [localBlobUrl, setLocalBlobUrl] = useState<string | null>(null);
+  const [isUploadingAudio, setIsUploadingAudio] = useState<boolean>(false);
+  const [audioUploadProgress, setAudioUploadProgress] = useState<string | null>(null);
   const [audioUrlInput, setAudioUrlInput] = useState<string>(
-    invitation?.audioTrackPath && invitation.audioTrackPath.startsWith("http")
+    invitation?.audioTrackPath && invitation.audioTrackPath.startsWith("http") && !invitation.audioTrackPath.includes("/event-audio/")
       ? invitation.audioTrackPath
       : ""
   );
@@ -265,7 +272,7 @@ export default function InvitationFormModal({
   const [isPlayingPreview, setIsPlayingPreview] = useState<boolean>(false);
   const previewAudioRef = useRef<HTMLAudioElement | null>(null);
 
-  const handleAudioFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAudioFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setAudioError(null);
     setIsPlayingPreview(false);
     if (previewAudioRef.current) {
@@ -274,32 +281,74 @@ export default function InvitationFormModal({
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (file.size > 4.5 * 1024 * 1024) {
+    if (file.size > 15 * 1024 * 1024) {
       setAudioError(
-        `⚠️ El archivo pesa ${(file.size / (1024 * 1024)).toFixed(1)}MB. El límite recomendado es de 4.5MB para evitar sobrecarga. Podés usar "🔗 Enlace URL" o una canción predeterminada.`
+        `⚠️ El archivo pesa ${(file.size / (1024 * 1024)).toFixed(1)}MB. El límite máximo permitido es de 15MB.`
       );
       e.target.value = "";
-      setUploadedAudioFileName("");
-      setUploadedAudioDataUrl("");
       return;
     }
 
     setUploadedAudioFileName(file.name);
-    const reader = new FileReader();
-    reader.onload = () => {
-      setUploadedAudioDataUrl(reader.result as string);
-    };
-    reader.onerror = () => {
-      setAudioError("Error al procesar el archivo de audio.");
-    };
-    reader.readAsDataURL(file);
+    // Instant local preview URL
+    const blobUrl = URL.createObjectURL(file);
+    setLocalBlobUrl(blobUrl);
+
+    setIsUploadingAudio(true);
+    setAudioUploadProgress("Preparando subida directa a la nube...");
+
+    try {
+      // 1. Request signed upload URL from server
+      const signedRes = await fetch("/api/audio/signed-url", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileName: file.name,
+          fileType: file.type || "audio/mpeg",
+          slug: slug || "invitacion",
+        }),
+      });
+
+      if (!signedRes.ok) {
+        const errJson = await signedRes.json().catch(() => ({}));
+        throw new Error(errJson.error || "No se pudo obtener autorización de subida");
+      }
+
+      const { signedUrl, publicUrl } = await signedRes.json();
+      setAudioUploadProgress("Subiendo canción a la nube...");
+
+      // 2. Direct binary upload to Supabase Storage (bypasses Vercel 4.5MB limit)
+      const uploadRes = await fetch(signedUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": file.type || "audio/mpeg",
+        },
+        body: file,
+      });
+
+      if (!uploadRes.ok) {
+        throw new Error(`Error en el almacenamiento (${uploadRes.status})`);
+      }
+
+      setUploadedAudioUrl(publicUrl);
+      setAudioUploadProgress(null);
+    } catch (err: unknown) {
+      console.error("Audio upload error:", err);
+      setAudioError(
+        `⚠️ Error al subir la canción: ${err instanceof Error ? err.message : "Error desconocido"}. Podés intentar nuevamente o pegar un enlace en "🔗 Enlace URL".`
+      );
+      setUploadedAudioUrl("");
+      setAudioUploadProgress(null);
+    } finally {
+      setIsUploadingAudio(false);
+    }
   };
 
   const currentPreviewSrc =
     audioMode === "preset"
       ? selectedPresetAudio
       : audioMode === "upload"
-      ? uploadedAudioDataUrl
+      ? localBlobUrl || uploadedAudioUrl
       : audioMode === "url"
       ? audioUrlInput
       : audioMode === "keep"
@@ -338,6 +387,11 @@ export default function InvitationFormModal({
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isUploadingAudio) {
+      setError("Por favor aguardá unos segundos a que finalice la subida de la canción.");
+      return;
+    }
+
     setIsSubmitting(true);
     setError(null);
     setSuccess(null);
@@ -359,8 +413,12 @@ export default function InvitationFormModal({
     } else if (audioMode === "url") {
       formData.set("audioTrackPath", audioUrlInput.trim());
     } else if (audioMode === "upload") {
-      if (uploadedAudioDataUrl) {
-        formData.set("audioTrackPath", uploadedAudioDataUrl);
+      if (uploadedAudioUrl) {
+        formData.set("audioTrackPath", uploadedAudioUrl);
+      } else if (invitation?.audioTrackPath) {
+        formData.set("audioTrackPath", invitation.audioTrackPath);
+      } else {
+        formData.set("audioTrackPath", "");
       }
     } else if (audioMode === "keep" && invitation?.audioTrackPath) {
       formData.set("audioTrackPath", invitation.audioTrackPath);
@@ -873,19 +931,27 @@ export default function InvitationFormModal({
               )}
 
               {audioMode === "upload" && (
-                <div className="space-y-2 pt-2">
+                <div className="space-y-3 pt-2">
                   <label className="block text-xs font-semibold text-slate-400">
-                    Seleccioná un archivo de audio (máx 4.5MB):
+                    Seleccioná un archivo de audio MP3 (máx 15MB):
                   </label>
                   <input
                     type="file"
-                    accept="audio/*"
+                    accept="audio/*,.mp3,.m4a,.aac,.wav,.ogg"
                     onChange={handleAudioFileChange}
-                    className="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 cursor-pointer"
+                    disabled={isUploadingAudio}
+                    className="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-600 file:text-white hover:file:bg-indigo-500 cursor-pointer disabled:opacity-50"
                   />
-                  {uploadedAudioFileName && (
-                    <p className="text-xs text-emerald-400 font-mono">
-                      ✓ Archivo cargado: {uploadedAudioFileName}
+                  {isUploadingAudio && (
+                    <div className="flex items-center gap-2 text-xs text-indigo-400 animate-pulse">
+                      <Loader2 className="w-4 h-4 animate-spin shrink-0" />
+                      <span>{audioUploadProgress || "Subiendo canción a la nube..."}</span>
+                    </div>
+                  )}
+                  {!isUploadingAudio && uploadedAudioUrl && (
+                    <p className="text-xs text-emerald-400 font-mono flex items-center gap-1.5">
+                      <span>✓ Canción lista en la nube:</span>
+                      <span className="text-white font-medium truncate max-w-xs">{uploadedAudioFileName || "audio.mp3"}</span>
                     </p>
                   )}
                 </div>
