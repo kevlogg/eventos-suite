@@ -90,31 +90,31 @@ export default function Mis15RojoDoradoTemplate({ invitation }: TemplateProps) {
     {
       time: formatOffsetTime(startTime, 0),
       title: "Recepción Real",
-      desc: "Copa de bienvenida, fotos en el photocall y encuentro con amigos y familia.",
+      desc: "Cocktail de bienvenida & fotos",
       icon: GlassWater,
     },
     {
       time: formatOffsetTime(startTime, 90),
       title: "Entrada Triunfal & Vals",
-      desc: "El momento más esperado de la noche, apertura de pista y el vals con papá.",
+      desc: "Apertura y el vals soñado",
       icon: Crown,
     },
     {
       time: formatOffsetTime(startTime, 150),
-      title: "Cena & Brindis de Honor",
-      desc: "Banquete especial, proyección del video emotivo y brindis por mis 15.",
+      title: "Cena & Brindis",
+      desc: "Banquete y video emotivo",
       icon: Heart,
     },
     {
       time: formatOffsetTime(startTime, 240),
       title: "Pista de Baile & Shows",
-      desc: "Apertura total de la fiesta con DJ, luces, sorpresas y toda la música.",
+      desc: "DJ en vivo, sorpresas y fiesta",
       icon: Music,
     },
     {
       time: formatOffsetTime(startTime, 420),
-      title: "Carnaval Carioca & Despedida",
-      desc: "Cotillón luminoso, snacks de trasnoche y el cierre de una noche inolvidable.",
+      title: "Carnaval Carioca",
+      desc: "Cotillón luminoso y trasnoche",
       icon: Sparkles,
     },
   ];
@@ -268,42 +268,45 @@ export default function Mis15RojoDoradoTemplate({ invitation }: TemplateProps) {
             <Countdown targetDate={invitation.targetDate} theme="mis-15-rojo-dorado" />
           </section>
 
-          {/* ─── ITINERARIO / MOMENTOS MÁGICOS ─── */}
-          <section className="bg-gradient-to-b from-[#2A0307]/85 to-[#120002]/95 rounded-3xl p-6 sm:p-10 border-2 border-[#D4AF37]/45 shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl flex flex-col gap-8">
-            <div className="flex flex-col items-center text-center gap-2">
+          {/* ─── ITINERARIO / CRONOGRAMA OPTIMIZADO Y COMPACTO ─── */}
+          <section className="bg-gradient-to-b from-[#2A0307]/85 to-[#120002]/95 rounded-3xl p-5 sm:p-7 border-2 border-[#D4AF37]/45 shadow-[0_15px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl flex flex-col gap-5">
+            <div className="flex flex-col items-center text-center gap-1.5">
               <div className="inline-flex items-center gap-2 text-xs font-serif uppercase tracking-widest text-[#D4AF37]">
-                <Clock size={16} />
+                <Clock size={15} />
                 <span>Cronograma del Festejo</span>
               </div>
-              <h2 className="font-serif font-bold text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6A3] via-[#FAF5EE] to-[#D4AF37]">
+              <h2 className="font-serif font-bold text-xl sm:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6A3] via-[#FAF5EE] to-[#D4AF37]">
                 Momentos Mágicos
               </h2>
-              <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mt-1" />
+              <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mt-0.5" />
             </div>
 
-            <div className="flex flex-col gap-4">
+            {/* Compact timeline list with connecting gold line */}
+            <div className="relative pl-6 sm:pl-8 space-y-2.5 sm:space-y-3 before:absolute before:left-3 sm:before:left-4 before:top-3 before:bottom-3 before:w-0.5 before:bg-gradient-to-b before:from-[#D4AF37] before:via-[#8C0010] before:to-[#D4AF37]/40">
               {itinerarySteps.map((step, idx) => {
                 const IconComponent = step.icon;
                 return (
                   <div
                     key={idx}
-                    className="flex items-start gap-4 p-4 sm:p-5 rounded-2xl bg-black/40 border border-[#D4AF37]/30 hover:border-[#D4AF37]/60 transition-colors"
+                    className="relative flex items-center justify-between gap-3 p-2.5 sm:p-3 rounded-xl bg-black/40 border border-[#D4AF37]/25 hover:border-[#D4AF37]/50 transition-colors"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#8C0010] flex items-center justify-center text-white shrink-0 shadow-md">
-                      <IconComponent size={22} />
+                    {/* Node on vertical line */}
+                    <div className="absolute -left-6 sm:-left-8 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-gradient-to-br from-[#D4AF37] to-[#8C0010] border-2 border-[#120002] flex items-center justify-center text-white shadow-sm">
+                      <IconComponent size={12} />
                     </div>
-                    <div className="flex flex-col gap-1">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-xs font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/40 text-[#F5E6A3]">
-                          {step.time}
-                        </span>
-                        <h3 className="font-serif font-bold text-lg text-[#FAF5EE]">
+
+                    <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+                      <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#D4AF37]/20 border border-[#D4AF37]/35 text-[#F5E6A3] shrink-0 font-mono">
+                        {step.time}
+                      </span>
+                      <div className="flex flex-col min-w-0">
+                        <h3 className="font-serif font-bold text-sm sm:text-base text-[#FAF5EE] truncate leading-tight">
                           {step.title}
                         </h3>
+                        <p className="text-[11px] sm:text-xs text-[#FAF5EE]/65 truncate">
+                          {step.desc}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm text-[#FAF5EE]/75 leading-relaxed">
-                        {step.desc}
-                      </p>
                     </div>
                   </div>
                 );
@@ -467,11 +470,17 @@ function Mis15EnvelopeModal({
           </div>
 
           {/* Golden Wax Seal */}
-          <div className="my-3.5 relative flex flex-col items-center justify-center">
+          <div className="my-3 relative flex flex-col items-center justify-center">
             {/* Pulsing Aura */}
-            <div className="absolute inset-0 rounded-full bg-[#D4AF37]/30 blur-md animate-ping" />
-            <div className="relative w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-[#8C0010] via-[#D4AF37] to-[#F5E6A3] border-3 border-white/80 shadow-[0_0_30px_rgba(212,175,55,0.9)] flex items-center justify-center shrink-0">
-              <span className="text-3xl sm:text-4xl font-black text-amber-950 leading-none font-cormorant select-none tracking-tight">
+            <div className="absolute inset-0 rounded-full bg-[#D4AF37]/35 blur-md animate-ping" />
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-[#8C0010] via-[#D4AF37] to-[#F5E6A3] border-4 border-[#FFF5CE] shadow-[inset_0_2px_4px_rgba(255,255,255,0.6),0_0_40px_rgba(212,175,55,0.95)] flex items-center justify-center shrink-0">
+              <span
+                className="font-black text-amber-950 leading-none font-cormorant select-none tracking-tighter"
+                style={{
+                  fontSize: "clamp(4.2rem, 16vw, 5.6rem)",
+                  filter: "drop-shadow(0 2px 3px rgba(0,0,0,0.35))",
+                }}
+              >
                 {eventNumber || "15"}
               </span>
             </div>
