@@ -79,7 +79,9 @@ export async function handleCreateEvent(formData: FormData) {
       const giftAlias = (formData.get("giftAlias") as string)?.trim() || "";
       const giftCbu = (formData.get("giftCbu") as string)?.trim() || "";
       const giftHolderName = (formData.get("giftHolderName") as string)?.trim() || "";
-      const audioTrackPath = (formData.get("audioTrackPath") as string)?.trim() || "/audio/celebration.mp3";
+      const audioTrackPath = formData.has("audioTrackPath")
+        ? ((formData.get("audioTrackPath") as string)?.trim() ?? "")
+        : "/audio/celebration.mp3";
       const footerPhrase = (formData.get("footerPhrase") as string)?.trim() || "Tu presencia es nuestro mejor regalo. ¡Nos vemos en la fiesta! 🥂";
       const carouselImages = (formData.get("carouselImages") as string)?.trim() || "";
       const allowCompanions = formData.get("allowCompanions") === "true" || formData.get("allowCompanions") === "on";
@@ -137,7 +139,7 @@ export async function handleSaveInvitationAction(
     const giftAlias = (formData.get("giftAlias") as string)?.trim() || "";
     const giftCbu = (formData.get("giftCbu") as string)?.trim() || "";
     const giftHolderName = (formData.get("giftHolderName") as string)?.trim() || "";
-    const audioTrackPath = (formData.get("audioTrackPath") as string)?.trim() || "";
+    const audioTrackPath = (formData.get("audioTrackPath") as string)?.trim() ?? "";
     const footerPhrase = (formData.get("footerPhrase") as string)?.trim() || "";
     const carouselImages = (formData.get("carouselImages") as string)?.trim() || "";
     const allowCompanions = formData.get("allowCompanions") === "true" || formData.get("allowCompanions") === "on";

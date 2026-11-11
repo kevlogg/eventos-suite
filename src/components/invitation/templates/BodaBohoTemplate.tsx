@@ -254,22 +254,28 @@ export default function BodaBohoTemplate({ invitation }: TemplateProps) {
           </section>
 
           {/* ─── CAROUSEL SECTION: NUESTRA HISTORIA ─── */}
-          <section
-            id="historia"
-            aria-labelledby="historia-heading"
-            className="flex flex-col gap-6"
-          >
-            <BohoSectionHeading
-              id="historia-heading"
-              icon="🌾"
-              title="Nuestra Historia de Amor"
-              subtitle="Tres momentos mágicos que sellaron nuestro destino"
-            />
-            <PhotoCarousel
-              slides={parseCarouselSlides(invitation.carouselImages)}
-              theme="boda-boho"
-            />
-          </section>
+          {(Boolean(invitation.carouselImages) || invitation.isDefault) && (
+            <section
+              id="historia"
+              aria-labelledby="historia-heading"
+              className="flex flex-col gap-6"
+            >
+              <BohoSectionHeading
+                id="historia-heading"
+                icon="🌾"
+                title="Nuestra Historia de Amor"
+                subtitle={
+                  parseCarouselSlides(invitation.carouselImages)?.length === 1
+                    ? "Un momento mágico que selló nuestro destino"
+                    : "Momentos mágicos que sellaron nuestro destino"
+                }
+              />
+              <PhotoCarousel
+                slides={parseCarouselSlides(invitation.carouselImages)}
+                theme="boda-boho"
+              />
+            </section>
+          )}
 
           {/* ─── COUNTDOWN SECTION ─── */}
           <section

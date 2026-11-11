@@ -7,6 +7,7 @@ import VenueCard from "@/components/invitation/VenueCard";
 import GiftCard from "@/components/invitation/GiftCard";
 import RsvpForm from "@/components/invitation/RsvpForm";
 import AudioController from "@/components/invitation/AudioController";
+import HeroPhotoDisplay from "@/components/invitation/HeroPhotoDisplay";
 import { Trophy, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 
 interface TemplateProps {
@@ -164,6 +165,13 @@ export default function FutbolInfantilTemplate({ invitation }: TemplateProps) {
             >
               {invitation.headline}
             </h1>
+
+            {/* Hero Photos (1 a 3 fotos / carrusel) */}
+            <HeroPhotoDisplay
+              carouselImages={invitation.carouselImages}
+              personName={invitation.personName}
+              theme="futbol-infantil"
+            />
 
             {/* Jersey Number */}
             {invitation.eventNumber && (

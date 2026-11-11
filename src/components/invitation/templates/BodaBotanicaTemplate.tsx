@@ -254,22 +254,28 @@ export default function BodaBotanicaTemplate({ invitation }: TemplateProps) {
           </section>
 
           {/* ─── CAROUSEL SECTION: NUESTRA HISTORIA ─── */}
-          <section
-            id="historia"
-            aria-labelledby="historia-heading"
-            className="flex flex-col gap-6"
-          >
-            <BotanicaSectionHeading
-              id="historia-heading"
-              icon="📷"
-              title="Nuestra Historia de Amor"
-              subtitle="Tres momentos que marcaron nuestro camino hacia el altar"
-            />
-            <PhotoCarousel
-              slides={parseCarouselSlides(invitation.carouselImages)}
-              theme="boda-botanica"
-            />
-          </section>
+          {(Boolean(invitation.carouselImages) || invitation.isDefault) && (
+            <section
+              id="historia"
+              aria-labelledby="historia-heading"
+              className="flex flex-col gap-6"
+            >
+              <BotanicaSectionHeading
+                id="historia-heading"
+                icon="📷"
+                title="Nuestra Historia de Amor"
+                subtitle={
+                  parseCarouselSlides(invitation.carouselImages)?.length === 1
+                    ? "Un momento que marcó nuestro camino hacia el altar"
+                    : "Momentos que marcaron nuestro camino hacia el altar"
+                }
+              />
+              <PhotoCarousel
+                slides={parseCarouselSlides(invitation.carouselImages)}
+                theme="boda-botanica"
+              />
+            </section>
+          )}
 
           {/* ─── COUNTDOWN SECTION ─── */}
           <section

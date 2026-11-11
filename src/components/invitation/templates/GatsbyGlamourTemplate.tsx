@@ -7,6 +7,7 @@ import VenueCard from "@/components/invitation/VenueCard";
 import GiftCard from "@/components/invitation/GiftCard";
 import RsvpForm from "@/components/invitation/RsvpForm";
 import AudioController from "@/components/invitation/AudioController";
+import HeroPhotoDisplay from "@/components/invitation/HeroPhotoDisplay";
 import { Sparkles, Wine, GlassWater, Crown, Award, Star } from "lucide-react";
 
 interface TemplateProps {
@@ -167,6 +168,13 @@ export default function GatsbyGlamourTemplate({ invitation }: TemplateProps) {
             >
               {invitation.headline}
             </h1>
+
+            {/* Hero Photos (1 a 3 fotos / carrusel) */}
+            <HeroPhotoDisplay
+              carouselImages={invitation.carouselImages}
+              personName={invitation.personName}
+              theme="gatsby-glamour"
+            />
 
             {/* Golden Anniversary Number */}
             {invitation.eventNumber && (

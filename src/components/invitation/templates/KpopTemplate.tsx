@@ -7,6 +7,7 @@ import VenueCard from "@/components/invitation/VenueCard";
 import GiftCard from "@/components/invitation/GiftCard";
 import RsvpForm from "@/components/invitation/RsvpForm";
 import AudioController from "@/components/invitation/AudioController";
+import HeroPhotoDisplay from "@/components/invitation/HeroPhotoDisplay";
 import { Sparkles, Music, Star, Heart, Ticket, Radio } from "lucide-react";
 
 interface TemplateProps {
@@ -181,6 +182,13 @@ export default function KpopTemplate({ invitation }: TemplateProps) {
             >
               {invitation.headline}
             </h1>
+
+            {/* Hero Photos (1 a 3 fotos / carrusel) */}
+            <HeroPhotoDisplay
+              carouselImages={invitation.carouselImages}
+              personName={invitation.personName}
+              theme="k-pop"
+            />
 
             {/* Neon Event Number */}
             {invitation.eventNumber && (

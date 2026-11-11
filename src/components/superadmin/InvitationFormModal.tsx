@@ -19,6 +19,7 @@ import {
   Upload,
   RefreshCw,
   Camera,
+  Trash2,
   Gift,
   Calendar,
   MapPin,
@@ -170,17 +171,24 @@ export default function InvitationFormModal({
   })();
   const [selectedCategory, setSelectedCategory] = useState<TemplateCategoryKey>(initialCategory);
 
-  // Carousel slides state
-  const initialSlides: CarouselSlide[] = (() => {
-    const parsed = parseCarouselSlides(invitation?.carouselImages);
-    if (parsed && parsed.length === 3) return parsed;
-    return DEFAULT_SLIDES;
-  })();
+  // Carousel slides state (Universal: 1 a 3 fotos para cualquier plantilla)
+  const initialParsedPhotos = parseCarouselSlides(invitation?.carouselImages) || [];
+  const [includePhotos, setIncludePhotos] = useState<boolean>(initialParsedPhotos.length > 0);
+  const [photoCount, setPhotoCount] = useState<number>(
+    initialParsedPhotos.length > 0 ? Math.min(3, Math.max(1, initialParsedPhotos.length)) : 1
+  );
+
+  const initialSlides: CarouselSlide[] = [
+    initialParsedPhotos[0] || { src: "", alt: "Foto 1", caption: "" },
+    initialParsedPhotos[1] || { src: "", alt: "Foto 2", caption: "" },
+    initialParsedPhotos[2] || { src: "", alt: "Foto 3", caption: "" },
+  ];
   const [carouselSlides, setCarouselSlides] = useState<CarouselSlide[]>(initialSlides);
 
   const handleImageUpload = async (index: number, file: File) => {
     try {
-      const base64 = await compressImageFile(file, 1200, 0.82);
+      // Compresión en HD liviana para móvil rápido (máx 1000px ancho, calidad 0.78)
+      const base64 = await compressImageFile(file, 1000, 0.78);
       setCarouselSlides((prev) => {
         const copy = [...prev];
         copy[index] = { ...copy[index], src: base64 };
@@ -199,10 +207,10 @@ export default function InvitationFormModal({
     });
   };
 
-  const handleResetSlot = (index: number) => {
+  const handleClearPhoto = (index: number) => {
     setCarouselSlides((prev) => {
       const copy = [...prev];
-      copy[index] = DEFAULT_SLIDES[index] || DEFAULT_SLIDES[0];
+      copy[index] = { src: "", alt: `Foto ${index + 1}`, caption: "" };
       return copy;
     });
   };
@@ -233,13 +241,16 @@ export default function InvitationFormModal({
     invitation?.allowDietary ?? true
   );
 
-  // Audio state
+  // Audio state (Persiste fielmente la última elección del usuario, incluso 'Sin música')
   const initialAudioMode = (): "preset" | "upload" | "url" | "none" | "keep" => {
-    if (invitation?.audioTrackPath) {
-      if (invitation.audioTrackPath.startsWith("/audio/")) return "preset";
-      if (invitation.audioTrackPath.includes("/event-audio/")) return "upload";
-      if (invitation.audioTrackPath.startsWith("http")) return "url";
-      return "keep";
+    if (invitation) {
+      if (invitation.audioTrackPath === "" || invitation.audioTrackPath === null) return "none";
+      if (invitation.audioTrackPath) {
+        if (invitation.audioTrackPath.startsWith("/audio/")) return "preset";
+        if (invitation.audioTrackPath.includes("/event-audio/")) return "upload";
+        if (invitation.audioTrackPath.startsWith("http")) return "upload";
+        return "keep";
+      }
     }
     return "preset";
   };
@@ -248,7 +259,9 @@ export default function InvitationFormModal({
     initialAudioMode()
   );
   const [uploadedAudioFileName, setUploadedAudioFileName] = useState<string>(
-    invitation?.audioTrackPath?.includes("/event-audio/") ? "Canción en la nube" : ""
+    invitation?.audioTrackPath && (invitation.audioTrackPath.includes("/event-audio/") || invitation.audioTrackPath.startsWith("http"))
+      ? "Canción subida guardada"
+      : ""
   );
   const [uploadedAudioUrl, setUploadedAudioUrl] = useState<string>(
     invitation?.audioTrackPath && (invitation.audioTrackPath.includes("/event-audio/") || invitation.audioTrackPath.startsWith("http"))
@@ -426,10 +439,18 @@ export default function InvitationFormModal({
 
     formData.delete("audioFile");
 
-    // Carousel and Wedding specifics
+    // Carousel images configuration (Universal: 1 a 3 fotos para cualquier plantilla)
     if (isWedding) {
       formData.set("eventNumber", "");
-      formData.set("carouselImages", JSON.stringify(carouselSlides));
+    }
+
+    if (includePhotos) {
+      const activeSlides = carouselSlides
+        .slice(0, photoCount)
+        .filter((s) => s.src && s.src.trim() !== "");
+      formData.set("carouselImages", activeSlides.length > 0 ? JSON.stringify(activeSlides) : "");
+    } else {
+      formData.set("carouselImages", "");
     }
 
     // If gifts are not included, clear gift values
@@ -441,6 +462,12 @@ export default function InvitationFormModal({
     }
 
     if (isPreCreation) {
+      const activePreSlides = includePhotos
+        ? carouselSlides
+            .slice(0, photoCount)
+            .filter((s) => s.src && s.src.trim() !== "")
+        : [];
+
       const record: InvitationRecord = {
         id: invitation?.id || "temp-inv",
         slug: slug || "",
@@ -458,9 +485,9 @@ export default function InvitationFormModal({
         giftAlias: includeGifts ? (formData.get("giftAlias") as string) || "" : "",
         giftCbu: includeGifts ? (formData.get("giftCbu") as string) || "" : "",
         giftHolderName: includeGifts ? (formData.get("giftHolderName") as string) || "" : "",
-        audioTrackPath: (formData.get("audioTrackPath") as string) || "",
+        audioTrackPath: (formData.get("audioTrackPath") as string) ?? "",
         footerPhrase: (formData.get("footerPhrase") as string) || "",
-        carouselImages: isWedding ? JSON.stringify(carouselSlides) : "",
+        carouselImages: activePreSlides.length > 0 ? JSON.stringify(activePreSlides) : "",
         template: selectedTemplate,
         allowCompanions,
         allowDietary,
@@ -973,80 +1000,137 @@ export default function InvitationFormModal({
               )}
             </div>
 
-            {/* ─── SECCIÓN 5: CARRUSEL DE FOTOS (Bodas y otros) ─── */}
-            {isWedding && (
-              <div className="p-5 sm:p-6 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-4">
-                <div className="flex items-center justify-between">
+            {/* ─── SECCIÓN 5: FOTOS DE LA INVITACIÓN (1 a 3 fotos para todas las plantillas) ─── */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
                   <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
                     <Camera className="w-4 h-4 text-indigo-400" />
-                    5. Carrusel de Fotos Romántico (3 Diapositivas)
+                    5. Fotos de la Invitación (1 a 3 fotos)
                   </h3>
-                  <span className="text-[11px] text-slate-400">
-                    Compresión automática en HD
-                  </span>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Se muestran en la portada (1 foto fija o carrusel interactivo si agregás 2 o 3 fotos).
+                  </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {carouselSlides.map((slide, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between space-y-3"
-                    >
-                      <div className="space-y-2">
-                        <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-950 border border-slate-800">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={slide.src}
-                            alt={slide.alt || `Slide ${idx + 1}`}
-                            className="w-full h-full object-cover"
-                          />
-                          <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-black/70 text-white backdrop-blur">
-                            Foto #{idx + 1}
-                          </span>
-                        </div>
-
-                        <div>
-                          <label className="block text-[11px] font-semibold text-slate-400 mb-1">
-                            Epígrafe / Mensaje:
-                          </label>
-                          <input
-                            type="text"
-                            value={slide.caption || ""}
-                            onChange={(e) => handleCaptionChange(idx, e.target.value)}
-                            placeholder="Frase para la foto..."
-                            className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2 pt-2 border-t border-slate-800">
-                        <label className="flex-1 py-1.5 px-2 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-[11px] font-semibold flex items-center justify-center gap-1 cursor-pointer transition-colors">
-                          <Upload className="w-3 h-3" />
-                          <span>Cambiar Foto</span>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => {
-                              const f = e.target.files?.[0];
-                              if (f) handleImageUpload(idx, f);
-                            }}
-                            className="hidden"
-                          />
-                        </label>
-                        <button
-                          type="button"
-                          onClick={() => handleResetSlot(idx)}
-                          title="Restablecer foto predeterminada"
-                          className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
-                        >
-                          <RefreshCw className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={includePhotos}
+                    onChange={(e) => setIncludePhotos(e.target.checked)}
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                </label>
               </div>
-            )}
+
+              {includePhotos && (
+                <div className="space-y-4 pt-3 border-t border-slate-800/80">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <span className="text-xs font-semibold text-slate-300">
+                      Cantidad de fotos a incluir:
+                    </span>
+                    <div className="inline-flex rounded-xl bg-slate-900 p-1 border border-slate-800">
+                      {[1, 2, 3].map((count) => (
+                        <button
+                          key={count}
+                          type="button"
+                          onClick={() => setPhotoCount(count)}
+                          className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                            photoCount === count
+                              ? "bg-indigo-600 text-white shadow-sm"
+                              : "text-slate-400 hover:text-white"
+                          }`}
+                        >
+                          {count === 1 ? "1 Foto" : `${count} Fotos (Carrusel)`}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className={`grid gap-4 ${photoCount === 1 ? "grid-cols-1 max-w-sm mx-auto" : photoCount === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1 sm:grid-cols-3"}`}>
+                    {Array.from({ length: photoCount }).map((_, idx) => {
+                      const slide = carouselSlides[idx] || { src: "", alt: `Foto ${idx + 1}`, caption: "" };
+                      const hasImage = Boolean(slide.src && slide.src.trim() !== "");
+
+                      return (
+                        <div
+                          key={idx}
+                          className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between space-y-3"
+                        >
+                          <div className="space-y-2">
+                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center">
+                              {hasImage ? (
+                                <>
+                                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                                  <img
+                                    src={slide.src}
+                                    alt={slide.alt || `Foto ${idx + 1}`}
+                                    className="w-full h-full object-cover"
+                                  />
+                                  <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-black/70 text-white backdrop-blur">
+                                    Foto #{idx + 1}
+                                  </span>
+                                </>
+                              ) : (
+                                <div className="flex flex-col items-center justify-center text-center p-4 gap-1.5 text-slate-500">
+                                  <Camera className="w-8 h-8 text-slate-600" />
+                                  <span className="text-xs font-semibold text-slate-400">
+                                    Foto #{idx + 1} vacía
+                                  </span>
+                                  <span className="text-[10px] text-slate-600">
+                                    Toca abajo para subir
+                                  </span>
+                                </div>
+                              )}
+                            </div>
+
+                            <div>
+                              <label className="block text-[11px] font-semibold text-slate-400 mb-1">
+                                Epígrafe / Frase (opcional):
+                              </label>
+                              <input
+                                type="text"
+                                value={slide.caption || ""}
+                                onChange={(e) => handleCaptionChange(idx, e.target.value)}
+                                placeholder="Frase para la foto..."
+                                className="w-full bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="flex items-center gap-2 pt-2 border-t border-slate-800">
+                            <label className="flex-1 py-1.5 px-2 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 text-[11px] font-semibold flex items-center justify-center gap-1 cursor-pointer transition-colors">
+                              <Upload className="w-3 h-3" />
+                              <span>{hasImage ? "Cambiar Foto" : "Subir Foto"}</span>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                  const f = e.target.files?.[0];
+                                  if (f) handleImageUpload(idx, f);
+                                }}
+                                className="hidden"
+                              />
+                            </label>
+                            {hasImage && (
+                              <button
+                                type="button"
+                                onClick={() => handleClearPhoto(idx)}
+                                title="Quitar foto"
+                                className="p-1.5 rounded-lg text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors cursor-pointer"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
 
             {/* ─── SECCIÓN 6: REGALO Y DATOS BANCARIOS ─── */}
             <div className="p-5 sm:p-6 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-4">

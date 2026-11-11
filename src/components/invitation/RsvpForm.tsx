@@ -66,7 +66,7 @@ export default function RsvpForm({
     : "glass-card p-6 sm:p-10 flex flex-col gap-6 text-[var(--dark-brown)]";
 
   const inputClass = isMis15RojoDorado
-    ? "w-full p-3.5 rounded-2xl border border-[#D4AF37]/50 focus:border-[#F5E6A3] bg-black/60 text-[#FAF5EE] placeholder-gray-400 font-medium text-sm outline-none transition-all shadow-inner"
+    ? "w-full p-3.5 rounded-2xl border border-[#D4AF37]/50 focus:border-[#F5E6A3] bg-black/60 text-[#FAF5EE] placeholder-[#FAF5EE]/40 font-medium text-sm outline-none transition-all shadow-inner"
     : isToyStory
     ? "w-full p-3.5 rounded-2xl border-2 border-blue-200 focus:border-blue-500 bg-sky-50/40 text-blue-950 font-medium text-sm outline-none transition-all"
     : isKpop
@@ -166,10 +166,10 @@ export default function RsvpForm({
   return (
     <div className={cardContainerClass}>
       <div className="flex flex-col gap-1 mb-2">
-        <h3 className="font-extrabold text-xl sm:text-2xl">
+        <h3 className={`font-extrabold text-xl sm:text-2xl ${isMis15RojoDorado ? "font-serif text-[#F5E6A3]" : ""}`}>
           ¿Venís a festejar?
         </h3>
-        <p className="text-xs sm:text-sm opacity-80">
+        <p className={`text-xs sm:text-sm ${isMis15RojoDorado ? "text-[#FAF5EE]/90 font-serif" : "opacity-80"}`}>
           Por favor completá los datos para poder reservar tu lugar en la celebración.
         </p>
       </div>
@@ -217,7 +217,7 @@ export default function RsvpForm({
               <label className={labelClass}>
                 Integrantes adicionales de tu grupo / familia
               </label>
-              <p className="text-[11px] opacity-70">
+              <p className={`text-[11px] ${isMis15RojoDorado ? "text-[#D4AF37] font-medium" : "opacity-70"}`}>
                 Usá los botones + y - para agregar a los integrantes que asistirán con vos
               </p>
             </div>
@@ -289,7 +289,7 @@ export default function RsvpForm({
                 </button>
               </div>
 
-              <span className={`text-xs sm:text-sm font-bold ${isClasica ? "text-[#FAF5EE]" : "opacity-90"}`}>
+              <span className={`text-xs sm:text-sm font-bold ${isMis15RojoDorado || isClasica ? "text-[#FAF5EE]" : "opacity-90"}`}>
                 {companionsCount === 0
                   ? "Asistiré solo/a"
                   : companionsCount === 1
@@ -310,8 +310,8 @@ export default function RsvpForm({
                     ? "bg-pink-50/70 border-pink-200 text-pink-950"
                     : isFootball
                     ? "bg-emerald-50/70 border-emerald-300 text-emerald-950"
-                    : isClasica
-                    ? "bg-black/60 border-[#D4AF37]/40 text-[#FAF5EE]"
+                    : isMis15RojoDorado || isClasica
+                    ? "bg-black/70 border-[#D4AF37]/50 text-[#FAF5EE] shadow-inner"
                     : isBotanica
                     ? "bg-[#556B2F]/10 border-[#556B2F]/30 text-[#2D3E1E]"
                     : isBoho
@@ -319,14 +319,14 @@ export default function RsvpForm({
                     : "bg-[rgba(197,155,39,0.08)] border-[rgba(197,155,39,0.3)] text-[var(--dark-brown)]"
                 }`}
               >
-                <div className="flex items-center gap-1.5 pb-1 border-b border-gray-200/40 text-xs font-bold uppercase tracking-wider">
+                <div className={`flex items-center gap-1.5 pb-1 border-b ${isMis15RojoDorado ? "border-[#D4AF37]/40 text-[#D4AF37]" : "border-gray-200/40"} text-xs font-bold uppercase tracking-wider`}>
                   <Users size={15} />
                   <span>Nombres de los integrantes adicionales ({companionsCount})</span>
                 </div>
 
                 {Array.from({ length: companionsCount }).map((_, index) => (
                   <div key={index} className="flex flex-col gap-1">
-                    <label htmlFor={`companion-${index}`} className="text-xs font-semibold opacity-90">
+                    <label htmlFor={`companion-${index}`} className={`text-xs font-semibold ${isMis15RojoDorado ? "text-[#F5E6A3]" : "opacity-90"}`}>
                       Nombre del acompañante #{index + 1} <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -369,7 +369,7 @@ export default function RsvpForm({
         <div className="flex flex-col gap-1.5">
           <label htmlFor="rsvp-message" className={labelClass}>
             Mensaje o dedicatoria para {personName}{" "}
-            <span className="font-normal opacity-60">(opcional)</span>
+            <span className={isMis15RojoDorado ? "text-[#F5E6A3]/70 font-normal" : "font-normal opacity-60"}>(opcional)</span>
           </label>
           <textarea
             id="rsvp-message"

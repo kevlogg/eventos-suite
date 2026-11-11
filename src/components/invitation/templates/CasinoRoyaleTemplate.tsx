@@ -7,6 +7,7 @@ import VenueCard from "@/components/invitation/VenueCard";
 import GiftCard from "@/components/invitation/GiftCard";
 import RsvpForm from "@/components/invitation/RsvpForm";
 import AudioController from "@/components/invitation/AudioController";
+import HeroPhotoDisplay from "@/components/invitation/HeroPhotoDisplay";
 import { Sparkles, Crown, Award, Star, Dices, ShieldCheck } from "lucide-react";
 
 interface TemplateProps {
@@ -202,6 +203,13 @@ export default function CasinoRoyaleTemplate({ invitation }: TemplateProps) {
             >
               {invitation.headline}
             </h1>
+
+            {/* Hero Photos (1 a 3 fotos / carrusel) */}
+            <HeroPhotoDisplay
+              carouselImages={invitation.carouselImages}
+              personName={invitation.personName}
+              theme="casino-royale"
+            />
 
             {/* Golden Anniversary Number */}
             {invitation.eventNumber && (

@@ -7,6 +7,7 @@ import VenueCard from "@/components/invitation/VenueCard";
 import GiftCard from "@/components/invitation/GiftCard";
 import RsvpForm from "@/components/invitation/RsvpForm";
 import AudioController from "@/components/invitation/AudioController";
+import HeroPhotoDisplay from "@/components/invitation/HeroPhotoDisplay";
 import { Crown, Sparkles, Heart, Castle, Clock } from "lucide-react";
 
 interface TemplateProps {
@@ -167,6 +168,13 @@ export default function PrincesasTemplate({ invitation }: TemplateProps) {
             >
               {invitation.headline}
             </h1>
+
+            {/* Hero Photos (1 a 3 fotos / carrusel) */}
+            <HeroPhotoDisplay
+              carouselImages={invitation.carouselImages}
+              personName={invitation.personName}
+              theme="princesas"
+            />
 
             {/* Princess Tiara Number */}
             {invitation.eventNumber && (

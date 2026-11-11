@@ -8,7 +8,31 @@ import GiftCard from "@/components/invitation/GiftCard";
 import RsvpForm from "@/components/invitation/RsvpForm";
 import AudioController from "@/components/invitation/AudioController";
 import PhotoCarousel, { parseCarouselSlides } from "@/components/invitation/PhotoCarousel";
+import HeroPhotoDisplay from "@/components/invitation/HeroPhotoDisplay";
 import { Sparkles, Crown, Heart, Star, Music, Clock, Shirt, GlassWater } from "lucide-react";
+
+function parseEventStartTime(targetDate?: string, badgeText?: string): { hour: number; minute: number } {
+  if (badgeText) {
+    const match = badgeText.match(/(\d{1,2}):(\d{2})/);
+    if (match) {
+      const h = parseInt(match[1], 10);
+      const m = parseInt(match[2], 10);
+      if (h >= 0 && h < 24 && m >= 0 && m < 60) return { hour: h, minute: m };
+    }
+  }
+  if (targetDate) {
+    const d = new Date(targetDate);
+    if (!isNaN(d.getTime())) return { hour: d.getHours(), minute: d.getMinutes() };
+  }
+  return { hour: 21, minute: 0 };
+}
+
+function formatOffsetTime(startTime: { hour: number; minute: number }, addMin: number): string {
+  const totalMin = (startTime.hour * 60 + startTime.minute + addMin) % (24 * 60);
+  const h = Math.floor(totalMin / 60);
+  const m = totalMin % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")} hs`;
+}
 
 interface TemplateProps {
   invitation: InvitationRecord;
@@ -17,6 +41,8 @@ interface TemplateProps {
 export default function Mis15RojoDoradoTemplate({ invitation }: TemplateProps) {
   const [isOpened, setIsOpened] = useState(false);
   const [isChestOpened, setIsChestOpened] = useState(false);
+
+  const startTime = parseEventStartTime(invitation.targetDate, invitation.badgeText);
 
   const hasGifts = Boolean(
     invitation.giftAlias?.trim() ||
@@ -62,31 +88,31 @@ export default function Mis15RojoDoradoTemplate({ invitation }: TemplateProps) {
 
   const itinerarySteps = [
     {
-      time: "21:00 hs",
+      time: formatOffsetTime(startTime, 0),
       title: "Recepción Real",
       desc: "Copa de bienvenida, fotos en el photocall y encuentro con amigos y familia.",
       icon: GlassWater,
     },
     {
-      time: "22:30 hs",
+      time: formatOffsetTime(startTime, 90),
       title: "Entrada Triunfal & Vals",
       desc: "El momento más esperado de la noche, apertura de pista y el vals con papá.",
       icon: Crown,
     },
     {
-      time: "23:30 hs",
+      time: formatOffsetTime(startTime, 150),
       title: "Cena & Brindis de Honor",
       desc: "Banquete especial, proyección del video emotivo y brindis por mis 15.",
       icon: Heart,
     },
     {
-      time: "01:00 hs",
+      time: formatOffsetTime(startTime, 240),
       title: "Pista de Baile & Shows",
       desc: "Apertura total de la fiesta con DJ, luces, sorpresas y toda la música.",
       icon: Music,
     },
     {
-      time: "04:00 hs",
+      time: formatOffsetTime(startTime, 420),
       title: "Carnaval Carioca & Despedida",
       desc: "Cotillón luminoso, snacks de trasnoche y el cierre de una noche inolvidable.",
       icon: Sparkles,
@@ -129,36 +155,6 @@ export default function Mis15RojoDoradoTemplate({ invitation }: TemplateProps) {
           className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/10 blur-3xl pointer-events-none"
         />
 
-        {/* ─── GOLD FILIGREE CORNER DECORATIONS ─── */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none overflow-hidden select-none"
-        >
-          {/* Top-left gold filigree */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/wedding/gold-filigree.jpg"
-            alt=""
-            className="absolute -top-14 -left-14 sm:-top-20 sm:-left-20 w-72 sm:w-96 md:w-[460px] max-w-none object-contain pointer-events-none mix-blend-screen opacity-30 transform rotate-6"
-          />
-
-          {/* Top-right gold filigree */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/wedding/gold-filigree.jpg"
-            alt=""
-            className="absolute -top-14 -right-14 sm:-top-20 sm:-right-20 w-72 sm:w-96 md:w-[460px] max-w-none object-contain pointer-events-none mix-blend-screen opacity-30 transform -scale-x-100 -rotate-6"
-          />
-
-          {/* Mid floating tiara in background */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/characters/quinceanera_tiara.jpg"
-            alt=""
-            className="absolute top-20 right-0 sm:right-6 md:right-12 w-64 sm:w-80 md:w-96 pointer-events-none mix-blend-screen opacity-35 select-none filter drop-shadow-[0_0_50px_rgba(212,175,55,0.4)]"
-          />
-        </div>
-
         {/* Top Gold Foil Bar */}
         <div
           aria-hidden="true"
@@ -186,9 +182,9 @@ export default function Mis15RojoDoradoTemplate({ invitation }: TemplateProps) {
             <div className="relative w-28 sm:w-36 md:w-44 mb-1">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/characters/quinceanera_tiara.jpg"
+                src="/images/characters/quinceanera_tiara.png"
                 alt="Tiara Real de 15 Años"
-                className="w-full h-auto object-contain mix-blend-screen filter drop-shadow-[0_0_30px_rgba(212,175,55,0.7)] animate-float"
+                className="w-full h-auto object-contain filter drop-shadow-[0_0_30px_rgba(212,175,55,0.7)] animate-float"
               />
             </div>
 
@@ -228,10 +224,17 @@ export default function Mis15RojoDoradoTemplate({ invitation }: TemplateProps) {
               {invitation.personName}
             </h1>
 
-            {/* Golden 15 Number Badge */}
-            <div className="relative my-2">
+            {/* ─── FOTOS DE LA HOMENAJEADA (1 A 3 IMÁGENES / CARRUSEL) ─── */}
+            <HeroPhotoDisplay
+              carouselImages={invitation.carouselImages}
+              personName={invitation.personName}
+              theme="mis-15-rojo-dorado"
+            />
+
+            {/* Golden 15 Number Badge (con espacio para que el badge inferior no tape los números) */}
+            <div className="relative my-3 flex flex-col items-center">
               <div
-                className="font-cormorant font-bold px-10 py-2 rounded-3xl border-2 border-[#D4AF37]/60 shadow-[0_0_40px_rgba(212,175,55,0.4)]"
+                className="font-cormorant font-bold px-12 pt-3 pb-8 rounded-3xl border-2 border-[#D4AF37]/60 shadow-[0_0_40px_rgba(212,175,55,0.4)] flex items-center justify-center"
                 style={{
                   fontSize: "clamp(4.8rem, 18vw, 8.5rem)",
                   lineHeight: 1,
@@ -242,7 +245,7 @@ export default function Mis15RojoDoradoTemplate({ invitation }: TemplateProps) {
               >
                 {invitation.eventNumber || "15"}
               </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#D4AF37] via-[#F5E6A3] to-[#D4AF37] text-slate-950 font-black px-5 py-1 rounded-full text-[11px] sm:text-xs uppercase tracking-widest shadow-lg flex items-center gap-1.5 whitespace-nowrap">
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#D4AF37] via-[#F5E6A3] to-[#D4AF37] text-slate-950 font-black px-5 py-1 rounded-full text-[11px] sm:text-xs uppercase tracking-widest shadow-lg flex items-center gap-1.5 whitespace-nowrap z-10">
                 <Crown size={13} className="text-black" />
                 <span>MIS 15 AÑOS</span>
                 <Crown size={13} className="text-black" />
@@ -328,26 +331,6 @@ export default function Mis15RojoDoradoTemplate({ invitation }: TemplateProps) {
               ✦ Detalle especial: El color rojo está reservado para la quinceañera ✨
             </div>
           </section>
-
-          {/* ─── PHOTO CAROUSEL (IF IMAGES PROVIDED) ─── */}
-          {invitation.carouselImages && (
-            <section className="bg-gradient-to-b from-[#2A0307]/90 to-[#100002] rounded-3xl p-6 sm:p-10 border-2 border-[#D4AF37]/50 shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl flex flex-col items-center gap-6">
-              <div className="flex flex-col items-center text-center gap-2">
-                <span className="text-xs font-serif uppercase tracking-widest text-[#D4AF37]">
-                  Sesión de Fotos
-                </span>
-                <h2 className="font-serif font-bold text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6A3] via-[#FAF5EE] to-[#D4AF37]">
-                  Mis Recuerdos
-                </h2>
-                <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent mt-1" />
-              </div>
-              <PhotoCarousel
-                slides={parseCarouselSlides(invitation.carouselImages)}
-                theme="mis-15-rojo-dorado"
-                showHeading={false}
-              />
-            </section>
-          )}
 
           {/* ─── VENUE SECTION ─── */}
           <section className="flex flex-col gap-4">
@@ -460,9 +443,9 @@ function Mis15EnvelopeModal({
           <div className="absolute -top-16 -right-6 sm:-right-8 w-32 sm:w-40 h-auto pointer-events-none z-20 transform rotate-6">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/characters/quinceanera_tiara.jpg"
+              src="/images/characters/quinceanera_tiara.png"
               alt="Tiara"
-              className="w-full h-auto mix-blend-screen drop-shadow-[0_15px_30px_rgba(212,175,55,0.8)] filter"
+              className="w-full h-auto drop-shadow-[0_15px_30px_rgba(212,175,55,0.8)] filter"
             />
           </div>
 
@@ -487,9 +470,8 @@ function Mis15EnvelopeModal({
           <div className="my-3.5 relative flex flex-col items-center justify-center">
             {/* Pulsing Aura */}
             <div className="absolute inset-0 rounded-full bg-[#D4AF37]/30 blur-md animate-ping" />
-            <div className="relative w-20 h-20 rounded-full bg-gradient-to-tr from-[#8C0010] via-[#D4AF37] to-[#F5E6A3] border-3 border-white/80 shadow-[0_0_30px_rgba(212,175,55,0.9)] flex flex-col items-center justify-center shrink-0">
-              <Crown size={20} className="text-black mb-0.5" />
-              <span className="text-sm font-black text-black leading-none font-cormorant">
+            <div className="relative w-22 h-22 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-[#8C0010] via-[#D4AF37] to-[#F5E6A3] border-3 border-white/80 shadow-[0_0_30px_rgba(212,175,55,0.9)] flex items-center justify-center shrink-0">
+              <span className="text-3xl sm:text-4xl font-black text-amber-950 leading-none font-cormorant select-none tracking-tight">
                 {eventNumber || "15"}
               </span>
             </div>

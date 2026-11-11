@@ -260,7 +260,7 @@ const REAL_TEMPLATES: RealTemplateConfig[] = [
     personName: "Valentina · Mis 15",
     eventSubtitle: "Una noche única de vals, cena de gala, fiesta y momentos inolvidables con tiara real",
     dorsalNumber: "15",
-    characterImg: "/images/characters/quinceanera_tiara.jpg",
+    characterImg: "/images/characters/quinceanera_tiara.png",
     countdownBg: "bg-[#2A0307]/90 text-[#F5E6A3]",
     countdownBorder: "border-2 border-[#D4AF37]/60 shadow-[0_0_15px_rgba(212,175,55,0.4)]",
     venueName: "Palacio San Souci · Salón Imperial",

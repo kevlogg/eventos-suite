@@ -7,6 +7,7 @@ import VenueCard from "@/components/invitation/VenueCard";
 import GiftCard from "@/components/invitation/GiftCard";
 import RsvpForm from "@/components/invitation/RsvpForm";
 import AudioController from "@/components/invitation/AudioController";
+import HeroPhotoDisplay from "@/components/invitation/HeroPhotoDisplay";
 import { Sparkles, Disc, Radio, Music, Zap, Flame, Ticket } from "lucide-react";
 
 interface TemplateProps {
@@ -187,6 +188,13 @@ export default function FiestaNeonDjTemplate({ invitation }: TemplateProps) {
             >
               {invitation.headline}
             </h1>
+
+            {/* Hero Photos (1 a 3 fotos / carrusel) */}
+            <HeroPhotoDisplay
+              carouselImages={invitation.carouselImages}
+              personName={invitation.personName}
+              theme="fiesta-neon-dj"
+            />
 
             {/* Neon Event Number / Anniversary */}
             {invitation.eventNumber && (

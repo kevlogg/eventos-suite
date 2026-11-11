@@ -254,22 +254,28 @@ export default function BodaClasicaTemplate({ invitation }: TemplateProps) {
           </section>
 
           {/* ─── CAROUSEL SECTION: NUESTRA HISTORIA ─── */}
-          <section
-            id="historia"
-            aria-labelledby="historia-heading"
-            className="flex flex-col gap-6"
-          >
-            <ClasicaSectionHeading
-              id="historia-heading"
-              icon="💍"
-              title="Nuestra Historia"
-              subtitle="Tres instantes inolvidables que nos guiaron a este momento único"
-            />
-            <PhotoCarousel
-              slides={parseCarouselSlides(invitation.carouselImages)}
-              theme="boda-clasica"
-            />
-          </section>
+          {(Boolean(invitation.carouselImages) || invitation.isDefault) && (
+            <section
+              id="historia"
+              aria-labelledby="historia-heading"
+              className="flex flex-col gap-6"
+            >
+              <ClasicaSectionHeading
+                id="historia-heading"
+                icon="💍"
+                title="Nuestra Historia"
+                subtitle={
+                  parseCarouselSlides(invitation.carouselImages)?.length === 1
+                    ? "Un instante inolvidable que nos guio a este momento único"
+                    : "Momentos inolvidables que nos guiaron a este momento único"
+                }
+              />
+              <PhotoCarousel
+                slides={parseCarouselSlides(invitation.carouselImages)}
+                theme="boda-clasica"
+              />
+            </section>
+          )}
 
           {/* ─── COUNTDOWN SECTION ─── */}
           <section

@@ -418,7 +418,7 @@ export default function NuevoEventoClient() {
                 {customizedInvitation?.giftAlias && <input type="hidden" name="giftAlias" value={customizedInvitation.giftAlias} />}
                 {customizedInvitation?.giftCbu && <input type="hidden" name="giftCbu" value={customizedInvitation.giftCbu} />}
                 {customizedInvitation?.giftHolderName && <input type="hidden" name="giftHolderName" value={customizedInvitation.giftHolderName} />}
-                {customizedInvitation?.audioTrackPath && <input type="hidden" name="audioTrackPath" value={customizedInvitation.audioTrackPath} />}
+                {customizedInvitation?.audioTrackPath !== undefined && <input type="hidden" name="audioTrackPath" value={customizedInvitation.audioTrackPath} />}
                 {customizedInvitation?.footerPhrase && <input type="hidden" name="footerPhrase" value={customizedInvitation.footerPhrase} />}
                 {customizedInvitation?.carouselImages && <input type="hidden" name="carouselImages" value={customizedInvitation.carouselImages} />}
                 <input type="hidden" name="allowCompanions" value={customizedInvitation?.allowCompanions !== false ? "true" : "false"} />
@@ -481,7 +481,10 @@ export default function NuevoEventoClient() {
             giftAlias: customizedInvitation?.giftAlias || "",
             giftCbu: customizedInvitation?.giftCbu || "",
             giftHolderName: customizedInvitation?.giftHolderName || "",
-            audioTrackPath: customizedInvitation?.audioTrackPath || "/audio/celebration.mp3",
+            audioTrackPath:
+              customizedInvitation?.audioTrackPath !== undefined
+                ? customizedInvitation.audioTrackPath
+                : "/audio/celebration.mp3",
             footerPhrase:
               customizedInvitation?.footerPhrase ||
               "Tu presencia es nuestro mejor regalo. ¡Nos vemos en la fiesta! 🥂",
