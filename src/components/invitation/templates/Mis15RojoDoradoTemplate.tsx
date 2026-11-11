@@ -475,9 +475,11 @@ function Mis15EnvelopeModal({
             <div className="absolute inset-0 rounded-full bg-[#D4AF37]/35 blur-md animate-ping" />
             <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-[#8C0010] via-[#D4AF37] to-[#F5E6A3] border-4 border-[#FFF5CE] shadow-[inset_0_2px_4px_rgba(255,255,255,0.6),0_0_40px_rgba(212,175,55,0.95)] flex items-center justify-center shrink-0">
               <span
-                className="font-black text-amber-950 leading-none font-cormorant select-none tracking-tighter"
+                className="font-black text-amber-950 font-cormorant select-none tracking-tighter"
                 style={{
-                  fontSize: "clamp(4.2rem, 16vw, 5.6rem)",
+                  fontSize: "clamp(4.4rem, 17vw, 5.8rem)",
+                  lineHeight: 1,
+                  transform: "translateY(-11%)",
                   filter: "drop-shadow(0 2px 3px rgba(0,0,0,0.35))",
                 }}
               >
