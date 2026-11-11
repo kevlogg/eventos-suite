@@ -117,29 +117,40 @@ export default function HeroPhotoDisplay({
     >
       <div className={`relative p-2.5 sm:p-3.5 rounded-3xl backdrop-blur-md transition-all ${cardBorderClass}`}>
         {/* Inner Photo Window */}
-        <div className="relative aspect-[4/3] sm:aspect-[16/11] rounded-2xl overflow-hidden bg-black/60 border border-white/10 shadow-inner select-none">
+        <div className="relative aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-inner select-none flex items-center justify-center">
+          {/* Ambient Blurred Background (fills letterbox bars naturally with photo colors) */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            key={`blur-${currentSlide.src}`}
+            src={currentSlide.src}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110 pointer-events-none select-none"
+          />
+
+          {/* Full Uncropped Photo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             key={currentSlide.src}
             src={currentSlide.src}
             alt={currentSlide.alt || personName}
-            className="w-full h-full object-cover animate-fade-in transition-transform duration-700 hover:scale-[1.02]"
+            className="relative z-10 w-full h-full object-contain animate-fade-in transition-transform duration-700 hover:scale-[1.02] drop-shadow-md select-none"
             loading="eager"
           />
 
           {/* Gloss Sheen Reflection */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 pointer-events-none opacity-25 mix-blend-screen"
+            className="absolute inset-0 pointer-events-none opacity-20 mix-blend-screen z-10"
             style={{
               background:
-                "linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 40%, transparent 70%)",
+                "linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.08) 40%, transparent 70%)",
             }}
           />
 
           {/* Photo Counter Pill (only if 2 or 3 photos) */}
           {total > 1 && (
-            <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-black/70 border border-white/20 text-[10px] font-bold text-white backdrop-blur-md shadow-md z-10">
+            <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-black/75 border border-white/20 text-[10px] font-bold text-white backdrop-blur-md shadow-md z-20">
               {currentIndex + 1} / {total}
             </div>
           )}
@@ -150,7 +161,7 @@ export default function HeroPhotoDisplay({
               type="button"
               onClick={prevSlide}
               aria-label="Foto anterior"
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-black/85 text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm z-10 active:scale-95 shadow-md"
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-black/85 text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm z-20 active:scale-95 shadow-md"
             >
               <ChevronLeft size={18} />
             </button>
@@ -162,7 +173,7 @@ export default function HeroPhotoDisplay({
               type="button"
               onClick={nextSlide}
               aria-label="Siguiente foto"
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-black/85 text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm z-10 active:scale-95 shadow-md"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/60 hover:bg-black/85 text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm z-20 active:scale-95 shadow-md"
             >
               <ChevronRight size={18} />
             </button>

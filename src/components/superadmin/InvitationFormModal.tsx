@@ -1059,16 +1059,25 @@ export default function InvitationFormModal({
                           className="p-3.5 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between space-y-3"
                         >
                           <div className="space-y-2">
-                            <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center">
+                            <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center">
                               {hasImage ? (
                                 <>
+                                  {/* Fondo difuminado ambiental para rellenar bordes sin cortar la foto */}
+                                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                                  <img
+                                    src={slide.src}
+                                    alt=""
+                                    aria-hidden="true"
+                                    className="absolute inset-0 w-full h-full object-cover blur-xl opacity-35 scale-110 pointer-events-none select-none"
+                                  />
+                                  {/* Foto completa 100% visible sin cortes */}
                                   {/* eslint-disable-next-line @next/next/no-img-element */}
                                   <img
                                     src={slide.src}
                                     alt={slide.alt || `Foto ${idx + 1}`}
-                                    className="w-full h-full object-cover"
+                                    className="relative z-10 w-full h-full object-contain"
                                   />
-                                  <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-black/70 text-white backdrop-blur">
+                                  <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-md bg-black/75 text-white backdrop-blur z-20">
                                     Foto #{idx + 1}
                                   </span>
                                 </>
