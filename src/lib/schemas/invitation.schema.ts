@@ -10,6 +10,7 @@ export const TEMPLATE_IDS = [
   "boda-clasica",
   "boda-boho",
   "fiesta-neon-dj",
+  "mis-15-rojo-dorado",
   "gatsby-glamour",
   "casino-royale",
 ] as const;
@@ -133,6 +134,17 @@ export const TEMPLATES: TemplateDefinition[] = [
     emoji: "🪩",
     previewBg: "linear-gradient(135deg, #180033 0%, #3B0764 50%, #06B6D4 100%)",
     accentColor: "#A855F7",
+    badge: "Nueva",
+  },
+  {
+    id: "mis-15-rojo-dorado",
+    name: "Mis 15 · Rubí & Oro Imperial",
+    category: "fiestas",
+    categoryLabel: "Jóvenes & Fiesta",
+    description: "Gala de 15 años en terciopelo rojo rubí y dorado imperial, tiara real, sobre con lacre de oro y detalles de ensueño",
+    emoji: "👑",
+    previewBg: "linear-gradient(135deg, #4A0404 0%, #1F0101 50%, #D4AF37 100%)",
+    accentColor: "#D4AF37",
     badge: "Nueva",
   },
 

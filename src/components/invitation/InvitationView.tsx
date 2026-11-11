@@ -12,6 +12,7 @@ import BodaBohoTemplate from "./templates/BodaBohoTemplate";
 import FiestaNeonDjTemplate from "./templates/FiestaNeonDjTemplate";
 import GatsbyGlamourTemplate from "./templates/GatsbyGlamourTemplate";
 import CasinoRoyaleTemplate from "./templates/CasinoRoyaleTemplate";
+import Mis15RojoDoradoTemplate from "./templates/Mis15RojoDoradoTemplate";
 
 interface InvitationViewProps {
   invitation: InvitationRecord;
@@ -39,6 +40,8 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
       return <GatsbyGlamourTemplate invitation={invitation} />;
     case "casino-royale":
       return <CasinoRoyaleTemplate invitation={invitation} />;
+    case "mis-15-rojo-dorado":
+      return <Mis15RojoDoradoTemplate invitation={invitation} />;
     case "classic-gold":
     default:
       return <ClassicGoldTemplate invitation={invitation} />;

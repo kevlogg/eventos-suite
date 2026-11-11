@@ -61,7 +61,7 @@ function CornerBracket({
   position: "top-left" | "top-right" | "bottom-left" | "bottom-right";
   theme: TemplateId;
 }) {
-  const isClasica = theme === "boda-clasica";
+  const isClasica = theme === "boda-clasica" || theme === "mis-15-rojo-dorado" || theme === "gatsby-glamour";
   const isBotanica = theme === "boda-botanica";
 
   const positionClasses = {
@@ -184,7 +184,7 @@ export default function PhotoCarousel({
   const touchEndX = useRef<number | null>(null);
 
   const isBotanica = theme === "boda-botanica";
-  const isClasica = theme === "boda-clasica";
+  const isClasica = theme === "boda-clasica" || theme === "mis-15-rojo-dorado" || theme === "gatsby-glamour";
   const isBoho = theme === "boda-boho";
 
   const total = slides.length;

@@ -29,6 +29,7 @@ export default function TreasureChest({
   const isBotanica = theme === "boda-botanica";
   const isClasica = theme === "boda-clasica" || theme === "gatsby-glamour" || theme === "casino-royale";
   const isBoho = theme === "boda-boho";
+  const isMis15RojoDorado = theme === "mis-15-rojo-dorado";
 
   const handleOpen = useCallback(() => {
     setIsOpen(true);
@@ -63,7 +64,9 @@ export default function TreasureChest({
   );
 
   // Outer card styling
-  const cardContainerClass = isToyStory
+  const cardContainerClass = isMis15RojoDorado
+    ? "bg-gradient-to-b from-[#2A0307]/95 via-[#1A0103]/95 to-[#100002] rounded-3xl border-2 border-[#D4AF37]/60 shadow-[0_25px_50px_rgba(0,0,0,0.7)] flex flex-col items-center justify-center w-full relative overflow-hidden text-[#FAF5EE] p-6 sm:p-10"
+    : isToyStory
     ? "bg-white rounded-3xl border-4 border-amber-400 shadow-xl flex flex-col items-center justify-center w-full relative overflow-hidden text-blue-950 font-sans p-6 sm:p-10"
     : isKpop
     ? "bg-black/60 rounded-3xl border border-pink-500/50 shadow-[0_0_30px_rgba(236,72,153,0.3)] flex flex-col items-center justify-center w-full relative overflow-hidden text-white backdrop-blur-xl font-sans p-6 sm:p-10"
@@ -80,7 +83,9 @@ export default function TreasureChest({
     : "glass-card flex flex-col items-center justify-center w-full relative overflow-hidden text-[var(--dark-brown)]";
 
   // Glow aura behind closed chest
-  const auraBackground = isToyStory
+  const auraBackground = isMis15RojoDorado
+    ? "radial-gradient(circle, rgba(212,175,55,0.4) 0%, rgba(155,17,30,0.3) 55%, transparent 75%)"
+    : isToyStory
     ? "radial-gradient(circle, rgba(56,189,248,0.35) 0%, rgba(251,191,36,0.2) 55%, transparent 75%)"
     : isKpop
     ? "radial-gradient(circle, rgba(236,72,153,0.4) 0%, rgba(168,85,247,0.25) 55%, transparent 75%)"
@@ -97,7 +102,9 @@ export default function TreasureChest({
     : "radial-gradient(circle, rgba(197,155,39,0.35) 0%, rgba(212,163,115,0.18) 55%, transparent 75%)";
 
   // Open button styling
-  const openBtnClass = isToyStory
+  const openBtnClass = isMis15RojoDorado
+    ? "px-8 py-3.5 text-base font-bold text-black bg-gradient-to-r from-[#D4AF37] via-[#F5E6A3] to-[#D4AF37] hover:opacity-95 rounded-2xl shadow-[0_0_25px_rgba(212,175,55,0.5)] cursor-pointer transition-transform hover:scale-105 flex items-center gap-2"
+    : isToyStory
     ? "px-8 py-3.5 text-base font-black text-amber-950 bg-amber-400 hover:bg-amber-500 border-2 border-amber-600 rounded-2xl shadow-lg cursor-pointer transition-transform hover:scale-105 flex items-center gap-2"
     : isKpop
     ? "px-8 py-3.5 text-base font-bold text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-95 rounded-2xl shadow-[0_0_20px_rgba(236,72,153,0.6)] cursor-pointer transition-transform hover:scale-105 flex items-center gap-2"
@@ -113,7 +120,9 @@ export default function TreasureChest({
     ? "px-8 py-3.5 text-base font-bold text-white bg-[#C86D51] hover:bg-[#B3583D] rounded-2xl shadow-md cursor-pointer transition-transform hover:scale-105 flex items-center gap-2"
     : "btn-gold px-8 py-3.5 text-base shadow-lg animate-wax-pulse cursor-pointer flex items-center gap-2";
 
-  const openBtnText = isToyStory
+  const openBtnText = isMis15RojoDorado
+    ? "👑 Tocá para abrir el cofre de mis 15"
+    : isToyStory
     ? "🐷 Tocá para abrir la alcancía"
     : isKpop
     ? "✨ Tocá para abrir pase de regalo"
@@ -130,7 +139,9 @@ export default function TreasureChest({
     : "✨ Tocá para abrir el cofre";
 
   // Opened phrases
-  const phraseTitle = isToyStory
+  const phraseTitle = isMis15RojoDorado
+    ? "“Mi mayor deseo es festejar junto a vos”"
+    : isToyStory
     ? "“¡Hay un amigo en mí!”"
     : isKpop
     ? "“¡Sos parte de nuestro Fandom!”"
@@ -146,7 +157,9 @@ export default function TreasureChest({
     ? "“Donde tú vayas, yo iré.”"
     : "“Menos chiches, más chanchito.”";
 
-  const phraseSubtitle = isToyStory
+  const phraseSubtitle = isMis15RojoDorado
+    ? "Tu compañía en esta noche mágica es mi regalo más soñado. Si deseás hacerme un obsequio o colaborar con mi viaje:"
+    : isToyStory
     ? "Tu presencia en esta misión es nuestro mejor regalo. Si querés hacernos un presente:"
     : isKpop
     ? "Tu energía y compañía en este recital es lo que más nos importa. Si deseás hacernos un obsequio:"
@@ -162,7 +175,9 @@ export default function TreasureChest({
     ? "Tu compañía en nuestra boda lo es todo. Si querés darnos una mano para nuestra nueva etapa juntos o el viaje de novios:"
     : "Tu presencia es mi mejor regalo, tu transferencia, el combustible para seguir festejando.";
 
-  const phraseTitleClass = isToyStory
+  const phraseTitleClass = isMis15RojoDorado
+    ? "font-serif font-bold text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6A3] via-[#FAF5EE] to-[#D4AF37]"
+    : isToyStory
     ? "font-black text-2xl sm:text-3xl text-blue-950"
     : isKpop
     ? "font-black text-2xl sm:text-3xl text-pink-300"
@@ -178,7 +193,9 @@ export default function TreasureChest({
     ? "font-serif font-bold text-2xl sm:text-3xl text-[#8C3D26]"
     : "font-cormorant italic font-bold text-2xl sm:text-3xl text-[var(--gold)]";
 
-  const phraseSubtitleClass = isToyStory
+  const phraseSubtitleClass = isMis15RojoDorado
+    ? "font-serif text-sm sm:text-base text-[#FAF5EE]/90"
+    : isToyStory
     ? "font-bold text-sm sm:text-base text-blue-900"
     : isKpop
     ? "font-medium text-sm sm:text-base text-pink-100/90"
@@ -195,7 +212,9 @@ export default function TreasureChest({
     : "font-cormorant italic font-semibold text-lg sm:text-xl text-[var(--dark-brown)]";
 
   // Bank box styling
-  const bankBoxClass = isToyStory
+  const bankBoxClass = isMis15RojoDorado
+    ? "rounded-2xl p-5 sm:p-8 flex flex-col gap-5 w-full bg-black/60 border border-[#D4AF37]/40 shadow-inner"
+    : isToyStory
     ? "rounded-2xl p-5 sm:p-8 flex flex-col gap-5 w-full bg-sky-50 border-2 border-sky-200 shadow-sm"
     : isKpop
     ? "rounded-2xl p-5 sm:p-8 flex flex-col gap-5 w-full bg-white/10 border border-pink-500/40 shadow-sm"
@@ -211,7 +230,9 @@ export default function TreasureChest({
     ? "rounded-2xl p-5 sm:p-8 flex flex-col gap-5 w-full bg-[#FAF1EC] border border-[#C86D51]/25 shadow-sm"
     : "rounded-2xl p-5 sm:p-8 flex flex-col gap-5 w-full bg-gradient-to-br from-[#FDFBF7] to-[#FAF5EE] border-1.5 border-[rgba(197,155,39,0.35)] shadow-md";
 
-  const bankNameClass = isToyStory
+  const bankNameClass = isMis15RojoDorado
+    ? "font-serif font-bold text-xs sm:text-sm tracking-widest uppercase text-[#D4AF37]"
+    : isToyStory
     ? "font-black text-xs sm:text-sm tracking-widest uppercase text-blue-900"
     : isKpop
     ? "font-extrabold text-xs sm:text-sm tracking-widest uppercase text-pink-300"
@@ -228,7 +249,9 @@ export default function TreasureChest({
     : "font-jakarta text-xs font-bold tracking-widest uppercase text-[var(--gold)]";
 
   // RSVP link pill class
-  const rsvpPillClass = isToyStory
+  const rsvpPillClass = isMis15RojoDorado
+    ? "flex items-center gap-2.5 px-6 py-3 rounded-full shadow-[0_0_15px_rgba(212,175,55,0.4)] bg-gradient-to-r from-[#D4AF37] to-[#B38F24] text-black font-serif font-bold text-xs sm:text-sm uppercase tracking-wider"
+    : isToyStory
     ? "flex items-center gap-2.5 px-6 py-3 rounded-full shadow-md bg-amber-400 border-2 border-amber-500 text-amber-950 font-black text-xs sm:text-sm uppercase tracking-wider"
     : isKpop
     ? "flex items-center gap-2.5 px-6 py-3 rounded-full shadow-[0_0_15px_rgba(236,72,153,0.5)] bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xs sm:text-sm uppercase tracking-wider"
@@ -402,8 +425,11 @@ function CopyRow({ label, value, isCopied, onCopy, theme = "classic-gold" }: Cop
   const isBotanica = theme === "boda-botanica";
   const isClasica = theme === "boda-clasica" || theme === "gatsby-glamour" || theme === "casino-royale";
   const isBoho = theme === "boda-boho";
+  const isMis15RojoDorado = theme === "mis-15-rojo-dorado";
 
-  const rowContainerClass = isToyStory
+  const rowContainerClass = isMis15RojoDorado
+    ? "flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl w-full bg-black/60 border border-[#D4AF37]/50 shadow-inner"
+    : isToyStory
     ? "flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl w-full bg-white border-2 border-sky-300 shadow-xs"
     : isKpop
     ? "flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl w-full bg-black/40 border border-pink-400/40 shadow-xs"
@@ -419,7 +445,9 @@ function CopyRow({ label, value, isCopied, onCopy, theme = "classic-gold" }: Cop
     ? "flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl w-full bg-white border border-[#C86D51]/30 shadow-xs"
     : "flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl w-full bg-[rgba(197,155,39,0.09)] border-1.5 border-[rgba(197,155,39,0.28)]";
 
-  const labelClass = isToyStory
+  const labelClass = isMis15RojoDorado
+    ? "text-[11px] font-bold uppercase tracking-wider text-[#D4AF37]"
+    : isToyStory
     ? "text-[11px] font-black uppercase tracking-wider text-blue-700"
     : isKpop
     ? "text-[11px] font-bold uppercase tracking-wider text-pink-300"
@@ -437,6 +465,8 @@ function CopyRow({ label, value, isCopied, onCopy, theme = "classic-gold" }: Cop
 
   const buttonClass = isCopied
     ? "bg-emerald-600 text-white"
+    : isMis15RojoDorado
+    ? "bg-gradient-to-r from-[#D4AF37] to-[#F5E6C8] text-black font-bold shadow-[0_0_12px_rgba(212,175,55,0.4)]"
     : isToyStory
     ? "bg-blue-600 hover:bg-blue-700 text-white font-black"
     : isKpop

@@ -64,12 +64,15 @@ export default function Countdown({ targetDate, theme = "classic-gold" }: Countd
   const isBotanica = theme === "boda-botanica";
   const isClasica = theme === "boda-clasica" || theme === "gatsby-glamour" || theme === "casino-royale";
   const isBoho = theme === "boda-boho";
+  const isMis15RojoDorado = theme === "mis-15-rojo-dorado";
 
   return (
     <div className="flex flex-col items-center gap-6 py-2 w-full">
       <p
         className={`text-center font-bold tracking-widest uppercase text-xs sm:text-sm ${
-          isToyStory
+          isMis15RojoDorado
+            ? "text-[#D4AF37] font-serif text-sm tracking-widest drop-shadow-[0_2px_10px_rgba(212,175,55,0.4)]"
+            : isToyStory
             ? "text-blue-900 font-black"
             : isKpop
             ? "text-pink-300 font-extrabold"
@@ -86,7 +89,9 @@ export default function Countdown({ targetDate, theme = "classic-gold" }: Countd
             : "font-cormorant text-[var(--dark-brown-70)] text-base"
         }`}
       >
-        {isBotanica
+        {isMis15RojoDorado
+          ? "✦ Cuenta regresiva para mi noche soñada ✦"
+          : isBotanica
           ? "— Faltan solo para el Sí, quiero —"
           : isClasica
           ? "✦ Cuenta regresiva para nuestra Boda ✦"
@@ -176,6 +181,22 @@ export default function Countdown({ targetDate, theme = "classic-gold" }: Countd
                   {timeLeft ? padTwo(timeLeft[key]) : "00"}
                 </span>
                 <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-[#556B2F] mt-1.5">
+                  {label}
+                </span>
+              </div>
+            );
+          }
+
+          if (isMis15RojoDorado) {
+            return (
+              <div
+                key={key}
+                className="flex-1 min-w-0 flex flex-col items-center justify-center p-3 sm:p-5 rounded-2xl bg-gradient-to-b from-[#3D0308]/90 via-[#260105]/95 to-[#150002] border-2 border-[#D4AF37]/60 shadow-[0_0_20px_rgba(212,175,55,0.3)] backdrop-blur-md"
+              >
+                <span className="font-serif font-bold text-2xl sm:text-4xl md:text-5xl leading-none text-[#F5E6A3] drop-shadow-[0_2px_8px_rgba(212,175,55,0.6)]">
+                  {timeLeft ? padTwo(timeLeft[key]) : "00"}
+                </span>
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#D4AF37] mt-1.5">
                   {label}
                 </span>
               </div>

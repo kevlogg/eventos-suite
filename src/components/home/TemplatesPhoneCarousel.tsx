@@ -242,6 +242,36 @@ const REAL_TEMPLATES: RealTemplateConfig[] = [
     emoji: "🪩",
   },
 
+  // ─── 8. MIS 15 · RUBÍ & ORO IMPERIAL (FIESTAS) ───
+  {
+    id: "mis-15-rojo-dorado",
+    name: "Mis 15 · Rubí & Oro Imperial",
+    category: "fiestas",
+    categoryLabel: "Mis 15 Años",
+    badge: "⏱️ SÁB 14 NOV · 21:00 HS",
+    tagline: "👑 GALA REAL · NOCHE SOÑADA DE 15 👑",
+    topRibbon:
+      "linear-gradient(90deg, #D4AF37 0%, #F5E6A3 25%, #997A15 50%, #F5E6A3 75%, #D4AF37 100%)",
+    bgStyle:
+      "radial-gradient(ellipse at 50% 20%, #420202 0%, #200101 45%, #0A0000 100%)",
+    textColor: "text-[#FAF5EE]",
+    subtextColor: "text-[#F5E6A3]/90",
+    headlineFont: "font-serif",
+    personName: "Valentina · Mis 15",
+    eventSubtitle: "Una noche única de vals, cena de gala, fiesta y momentos inolvidables con tiara real",
+    dorsalNumber: "15",
+    characterImg: "/images/characters/quinceanera_tiara.jpg",
+    countdownBg: "bg-[#2A0307]/90 text-[#F5E6A3]",
+    countdownBorder: "border-2 border-[#D4AF37]/60 shadow-[0_0_15px_rgba(212,175,55,0.4)]",
+    venueName: "Palacio San Souci · Salón Imperial",
+    venueAddress: "Av. Libertador 2450, San Fernando",
+    giftTitle: "Cofre de Regalos & Viaje",
+    giftBadge: "Alias: VALE.MIS15.GALA",
+    rsvpButtonText: "👑 Confirmar Asistencia Real",
+    rsvpGradient: "from-[#D4AF37] via-[#F5E6A3] to-[#D4AF37] text-slate-950",
+    emoji: "👑",
+  },
+
   // ─── 8. CASINO ROYALE VIP (GALA) ───
   {
     id: "casino-royale",

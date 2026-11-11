@@ -45,8 +45,11 @@ export default function RsvpForm({
   const isBotanica = theme === "boda-botanica";
   const isClasica = theme === "boda-clasica" || theme === "gatsby-glamour" || theme === "casino-royale";
   const isBoho = theme === "boda-boho";
+  const isMis15RojoDorado = theme === "mis-15-rojo-dorado";
 
-  const cardContainerClass = isToyStory
+  const cardContainerClass = isMis15RojoDorado
+    ? "bg-gradient-to-b from-[#2A0307]/95 via-[#1A0103]/95 to-[#100002] rounded-3xl border-2 border-[#D4AF37]/60 shadow-[0_20px_50px_rgba(0,0,0,0.7)] p-6 sm:p-10 text-[#FAF5EE] backdrop-blur-xl"
+    : isToyStory
     ? "bg-white rounded-3xl border-4 border-amber-400 shadow-xl p-6 sm:p-10 text-blue-950"
     : isKpop
     ? "bg-black/60 rounded-3xl border border-pink-500/50 shadow-[0_0_30px_rgba(236,72,153,0.3)] p-6 sm:p-10 text-white backdrop-blur-xl"
@@ -62,7 +65,9 @@ export default function RsvpForm({
     ? "bg-[#FDF8F5] rounded-3xl border-2 border-[#C86D51]/30 shadow-xl p-6 sm:p-10 text-[#6D2B19]"
     : "glass-card p-6 sm:p-10 flex flex-col gap-6 text-[var(--dark-brown)]";
 
-  const inputClass = isToyStory
+  const inputClass = isMis15RojoDorado
+    ? "w-full p-3.5 rounded-2xl border border-[#D4AF37]/50 focus:border-[#F5E6A3] bg-black/60 text-[#FAF5EE] placeholder-gray-400 font-medium text-sm outline-none transition-all shadow-inner"
+    : isToyStory
     ? "w-full p-3.5 rounded-2xl border-2 border-blue-200 focus:border-blue-500 bg-sky-50/40 text-blue-950 font-medium text-sm outline-none transition-all"
     : isKpop
     ? "w-full p-3.5 rounded-2xl border border-pink-400/50 focus:border-pink-400 bg-white/10 text-white placeholder-gray-400 font-medium text-sm outline-none transition-all"
@@ -78,7 +83,9 @@ export default function RsvpForm({
     ? "w-full p-3.5 rounded-2xl border border-[#C86D51]/30 focus:border-[#C86D51] bg-white text-[#6D2B19] font-medium text-sm outline-none transition-all"
     : "form-input p-3.5 text-sm w-full";
 
-  const labelClass = isToyStory
+  const labelClass = isMis15RojoDorado
+    ? "text-xs font-bold uppercase tracking-wider text-[#D4AF37]"
+    : isToyStory
     ? "text-xs font-black uppercase tracking-wider text-blue-900"
     : isKpop
     ? "text-xs font-bold uppercase tracking-wider text-pink-300"
@@ -94,7 +101,9 @@ export default function RsvpForm({
     ? "text-xs font-bold uppercase tracking-wider text-[#8C3D26]"
     : "form-label text-xs";
 
-  const submitButtonClass = isToyStory
+  const submitButtonClass = isMis15RojoDorado
+    ? "w-full py-4 px-6 rounded-2xl font-bold text-black text-base shadow-[0_0_25px_rgba(212,175,55,0.4)] bg-gradient-to-r from-[#D4AF37] via-[#F5E6A3] to-[#D4AF37] hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+    : isToyStory
     ? "w-full py-4 px-6 rounded-2xl font-black text-white text-base shadow-lg bg-blue-600 hover:bg-blue-700 border-2 border-blue-800 transition-all flex items-center justify-center gap-2 cursor-pointer"
     : isKpop
     ? "w-full py-4 px-6 rounded-2xl font-bold text-white text-base shadow-[0_0_20px_rgba(236,72,153,0.6)] bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
@@ -122,7 +131,9 @@ export default function RsvpForm({
         <div
           className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg"
           style={{
-            background: isToyStory
+            background: isMis15RojoDorado
+              ? "linear-gradient(135deg, #9B111E, #D4AF37)"
+              : isToyStory
               ? "#2563EB"
               : isKpop
               ? "linear-gradient(135deg, #EC4899, #8B5CF6)"
@@ -216,7 +227,9 @@ export default function RsvpForm({
             <div className="flex items-center gap-3">
               <div
                 className={`flex items-center rounded-2xl border-2 p-1 ${
-                  isKpop
+                  isMis15RojoDorado
+                    ? "border-[#D4AF37]/60 bg-black/80 text-[#FAF5EE] shadow-[0_0_12px_rgba(212,175,55,0.25)]"
+                    : isKpop
                     ? "border-pink-500/40 bg-white/10 text-white"
                     : isToyStory
                     ? "border-blue-300 bg-sky-50 text-blue-950"
@@ -238,7 +251,7 @@ export default function RsvpForm({
                   onClick={() => setCompanionsCount((prev) => Math.max(0, prev - 1))}
                   disabled={companionsCount === 0}
                   className={`w-10 h-10 flex items-center justify-center font-bold text-lg rounded-xl transition-all cursor-pointer disabled:cursor-not-allowed disabled:opacity-30 ${
-                    isClasica
+                    isMis15RojoDorado || isClasica
                       ? "text-[#D4AF37] hover:bg-white/10 active:scale-95"
                       : isBotanica
                       ? "text-[#556B2F] hover:bg-black/5"
@@ -252,7 +265,7 @@ export default function RsvpForm({
                 </button>
                 <div
                   className={`w-10 text-center font-black text-lg select-none ${
-                    isClasica ? "text-[#FAF5EE]" : ""
+                    isMis15RojoDorado || isClasica ? "text-[#FAF5EE]" : ""
                   }`}
                 >
                   {companionsCount}
@@ -262,7 +275,7 @@ export default function RsvpForm({
                   onClick={() => setCompanionsCount((prev) => Math.min(10, prev + 1))}
                   disabled={companionsCount === 10}
                   className={`w-10 h-10 flex items-center justify-center font-bold text-lg rounded-xl transition-all cursor-pointer disabled:cursor-not-allowed disabled:opacity-30 ${
-                    isClasica
+                    isMis15RojoDorado || isClasica
                       ? "text-[#D4AF37] hover:bg-white/10 active:scale-95"
                       : isBotanica
                       ? "text-[#556B2F] hover:bg-black/5"

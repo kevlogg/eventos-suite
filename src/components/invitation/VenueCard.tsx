@@ -110,9 +110,12 @@ export default function VenueCard({
   const isBotanica = theme === "boda-botanica";
   const isClasica = theme === "boda-clasica" || theme === "gatsby-glamour" || theme === "casino-royale";
   const isBoho = theme === "boda-boho";
+  const isMis15RojoDorado = theme === "mis-15-rojo-dorado";
 
   // Card container styling
-  const cardContainerClass = isToyStory
+  const cardContainerClass = isMis15RojoDorado
+    ? "bg-gradient-to-b from-[#2A0307]/95 via-[#1A0103]/95 to-[#100002] rounded-3xl border-2 border-[#D4AF37]/60 shadow-[0_20px_50px_rgba(0,0,0,0.7)] p-6 sm:p-10 flex flex-col gap-6 text-[#FAF5EE] backdrop-blur-xl"
+    : isToyStory
     ? "bg-white rounded-3xl border-4 border-amber-400 shadow-xl p-6 sm:p-10 flex flex-col gap-6 text-blue-950"
     : isKpop
     ? "bg-black/60 rounded-3xl border border-pink-500/50 shadow-[0_0_30px_rgba(236,72,153,0.3)] p-6 sm:p-10 flex flex-col gap-6 text-white backdrop-blur-xl"
@@ -129,7 +132,9 @@ export default function VenueCard({
     : "glass-card p-6 sm:p-10 flex flex-col gap-6 sm:gap-8 text-[var(--dark-brown)]";
 
   // Header icon background
-  const iconBg = isToyStory
+  const iconBg = isMis15RojoDorado
+    ? "bg-gradient-to-tr from-[#9B111E] via-[#D4AF37] to-[#F5E6A3] text-black shadow-[0_0_20px_rgba(212,175,55,0.5)]"
+    : isToyStory
     ? "bg-blue-600 text-white shadow-md"
     : isKpop
     ? "bg-gradient-to-tr from-pink-500 to-purple-600 text-white shadow-[0_0_15px_rgba(236,72,153,0.6)]"
@@ -146,7 +151,9 @@ export default function VenueCard({
     : "bg-gradient-to-br from-[#C59B27] to-[#D4A373] text-white shadow-md";
 
   // Title styling
-  const titleClass = isToyStory
+  const titleClass = isMis15RojoDorado
+    ? "font-serif font-bold text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6A3] via-[#FAF5EE] to-[#D4AF37] tracking-wider"
+    : isToyStory
     ? "font-black text-2xl sm:text-3xl text-blue-950 tracking-tight"
     : isKpop
     ? "font-black text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-white to-pink-400 tracking-wide"
@@ -157,13 +164,15 @@ export default function VenueCard({
     : isBotanica
     ? "font-serif font-bold text-2xl sm:text-3xl text-[#2D3E1E]"
     : isClasica
-    ? "font-serif font-bold text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6C8] via-[#FAF5EE] to-[#D4AF37] tracking-wider"
+    ? "font-serif font-bold text-2xl sm:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-[#F5E6A3] via-[#FAF5EE] to-[#D4AF37] tracking-wider"
     : isBoho
     ? "font-serif font-bold text-2xl sm:text-3xl text-[#8C3D26]"
     : "font-cormorant font-bold text-2xl sm:text-3xl text-[var(--dark-brown)]";
 
   // Datetime block styling
-  const datetimeBlockClass = isToyStory
+  const datetimeBlockClass = isMis15RojoDorado
+    ? "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-5 rounded-2xl bg-black/50 border border-[#D4AF37]/40 shadow-inner"
+    : isToyStory
     ? "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-5 rounded-2xl bg-sky-50 border-2 border-sky-200 shadow-xs"
     : isKpop
     ? "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white/5 border border-pink-500/30 shadow-xs"
@@ -180,7 +189,9 @@ export default function VenueCard({
     : "flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 p-5 sm:p-6 rounded-2xl bg-[rgba(197,155,39,0.08)] border-1.5 border-[rgba(197,155,39,0.3)] shadow-xs";
 
   // Action Buttons
-  const mapBtnClass = isToyStory
+  const mapBtnClass = isMis15RojoDorado
+    ? "flex-1 py-3.5 px-5 rounded-2xl font-bold text-black text-sm shadow-[0_0_20px_rgba(212,175,55,0.4)] bg-gradient-to-r from-[#D4AF37] via-[#F5E6A3] to-[#D4AF37] hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+    : isToyStory
     ? "flex-1 py-3.5 px-5 rounded-2xl font-black text-white text-sm shadow-md bg-blue-600 hover:bg-blue-700 transition-all flex items-center justify-center gap-2 cursor-pointer"
     : isKpop
     ? "flex-1 py-3.5 px-5 rounded-2xl font-bold text-white text-sm shadow-[0_0_15px_rgba(236,72,153,0.5)] bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
@@ -196,7 +207,9 @@ export default function VenueCard({
     ? "flex-1 py-3.5 px-5 rounded-2xl font-bold text-white text-sm shadow-md bg-[#C86D51] hover:bg-[#B3583D] transition-all flex items-center justify-center gap-2 cursor-pointer"
     : "btn-gold flex-1 justify-center py-4 flex items-center gap-2";
 
-  const calendarBtnClass = isToyStory
+  const calendarBtnClass = isMis15RojoDorado
+    ? "flex-1 py-3.5 px-5 rounded-2xl font-bold text-[#F5E6A3] text-sm border border-[#D4AF37]/60 bg-[#3D0308]/60 hover:bg-[#52050C]/80 transition-all flex items-center justify-center gap-2 cursor-pointer"
+    : isToyStory
     ? "flex-1 py-3.5 px-5 rounded-2xl font-black text-amber-950 text-sm shadow-sm bg-amber-400 hover:bg-amber-500 border-2 border-amber-500 transition-all flex items-center justify-center gap-2 cursor-pointer"
     : isKpop
     ? "flex-1 py-3.5 px-5 rounded-2xl font-bold text-pink-200 text-sm border border-pink-400/60 bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center gap-2 cursor-pointer"
@@ -224,7 +237,7 @@ export default function VenueCard({
             <Rocket size={26} />
           ) : isKpop ? (
             <Ticket size={26} />
-          ) : isPrincess ? (
+          ) : isPrincess || isMis15RojoDorado ? (
             <Crown size={26} />
           ) : isFootball ? (
             <Trophy size={26} />
@@ -248,7 +261,9 @@ export default function VenueCard({
         <div className="flex items-center gap-3.5 flex-1 text-left">
           <div
             className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${
-              isToyStory
+              isMis15RojoDorado
+                ? "bg-[#D4AF37]/20 text-[#F5E6A3] border border-[#D4AF37]/50"
+                : isToyStory
                 ? "bg-blue-100 text-blue-700"
                 : isKpop
                 ? "bg-purple-900/60 text-pink-400"
@@ -264,7 +279,9 @@ export default function VenueCard({
           <div className="flex flex-col gap-0.5">
             <span
               className={`text-[11px] font-extrabold uppercase tracking-widest ${
-                isToyStory
+                isMis15RojoDorado
+                  ? "text-[#D4AF37]"
+                  : isToyStory
                   ? "text-blue-700"
                   : isKpop
                   ? "text-pink-400"
@@ -290,7 +307,9 @@ export default function VenueCard({
         <div className="flex items-center gap-3.5 flex-1 text-left">
           <div
             className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-xs ${
-              isToyStory
+              isMis15RojoDorado
+                ? "bg-gradient-to-br from-[#D4AF37] to-[#9B111E] text-white shadow-[0_0_12px_rgba(212,175,55,0.4)] animate-pulse"
+                : isToyStory
                 ? "bg-amber-400 text-amber-950"
                 : isKpop
                 ? "bg-gradient-to-r from-pink-500 to-purple-600 text-white"
@@ -306,7 +325,9 @@ export default function VenueCard({
           <div className="flex flex-col gap-0.5">
             <span
               className={`text-[11px] font-extrabold uppercase tracking-widest flex items-center gap-1 ${
-                isToyStory
+                isMis15RojoDorado
+                  ? "text-[#F5E6A3]"
+                  : isToyStory
                   ? "text-red-600"
                   : isKpop
                   ? "text-pink-400"
