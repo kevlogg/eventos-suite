@@ -90,9 +90,7 @@ export async function getAllEvents(): Promise<SuiteEvent[]> {
     try {
       await ensureSuiteSchema();
       const res = await turso.execute("SELECT * FROM suite_events ORDER BY created_at DESC;");
-      if (res.rows.length > 0) {
-        return res.rows.map((r) => mapRowToEvent(r as Record<string, unknown>));
-      }
+      return res.rows.map((r) => mapRowToEvent(r as Record<string, unknown>));
     } catch (err) {
       console.error("Turso error in getAllEvents, falling back to JSON:", err);
     }
@@ -216,6 +214,20 @@ export async function createEvent(data: {
           newEvent.updatedAt,
         ],
       });
+      // Mantener backup local JSON sincronizado
+      try {
+        ensureFallbackStorage();
+        const raw = fs.readFileSync(getEventsFilePath(), "utf-8").replace(/^\uFEFF/, "");
+        const events = JSON.parse(raw);
+        if (Array.isArray(events)) {
+          const filtered = events.filter((e) => e.id !== newEvent.id && e.slug !== newEvent.slug);
+          filtered.unshift(newEvent);
+          fs.writeFileSync(getEventsFilePath(), JSON.stringify(filtered, null, 2), "utf-8");
+        }
+      } catch {
+        // ignore fallback errors
+      }
+
       return newEvent;
     } catch (err) {
       console.error("Turso error in createEvent, attempting fallback:", err);
@@ -274,7 +286,20 @@ export async function updateEvent(
         args: [id],
       });
       if (res.rows.length > 0) {
-        return mapRowToEvent(res.rows[0] as Record<string, unknown>);
+        const updated = mapRowToEvent(res.rows[0] as Record<string, unknown>);
+        // Mantener backup local JSON sincronizado
+        try {
+          const raw = fs.readFileSync(getEventsFilePath(), "utf-8").replace(/^\uFEFF/, "");
+          const events = JSON.parse(raw);
+          if (Array.isArray(events)) {
+            const idx = events.findIndex((e) => e.id === id);
+            if (idx !== -1) {
+              events[idx] = updated;
+              fs.writeFileSync(getEventsFilePath(), JSON.stringify(events, null, 2), "utf-8");
+            }
+          }
+        } catch {}
+        return updated;
       }
     } catch (err) {
       console.error("Turso error in updateEvent:", err);

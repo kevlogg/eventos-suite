@@ -188,9 +188,7 @@ export async function getAllInvitations(): Promise<InvitationRecord[]> {
     try {
       await ensureSuiteSchema();
       const res = await turso.execute("SELECT * FROM suite_invitations ORDER BY created_at DESC;");
-      if (res.rows.length > 0) {
-        return res.rows.map((r) => rowToInvitation(r as Record<string, unknown>));
-      }
+      return res.rows.map((r) => rowToInvitation(r as Record<string, unknown>));
     } catch (err) {
       console.error("Turso error in getAllInvitations:", err);
     }
@@ -349,6 +347,21 @@ export async function saveInvitation(
           record.updatedAt,
         ],
       });
+      // Mantener backup local JSON sincronizado
+      try {
+        ensureFallbackStorage();
+        const raw = fs.readFileSync(getInvitationsFilePath(), "utf-8").replace(/^\uFEFF/, "");
+        const list: (InvitationRecord & { eventId?: string })[] = JSON.parse(raw);
+        const index = list.findIndex((i) => i.slug.toLowerCase() === cleanSlug || i.id === record.id || i.eventId === eventId);
+        const extendedRecord = { ...record, eventId };
+        if (index >= 0) {
+          list[index] = extendedRecord;
+        } else {
+          list.unshift(extendedRecord);
+        }
+        fs.writeFileSync(getInvitationsFilePath(), JSON.stringify(list, null, 2), "utf-8");
+      } catch {}
+
       return record;
     } catch (err) {
       console.error("Turso error in saveInvitation, falling back to JSON:", err);

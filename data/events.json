@@ -1,5 +1,35 @@
 [
   {
+    "id": "evt_mwcjtjfp",
+    "slug": "mis-15-anos-guadalupe",
+    "title": "Mis 15 años - Guadalupe",
+    "date": "2027-01-13",
+    "location": "Los Rosales",
+    "adminToken": "adm_8n5tfat3mwcjtjfp",
+    "enabledModules": {
+      "invitacion": true,
+      "trivia": true,
+      "fotos": true
+    },
+    "createdAt": "2026-11-11T20:05:29.893Z",
+    "updatedAt": "2026-11-11T22:43:44.503Z"
+  },
+  {
+    "id": "evt_mwap3u71",
+    "slug": "cumple-kevin",
+    "title": "Cumple Kevin",
+    "date": "2026-11-14",
+    "location": "Mi casa",
+    "adminToken": "adm_w5zgdosdmwap3u71",
+    "enabledModules": {
+      "invitacion": true,
+      "trivia": true,
+      "fotos": true
+    },
+    "createdAt": "2026-11-10T12:57:56.125Z",
+    "updatedAt": "2026-11-10T12:57:56.125Z"
+  },
+  {
     "id": "evt-demo-1",
     "slug": "demo-fiesta",
     "title": "Casamiento Sofi & Nico",
