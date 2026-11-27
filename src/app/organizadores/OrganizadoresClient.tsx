@@ -1074,12 +1074,12 @@ export default function OrganizadoresClient() {
                 </p>
               </div>
               <a
-                href="/docs/ONE_PAGER_EVENTOS_KRONITT.pdf"
+                href="/docs/Propuesta_Comercial_Eventos_Kronitt.pdf"
                 download
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors"
               >
                 <Download className="w-4 h-4" />
-                <span>Descargar One-Pager PDF</span>
+                <span>Descargar Propuesta Comercial (PDF)</span>
               </a>
             </div>
 
@@ -1088,18 +1088,18 @@ export default function OrganizadoresClient() {
                 <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center mb-4">
                   <FileText className="w-5 h-5" />
                 </div>
-                <h4 className="text-lg font-bold text-white mb-1">Dossier Comercial Completo (2 Páginas A4)</h4>
+                <h4 className="text-lg font-bold text-white mb-1">Presentación Completa de Servicios (2 Páginas A4)</h4>
                 <p className="text-xs text-slate-300 mb-4 leading-relaxed">
                   Ficha completa con los 3 servicios en profundidad, especificaciones técnicas de pantalla y detalle de alianzas.
                 </p>
               </div>
               <a
-                href="/docs/DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf"
+                href="/docs/Presentacion_Servicios_Eventos_Kronitt.pdf"
                 download
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition-colors"
               >
                 <Download className="w-4 h-4" />
-                <span>Descargar Dossier PDF</span>
+                <span>Descargar Presentación de Servicios (PDF)</span>
               </a>
             </div>
           </div>

@@ -1453,10 +1453,24 @@ fs.writeFileSync(onePagerPath, onePagerHtml, 'utf8');
 fs.writeFileSync(dossierPath, dossierHtml, 'utf8');
 fs.writeFileSync(playbookPath, playbookHtml, 'utf8');
 
-// Target PDF outputs
-const outOnePager = path.join(docsDir, 'ONE_PAGER_EVENTOS_KRONITT.pdf');
-const outDossier = path.join(docsDir, 'DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf');
-const outPlaybook = path.join(docsDir, 'PLAYBOOK_VENTAS_EVENTOS_KRONITT.pdf');
+// Target PDF outputs (nombres adaptados en español claro para compartir)
+const pdfConfigs = [
+  {
+    html: onePagerPath,
+    mainName: 'Propuesta_Comercial_Eventos_Kronitt.pdf',
+    legacyName: 'ONE_PAGER_EVENTOS_KRONITT.pdf',
+  },
+  {
+    html: dossierPath,
+    mainName: 'Presentacion_Servicios_Eventos_Kronitt.pdf',
+    legacyName: 'DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf',
+  },
+  {
+    html: playbookPath,
+    mainName: 'Guia_Ventas_Eventos_Kronitt.pdf',
+    legacyName: 'PLAYBOOK_VENTAS_EVENTOS_KRONITT.pdf',
+  },
+];
 
 function renderPdf(htmlPath, outPdf) {
   const fileUrl = 'file:///' + htmlPath.replace(/\\/g, '/');
@@ -1466,16 +1480,22 @@ function renderPdf(htmlPath, outPdf) {
 }
 
 try {
-  renderPdf(onePagerPath, outOnePager);
-  renderPdf(dossierPath, outDossier);
-  renderPdf(playbookPath, outPlaybook);
+  pdfConfigs.forEach(cfg => {
+    const mainOut = path.join(docsDir, cfg.mainName);
+    const legacyOut = path.join(docsDir, cfg.legacyName);
 
-  // Copy to public/docs for web access
-  fs.copyFileSync(outOnePager, path.join(publicDocsDir, 'ONE_PAGER_EVENTOS_KRONITT.pdf'));
-  fs.copyFileSync(outDossier, path.join(publicDocsDir, 'DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf'));
-  fs.copyFileSync(outPlaybook, path.join(publicDocsDir, 'PLAYBOOK_VENTAS_EVENTOS_KRONITT.pdf'));
+    // Render primary PDF
+    renderPdf(cfg.html, mainOut);
 
-  console.log('All 3 PDFs regenerated with $70k base, Combos B2C and Tramo 1 at $50k!');
+    // Copy to legacy name in docs/
+    fs.copyFileSync(mainOut, legacyOut);
+
+    // Copy both to public/docs for web access
+    fs.copyFileSync(mainOut, path.join(publicDocsDir, cfg.mainName));
+    fs.copyFileSync(mainOut, path.join(publicDocsDir, cfg.legacyName));
+  });
+
+  console.log('All PDFs regenerated and saved with Spanish adapted filenames!');
 } catch (err) {
   console.error('Error generating PDFs:', err);
   process.exit(1);
