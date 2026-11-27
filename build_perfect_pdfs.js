@@ -44,7 +44,7 @@ const commonCss = `
     page-break-after: always;
     page-break-inside: avoid;
     box-sizing: border-box;
-    padding: 14mm 16mm 12mm 16mm;
+    padding: 13mm 16mm 11mm 16mm;
     background-color: #060813;
     display: flex;
     flex-direction: column;
@@ -85,7 +85,7 @@ const commonCss = `
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 11px;
+    padding-bottom: 10px;
     border-bottom: 1.5px solid rgba(255, 255, 255, 0.14);
   }
   
@@ -144,7 +144,7 @@ const commonCss = `
 
   /* Footer */
   .footer-bar {
-    padding-top: 9px;
+    padding-top: 8px;
     border-top: 1.5px solid rgba(255, 255, 255, 0.12);
     display: flex;
     justify-content: space-between;
@@ -165,7 +165,7 @@ const commonCss = `
 `;
 
 // =========================================================================
-// 1. ONE-PAGER EJECUTIVO (1 Sola Página A4, Full Bleed, URL kronitt.com.ar/organizadores Clickable)
+// 1. ONE-PAGER EJECUTIVO (Servicio base $60.000, Combos y Escala B2B)
 // =========================================================================
 const onePagerHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -176,8 +176,8 @@ const onePagerHtml = `<!DOCTYPE html>
     ${commonCss}
     
     .hero-section {
-      margin-top: 8px;
-      margin-bottom: 11px;
+      margin-top: 6px;
+      margin-bottom: 10px;
     }
     
     .hero-title {
@@ -185,7 +185,7 @@ const onePagerHtml = `<!DOCTYPE html>
       font-weight: 900;
       line-height: 1.2;
       color: #ffffff;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       letter-spacing: -0.4px;
     }
     
@@ -196,25 +196,25 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     .hero-desc {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #e2e8f0;
       font-weight: 600;
-      line-height: 1.45;
+      line-height: 1.4;
     }
     
     /* 3 Services Grid */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 11px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 11px;
     }
     
     .service-card {
       background: #0d1224;
       border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 13px;
-      padding: 13px;
+      border-radius: 12px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -227,52 +227,51 @@ const onePagerHtml = `<!DOCTYPE html>
     
     .svc-badge {
       display: inline-block;
-      font-size: 9.5px;
+      font-size: 9px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
     .badge-amber { color: #fcd34d; }
     .badge-purple { color: #d8b4fe; }
     .badge-pink { color: #f9a8d4; }
     
     .svc-name {
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 900;
       color: #ffffff;
-      margin-bottom: 5px;
-      line-height: 1.25;
+      margin-bottom: 2px;
+      line-height: 1.2;
     }
-    
-    .svc-summary {
-      font-size: 10.5px;
-      font-weight: 600;
-      color: #e2e8f0;
-      margin-bottom: 9px;
-      line-height: 1.35;
+
+    .svc-price-tag {
+      font-size: 10px;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 5px;
     }
     
     .svc-items {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
     }
     
     .svc-items li {
-      font-size: 10px;
+      font-size: 9.8px;
       font-weight: 600;
       color: #f1f5f9;
-      line-height: 1.35;
+      line-height: 1.3;
       display: flex;
       align-items: flex-start;
       gap: 6px;
     }
     
     .svc-items li svg {
-      width: 13px;
-      height: 13px;
+      width: 12px;
+      height: 12px;
       flex-shrink: 0;
       margin-top: 1px;
       stroke-width: 2.8;
@@ -281,14 +280,13 @@ const onePagerHtml = `<!DOCTYPE html>
     .icon-purple { stroke: #c084fc; }
     .icon-pink { stroke: #f472b6; }
     
-    /* Section Headers */
     .block-header {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.6px;
       color: #ffffff;
-      margin-bottom: 7px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 7px;
@@ -302,19 +300,65 @@ const onePagerHtml = `<!DOCTYPE html>
       stroke-width: 2.5;
     }
     
-    /* Comparison Table */
+    /* Combos B2C Grid */
+    .combos-b2c-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 11px;
+    }
+
+    .combo-box {
+      background: #0d1224;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 11px;
+      padding: 10px 12px;
+    }
+    .combo-box.featured {
+      border: 1.5px solid #a855f7;
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, #0d1224 100%);
+    }
+
+    .combo-tag {
+      font-size: 8.5px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #93c5fd;
+      margin-bottom: 2px;
+    }
+    .combo-price {
+      font-size: 15px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 3px;
+    }
+    .combo-desc {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #cbd5e1;
+      line-height: 1.35;
+    }
+    .combo-saving {
+      font-size: 9px;
+      font-weight: 800;
+      color: #4ade80;
+      margin-top: 4px;
+    }
+
+    /* B2B Partner Table */
     .table-box {
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(99, 102, 241, 0.35);
       border-radius: 11px;
       overflow: hidden;
-      margin-bottom: 12px;
+      margin-bottom: 11px;
       background: #0d1224;
     }
     
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 10.5px;
+      font-size: 10px;
     }
     
     th {
@@ -322,7 +366,7 @@ const onePagerHtml = `<!DOCTYPE html>
       padding: 7px 12px;
       text-align: left;
       font-weight: 900;
-      font-size: 9.8px;
+      font-size: 9.5px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: #cbd5e1;
@@ -342,82 +386,30 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     .td-highlight {
-      color: #e0e7ff;
-      font-weight: 700;
-      background: rgba(99, 102, 241, 0.08);
-    }
-    
-    /* 3 Commercial Models Grid */
-    .models-grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 11px;
-    }
-    
-    .model-card-3 {
-      background: #0d1224;
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      border-radius: 12px;
-      padding: 11px 12px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    
-    .model-tag {
-      font-size: 9px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      color: #93c5fd;
-      margin-bottom: 3px;
-    }
-    
-    .model-title {
-      font-size: 11.5px;
-      font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 5px;
-      line-height: 1.25;
-    }
-    
-    .model-desc {
-      font-size: 10px;
-      font-weight: 600;
-      color: #cbd5e1;
-      line-height: 1.4;
-    }
-    
-    .model-highlight {
-      margin-top: 6px;
-      padding-top: 5px;
-      border-top: 1px dashed rgba(255, 255, 255, 0.12);
-      font-size: 9.5px;
+      color: #4ade80;
       font-weight: 800;
-      color: #a5b4fc;
     }
-    
+
     /* Bottom Strip */
     .demo-strip {
       background: linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(168, 85, 247, 0.22) 100%);
       border: 1.5px solid rgba(99, 102, 241, 0.45);
       border-radius: 12px;
-      padding: 10px 16px;
+      padding: 9px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     
     .demo-left h4 {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 900;
       color: #ffffff;
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
     
     .demo-left p {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 600;
       color: #e2e8f0;
     }
@@ -427,7 +419,7 @@ const onePagerHtml = `<!DOCTYPE html>
       color: #ffffff !important;
       font-size: 11px;
       font-weight: 800;
-      padding: 8px 16px;
+      padding: 7px 16px;
       border-radius: 9px;
       letter-spacing: 0.3px;
       text-decoration: none !important;
@@ -437,14 +429,6 @@ const onePagerHtml = `<!DOCTYPE html>
       box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
       cursor: pointer;
       border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .demo-url-btn svg {
-      width: 14px;
-      height: 14px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.5;
     }
   </style>
 </head>
@@ -472,34 +456,30 @@ const onePagerHtml = `<!DOCTYPE html>
       <div class="hero-section">
         <h1 class="hero-title">Soluciones Tecnológicas para <span>Salones & Event Planners</span></h1>
         <p class="hero-desc">
-          Suite web en tiempo real que digitaliza y llena de emoción cada fiesta en sus 3 etapas: <strong>Antes</strong> (Invitación & confirmación RSVP), <strong>Durante</strong> (Trivia en pantallas LED y fotos en vivo por QR) y <strong>Después</strong> (Descarga masiva de recuerdos en alta resolución).
+          Suite web en tiempo real que digitaliza cada fiesta: <strong>Antes</strong> (Invitación & RSVP de catering), <strong>Durante</strong> (Trivia en pantallas LED y fotos en vivo por QR) y <strong>Después</strong> (Descarga masiva en alta resolución).
         </p>
       </div>
 
-      <!-- 3 SERVICES -->
+      <!-- 3 SERVICES ($60.000 BASE EACH) -->
       <div class="services-grid">
         <div class="service-card card-amber">
           <div>
             <span class="svc-badge badge-amber">Servicio 01 · Pre-Evento</span>
-            <div class="svc-name">Invitaciones Digitales & RSVP</div>
-            <div class="svc-summary">Sobre virtual 3D con música y confirmación en tiempo real.</div>
+            <div class="svc-name">Invitaciones & RSVP</div>
+            <div class="svc-price-tag">PVP Individual: $60.000 ARS</div>
           </div>
           <ul class="svc-items">
             <li>
               <svg class="icon-amber" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Filtro de dietas:</strong> celíacos, veganos y menúes para catering.</span>
+              <span>Sobre virtual 3D con música y animación.</span>
             </li>
             <li>
               <svg class="icon-amber" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>GPS con 1 clic:</strong> llegada directa a Google Maps y Waze.</span>
+              <span>Filtro de dietas (celíacos/veganos) para catering.</span>
             </li>
             <li>
               <svg class="icon-amber" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Cofre de regalos:</strong> copia de CBU/Alias en el celular.</span>
-            </li>
-            <li>
-              <svg class="icon-amber" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Ahorro total</strong> de costos de imprenta tradicional.</span>
+              <span>Geolocalización GPS y cofre de regalos con CBU.</span>
             </li>
           </ul>
         </div>
@@ -508,141 +488,113 @@ const onePagerHtml = `<!DOCTYPE html>
           <div>
             <span class="svc-badge badge-purple">Servicio 02 · Durante</span>
             <div class="svc-name">Trivia Fiesta en Vivo</div>
-            <div class="svc-summary">Show interactivo durante la cena proyectado en pantalla LED.</div>
+            <div class="svc-price-tag">PVP Individual: $60.000 ARS</div>
           </div>
           <ul class="svc-items">
             <li>
               <svg class="icon-purple" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Cero descargas:</strong> juegan directo con la cámara del celu.</span>
+              <span>Show interactivo durante la cena en pantalla LED.</span>
             </li>
             <li>
               <svg class="icon-purple" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Preguntas a medida:</strong> anécdotas de novios o empresa.</span>
+              <span>Preguntas personalizadas y podio con confeti.</span>
             </li>
             <li>
               <svg class="icon-purple" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Podio animado:</strong> ranking y confeti en pantalla gigante.</span>
-            </li>
-            <li>
-              <svg class="icon-purple" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Dinamismo total:</strong> elimina los baches entre platos.</span>
+              <span>Juegan desde el celular sin descargar apps.</span>
             </li>
           </ul>
         </div>
 
         <div class="service-card card-pink">
           <div>
-            <span class="svc-badge badge-pink">Servicio 03 · Durante y Post</span>
+            <span class="svc-badge badge-pink">Servicio 03 · Durante & Post</span>
             <div class="svc-name">Mural de Fotos por QR</div>
-            <div class="svc-summary">Transmisión instantánea de fotos a la pantalla del salón.</div>
+            <div class="svc-price-tag">PVP Individual: $60.000 ARS</div>
           </div>
           <ul class="svc-items">
             <li>
               <svg class="icon-pink" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>QR en cada mesa:</strong> fotos y dedicatorias al instante.</span>
+              <span>QR en cada mesa: fotos y dedicatorias en vivo.</span>
             </li>
             <li>
               <svg class="icon-pink" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Panel de moderación:</strong> filtro de seguridad en vivo.</span>
+              <span>Panel de moderación con filtro de seguridad.</span>
             </li>
             <li>
               <svg class="icon-pink" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Rotación moderna:</strong> aprovecha la pantalla del salón.</span>
-            </li>
-            <li>
-              <svg class="icon-pink" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Descarga ZIP:</strong> álbum completo en alta resolución.</span>
+              <span>Descarga de álbum digital completo en ZIP.</span>
             </li>
           </ul>
         </div>
       </div>
 
-      <!-- COMPARATIVE TABLE -->
+      <!-- PACKS / COMBOS CONSUMIDOR FINAL -->
       <div>
         <div class="block-header">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <span>Comparativa: Evento Tradicional vs. Experiencia Kronitt</span>
+          <span>Packs & Combos para el Cliente Final (Valor de lista $180k)</span>
+        </div>
+        <div class="combos-b2c-grid">
+          <div class="combo-box">
+            <div class="combo-tag">1 Servicio Suelto</div>
+            <div class="combo-price">$60.000</div>
+            <div class="combo-desc">A elección: solo Invitación, solo Trivia o solo Mural de fotos.</div>
+          </div>
+
+          <div class="combo-box">
+            <div class="combo-tag">Combo Dúo (2 Servicios)</div>
+            <div class="combo-price">$85.000</div>
+            <div class="combo-desc">Elegís 2 módulos (ej: Invitación + Mural o Trivia + Mural).</div>
+            <div class="combo-saving">Ahorra $35.000 vs. precio de lista</div>
+          </div>
+
+          <div class="combo-box featured">
+            <div class="combo-tag" style="color: #d8b4fe;">Combo Full Suite (3 Servicios)</div>
+            <div class="combo-price" style="color: #fbcfe8;">$100.000</div>
+            <div class="combo-desc">La experiencia completa: Invitación 3D + Trivia LED + Mural QR.</div>
+            <div class="combo-saving" style="color: #86efac;">Ahorra $80.000 (¡Pack estrella!)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CANAL PARTNERS B2B TABLE (ESCALA POR VOLUMEN MENSUAL) -->
+      <div>
+        <div class="block-header">
+          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Canal Partners B2B: Salones & Organizadores (Tarifa Mayorista Escalonada)</span>
         </div>
         <div class="table-box">
           <table>
             <thead>
               <tr>
-                <th style="width: 24%;">Dimensión</th>
-                <th style="width: 36%;">Formato Tradicional</th>
-                <th style="width: 40%;">Experiencia Eventos Kronitt</th>
+                <th style="width: 25%;">Tramo Mensual</th>
+                <th style="width: 25%;">Servicios en el Mes</th>
+                <th style="width: 25%;">Tu Costo Mayorista</th>
+                <th style="width: 25%;">Evento Completo (3 serv.)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Invitaciones</strong></td>
-                <td>Tarjetas de papel costosas o PDF plano estático.</td>
-                <td class="td-highlight">Web 3D interactiva, música, GPS y dietas en tiempo real.</td>
+                <td><strong>Tramo 1 (Base)</strong></td>
+                <td>1 a 4 servicios</td>
+                <td><strong>$25.000</strong> c/u</td>
+                <td>$75.000 <span class="td-highlight">(Margen $25k-$35k)</span></td>
               </tr>
               <tr>
-                <td><strong>Momento Cena</strong></td>
-                <td>Tiempos muertos entre platos, invitados en silencio.</td>
-                <td class="td-highlight">Trivia en pantalla gigante: todos juegan y compiten en vivo.</td>
+                <td><strong>Tramo 2 (Activo)</strong></td>
+                <td>5 a 9 servicios</td>
+                <td><strong>$20.000</strong> c/u</td>
+                <td>$60.000 <span class="td-highlight">(Margen $40k)</span></td>
               </tr>
               <tr>
-                <td><strong>Fotos de Invitados</strong></td>
-                <td>Selfies individuales que nunca se comparten.</td>
-                <td class="td-highlight">QR por mesa: proyección inmediata y descarga ZIP completa.</td>
-              </tr>
-              <tr>
-                <td><strong>Operatividad</strong></td>
-                <td>Requiere apps pesadas o cableados complejos.</td>
-                <td class="td-highlight">100% Web: Sin descargas ni registros. Compatible con HDMI.</td>
+                <td><strong>Tramo 3 (VIP / Salón)</strong></td>
+                <td>10 o más servicios</td>
+                <td><strong>$15.000</strong> c/u</td>
+                <td>$45.000 <span class="td-highlight">(Margen $55k limpios)</span></td>
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
-
-      <!-- 3 COMMERCIAL MODELS -->
-      <div>
-        <div class="block-header">
-          <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>Modelos de Comercialización & Alianza</span>
-        </div>
-        <div class="models-grid-3">
-          <div class="model-card-3">
-            <div>
-              <div class="model-tag">1. Para Organizadores</div>
-              <div class="model-title">Ganancia Escalada Mensual</div>
-              <div class="model-desc">
-                Comisión creciente según los servicios vendidos al mes. A mayor volumen de eventos cerrados, mayor es tu margen por fecha.
-              </div>
-            </div>
-            <div class="model-highlight">
-              📈 Escala: 15% · 20% · 25% + Bonos
-            </div>
-          </div>
-
-          <div class="model-card-3">
-            <div>
-              <div class="model-tag">2. Para Salones de Fiesta</div>
-              <div class="model-title">Paquetes Mensuales (Abono)</div>
-              <div class="model-desc">
-                Tarifa plana por paquete de fechas o cobertura ilimitada mensual para incluir tecnología en todas tus propuestas "All-Inclusive".
-              </div>
-            </div>
-            <div class="model-highlight">
-              🏢 Tarifa mayorista fija por mes
-            </div>
-          </div>
-
-          <div class="model-card-3">
-            <div>
-              <div class="model-tag">3. Para Quien Festeja</div>
-              <div class="model-title">Combos de Servicios</div>
-              <div class="model-desc">
-                Packs promocionales accesibles para familias y parejas: Pack Invitación, Pack Show (Trivia + Mural) o Full Suite con los 3 módulos.
-              </div>
-            </div>
-            <div class="model-highlight">
-              🎉 Ahorro al combinar servicios
-            </div>
-          </div>
         </div>
       </div>
 
@@ -650,7 +602,7 @@ const onePagerHtml = `<!DOCTYPE html>
       <div class="demo-strip">
         <div class="demo-left">
           <h4>¿Querés probar la experiencia en vivo desde tu smartphone?</h4>
-          <p>Hacé clic en el botón para abrir el showroom interactivo con códigos QR.</p>
+          <p>Hacé clic para abrir el showroom interactivo y probar los 3 servicios con códigos QR.</p>
         </div>
         <a href="https://kronitt.com.ar/organizadores" target="_blank" class="demo-url-btn">
           <span>Abrir Demo en Vivo ↗</span>
@@ -668,7 +620,7 @@ const onePagerHtml = `<!DOCTYPE html>
 </html>`;
 
 // =========================================================================
-// 2. DOSSIER B2B COMPLETO (2 Páginas A4, URL kronitt.com.ar/organizadores Clickable)
+// 2. DOSSIER B2B COMPLETO (2 Páginas A4, Servicio Base $60.000, Combos y B2B)
 // =========================================================================
 const dossierHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -679,19 +631,19 @@ const dossierHtml = `<!DOCTYPE html>
     ${commonCss}
     
     .section-headline {
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     
     .section-headline h2 {
       font-size: 21px;
       font-weight: 900;
       color: #ffffff;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       letter-spacing: -0.4px;
     }
     
     .section-headline p {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
       color: #cbd5e1;
     }
@@ -699,9 +651,9 @@ const dossierHtml = `<!DOCTYPE html>
     .service-row-card {
       background: #0d1224;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      padding: 16px 20px;
-      margin-bottom: 14px;
+      border-radius: 13px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
     }
     
@@ -713,7 +665,7 @@ const dossierHtml = `<!DOCTYPE html>
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
     
     .sr-title {
@@ -727,32 +679,32 @@ const dossierHtml = `<!DOCTYPE html>
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.7px;
-      padding: 4px 10px;
+      padding: 3px 9px;
       border-radius: 6px;
       background: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
+      color: #38bdf8;
     }
     
     .sr-body {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
       color: #e2e8f0;
-      line-height: 1.45;
-      margin-bottom: 10px;
+      line-height: 1.4;
+      margin-bottom: 8px;
     }
     
     .feature-grid-mini {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 7px;
+      gap: 6px;
       background: rgba(0, 0, 0, 0.35);
-      padding: 9px 14px;
-      border-radius: 9px;
-      margin-bottom: 9px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-bottom: 8px;
     }
     
     .f-item {
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 600;
       color: #cbd5e1;
     }
@@ -764,12 +716,12 @@ const dossierHtml = `<!DOCTYPE html>
     .b2b-highlight {
       background: rgba(99, 102, 241, 0.12);
       border: 1px dashed rgba(99, 102, 241, 0.4);
-      padding: 8px 14px;
-      border-radius: 9px;
-      font-size: 11px;
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 10.5px;
       font-weight: 700;
       color: #e0e7ff;
-      line-height: 1.4;
+      line-height: 1.35;
     }
     
     /* Page 2 Specs & 3 Models */
@@ -777,22 +729,22 @@ const dossierHtml = `<!DOCTYPE html>
       border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       background: #0d1224;
     }
     
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 11px;
+      font-size: 10.5px;
     }
     
     th {
       background: #141c36;
-      padding: 9px 14px;
+      padding: 8px 14px;
       text-align: left;
       font-weight: 900;
-      font-size: 9.8px;
+      font-size: 9.5px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: #cbd5e1;
@@ -800,85 +752,63 @@ const dossierHtml = `<!DOCTYPE html>
     }
     
     td {
-      padding: 9px 14px;
+      padding: 8px 14px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       color: #f1f5f9;
       font-weight: 600;
-      line-height: 1.4;
+      line-height: 1.35;
     }
     
     tr:last-child td { border-bottom: none; }
     
-    .models-grid-dossier {
+    .b2b-boxes-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 11px;
-      margin-bottom: 16px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 14px;
     }
-    
-    .m-card-dossier {
+
+    .b2b-summary-card {
       background: #0d1224;
       border: 1px solid rgba(99, 102, 241, 0.35);
       border-radius: 12px;
-      padding: 13px 14px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      padding: 12px 14px;
     }
-    
-    .m-badge-dossier {
-      font-size: 9px;
+
+    .b2b-summary-card h4 {
+      font-size: 12px;
       font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
       color: #93c5fd;
       margin-bottom: 4px;
     }
-    
-    .m-title-dossier {
-      font-size: 12.5px;
-      font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 6px;
-      line-height: 1.25;
-    }
-    
-    .m-desc-dossier {
-      font-size: 10.5px;
+
+    .b2b-summary-card p {
+      font-size: 10px;
       font-weight: 600;
       color: #cbd5e1;
       line-height: 1.4;
-      margin-bottom: 8px;
     }
-    
-    .m-callout-dossier {
-      padding-top: 6px;
-      border-top: 1px dashed rgba(255, 255, 255, 0.12);
-      font-size: 10px;
-      font-weight: 800;
-      color: #a5b4fc;
-    }
-    
+
     .cta-strip-dossier {
       background: linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(236, 72, 153, 0.22) 100%);
       border: 1.5px solid rgba(99, 102, 241, 0.45);
-      border-radius: 14px;
-      padding: 16px 20px;
+      border-radius: 13px;
+      padding: 14px 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
     }
     
     .cta-strip-dossier h3 {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 900;
       color: #ffffff;
     }
     
     .cta-strip-dossier p {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
       color: #e2e8f0;
       max-width: 580px;
@@ -887,10 +817,10 @@ const dossierHtml = `<!DOCTYPE html>
     .cta-link-pill {
       background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
       color: #ffffff !important;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 800;
-      padding: 9px 22px;
-      border-radius: 10px;
+      padding: 8px 20px;
+      border-radius: 9px;
       margin-top: 3px;
       letter-spacing: 0.3px;
       text-decoration: none !important;
@@ -900,14 +830,6 @@ const dossierHtml = `<!DOCTYPE html>
       box-shadow: 0 4px 16px rgba(79, 70, 229, 0.4);
       cursor: pointer;
       border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .cta-link-pill svg {
-      width: 14px;
-      height: 14px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2.5;
     }
   </style>
 </head>
@@ -934,14 +856,14 @@ const dossierHtml = `<!DOCTYPE html>
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
         <div class="section-headline">
           <h2>Los 3 Servicios Interactivos en Detalle</h2>
-          <p>Diseñados para elevar la experiencia del invitado y simplificar la gestión del organizador.</p>
+          <p>Cada servicio tiene un valor individual de lista de $60.000 ARS. Diseñados para elevar la fiesta y simplificar la gestión.</p>
         </div>
 
         <!-- SERVICE 1 -->
         <div class="service-row-card sr-amber">
           <div class="sr-header">
             <div class="sr-title">01. Invitaciones Digitales Interactivas & RSVP</div>
-            <div class="sr-tag">Pre-Evento</div>
+            <div class="sr-tag">PVP: $60.000 ARS</div>
           </div>
           <div class="sr-body">
             Reemplaza las tarjetas de papel por una web inmersiva con sobre virtual 3D, música y animación temática. Los invitados confirman asistencia y detallan preferencias con un toque.
@@ -961,7 +883,7 @@ const dossierHtml = `<!DOCTYPE html>
         <div class="service-row-card sr-purple">
           <div class="sr-header">
             <div class="sr-title">02. Trivia Fiesta en Vivo (Show en Pantallas LED)</div>
-            <div class="sr-tag">Durante la Fiesta</div>
+            <div class="sr-tag">PVP: $60.000 ARS</div>
           </div>
           <div class="sr-body">
             Convierte la cena en un programa de TV interactivo. Los invitados escanean el código QR desde la mesa y compiten respondiendo preguntas temáticas o personalizadas contra reloj.
@@ -981,7 +903,7 @@ const dossierHtml = `<!DOCTYPE html>
         <div class="service-row-card sr-pink">
           <div class="sr-header">
             <div class="sr-title">03. Mural de Fotos Dinámicas por QR</div>
-            <div class="sr-tag">Durante y Post-Evento</div>
+            <div class="sr-tag">PVP: $60.000 ARS</div>
           </div>
           <div class="sr-body">
             Identificador con QR exclusivo en cada mesa. Los invitados sacan selfies y dedicatorias que se proyectan en pantalla gigante en segundos con transiciones elegantes.
@@ -1000,7 +922,7 @@ const dossierHtml = `<!DOCTYPE html>
 
       <div class="footer-bar">
         <div><strong>EVENTOS KRONITT</strong> · Dossier Comercial B2B</div>
-        <div>Showroom: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
+        <div>Página 01 de 02 · Showroom: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
       </div>
     </div>
   </div>
@@ -1018,7 +940,7 @@ const dossierHtml = `<!DOCTYPE html>
           </div>
           <div>
             <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Especificaciones & Comercialización</div>
+            <div class="brand-sub">Comercialización & Especificaciones</div>
           </div>
         </div>
         <div class="badge-tag">Página 02 de 02</div>
@@ -1026,79 +948,62 @@ const dossierHtml = `<!DOCTYPE html>
 
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
         <div class="section-headline">
-          <h2>Simplicidad Técnica & Modelos de Comercialización</h2>
-          <p>Cero fricción operativa para tu salón y beneficios comerciales directos para cada tipo de cliente.</p>
+          <h2>Modelos de Comercialización & Alianza B2B</h2>
+          <p>Un solo criterio unificado para Salones y Planners con tarifa mayorista decreciente por cantidad de servicios al mes.</p>
         </div>
 
-        <!-- SPECS TABLE -->
+        <!-- B2B SCALE TABLE -->
         <div class="specs-table-box">
           <table>
             <thead>
               <tr>
-                <th style="width: 28%;">Aspecto Técnico</th>
-                <th style="width: 72%;">Garantía y Especificación Kronitt</th>
+                <th style="width: 25%;">Tramo Mensual</th>
+                <th style="width: 25%;">Servicios Acumulados</th>
+                <th style="width: 25%;">Costo por Servicio</th>
+                <th style="width: 25%;">Costo Evento Full (3 serv.)</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Instalación</strong></td>
-                <td>100% Web moderna. No requiere descargar apps ni instalar programas en computadoras.</td>
+                <td><strong>Tramo 1 (Base)</strong></td>
+                <td>1 a 4 servicios/mes</td>
+                <td><strong>$25.000</strong> c/u</td>
+                <td>$75.000 <span style="color:#4ade80;font-weight:800;">(Margen: $25k-$35k)</span></td>
               </tr>
               <tr>
-                <td><strong>Conectividad</strong></td>
-                <td>Optimizado para Wi-Fi estándar o 4G (compresión automática de imágenes en el celular).</td>
+                <td><strong>Tramo 2 (Activo)</strong></td>
+                <td>5 a 9 servicios/mes</td>
+                <td><strong>$20.000</strong> c/u</td>
+                <td>$60.000 <span style="color:#4ade80;font-weight:800;">(Margen: $40k)</span></td>
               </tr>
               <tr>
-                <td><strong>Pantallas del Salón</strong></td>
-                <td>Compatible con cualquier Smart TV, pantalla LED modular o proyector con conexión HDMI.</td>
-              </tr>
-              <tr>
-                <td><strong>Soporte Integral</strong></td>
-                <td>Kronitt entrega los links de pantalla listos para proyectar y los QRs listos para imprimir.</td>
+                <td><strong>Tramo 3 (VIP / Salón)</strong></td>
+                <td>10 o más servicios/mes</td>
+                <td><strong>$15.000</strong> c/u</td>
+                <td>$45.000 <span style="color:#4ade80;font-weight:800;">(Margen: $55k limpios)</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- 3 COMMERCIAL MODELS -->
-        <div class="models-grid-dossier">
-          <div class="m-card-dossier">
-            <div>
-              <div class="m-badge-dossier">1. Para Organizadores</div>
-              <div class="m-title-dossier">Ganancia Escalada Mensual</div>
-              <div class="m-desc-dossier">
-                Comisión creciente según los servicios vendidos al mes. A mayor volumen de eventos cerrados, mayor es tu margen por fecha.
-              </div>
-            </div>
-            <div class="m-callout-dossier">
-              📈 Escala: 15% · 20% · 25% + Bonos
-            </div>
+        <!-- 2 EXPLANATION CARDS -->
+        <div class="b2b-boxes-container">
+          <div class="b2b-summary-card">
+            <h4>Packs Sugeridos al Cliente Final</h4>
+            <p>
+              • <strong>1 Servicio Individual:</strong> $60.000 ARS.<br>
+              • <strong>Combo Dúo (2 servicios):</strong> $85.000 ARS.<br>
+              • <strong>Combo Full Suite (3 servicios):</strong> $100.000 ARS.<br>
+              El partner es libre de fijar su precio de venta o sumarlo a sus paquetes.
+            </p>
           </div>
-
-          <div class="m-card-dossier">
-            <div>
-              <div class="m-badge-dossier">2. Para Salones de Fiesta</div>
-              <div class="m-title-dossier">Paquetes Mensuales (Abono)</div>
-              <div class="m-desc-dossier">
-                Tarifa plana por paquete de fechas o cobertura ilimitada mensual para incluir tecnología en todas tus propuestas "All-Inclusive".
-              </div>
-            </div>
-            <div class="m-callout-dossier">
-              🏢 Tarifa mayorista fija por mes
-            </div>
-          </div>
-
-          <div class="m-card-dossier">
-            <div>
-              <div class="m-badge-dossier">3. Para Quien Festeja</div>
-              <div class="m-title-dossier">Combos de Servicios</div>
-              <div class="m-desc-dossier">
-                Packs promocionales accesibles para familias y parejas: Pack Invitación, Pack Show (Trivia + Mural) o Full Suite con los 3 módulos.
-              </div>
-            </div>
-            <div class="m-callout-dossier">
-              🎉 Ahorro al combinar servicios
-            </div>
+          <div class="b2b-summary-card">
+            <h4>Ventaja Operativa para el Partner</h4>
+            <p>
+              • <strong>Un solo criterio:</strong> Cada módulo vale exactamente lo mismo.<br>
+              • <strong>Mayor volumen = menor costo:</strong> A partir de 10 servicios al mes el costo unitario baja a $15.000.<br>
+              • <strong>Cero complejidad técnica:</strong> Kronitt entrega todo configurado y listo para proyectar.
+            </p>
           </div>
         </div>
 
@@ -1121,302 +1026,6 @@ const dossierHtml = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// =========================================================================
-// 3. PLAYBOOK DE VENTAS (2 Páginas A4, URL kronitt.com.ar/organizadores Clickable)
-// =========================================================================
-const playbookHtml = `<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Playbook de Ventas B2B - Eventos Kronitt</title>
-  <style>
-    ${commonCss}
-    
-    .section-title-bar {
-      margin-bottom: 12px;
-    }
-    
-    .section-title-bar h2 {
-      font-size: 19px;
-      font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 3px;
-      letter-spacing: -0.3px;
-    }
-    
-    .section-title-bar p {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: #cbd5e1;
-    }
-    
-    .script-box {
-      background: #0d1224;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 12px;
-      padding: 12px 15px;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-    }
-    
-    .script-tag {
-      font-size: 10.5px;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      color: #93c5fd;
-      margin-bottom: 6px;
-    }
-    
-    .script-quote {
-      background: rgba(0, 0, 0, 0.4);
-      border-left: 3.5px solid #818cf8;
-      padding: 10px 14px;
-      border-radius: 7px;
-      font-size: 10.5px;
-      font-weight: 600;
-      color: #f1f5f9;
-      line-height: 1.5;
-      white-space: pre-wrap;
-    }
-    
-    .steps-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    
-    .step-card {
-      background: #0d1224;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      padding: 9px 14px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-    
-    .step-num {
-      width: 26px;
-      height: 26px;
-      background: linear-gradient(135deg, #6366f1, #a855f7);
-      color: #ffffff;
-      border-radius: 50%;
-      font-weight: 900;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11.5px;
-      flex-shrink: 0;
-    }
-    
-    .step-info strong {
-      font-size: 11.5px;
-      font-weight: 800;
-      color: #ffffff;
-      display: block;
-      margin-bottom: 2px;
-    }
-    
-    .step-info p {
-      font-size: 10.5px;
-      font-weight: 600;
-      color: #cbd5e1;
-      line-height: 1.35;
-    }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 10.5px;
-    }
-    
-    th {
-      background: #141c36;
-      padding: 8px 12px;
-      text-align: left;
-      font-weight: 900;
-      font-size: 9.8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #cbd5e1;
-      border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);
-    }
-    
-    td {
-      padding: 8px 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      color: #f1f5f9;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-    
-    tr:last-child td { border-bottom: none; }
-  </style>
-</head>
-<body>
-  <!-- PAGE 1 -->
-  <div class="page">
-    <div class="bg-glow glow-purple"></div>
-    
-    <div class="content-layer">
-      <div class="header-brand">
-        <div class="brand-left">
-          <div class="brand-logo">
-            <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
-          </div>
-          <div>
-            <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Playbook de Ventas B2B</div>
-          </div>
-        </div>
-        <div class="badge-tag">Página 01 · Prospección</div>
-      </div>
-
-      <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
-        <div class="section-title-bar">
-          <h2>Scripts de Prospección Comercial</h2>
-          <p>Mensajes directos para contactar salones y planners por WhatsApp o redes sociales.</p>
-        </div>
-
-        <div class="script-box">
-          <div class="script-tag">1. Contacto para Salones de Fiestas</div>
-          <div class="script-quote">"Hola [Nombre], ¿cómo estás? Te escribe [Tu Nombre] de Eventos Kronitt.
-Estuve viendo los eventos increíbles que hacen en [Nombre del Salón] y quería consultarte algo rápido:
-¿Tienen actualmente algún sistema interactivo para que los invitados jueguen desde sus celulares y proyecten fotos en vivo en sus pantallas durante la cena?
-
-Desarrollamos una plataforma web interactiva llave en mano (Trivia en vivo, Mural de fotos por QR e Invitaciones RSVP) que muchos salones están sumando a sus paquetes premium o recomendando con comisión directa.
-
-Los invitados no descargan ninguna app. Te comparto un enlace demo de 30 segundos para que pruebes cómo funciona desde tu celular: 👉 kronitt.com.ar/organizadores
-
-Si te parece, te cuento en 5 minutos cómo podemos implementarlo en un evento de prueba sin costo para el salón. ¿Te gustaría ver cómo funciona?"</div>
-        </div>
-
-        <div class="script-box">
-          <div class="script-tag">2. Contacto para Wedding Planners</div>
-          <div class="script-quote">"¡Hola [Nombre]! Sigo tu trabajo organizando eventos, impecable la dedicación que le ponés a cada detalle.
-Te escribo porque creamos Eventos Kronitt, una herramienta diseñada justamente para solucionar dos dolores de cabeza típicos de las planners:
-1. El desorden con el catering: Formulario RSVP interactivo con reporte en vivo de confirmados y dietas especiales.
-2. Momentos estáticos en la cena: Trivia interactiva en pantalla gigante y mural de fotos rotativo por QR.
-
-Lo mejor: los invitados no descargan nada y vos como planner podés monetizarlo con comisión por evento o integrarlo a tu propuesta de valor para cerrar clientes indecisos.
-Te dejo el demo para que lo chusmees en 1 minuto: 👉 kronitt.com.ar/organizadores"</div>
-        </div>
-
-        <div class="section-title-bar" style="margin-top: 10px; margin-bottom: 8px;">
-          <h2 style="font-size: 14.5px;">Estructura de Reunión o Videollamada (15 Minutos)</h2>
-        </div>
-
-        <div class="steps-grid">
-          <div class="step-card">
-            <div class="step-num">1</div>
-            <div class="step-info">
-              <strong>Diagnóstico & Validación de Dolores (3 min)</strong>
-              <p>"¿Cómo manejan hoy el RSVP para catering y los momentos de bache en la cena?"</p>
-            </div>
-          </div>
-          <div class="step-card">
-            <div class="step-num">2</div>
-            <div class="step-info">
-              <strong>Demostración en Vivo en su Celular (5 min)</strong>
-              <p>Hacer que escanee los QR de kronitt.com.ar/organizadores y experimente la apertura del sobre, la trivia y el mural.</p>
-            </div>
-          </div>
-          <div class="step-card">
-            <div class="step-num">3</div>
-            <div class="step-info">
-              <strong>Propuesta Comercial & Cierre de Evento Piloto (7 min)</strong>
-              <p>Presentar el modelo de comisión escalada mensual o paquete de salón y ofrecer el primer evento bonificado.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bar">
-        <div><strong>EVENTOS KRONITT</strong> · Playbook de Ventas B2B</div>
-        <div>Página 01 de 02 · Uso Interno Comercial</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PAGE 2 -->
-  <div class="page">
-    <div class="bg-glow glow-pink"></div>
-    
-    <div class="content-layer">
-      <div class="header-brand">
-        <div class="brand-left">
-          <div class="brand-logo">
-            <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
-          </div>
-          <div>
-            <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Herramientas de Cierre</div>
-          </div>
-        </div>
-        <div class="badge-tag">Página 02 · Objeciones</div>
-      </div>
-
-      <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
-        <div class="section-title-bar">
-          <h2>Mensajes Listos para Reenviar a Clientes</h2>
-          <p>Textos para que el Planner o Salón copie y pegue a sus novios o quinceañeras.</p>
-        </div>
-
-        <div class="script-box">
-          <div class="script-tag">Para Novios (Casamientos)</div>
-          <div class="script-quote">"¡Hola chicos! Pensando en su boda, les quería compartir un servicio interactivo espectacular que estamos trabajando para que la fiesta sea inolvidable:
-💌 Invitación Digital de Lujo: Con sobre virtual interactivo, música, mapa GPS y confirmación con dietas para el catering.
-🏆 Trivia de la Pareja en Vivo: Un show en pantalla gigante durante la cena donde los invitados juegan con su celular respondiendo anécdotas sobre ustedes.
-📸 Mural de Fotos en Pantalla: Cada mesa tiene su QR para sacar selfies y dedicatorias que se proyectan en vivo. Al final, se descargan todas las fotos en alta resolución.
-
-Miren este link para probarlo: kronitt.com.ar/organizadores
-¿Les gustaría que lo sumemos a la propuesta de su evento?"</div>
-        </div>
-
-        <div class="section-title-bar" style="margin-top: 10px; margin-bottom: 8px;">
-          <h2 style="font-size: 14.5px;">Matriz de Manejo de Objeciones</h2>
-        </div>
-
-        <div style="border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 12px; overflow: hidden; background: #0d1224;">
-          <table>
-            <thead>
-              <tr>
-                <th style="width: 32%;">Objeción</th>
-                <th style="width: 68%;">Respuesta Profesional Recomendada</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>"La señal de Wi-Fi en el salón es débil."</strong></td>
-                <td>El sistema comprime las fotos en el propio teléfono antes de subirlas y las trivias consumen menos de 100 KB. Funciona fluido con cualquier Wi-Fi básico o señal 4G.</td>
-              </tr>
-              <tr>
-                <td><strong>"¿Y si alguien sube una foto desubicada?"</strong></td>
-                <td>Tenemos Panel de Moderación en Vivo con aprobación previa obligatoria si lo desean. Ninguna foto sale a pantalla sin autorización.</td>
-              </tr>
-              <tr>
-                <td><strong>"¿Los adultos mayores saben usarlo?"</strong></td>
-                <td>No requiere descargar ninguna app ni crear contraseñas. Solo abren la cámara del celular y apuntan al código QR de la mesa.</td>
-              </tr>
-              <tr>
-                <td><strong>"Presupuesto ajustado de los clientes."</strong></td>
-                <td>Se puede contratar por combos o módulos individuales (solo la Trivia o solo la Invitación) y la invitación ahorra el costo total de imprenta tradicional.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="footer-bar">
-        <div><strong>EVENTOS KRONITT</strong> · Playbook de Ventas B2B</div>
-        <div>Showroom Interactivo: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
-      </div>
-    </div>
-  </div>
-</body>
-</html>`;
-
 // Write HTMLs to temp
 const onePagerPath = path.join(tempDir, 'one_pager.html');
 const dossierPath = path.join(tempDir, 'dossier.html');
@@ -1424,7 +1033,6 @@ const playbookPath = path.join(tempDir, 'playbook.html');
 
 fs.writeFileSync(onePagerPath, onePagerHtml, 'utf8');
 fs.writeFileSync(dossierPath, dossierHtml, 'utf8');
-fs.writeFileSync(playbookPath, playbookHtml, 'utf8');
 
 // Target PDF outputs
 const outOnePager = path.join(docsDir, 'ONE_PAGER_EVENTOS_KRONITT.pdf');
@@ -1441,14 +1049,12 @@ function renderPdf(htmlPath, outPdf) {
 try {
   renderPdf(onePagerPath, outOnePager);
   renderPdf(dossierPath, outDossier);
-  renderPdf(playbookPath, outPlaybook);
 
   // Copy to public/docs for web access
   fs.copyFileSync(outOnePager, path.join(publicDocsDir, 'ONE_PAGER_EVENTOS_KRONITT.pdf'));
   fs.copyFileSync(outDossier, path.join(publicDocsDir, 'DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf'));
-  fs.copyFileSync(outPlaybook, path.join(publicDocsDir, 'PLAYBOOK_VENTAS_EVENTOS_KRONITT.pdf'));
 
-  console.log('All 3 PDFs regenerated with CLICKABLE LINKS and kronitt.com.ar/organizadores!');
+  console.log('PDFs regenerated with $60.000 base service price, Combos and B2B Scale!');
 } catch (err) {
   console.error('Error generating PDFs:', err);
   process.exit(1);

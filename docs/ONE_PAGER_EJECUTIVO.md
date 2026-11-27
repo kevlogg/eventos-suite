@@ -8,37 +8,33 @@ Es la plataforma web integral que digitaliza y dinamiza la experiencia de un eve
 
 ---
 
-## 📊 COMPARATIVA: TRADICIONAL VS. EXPERIENCIA KRONITT
+## 🎯 MODELO DE PRECIOS & COMBOS (CONSUMIDOR FINAL)
+*Cada servicio individual tiene un valor de lista de **$60.000 ARS**.*
 
-| Dimensión | Enfoque Tradicional | Experiencia Eventos Kronitt |
-| :--- | :--- | :--- |
-| **Invitaciones & Confirmación** | Tarjetas de papel costosas o PDF estático. Conteo manual en Excel, demoras con el catering. | **Web interactiva con sobre virtual 3D, música, GPS y confirmación RSVP en vivo con filtro de dietas especiales.** |
-| **Dinamismo durante la Cena** | Tiempos muertos entre platos, invitados aislados mirando sus teléfonos. | **Trivia Fiesta en Vivo proyectada en pantalla LED: juego colectivo contra reloj con podio y confeti.** |
-| **Fotografía de Invitados** | Selfies que quedan en teléfonos individuales y nunca se comparten. | **QR en cada mesa: las fotos suben al instante a pantalla gigante con dedicatorias y moderación.** |
-| **Álbum Post-Evento** | Los homenajeados esperan semanas para recibir fotos de sus invitados. | **Descarga inmediata de todas las fotos de los invitados en formato ZIP de alta resolución.** |
-| **Complejidad Técnica** | Requiere contratar equipos externos pesados o descargar aplicaciones. | **100% Web: Sin descargas ni registros. Compatible con cualquier pantalla HDMI y teléfono celular.** |
+* **1 Servicio Individual:** **$60.000 ARS** *(Invitación sola, Trivia sola o Mural solo)*.
+* **Combo Dúo (2 servicios a elección):** **$85.000 ARS** *(Ahorro de $35.000 vs. precio de lista)*.
+* **Combo Full Suite (Los 3 servicios juntos):** **$100.000 ARS** *(Ahorro de $80.000 respecto a los $180.000 de lista)*.
+
+---
+
+## 🤝 CANAL PARTNERS B2B: SALONES & ORGANIZADORES
+*Tarifa mayorista unificada por volumen de servicios mensuales. Vos definís tu precio de venta final (PVP sugerido: $60.000 c/u o $100.000 el pack completo).*
+
+| Tramo Mensual | Servicios en el Mes | Tu Costo por Servicio | Costo Evento Completo (3 serv.) | Tu Ganancia (al sugerido) |
+| :---: | :---: | :---: | :---: | :---: |
+| **Tramo 1 (Base)** | **1 a 4 servicios** | **$25.000** | **$75.000** | **$25.000 a $35.000** por fiesta |
+| **Tramo 2 (Activo)** | **5 a 9 servicios** | **$20.000** | **$60.000** | **$40.000** por fiesta |
+| **Tramo 3 (VIP / Salón)** | **10 o más servicios** | **$15.000** | **$45.000** | **$45.000 a $55.000** por fiesta |
 
 ---
 
 ## 🛠️ FICHA TÉCNICA RÁPIDA (PARA COORDINADORES Y TÉCNICOS)
-
-* **Compatibilidad de Pantallas:** Conexión HDMI estándar a Smart TVs, proyectores o pantallas modulares LED de cualquier salón.
-* **Dispositivos de Invitados:** 100% responsivo para iPhone y Android. Acceso directo por cámara QR nativa.
-* **Consumo de Datos:** Optimizado con compresión de imágenes en el cliente (no satura conexiones Wi-Fi o 4G).
-* **Seguridad & Moderación:** Panel privado para el organizador con aprobación previa de fotos (opcional) y token secreto de administración.
-* **Tiempo de Puesta en Marcha:** Listo para proyectar en menos de 5 minutos mediante un link web dedicado.
+* **Compatibilidad:** Cualquier Smart TV, proyector o pantalla LED HDMI.
+* **Invitados:** 100% responsivo para iPhone y Android vía cámara QR nativa (sin descargas ni logins).
+* **Consumo:** Compresión de imágenes en el cliente (apto Wi-Fi básico y 4G).
+* **Seguridad:** Panel privado de moderación en vivo con aprobación previa opcional.
 
 ---
 
-## 🤝 ¿CÓMO GANA TU SALÓN O AGENCIA DE EVENTOS?
-
-1. **Paquetes Premium de Mayor Valor:** Podés incluir los 3 servicios dentro de tus propuestas comerciales "Todo Incluido" o "Full Experience".
-2. **Comisión Directa del 15% al 20%:** Si preferís que facturemos directo al cliente final, recibís una comisión fija por evento referido.
-3. **Cero Horas de Trabajo Extra:** Nuestro equipo se encarga de la configuración gráfica, enlaces y soporte técnico.
-4. **Alivio Operativo con el Catering:** Reportes exactos de comensales vegetarianos, celíacos y confirmados con un solo clic.
-
----
-
-## 🎯 PRUEBA EN VIVO EN 30 SEGUNDOS
-> **¿Querés ver cómo se ve en el celular?**  
-> Escribinos por WhatsApp al **+54 9 223 585-1419** y te enviamos el enlace demo interactivo al instante.
+## 🌐 PROBÁ LA EXPERIENCIA EN VIVO
+Showroom interactivo con códigos QR en: **kronitt.com.ar/organizadores**
