@@ -106,4 +106,4 @@ Eliminamos las listas de invitados desactualizadas en Excel, las tarjetas de pap
 
 ## 6. CONTACTO DIRECTO
 * WhatsApp Comercial: **+54 9 223 585-1419**
-* Web: **eventos-suite.vercel.app**
+* Web Showroom: **kronitt.com.ar/organizadores**

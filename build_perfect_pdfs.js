@@ -10,7 +10,7 @@ const tempDir = path.join(docsDir, 'temp_pdf_src');
 if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
 if (!fs.existsSync(publicDocsDir)) fs.mkdirSync(publicDocsDir, { recursive: true });
 
-// Common CSS: High-contrast, bold, clear typography, full-bleed A4
+// Common CSS: High-contrast, bold, clear typography, full-bleed A4, clickable links
 const commonCss = `
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
   
@@ -157,10 +157,15 @@ const commonCss = `
     color: #ffffff;
     font-weight: 800;
   }
+  .footer-bar a {
+    color: #a5b4fc;
+    text-decoration: underline;
+    font-weight: 800;
+  }
 `;
 
 // =========================================================================
-// 1. ONE-PAGER EJECUTIVO (1 Sola Página A4, Full Bleed, 3 Modelos, Sin WSP)
+// 1. ONE-PAGER EJECUTIVO (1 Sola Página A4, Full Bleed, URL kronitt.com.ar/organizadores Clickable)
 // =========================================================================
 const onePagerHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -417,14 +422,29 @@ const onePagerHtml = `<!DOCTYPE html>
       color: #e2e8f0;
     }
     
-    .demo-url-badge {
-      background: #4f46e5;
-      color: #ffffff;
-      font-size: 10.5px;
+    .demo-url-btn {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #ffffff !important;
+      font-size: 11px;
       font-weight: 800;
-      padding: 6px 14px;
-      border-radius: 8px;
+      padding: 8px 16px;
+      border-radius: 9px;
       letter-spacing: 0.3px;
+      text-decoration: none !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .demo-url-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
     }
   </style>
 </head>
@@ -626,21 +646,21 @@ const onePagerHtml = `<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- BOTTOM DEMO STRIP (SIN WHATSAPP) -->
+      <!-- BOTTOM DEMO STRIP WITH CLICKABLE LINK -->
       <div class="demo-strip">
         <div class="demo-left">
           <h4>¿Querés probar la experiencia en vivo desde tu smartphone?</h4>
-          <p>Escaneá los códigos QR de demostración en el showroom interactivo.</p>
+          <p>Hacé clic en el botón para abrir el showroom interactivo con códigos QR.</p>
         </div>
-        <div class="demo-url-badge">
-          eventos-suite.vercel.app/organizadores
-        </div>
+        <a href="https://kronitt.com.ar/organizadores" target="_blank" class="demo-url-btn">
+          <span>Abrir Demo en Vivo ↗</span>
+        </a>
       </div>
 
       <!-- FOOTER -->
       <div class="footer-bar">
         <div><strong>EVENTOS KRONITT</strong> · Suite de Experiencias Digitales para Eventos</div>
-        <div>Showroom Interactivo: <strong>eventos-suite.vercel.app/organizadores</strong></div>
+        <div>Showroom Interactivo: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
       </div>
     </div>
   </div>
@@ -648,7 +668,7 @@ const onePagerHtml = `<!DOCTYPE html>
 </html>`;
 
 // =========================================================================
-// 2. DOSSIER B2B COMPLETO (2 Páginas A4, Sin Portada, 3 Modelos, Sin WSP)
+// 2. DOSSIER B2B COMPLETO (2 Páginas A4, URL kronitt.com.ar/organizadores Clickable)
 // =========================================================================
 const dossierHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -848,7 +868,7 @@ const dossierHtml = `<!DOCTYPE html>
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
     }
     
     .cta-strip-dossier h3 {
@@ -865,14 +885,29 @@ const dossierHtml = `<!DOCTYPE html>
     }
     
     .cta-link-pill {
-      background: #4f46e5;
-      color: #ffffff;
-      font-size: 11.5px;
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #ffffff !important;
+      font-size: 12px;
       font-weight: 800;
-      padding: 7px 18px;
-      border-radius: 9px;
-      margin-top: 4px;
+      padding: 9px 22px;
+      border-radius: 10px;
+      margin-top: 3px;
       letter-spacing: 0.3px;
+      text-decoration: none !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.4);
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .cta-link-pill svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
     }
   </style>
 </head>
@@ -965,7 +1000,7 @@ const dossierHtml = `<!DOCTYPE html>
 
       <div class="footer-bar">
         <div><strong>EVENTOS KRONITT</strong> · Dossier Comercial B2B</div>
-        <div>Página 01 de 02 · eventos-suite.vercel.app/organizadores</div>
+        <div>Showroom: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
       </div>
     </div>
   </div>
@@ -1067,19 +1102,19 @@ const dossierHtml = `<!DOCTYPE html>
           </div>
         </div>
 
-        <!-- DEMO CTA (SIN WHATSAPP) -->
+        <!-- DEMO CTA (CLICKABLE BUTTON) -->
         <div class="cta-strip-dossier">
           <h3>Demostración Interactiva en Vivo</h3>
           <p>Podés escanear con tu celular y probar los 3 servicios funcionando en tiempo real en nuestro showroom online.</p>
-          <div class="cta-link-pill">
-            eventos-suite.vercel.app/organizadores
-          </div>
+          <a href="https://kronitt.com.ar/organizadores" target="_blank" class="cta-link-pill">
+            <span>Hacer Clic para Abrir Demo en Vivo ↗</span>
+          </a>
         </div>
       </div>
 
       <div class="footer-bar">
         <div><strong>EVENTOS KRONITT</strong> · Dossier Comercial B2B</div>
-        <div>Página 02 de 02 · Showroom: <strong>eventos-suite.vercel.app/organizadores</strong></div>
+        <div>Showroom Interactivo: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
       </div>
     </div>
   </div>
@@ -1087,7 +1122,7 @@ const dossierHtml = `<!DOCTYPE html>
 </html>`;
 
 // =========================================================================
-// 3. PLAYBOOK DE VENTAS (2 Páginas A4, Texto Grueso y Claro, Sin WSP)
+// 3. PLAYBOOK DE VENTAS (2 Páginas A4, URL kronitt.com.ar/organizadores Clickable)
 // =========================================================================
 const playbookHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -1252,7 +1287,7 @@ Estuve viendo los eventos increíbles que hacen en [Nombre del Salón] y quería
 
 Desarrollamos una plataforma web interactiva llave en mano (Trivia en vivo, Mural de fotos por QR e Invitaciones RSVP) que muchos salones están sumando a sus paquetes premium o recomendando con comisión directa.
 
-Los invitados no descargan ninguna app. Te comparto un enlace demo de 30 segundos para que pruebes cómo funciona desde tu celular: 👉 [Link a eventos-suite.vercel.app/organizadores]
+Los invitados no descargan ninguna app. Te comparto un enlace demo de 30 segundos para que pruebes cómo funciona desde tu celular: 👉 kronitt.com.ar/organizadores
 
 Si te parece, te cuento en 5 minutos cómo podemos implementarlo en un evento de prueba sin costo para el salón. ¿Te gustaría ver cómo funciona?"</div>
         </div>
@@ -1265,7 +1300,7 @@ Te escribo porque creamos Eventos Kronitt, una herramienta diseñada justamente 
 2. Momentos estáticos en la cena: Trivia interactiva en pantalla gigante y mural de fotos rotativo por QR.
 
 Lo mejor: los invitados no descargan nada y vos como planner podés monetizarlo con comisión por evento o integrarlo a tu propuesta de valor para cerrar clientes indecisos.
-Te dejo el demo para que lo chusmees en 1 minuto: 👉 [Link a /organizadores]"</div>
+Te dejo el demo para que lo chusmees en 1 minuto: 👉 kronitt.com.ar/organizadores"</div>
         </div>
 
         <div class="section-title-bar" style="margin-top: 10px; margin-bottom: 8px;">
@@ -1284,7 +1319,7 @@ Te dejo el demo para que lo chusmees en 1 minuto: 👉 [Link a /organizadores]"<
             <div class="step-num">2</div>
             <div class="step-info">
               <strong>Demostración en Vivo en su Celular (5 min)</strong>
-              <p>Hacer que escanee los QR de /organizadores y experimente la apertura del sobre, la trivia y el mural.</p>
+              <p>Hacer que escanee los QR de kronitt.com.ar/organizadores y experimente la apertura del sobre, la trivia y el mural.</p>
             </div>
           </div>
           <div class="step-card">
@@ -1335,7 +1370,7 @@ Te dejo el demo para que lo chusmees en 1 minuto: 👉 [Link a /organizadores]"<
 🏆 Trivia de la Pareja en Vivo: Un show en pantalla gigante durante la cena donde los invitados juegan con su celular respondiendo anécdotas sobre ustedes.
 📸 Mural de Fotos en Pantalla: Cada mesa tiene su QR para sacar selfies y dedicatorias que se proyectan en vivo. Al final, se descargan todas las fotos en alta resolución.
 
-Miren este link para probarlo: [Link Demo]
+Miren este link para probarlo: kronitt.com.ar/organizadores
 ¿Les gustaría que lo sumemos a la propuesta de su evento?"</div>
         </div>
 
@@ -1375,7 +1410,7 @@ Miren este link para probarlo: [Link Demo]
 
       <div class="footer-bar">
         <div><strong>EVENTOS KRONITT</strong> · Playbook de Ventas B2B</div>
-        <div>Página 02 de 02 · Showroom: <strong>eventos-suite.vercel.app/organizadores</strong></div>
+        <div>Showroom Interactivo: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
       </div>
     </div>
   </div>
@@ -1413,7 +1448,7 @@ try {
   fs.copyFileSync(outDossier, path.join(publicDocsDir, 'DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf'));
   fs.copyFileSync(outPlaybook, path.join(publicDocsDir, 'PLAYBOOK_VENTAS_EVENTOS_KRONITT.pdf'));
 
-  console.log('All 3 PDFs regenerated with high-contrast text, 3 commercial models, no WhatsApp, and 2-page Dossier!');
+  console.log('All 3 PDFs regenerated with CLICKABLE LINKS and kronitt.com.ar/organizadores!');
 } catch (err) {
   console.error('Error generating PDFs:', err);
   process.exit(1);
