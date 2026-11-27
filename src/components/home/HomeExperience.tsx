@@ -39,25 +39,114 @@ export default function HomeExperience() {
   // Selector de audiencia principal: 'festejadores' o 'organizadores'
   const [audience, setAudience] = useState<"festejadores" | "organizadores">("festejadores");
 
-  // Simulador B2B para salones
-  const [eventosMes, setEventosMes] = useState<number>(4);
-  const serviciosPorEvento = 3;
-  const totalServicios = eventosMes * serviciosPorEvento;
-  
-  let costoUnitario = 50000;
-  let tramoNombre = "Tramo 1 (1 a 3 serv.)";
-  if (totalServicios >= 7) {
-    costoUnitario = 30000;
-    tramoNombre = "Tramo 3 (7+ serv. - VIP)";
-  } else if (totalServicios >= 4) {
-    costoUnitario = 40000;
-    tramoNombre = "Tramo 2 (4 a 6 serv.)";
-  }
-
-  const precioVentaSugerido = 70000;
-  const ingresoBruto = totalServicios * precioVentaSugerido;
-  const costoTotal = totalServicios * costoUnitario;
-  const gananciaNeta = ingresoBruto - costoTotal;
+  // Escenarios fijos de rentabilidad B2B para salones y organizadores
+  const escenariosRentabilidad = [
+    {
+      fiestas: "1 Fiesta al mes",
+      detalle: "3 servicios (Combo completo)",
+      tramo: "Tramo 1 (Base)",
+      costoMayoristaUnitario: "$50.000",
+      costoMayoristaTotal: "$150.000",
+      // Vendiendo a $70.000 (Precio oficial de lista Kronitt)
+      a70k: {
+        precioUnitario: "$70.000",
+        facturacion: "$210.000",
+        gananciaPorServ: "+$20.000",
+        gananciaTotal: "+$60.000",
+      },
+      // Vendiendo a $85.000 (+21% de margen)
+      a85k: {
+        precioUnitario: "$85.000",
+        facturacion: "$255.000",
+        gananciaPorServ: "+$35.000",
+        gananciaTotal: "+$105.000",
+      },
+      // Vendiendo a $100.000 (Paquete Premium)
+      a100k: {
+        precioUnitario: "$100.000",
+        facturacion: "$300.000",
+        gananciaPorServ: "+$50.000",
+        gananciaTotal: "+$150.000",
+      },
+    },
+    {
+      fiestas: "2 Fiestas al mes",
+      detalle: "6 servicios (2 fiestas x 3 serv.)",
+      tramo: "Tramo 2 (Activo)",
+      costoMayoristaUnitario: "$40.000",
+      costoMayoristaTotal: "$240.000",
+      a70k: {
+        precioUnitario: "$70.000",
+        facturacion: "$420.000",
+        gananciaPorServ: "+$30.000",
+        gananciaTotal: "+$180.000",
+      },
+      a85k: {
+        precioUnitario: "$85.000",
+        facturacion: "$510.000",
+        gananciaPorServ: "+$45.000",
+        gananciaTotal: "+$270.000",
+      },
+      a100k: {
+        precioUnitario: "$100.000",
+        facturacion: "$600.000",
+        gananciaPorServ: "+$60.000",
+        gananciaTotal: "+$360.000",
+      },
+    },
+    {
+      destacado: true,
+      badge: "Caso habitual",
+      fiestas: "4 Fiestas al mes",
+      detalle: "12 servicios (1 fiesta por finde)",
+      tramo: "Tramo 3 (VIP)",
+      costoMayoristaUnitario: "$30.000",
+      costoMayoristaTotal: "$360.000",
+      a70k: {
+        precioUnitario: "$70.000",
+        facturacion: "$840.000",
+        gananciaPorServ: "+$40.000",
+        gananciaTotal: "+$480.000",
+      },
+      a85k: {
+        precioUnitario: "$85.000",
+        facturacion: "$1.020.000",
+        gananciaPorServ: "+$55.000",
+        gananciaTotal: "+$660.000",
+      },
+      a100k: {
+        precioUnitario: "$100.000",
+        facturacion: "$1.200.000",
+        gananciaPorServ: "+$70.000",
+        gananciaTotal: "+$840.000",
+      },
+    },
+    {
+      fiestas: "8 Fiestas al mes",
+      detalle: "24 servicios (Salón con 2 salas / viernes y sábados)",
+      tramo: "Tramo 3 (VIP)",
+      costoMayoristaUnitario: "$30.000",
+      costoMayoristaTotal: "$720.000",
+      a70k: {
+        precioUnitario: "$70.000",
+        facturacion: "$1.680.000",
+        gananciaPorServ: "+$40.000",
+        gananciaTotal: "+$960.000",
+      },
+      a85k: {
+        precioUnitario: "$85.000",
+        facturacion: "$2.040.000",
+        gananciaPorServ: "+$55.000",
+        gananciaTotal: "+$1.320.000",
+      },
+      a100k: {
+        precioUnitario: "$100.000",
+        facturacion: "$2.400.000",
+        gananciaPorServ: "+$70.000",
+        gananciaTotal: "+$1.680.000",
+      },
+    },
+  ];
 
   return (
     <div
@@ -96,8 +185,17 @@ export default function HomeExperience() {
         </div>
       </div>
 
-      {/* ─── 2. SELECTOR DE AUDIENCIA DUAL (FESTEJADORES VS SALONES) ─── */}
+      {/* ─── 2. SELECTOR DE AUDIENCIA DUAL (FESTEJADORES VS SALONES Y ORGANIZADORES) ─── */}
       <section className="pt-12 sm:pt-16 pb-8 max-w-7xl mx-auto px-4 sm:px-6 text-center">
+        <div className="mb-4 flex flex-col items-center">
+          <span className="text-xs sm:text-sm font-black uppercase tracking-[0.25em] text-amber-300 drop-shadow-sm">
+            Elegí una opción
+          </span>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Personalizá tu experiencia según tu perfil:
+          </p>
+        </div>
+
         <div className="inline-flex p-1.5 rounded-2xl bg-[#0c0e15] border border-white/15 shadow-xl max-w-full">
           <button
             type="button"
@@ -123,7 +221,7 @@ export default function HomeExperience() {
                 : "text-slate-400 hover:text-white"
             }`}
           >
-            <span>🏛️ Salones & Planners</span>
+            <span>🏛️ Salones y Organizadores</span>
             <span className="hidden sm:inline text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-900 border border-amber-500/30">
               Propuesta B2B Mayorista
             </span>
@@ -475,7 +573,7 @@ export default function HomeExperience() {
       )}
 
       {/* ═══════════════════════════════════════════════════════════ */}
-      {/* VISTA 2: SALONES & PLANNERS (B2B)                          */}
+      {/* VISTA 2: SALONES Y ORGANIZADORES (B2B)                     */}
       {/* ═══════════════════════════════════════════════════════════ */}
       {audience === "organizadores" && (
         <div className="transition-opacity duration-500 animate-fadeIn">
@@ -487,12 +585,12 @@ export default function HomeExperience() {
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-5 leading-tight">
               Modernizá tus pantallas y sumá hasta{" "}
               <span className="bg-gradient-to-r from-white via-slate-100 to-amber-300 bg-clip-text text-transparent">
-                $50.000 de ganancia limpia
+                $50.000 a $70.000 de ganancia limpia
               </span>{" "}
-              por evento
+              por servicio
             </h2>
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
-              Plataforma llave en mano para salones y wedding planners. Ofrecé tecnología interactiva de alto impacto sin invertir en equipamiento y con soporte técnico completo.
+              Plataforma llave en mano para salones y organizadores de eventos. Ofrecé tecnología interactiva de alto impacto sin invertir en equipamiento y con soporte técnico completo.
             </p>
           </section>
 
@@ -525,77 +623,177 @@ export default function HomeExperience() {
             </div>
           </section>
 
-          {/* ─── SIMULADOR B2B Y ESCALA MAYORISTA ─── */}
-          <section className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-white/10">
-            <div className="p-8 sm:p-10 rounded-3xl bg-[#0c0e15] border border-white/20 shadow-2xl">
-              <div className="text-center max-w-2xl mx-auto mb-8">
+          {/* ─── LIBERTAD DE PRECIOS Y TABLA DE RENTABILIDAD FIJA ─── */}
+          <section className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 border-t border-white/10">
+            {/* Banner Explícito de Libertad de Precios */}
+            <div className="mb-10 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#121524] via-[#0d0f17] to-[#161320] border border-amber-300/35 shadow-2xl">
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/35 text-[11px] font-black uppercase tracking-wider text-amber-300">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Libertad Total de Fijación de Precios</span>
+                </div>
+                <span className="text-xs font-bold text-slate-400">
+                  Precio Lista Kronitt (B2C): $70.000 ARS
+                </span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-white mb-2">
+                Kronitt vende cada servicio a $70.000, pero vos podés cobrar el valor que desees
+              </h3>
+              <div className="text-xs sm:text-sm text-slate-300 space-y-2 leading-relaxed">
+                <p>
+                  El valor de <strong className="text-amber-200">$70.000 ARS</strong> es el precio sugerido de lista al que Kronitt comercializa de manera directa cada módulo a particulares (B2C).
+                </p>
+                <p>
+                  Como salón u organizador aliado, <strong className="text-white">vos tenés total libertad para cobrar el valor que consideres</strong> (por ejemplo $85.000, $100.000 o más por servicio, o integrarlo directamente dentro del valor de la tarjeta o paquete &quot;Todo Incluido&quot; sin desglosar). Kronitt únicamente te factura la <strong className="text-white">tarifa mayorista bonificada</strong> ($50.000, $40.000 o $30.000 según tu escala mensual). <strong className="text-amber-300">Toda la diferencia es 100% ganancia neta directa para vos.</strong>
+                </p>
+              </div>
+            </div>
+
+            {/* Tabla Fija de Rentabilidad */}
+            <div className="p-6 sm:p-10 rounded-3xl bg-[#0c0e15] border border-white/20 shadow-2xl">
+              <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
                 <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-1 block">
-                  Simulador de Rentabilidad
+                  Simulador de Rentabilidad Fijo
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-black text-white">
-                  Calculá tu Ganancia Mensual
+                  Tabla de Rentabilidad y Ganancia Neta Mensual
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 mt-2">
-                  Ajustá la cantidad de eventos que hacés por mes (calculando 3 servicios por fiesta):
+                  Ejemplos calculados sobre los 3 servicios por fiesta (Invitación 3D + Trivia en Pantalla + Mural QR).
+                  Mirá cuánto gana tu salón cobrando a $70.000 versus si los ofrecés a valores más altos:
                 </p>
               </div>
 
-              {/* Slider */}
-              <div className="max-w-xl mx-auto mb-8">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-xs font-bold text-slate-400">Fiestas al mes:</span>
-                  <span className="text-lg font-black text-white bg-white/10 px-3 py-1 rounded-lg border border-white/20">
-                    {eventosMes} eventos ({totalServicios} servicios)
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="12"
-                  value={eventosMes}
-                  onChange={(e) => setEventosMes(Number(e.target.value))}
-                  className="w-full accent-amber-400 cursor-pointer h-2 bg-slate-800 rounded-lg"
-                />
-                <div className="flex justify-between text-[10px] text-slate-400 mt-1">
-                  <span>1 evento</span>
-                  <span>6 eventos</span>
-                  <span>12 eventos</span>
-                </div>
+              {/* Vista Escritorio / Tablet Grande */}
+              <div className="hidden lg:block overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-white/15 text-[11px] font-black uppercase tracking-wider text-slate-400">
+                      <th className="py-4 px-4">Volumen Mensual</th>
+                      <th className="py-4 px-4">Costo Mayorista Kronitt</th>
+                      <th className="py-4 px-4 bg-white/[0.02] border-x border-white/10 text-center">
+                        <div className="text-slate-200">Ganancia a $70.000</div>
+                        <div className="text-[9px] font-semibold text-amber-300/80 normal-case">(Recomendado Kronitt)</div>
+                      </th>
+                      <th className="py-4 px-4 bg-white/[0.04] border-r border-white/10 text-center">
+                        <div className="text-slate-200">Ganancia a $85.000</div>
+                        <div className="text-[9px] font-semibold text-slate-400 normal-case">(Margen ampliado +21%)</div>
+                      </th>
+                      <th className="py-4 px-4 bg-amber-400/[0.04] text-center">
+                        <div className="text-amber-200">Ganancia a $100.000</div>
+                        <div className="text-[9px] font-semibold text-amber-400/80 normal-case">(Paquete Premium)</div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/10 text-sm">
+                    {escenariosRentabilidad.map((esc, i) => (
+                      <tr
+                        key={i}
+                        className={`transition-colors ${
+                          esc.destacado
+                            ? "bg-gradient-to-r from-amber-400/10 via-white/5 to-transparent border-y-2 border-amber-300/40"
+                            : "hover:bg-white/[0.02]"
+                        }`}
+                      >
+                        <td className="py-5 px-4">
+                          <div className="flex items-center gap-2">
+                            <span className="font-black text-white text-base">{esc.fiestas}</span>
+                            {esc.badge && (
+                              <span className="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase">
+                                {esc.badge}
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs text-slate-400 mt-0.5">{esc.detalle}</div>
+                        </td>
+                        <td className="py-5 px-4">
+                          <div className="font-bold text-slate-200">{esc.costoMayoristaUnitario} <span className="text-xs text-slate-400">c/u</span></div>
+                          <div className="text-xs text-slate-400">{esc.tramo} · Total: {esc.costoMayoristaTotal}</div>
+                        </td>
+                        <td className="py-5 px-4 bg-white/[0.02] border-x border-white/10 text-center">
+                          <div className="font-black text-slate-100 text-lg">{esc.a70k.gananciaTotal}</div>
+                          <div className="text-xs text-slate-400">({esc.a70k.gananciaPorServ} / servicio)</div>
+                        </td>
+                        <td className="py-5 px-4 bg-white/[0.04] border-r border-white/10 text-center">
+                          <div className="font-black text-slate-100 text-lg">{esc.a85k.gananciaTotal}</div>
+                          <div className="text-xs text-slate-400">({esc.a85k.gananciaPorServ} / servicio)</div>
+                        </td>
+                        <td className="py-5 px-4 bg-amber-400/[0.04] text-center">
+                          <div className="font-black text-amber-200 text-xl">{esc.a100k.gananciaTotal}</div>
+                          <div className="text-xs text-amber-300/80 font-semibold">({esc.a100k.gananciaPorServ} / servicio)</div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
 
-              {/* Resultados */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center mb-8">
-                <div className="p-4 rounded-2xl bg-black/40 border border-white/10">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Tu Escala</span>
-                  <span className="text-xs sm:text-sm font-black text-white">{tramoNombre}</span>
-                  <span className="text-[11px] text-slate-400 block mt-1">${costoUnitario.toLocaleString("es-AR")} / serv.</span>
-                </div>
-                <div className="p-4 rounded-2xl bg-black/40 border border-white/10">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">Ingreso Sugerido</span>
-                  <span className="text-base sm:text-lg font-black text-slate-200">
-                    ${ingresoBruto.toLocaleString("es-AR")}
-                  </span>
-                  <span className="text-[11px] text-slate-400 block mt-1">Vendiendo a $70k c/u</span>
-                </div>
-                <div className="p-4 rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-amber-400/20 border border-amber-300/40">
-                  <span className="text-[10px] uppercase font-black text-amber-300 block mb-1">Tu Ganancia Neta</span>
-                  <span className="text-xl sm:text-2xl font-black text-amber-200">
-                    +${gananciaNeta.toLocaleString("es-AR")}
-                  </span>
-                  <span className="text-[10px] text-slate-300 block mt-1">Margen directo para tu salón</span>
-                </div>
+              {/* Vista Mobile & Tablet: Tarjetas Detalladas por Escenario */}
+              <div className="lg:hidden space-y-4">
+                {escenariosRentabilidad.map((esc, i) => (
+                  <div
+                    key={i}
+                    className={`p-5 rounded-2xl border ${
+                      esc.destacado
+                        ? "bg-[#121524] border-amber-300/50 shadow-xl"
+                        : "bg-black/40 border-white/10"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <h4 className="font-black text-white text-base">{esc.fiestas}</h4>
+                      {esc.badge ? (
+                        <span className="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase">
+                          {esc.badge}
+                        </span>
+                      ) : (
+                        <span className="text-[11px] text-slate-400">{esc.tramo}</span>
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-400 mb-4">{esc.detalle} · Costo Kronitt: <strong className="text-slate-200">{esc.costoMayoristaUnitario} c/u</strong> (Total: {esc.costoMayoristaTotal})</p>
+
+                    <div className="space-y-2.5 pt-2 border-t border-white/10">
+                      <div className="p-3 rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-between">
+                        <div>
+                          <div className="text-xs font-bold text-slate-300">Cobrando a $70.000</div>
+                          <div className="text-[10px] text-slate-400">Recomendado ({esc.a70k.gananciaPorServ}/serv)</div>
+                        </div>
+                        <div className="text-base font-black text-white">{esc.a70k.gananciaTotal}</div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-white/[0.05] border border-white/15 flex items-center justify-between">
+                        <div>
+                          <div className="text-xs font-bold text-slate-200">Cobrando a $85.000</div>
+                          <div className="text-[10px] text-slate-400">Margen ampliado ({esc.a85k.gananciaPorServ}/serv)</div>
+                        </div>
+                        <div className="text-base font-black text-white">{esc.a85k.gananciaTotal}</div>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-amber-400/10 border border-amber-300/30 flex items-center justify-between">
+                        <div>
+                          <div className="text-xs font-bold text-amber-200">Cobrando a $100.000</div>
+                          <div className="text-[10px] text-amber-300/80">Paquete Premium ({esc.a100k.gananciaPorServ}/serv)</div>
+                        </div>
+                        <div className="text-lg font-black text-amber-200">{esc.a100k.gananciaTotal}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
 
-              {/* Botón CTA alianzas */}
-              <div className="text-center">
+              {/* Nota de cero riesgo y botón de contacto */}
+              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+                <div className="text-xs text-slate-300 max-w-xl leading-relaxed">
+                  <strong className="text-white">Cero riesgo financiero:</strong> No hay costo de mantenimiento ni cuotas fijas mensuales. Kronitt te factura únicamente los servicios que vendas en cada mes cerrado.
+                </div>
+
                 <a
-                  href="https://wa.me/5492235851419?text=Hola!%20Tengo%20un%20sal%C3%B3n%20/%20soy%20planner%20y%20quiero%20coordinar%20una%20alianza%20con%20Eventos%20Kronitt."
+                  href="https://wa.me/5492235851419?text=Hola!%20Tengo%20un%20sal%C3%B3n%20/%20soy%20organizador%20y%20quiero%20coordinar%20una%20alianza%20con%20Eventos%20Kronitt."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-white via-slate-100 to-amber-200 text-slate-950 font-black text-sm shadow-lg hover:from-slate-100 hover:to-white transition-all transform hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-white via-slate-100 to-amber-200 text-slate-950 font-black text-xs sm:text-sm shadow-lg hover:from-slate-100 hover:to-white transition-all transform hover:-translate-y-0.5 shrink-0"
                 >
                   <WhatsAppIcon className="w-5 h-5 shrink-0" />
-                  <span>Quiero coordinar una reunión de 10 min</span>
+                  <span>Coordinar reunión de 10 min</span>
                 </a>
               </div>
             </div>
@@ -699,7 +897,7 @@ export default function HomeExperience() {
               onClick={() => setAudience("organizadores")}
               className={`hover:text-white transition-colors ${audience === "organizadores" ? "text-amber-300 font-bold" : ""}`}
             >
-              Para Salones & Planners
+              Para Salones y Organizadores
             </button>
             <span>·</span>
             <Link href="/organizadores" className="text-slate-300 hover:text-white transition-colors">

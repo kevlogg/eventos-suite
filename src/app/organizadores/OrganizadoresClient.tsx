@@ -141,7 +141,7 @@ export default function OrganizadoresClient() {
               <span className="font-extrabold text-base sm:text-lg text-white tracking-tight">Eventos Kronitt</span>
             </div>
             <span className="hidden md:inline-block px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-white/10 text-slate-200 border border-white/25 uppercase tracking-wider">
-              Salones & Planners
+              Salones y Organizadores
             </span>
           </Link>
 
@@ -877,7 +877,7 @@ export default function OrganizadoresClient() {
                   : "text-slate-400 hover:text-white"
               }`}
             >
-              🏢 Salones & Planners (Tarifa Mayorista B2B)
+              🏢 Salones y Organizadores (Tarifa Mayorista B2B)
             </button>
             <button
               onClick={() => setPricingTab("b2c")}
@@ -919,7 +919,7 @@ export default function OrganizadoresClient() {
 
             <div className="p-6 rounded-3xl bg-slate-900 border-2 border-slate-400/50 shadow-xl shadow-slate-300/10 flex flex-col justify-between relative">
               <div className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-slate-200 text-slate-950 text-[10px] font-black uppercase tracking-wider">
-                Recomendado Planners
+                Recomendado Organizadores
               </div>
               <div>
                 <span className="px-2.5 py-1 rounded-full bg-slate-800 text-slate-200 border border-slate-700 text-[10px] font-bold uppercase tracking-wider">
@@ -930,7 +930,7 @@ export default function OrganizadoresClient() {
                   $40.000 <span className="text-xs text-slate-400 font-semibold">c/u</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed mb-5">
-                  Para salones y planners con 2 a 3 fiestas al mes que ofrecen los combos.
+                  Para salones y organizadores con 2 a 3 fiestas al mes que ofrecen los combos.
                 </p>
                 <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs mb-4">
                   <div className="text-slate-400">Margen vendiendo a $70k:</div>
@@ -1086,7 +1086,7 @@ export default function OrganizadoresClient() {
               <div>
                 <h4 className="text-lg font-bold text-white mb-2">Guía de Ventas (2 Páginas)</h4>
                 <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-                  Mensajes modelo para WhatsApp, guión de reunión de 15 min y manejo de objeciones para salones y planners.
+                  Mensajes modelo para WhatsApp, guión de reunión de 15 min y manejo de objeciones para salones y organizadores.
                 </p>
               </div>
               <a
@@ -1109,7 +1109,7 @@ export default function OrganizadoresClient() {
             Dudas Habituales
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-white mt-1 mb-2">
-            Preguntas Frecuentes de Salones y Planners
+            Preguntas Frecuentes de Salones y Organizadores
           </h2>
           <p className="text-slate-300 text-xs sm:text-sm">
             Todo lo que necesitás saber sobre la implementación técnica y comercial.

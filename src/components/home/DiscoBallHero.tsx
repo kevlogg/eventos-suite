@@ -493,9 +493,8 @@ export default function DiscoBallHero() {
       >
         {/* Top Hint: Fades out on drag or scroll */}
         <div
-          className={`transition-all duration-700 pointer-events-none ${
-            isInteracting || hasScrolled ? "opacity-0 -translate-y-3" : "opacity-80"
-          }`}
+          className={`transition-all duration-700 pointer-events-none ${isInteracting || hasScrolled ? "opacity-0 -translate-y-3" : "opacity-80"
+            }`}
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 border border-white/15 text-slate-300 text-xs font-medium tracking-wide backdrop-blur-md shadow-lg">
             <Sparkles size={13} className="text-amber-400 animate-pulse" />
@@ -523,15 +522,13 @@ export default function DiscoBallHero() {
             {WORDS.map((w, i) => (
               <span
                 key={i}
-                className={`inline-block mr-[0.25em] transition-all duration-700 ease-out transform ${
-                  showHeadline && !hasScrolled
+                className={`inline-block mr-[0.25em] transition-all duration-700 ease-out transform ${showHeadline && !hasScrolled
                     ? "opacity-100 translate-y-0 filter blur-0 scale-100"
                     : "opacity-0 translate-y-6 filter blur-[4px] scale-95"
-                } ${
-                  w.isGradient
+                  } ${w.isGradient
                     ? "bg-gradient-to-r from-white via-slate-100 to-amber-300 bg-clip-text text-transparent font-black"
                     : "text-white"
-                }`}
+                  }`}
                 style={{
                   transitionDelay: `${i * 150}ms`,
                   textShadow: w.isGradient
@@ -549,9 +546,8 @@ export default function DiscoBallHero() {
         <button
           type="button"
           onClick={scrollToContent}
-          className={`flex flex-col items-center gap-2 cursor-pointer transition-all duration-700 group ${
-            hasScrolled ? "opacity-0 pointer-events-none translate-y-4" : "opacity-90 hover:opacity-100"
-          }`}
+          className={`flex flex-col items-center gap-2 cursor-pointer transition-all duration-700 group ${hasScrolled ? "opacity-0 pointer-events-none translate-y-4" : "opacity-90 hover:opacity-100"
+            }`}
         >
           <span className="text-[11px] sm:text-xs uppercase tracking-widest font-semibold text-slate-400 group-hover:text-white transition-colors drop-shadow-md">
             Deslizá para descubrir
