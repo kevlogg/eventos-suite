@@ -8,13 +8,16 @@
 }
 
 :root {
-  --background: #07080a;
+  --background: #050608;
   --foreground: #f8fafc;
   --primary: #ffffff;
   --primary-hover: #e2e8f0;
-  --accent: #d4af37;
-  --surface: #0e1017;
-  --surface-border: rgba(255, 255, 255, 0.15);
+  --accent: #dfc28d;
+  --accent-warm: #f59e0b;
+  --surface: #0c0e15;
+  --surface-border: rgba(255, 255, 255, 0.12);
+  --metallic-silver: linear-gradient(135deg, #ffffff 0%, #e2e8f0 40%, #94a3b8 100%);
+  --champagne-glow: rgba(223, 194, 141, 0.18);
 
   /* Invitation Theme Tokens */
   --cream:        #FDFBF7;

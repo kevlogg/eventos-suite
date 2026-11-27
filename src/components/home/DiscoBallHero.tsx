@@ -529,7 +529,7 @@ export default function DiscoBallHero() {
                     : "opacity-0 translate-y-6 filter blur-[4px] scale-95"
                 } ${
                   w.isGradient
-                    ? "bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-400 bg-clip-text text-transparent font-black"
+                    ? "bg-gradient-to-r from-white via-slate-100 to-amber-300 bg-clip-text text-transparent font-black"
                     : "text-white"
                 }`}
                 style={{
@@ -556,7 +556,7 @@ export default function DiscoBallHero() {
           <span className="text-[11px] sm:text-xs uppercase tracking-widest font-semibold text-slate-400 group-hover:text-white transition-colors drop-shadow-md">
             Deslizá para descubrir
           </span>
-          <div className="w-9 h-9 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-slate-300 group-hover:text-white group-hover:border-indigo-400/70 group-hover:bg-indigo-950/50 transition-all shadow-[0_0_20px_rgba(99,102,241,0.25)] animate-bounce">
+          <div className="w-9 h-9 rounded-full bg-black/70 border border-white/20 flex items-center justify-center text-slate-300 group-hover:text-white group-hover:border-amber-400/70 group-hover:bg-amber-950/40 transition-all shadow-[0_0_20px_rgba(245,158,11,0.25)] animate-bounce">
             <ChevronDown size={18} />
           </div>
         </button>
