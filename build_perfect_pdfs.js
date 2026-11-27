@@ -584,14 +584,14 @@ const onePagerHtml = `<!DOCTYPE html>
               <tr>
                 <td><strong>Tramo 2 (Activo)</strong></td>
                 <td>4 a 8 servicios</td>
-                <td><strong>$35.000</strong> c/u</td>
-                <td><span class="td-highlight">$35.000 por servicio (50%)</span></td>
+                <td><strong>$40.000</strong> c/u</td>
+                <td><span class="td-highlight">$30.000 por servicio (43%)</span></td>
               </tr>
               <tr>
                 <td><strong>Tramo 3 (VIP / Salón)</strong></td>
                 <td>9 o más servicios</td>
-                <td><strong>$25.000</strong> c/u</td>
-                <td><span class="td-highlight">$45.000 por servicio (64%)</span></td>
+                <td><strong>$30.000</strong> c/u</td>
+                <td><span class="td-highlight">$40.000 por servicio (57%)</span></td>
               </tr>
             </tbody>
           </table>
@@ -973,14 +973,14 @@ const dossierHtml = `<!DOCTYPE html>
               <tr>
                 <td><strong>Tramo 2 (Activo)</strong></td>
                 <td>4 a 8 servicios/mes</td>
-                <td><strong>$35.000</strong> c/u</td>
-                <td><span style="color:#4ade80;font-weight:800;">$35.000 por servicio (50%)</span></td>
+                <td><strong>$40.000</strong> c/u</td>
+                <td><span style="color:#4ade80;font-weight:800;">$30.000 por servicio (43%)</span></td>
               </tr>
               <tr>
                 <td><strong>Tramo 3 (VIP / Salón)</strong></td>
                 <td>9 o más servicios/mes</td>
-                <td><strong>$25.000</strong> c/u</td>
-                <td><span style="color:#4ade80;font-weight:800;">$45.000 por servicio (64%)</span></td>
+                <td><strong>$30.000</strong> c/u</td>
+                <td><span style="color:#4ade80;font-weight:800;">$40.000 por servicio (57%)</span></td>
               </tr>
             </tbody>
           </table>
@@ -1001,7 +1001,7 @@ const dossierHtml = `<!DOCTYPE html>
             <h4>Ventaja Operativa para el Partner</h4>
             <p>
               • <strong>Un solo criterio:</strong> Cada módulo vale exactamente lo mismo.<br>
-              • <strong>Mayor volumen = menor costo:</strong> A partir de 4 servicios al mes el costo baja a $35.000 y luego a $25.000.<br>
+              • <strong>Mayor volumen = menor costo:</strong> A partir de 4 servicios al mes el costo baja a $40.000 y luego a $30.000.<br>
               • <strong>Cero complejidad técnica:</strong> Kronitt entrega todo configurado y listo para proyectar.
             </p>
           </div>
@@ -1418,8 +1418,8 @@ const playbookHtml = `<!DOCTYPE html>
             <h4>Escala Mayorista Partners B2B</h4>
             <p>
               • <strong>Tramo 1 (1-3 serv.):</strong> $50.000 c/u (Margen $20k).<br>
-              • <strong>Tramo 2 (4-8 serv.):</strong> $35.000 c/u (50% margen).<br>
-              • <strong>Tramo 3 (9+ serv.):</strong> $25.000 c/u (64% margen).
+              • <strong>Tramo 2 (4-8 serv.):</strong> $40.000 c/u ($30k margen / 43%).<br>
+              • <strong>Tramo 3 (9+ serv.):</strong> $30.000 c/u ($40k margen / 57%).
             </p>
           </div>
         </div>

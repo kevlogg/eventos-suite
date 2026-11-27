@@ -52,8 +52,8 @@ Eliminamos las listas de invitados desactualizadas en Excel, las tarjetas de pap
 | Tramo Mensual | Servicios Acumulados en el Mes | Tu Costo Mayorista por Servicio | Margen vendiendo servicio suelto ($70k) |
 | :---: | :---: | :---: | :---: |
 | **Tramo 1 (Base)** | **1 a 3 servicios** | **$50.000** c/u | **$20.000** por servicio (28.5% margen) |
-| **Tramo 2 (Activo)** | **4 a 8 servicios** | **$35.000** c/u | **$35.000** por servicio (50% margen) |
-| **Tramo 3 (VIP / Salón)** | **9 o más servicios** | **$25.000** c/u | **$45.000** por servicio (64% margen) |
+| **Tramo 2 (Activo)** | **4 a 8 servicios** | **$40.000** c/u | **$30.000** por servicio (43% margen) |
+| **Tramo 3 (VIP / Salón)** | **9 o más servicios** | **$30.000** c/u | **$40.000** por servicio (57% margen) |
 
 ---
 

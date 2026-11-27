@@ -86,9 +86,9 @@
   * Combo Dúo (2 serv.): **$105.000 ARS**
   * Combo Full Suite (3 serv.): **$135.000 ARS**
 * **Canal Partners B2B (Salones & Organizadores):**
-  * Tramo 1 (1 a 3 serv./mes): **$50.000 c/u** (Margen: $20.000/serv)
-  * Tramo 2 (4 a 8 serv./mes): **$35.000 c/u** (Margen: $35.000/serv, 50%)
-  * Tramo 3 (9+ serv./mes): **$25.000 c/u** (Margen: $45.000/serv, 64%)
+  * Tramo 1 (1 a 3 serv./mes): **$50.000 c/u** (Margen: $20.000/serv, 28.5%)
+  * Tramo 2 (4 a 8 serv./mes): **$40.000 c/u** (Margen: $30.000/serv, 43%)
+  * Tramo 3 (9+ serv./mes): **$30.000 c/u** (Margen: $40.000/serv, 57%)
 
 | Objeción Habitual | Respuesta Recomendada |
 | :--- | :--- |
