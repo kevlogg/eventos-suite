@@ -9,22 +9,22 @@ Es la plataforma web integral que digitaliza y dinamiza la experiencia de un eve
 ---
 
 ## 🎯 MODELO DE PRECIOS & COMBOS (CONSUMIDOR FINAL)
-*Cada servicio individual tiene un valor de lista de **$60.000 ARS**.*
+*Cada servicio individual tiene un valor de lista de **$70.000 ARS** (los 3 por separado suman $210.000).*
 
-* **1 Servicio Individual:** **$60.000 ARS** *(Invitación sola, Trivia sola o Mural solo)*.
-* **Combo Dúo (2 servicios a elección):** **$85.000 ARS** *(Ahorro de $35.000 vs. precio de lista)*.
-* **Combo Full Suite (Los 3 servicios juntos):** **$100.000 ARS** *(Ahorro de $80.000 respecto a los $180.000 de lista)*.
+* **1 Servicio Individual:** **$70.000 ARS** *(Invitación sola, Trivia sola o Mural solo)*.
+* **Combo Dúo (2 servicios a elección):** **$105.000 ARS** *(Ahorro de $35.000 vs. precio de lista)*.
+* **Combo Full Suite (Los 3 servicios juntos):** **$135.000 ARS** *(Ahorro de $75.000 respecto a los $210.000 de lista)*.
 
 ---
 
 ## 🤝 CANAL PARTNERS B2B: SALONES & ORGANIZADORES
-*Tarifa mayorista unificada por volumen de servicios mensuales. Vos definís tu precio de venta final (PVP sugerido: $60.000 c/u o $100.000 el pack completo).*
+*Tarifa mayorista por escala mensual de servicios individuales. A mayor volumen de servicios acumulados en el mes calendario, menor es tu costo:*
 
-| Tramo Mensual | Servicios en el Mes | Tu Costo por Servicio | Costo Evento Completo (3 serv.) | Tu Ganancia (al sugerido) |
-| :---: | :---: | :---: | :---: | :---: |
-| **Tramo 1 (Base)** | **1 a 4 servicios** | **$25.000** | **$75.000** | **$25.000 a $35.000** por fiesta |
-| **Tramo 2 (Activo)** | **5 a 9 servicios** | **$20.000** | **$60.000** | **$40.000** por fiesta |
-| **Tramo 3 (VIP / Salón)** | **10 o más servicios** | **$15.000** | **$45.000** | **$45.000 a $55.000** por fiesta |
+| Tramo Mensual | Servicios en el Mes | Tu Costo Mayorista por Servicio | Margen vendiendo servicio suelto ($70k) |
+| :---: | :---: | :---: | :---: |
+| **Tramo 1 (Base)** | **1 a 3 servicios** | **$50.000** c/u | **$20.000** por servicio |
+| **Tramo 2 (Activo)** | **4 a 8 servicios** | **$35.000** c/u | **$35.000** por servicio (50% margen) |
+| **Tramo 3 (VIP / Salón)** | **9 o más servicios** | **$25.000** c/u | **$45.000** por servicio (64% margen) |
 
 ---
 

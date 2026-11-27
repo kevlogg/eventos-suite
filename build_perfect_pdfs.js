@@ -165,7 +165,7 @@ const commonCss = `
 `;
 
 // =========================================================================
-// 1. ONE-PAGER EJECUTIVO (Servicio base $60.000, Combos y Escala B2B)
+// 1. ONE-PAGER EJECUTIVO (Servicio base $70.000, Combos y Tramo 1 B2B a $50k)
 // =========================================================================
 const onePagerHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -460,13 +460,13 @@ const onePagerHtml = `<!DOCTYPE html>
         </p>
       </div>
 
-      <!-- 3 SERVICES ($60.000 BASE EACH) -->
+      <!-- 3 SERVICES ($70.000 BASE EACH) -->
       <div class="services-grid">
         <div class="service-card card-amber">
           <div>
             <span class="svc-badge badge-amber">Servicio 01 · Pre-Evento</span>
             <div class="svc-name">Invitaciones & RSVP</div>
-            <div class="svc-price-tag">PVP Individual: $60.000 ARS</div>
+            <div class="svc-price-tag">PVP Individual: $70.000 ARS</div>
           </div>
           <ul class="svc-items">
             <li>
@@ -488,7 +488,7 @@ const onePagerHtml = `<!DOCTYPE html>
           <div>
             <span class="svc-badge badge-purple">Servicio 02 · Durante</span>
             <div class="svc-name">Trivia Fiesta en Vivo</div>
-            <div class="svc-price-tag">PVP Individual: $60.000 ARS</div>
+            <div class="svc-price-tag">PVP Individual: $70.000 ARS</div>
           </div>
           <ul class="svc-items">
             <li>
@@ -510,7 +510,7 @@ const onePagerHtml = `<!DOCTYPE html>
           <div>
             <span class="svc-badge badge-pink">Servicio 03 · Durante & Post</span>
             <div class="svc-name">Mural de Fotos por QR</div>
-            <div class="svc-price-tag">PVP Individual: $60.000 ARS</div>
+            <div class="svc-price-tag">PVP Individual: $70.000 ARS</div>
           </div>
           <ul class="svc-items">
             <li>
@@ -533,32 +533,32 @@ const onePagerHtml = `<!DOCTYPE html>
       <div>
         <div class="block-header">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <span>Packs & Combos para el Cliente Final (Valor de lista $180k)</span>
+          <span>Packs & Combos para el Cliente Final (Valor de lista $210k)</span>
         </div>
         <div class="combos-b2c-grid">
           <div class="combo-box">
             <div class="combo-tag">1 Servicio Suelto</div>
-            <div class="combo-price">$60.000</div>
+            <div class="combo-price">$70.000</div>
             <div class="combo-desc">A elección: solo Invitación, solo Trivia o solo Mural de fotos.</div>
           </div>
 
           <div class="combo-box">
             <div class="combo-tag">Combo Dúo (2 Servicios)</div>
-            <div class="combo-price">$85.000</div>
+            <div class="combo-price">$120.000</div>
             <div class="combo-desc">Elegís 2 módulos (ej: Invitación + Mural o Trivia + Mural).</div>
-            <div class="combo-saving">Ahorra $35.000 vs. precio de lista</div>
+            <div class="combo-saving">Ahorra $20.000 vs. precio de lista ($140k)</div>
           </div>
 
           <div class="combo-box featured">
             <div class="combo-tag" style="color: #d8b4fe;">Combo Full Suite (3 Servicios)</div>
-            <div class="combo-price" style="color: #fbcfe8;">$100.000</div>
+            <div class="combo-price" style="color: #fbcfe8;">$160.000</div>
             <div class="combo-desc">La experiencia completa: Invitación 3D + Trivia LED + Mural QR.</div>
-            <div class="combo-saving" style="color: #86efac;">Ahorra $80.000 (¡Pack estrella!)</div>
+            <div class="combo-saving" style="color: #86efac;">Ahorra $50.000 sobre los $210k de lista</div>
           </div>
         </div>
       </div>
 
-      <!-- CANAL PARTNERS B2B TABLE (ESCALA POR VOLUMEN MENSUAL) -->
+      <!-- CANAL PARTNERS B2B TABLE (TRAMO 1: 1 A 3 SERVICIOS A $50.000) -->
       <div>
         <div class="block-header">
           <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -577,21 +577,21 @@ const onePagerHtml = `<!DOCTYPE html>
             <tbody>
               <tr>
                 <td><strong>Tramo 1 (Base)</strong></td>
-                <td>1 a 4 servicios</td>
-                <td><strong>$25.000</strong> c/u</td>
-                <td>$75.000 <span class="td-highlight">(Margen $25k-$35k)</span></td>
+                <td>1 a 3 servicios</td>
+                <td><strong>$50.000</strong> c/u</td>
+                <td>$150.000 <span class="td-highlight">(Margen $20k c/u)</span></td>
               </tr>
               <tr>
                 <td><strong>Tramo 2 (Activo)</strong></td>
-                <td>5 a 9 servicios</td>
-                <td><strong>$20.000</strong> c/u</td>
-                <td>$60.000 <span class="td-highlight">(Margen $40k)</span></td>
+                <td>4 a 8 servicios</td>
+                <td><strong>$35.000</strong> c/u</td>
+                <td>$105.000 <span class="td-highlight">(Margen $35k-$55k)</span></td>
               </tr>
               <tr>
                 <td><strong>Tramo 3 (VIP / Salón)</strong></td>
-                <td>10 o más servicios</td>
-                <td><strong>$15.000</strong> c/u</td>
-                <td>$45.000 <span class="td-highlight">(Margen $55k limpios)</span></td>
+                <td>9 o más servicios</td>
+                <td><strong>$25.000</strong> c/u</td>
+                <td>$75.000 <span class="td-highlight">(Margen $45k-$85k)</span></td>
               </tr>
             </tbody>
           </table>
@@ -620,7 +620,7 @@ const onePagerHtml = `<!DOCTYPE html>
 </html>`;
 
 // =========================================================================
-// 2. DOSSIER B2B COMPLETO (2 Páginas A4, Servicio Base $60.000, Combos y B2B)
+// 2. DOSSIER B2B COMPLETO (2 Páginas A4, Servicio Base $70.000, Tramo 1 a $50k)
 // =========================================================================
 const dossierHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -856,14 +856,14 @@ const dossierHtml = `<!DOCTYPE html>
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
         <div class="section-headline">
           <h2>Los 3 Servicios Interactivos en Detalle</h2>
-          <p>Cada servicio tiene un valor individual de lista de $60.000 ARS. Diseñados para elevar la fiesta y simplificar la gestión.</p>
+          <p>Cada servicio tiene un valor individual de lista de $70.000 ARS. Diseñados para elevar la fiesta y simplificar la gestión.</p>
         </div>
 
         <!-- SERVICE 1 -->
         <div class="service-row-card sr-amber">
           <div class="sr-header">
             <div class="sr-title">01. Invitaciones Digitales Interactivas & RSVP</div>
-            <div class="sr-tag">PVP: $60.000 ARS</div>
+            <div class="sr-tag">PVP: $70.000 ARS</div>
           </div>
           <div class="sr-body">
             Reemplaza las tarjetas de papel por una web inmersiva con sobre virtual 3D, música y animación temática. Los invitados confirman asistencia y detallan preferencias con un toque.
@@ -883,7 +883,7 @@ const dossierHtml = `<!DOCTYPE html>
         <div class="service-row-card sr-purple">
           <div class="sr-header">
             <div class="sr-title">02. Trivia Fiesta en Vivo (Show en Pantallas LED)</div>
-            <div class="sr-tag">PVP: $60.000 ARS</div>
+            <div class="sr-tag">PVP: $70.000 ARS</div>
           </div>
           <div class="sr-body">
             Convierte la cena en un programa de TV interactivo. Los invitados escanean el código QR desde la mesa y compiten respondiendo preguntas temáticas o personalizadas contra reloj.
@@ -903,7 +903,7 @@ const dossierHtml = `<!DOCTYPE html>
         <div class="service-row-card sr-pink">
           <div class="sr-header">
             <div class="sr-title">03. Mural de Fotos Dinámicas por QR</div>
-            <div class="sr-tag">PVP: $60.000 ARS</div>
+            <div class="sr-tag">PVP: $70.000 ARS</div>
           </div>
           <div class="sr-body">
             Identificador con QR exclusivo en cada mesa. Los invitados sacan selfies y dedicatorias que se proyectan en pantalla gigante en segundos con transiciones elegantes.
@@ -966,21 +966,21 @@ const dossierHtml = `<!DOCTYPE html>
             <tbody>
               <tr>
                 <td><strong>Tramo 1 (Base)</strong></td>
-                <td>1 a 4 servicios/mes</td>
-                <td><strong>$25.000</strong> c/u</td>
-                <td>$75.000 <span style="color:#4ade80;font-weight:800;">(Margen: $25k-$35k)</span></td>
+                <td>1 a 3 servicios/mes</td>
+                <td><strong>$50.000</strong> c/u</td>
+                <td>$150.000 <span style="color:#4ade80;font-weight:800;">(Margen: $20k c/u)</span></td>
               </tr>
               <tr>
                 <td><strong>Tramo 2 (Activo)</strong></td>
-                <td>5 a 9 servicios/mes</td>
-                <td><strong>$20.000</strong> c/u</td>
-                <td>$60.000 <span style="color:#4ade80;font-weight:800;">(Margen: $40k)</span></td>
+                <td>4 a 8 servicios/mes</td>
+                <td><strong>$35.000</strong> c/u</td>
+                <td>$105.000 <span style="color:#4ade80;font-weight:800;">(Margen: $35k-$55k)</span></td>
               </tr>
               <tr>
                 <td><strong>Tramo 3 (VIP / Salón)</strong></td>
-                <td>10 o más servicios/mes</td>
-                <td><strong>$15.000</strong> c/u</td>
-                <td>$45.000 <span style="color:#4ade80;font-weight:800;">(Margen: $55k limpios)</span></td>
+                <td>9 o más servicios/mes</td>
+                <td><strong>$25.000</strong> c/u</td>
+                <td>$75.000 <span style="color:#4ade80;font-weight:800;">(Margen: $45k-$85k limpios)</span></td>
               </tr>
             </tbody>
           </table>
@@ -991,9 +991,9 @@ const dossierHtml = `<!DOCTYPE html>
           <div class="b2b-summary-card">
             <h4>Packs Sugeridos al Cliente Final</h4>
             <p>
-              • <strong>1 Servicio Individual:</strong> $60.000 ARS.<br>
-              • <strong>Combo Dúo (2 servicios):</strong> $85.000 ARS.<br>
-              • <strong>Combo Full Suite (3 servicios):</strong> $100.000 ARS.<br>
+              • <strong>1 Servicio Individual:</strong> $70.000 ARS.<br>
+              • <strong>Combo Dúo (2 servicios):</strong> $120.000 ARS (ahorro $20k).<br>
+              • <strong>Combo Full Suite (3 servicios):</strong> $160.000 ARS (ahorro $50k).<br>
               El partner es libre de fijar su precio de venta o sumarlo a sus paquetes.
             </p>
           </div>
@@ -1001,8 +1001,8 @@ const dossierHtml = `<!DOCTYPE html>
             <h4>Ventaja Operativa para el Partner</h4>
             <p>
               • <strong>Un solo criterio:</strong> Cada módulo vale exactamente lo mismo.<br>
-              • <strong>Mayor volumen = menor costo:</strong> A partir de 10 servicios al mes el costo unitario baja a $15.000.<br>
-              • <strong>Cero complejidad técnica:</strong> Kronitt entrega todo configurado y listo para proyectar.
+              • <strong>Tramo 1 a $50.000:</strong> Margen directo desde el primer servicio.<br>
+              • <strong>Escala a $25.000:</strong> A partir de 9 servicios el margen se dispara.
             </p>
           </div>
         </div>
@@ -1029,7 +1029,6 @@ const dossierHtml = `<!DOCTYPE html>
 // Write HTMLs to temp
 const onePagerPath = path.join(tempDir, 'one_pager.html');
 const dossierPath = path.join(tempDir, 'dossier.html');
-const playbookPath = path.join(tempDir, 'playbook.html');
 
 fs.writeFileSync(onePagerPath, onePagerHtml, 'utf8');
 fs.writeFileSync(dossierPath, dossierHtml, 'utf8');
@@ -1037,7 +1036,6 @@ fs.writeFileSync(dossierPath, dossierHtml, 'utf8');
 // Target PDF outputs
 const outOnePager = path.join(docsDir, 'ONE_PAGER_EVENTOS_KRONITT.pdf');
 const outDossier = path.join(docsDir, 'DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf');
-const outPlaybook = path.join(docsDir, 'PLAYBOOK_VENTAS_EVENTOS_KRONITT.pdf');
 
 function renderPdf(htmlPath, outPdf) {
   const fileUrl = 'file:///' + htmlPath.replace(/\\/g, '/');
@@ -1054,7 +1052,7 @@ try {
   fs.copyFileSync(outOnePager, path.join(publicDocsDir, 'ONE_PAGER_EVENTOS_KRONITT.pdf'));
   fs.copyFileSync(outDossier, path.join(publicDocsDir, 'DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf'));
 
-  console.log('PDFs regenerated with $60.000 base service price, Combos and B2B Scale!');
+  console.log('PDFs regenerated with $70k base and Tramo 1 (1-3 serv) at $50k!');
 } catch (err) {
   console.error('Error generating PDFs:', err);
   process.exit(1);

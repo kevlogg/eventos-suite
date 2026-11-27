@@ -39,21 +39,21 @@ Eliminamos las listas de invitados desactualizadas en Excel, las tarjetas de pap
 
 ## 3. MODELO COMERCIAL: SERVICIOS, COMBOS Y CANAL PARTNERS
 
-### A. Para Quien Festeja (Consumidor Final):
-* **PVP Individual por Servicio:** **$60.000 ARS** c/u *(Invitación sola, Trivia sola o Mural solo)*.
-* **Combo Dúo (2 servicios a elección):** **$85.000 ARS** *(Ahorro de $35.000)*.
-* **Combo Full Suite (Los 3 servicios juntos):** **$100.000 ARS** *(Ahorro de $80.000 sobre los $180.000 de lista)*.
+### A. Para Quien Festeja (Consumidor Final / B2C):
+* **PVP Individual por Servicio:** **$70.000 ARS** c/u *(Invitación sola, Trivia sola o Mural solo)*.
+* **Combo Dúo (2 servicios a elección):** **$120.000 ARS** *(Ahorro de $20.000 sobre los $140.000 de lista)*.
+* **Combo Full Suite (Los 3 servicios juntos):** **$160.000 ARS** *(Ahorro de $50.000 sobre los $210.000 de lista)*.
 
 ---
 
 ### B. Canal Partners B2B (Salones & Organizadores):
-*Tarifa mayorista unificada por volumen de servicios mensuales. A mayor cantidad de servicios acumulados en el mes calendario, menor es tu costo unitario:*
+*Tarifa mayorista unificada por cantidad de servicios acumulados en el mes calendario. A mayor volumen mensual, menor es tu costo unitario:*
 
-| Tramo Mensual | Servicios Acumulados en el Mes | Tu Costo por Servicio | Costo Evento Completo (3 serv.) | Tu Margen Estimado |
+| Tramo Mensual | Servicios Acumulados en el Mes | Tu Costo Mayorista por Servicio | Costo Evento Completo (3 serv.) | Tu Margen Estimado |
 | :---: | :---: | :---: | :---: | :---: |
-| **Tramo 1 (Base)** | **1 a 4 servicios** | **$25.000** | **$75.000** | **$25.000 a $35.000** por fiesta |
-| **Tramo 2 (Activo)** | **5 a 9 servicios** | **$20.000** | **$60.000** | **$40.000** por fiesta |
-| **Tramo 3 (VIP / Salón)** | **10 o más servicios** | **$15.000** | **$45.000** | **$45.000 a $55.000** por fiesta |
+| **Tramo 1 (Base)** | **1 a 3 servicios** | **$50.000** c/u | **$150.000** | **$20.000** por servicio vendido |
+| **Tramo 2 (Activo)** | **4 a 8 servicios** | **$35.000** c/u | **$105.000** | **$35.000 a $55.000** por fiesta |
+| **Tramo 3 (VIP / Salón)** | **9 o más servicios** | **$25.000** c/u | **$75.000** | **$45.000 a $85.000** limpios |
 
 ---
 
