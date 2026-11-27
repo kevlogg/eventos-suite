@@ -15,15 +15,22 @@ import {
   ArrowRight,
   ExternalLink,
   Sparkles,
-  ChevronRight,
-  HelpCircle,
+  ChevronDown,
+  ChevronUp,
   Percent,
   Layers,
   Zap,
   Gift,
-  MapPin,
+  Download,
   Calendar,
   Check,
+  HelpCircle,
+  TrendingUp,
+  Flame,
+  Clock,
+  FileText,
+  Sliders,
+  DollarSign,
 } from "lucide-react";
 
 function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
@@ -44,6 +51,12 @@ export default function OrganizadoresClient() {
   const [qrInvitacion, setQrInvitacion] = useState<string | null>(null);
   const [qrTrivia, setQrTrivia] = useState<string | null>(null);
   const [qrFotos, setQrFotos] = useState<string | null>(null);
+
+  // UX Interactive States
+  const [activeStepTab, setActiveStepTab] = useState<"invitacion" | "trivia" | "fotos" | "salon">("invitacion");
+  const [serviciosMes, setServiciosMes] = useState<number>(6);
+  const [pricingTab, setPricingTab] = useState<"b2b" | "b2c">("b2b");
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -71,6 +84,51 @@ export default function OrganizadoresClient() {
     }
   }, []);
 
+  // Simulator calculations
+  let costoUnitario = 50000;
+  let tramoNombre = "Tramo 1 (Base)";
+  let margenUnitario = 20000;
+  let porcentajeMargen = 29;
+
+  if (serviciosMes >= 9) {
+    costoUnitario = 30000;
+    tramoNombre = "Tramo 3 (VIP / Salón)";
+    margenUnitario = 40000;
+    porcentajeMargen = 57;
+  } else if (serviciosMes >= 4) {
+    costoUnitario = 40000;
+    tramoNombre = "Tramo 2 (Activo)";
+    margenUnitario = 30000;
+    porcentajeMargen = 43;
+  }
+
+  const facturacionSugerida = serviciosMes * 70000;
+  const costoTotalMayorista = serviciosMes * costoUnitario;
+  const gananciaNetaEstimada = serviciosMes * margenUnitario;
+
+  const faqs = [
+    {
+      q: "¿Qué necesita tener el salón para que funcione en las pantallas?",
+      a: "Cualquier computadora o notebook conectada por cable HDMI a las pantallas gigantes, proyectores o televisores del salón. Desde esa computadora abrís Google Chrome a pantalla completa (tecla F11) con el link del evento que te damos listo. No requiere consolas especiales ni instalación de software.",
+    },
+    {
+      q: "¿Qué pasa si en el salón no hay buen Wi-Fi o la señal es débil?",
+      a: "El sistema fue diseñado especialmente para eventos en Argentina. Todas las fotos que sacan los invitados se comprimen automáticamente en el navegador de su propio celular antes de subirse (ocupan menos de 100 KB). Funciona con fluidez tanto con un Wi-Fi básico como con datos 4G de cualquier compañía.",
+    },
+    {
+      q: "¿Cómo se controla que ningún invitado suba una foto desubicada o inapropiada?",
+      a: "Tenés a disposición un Panel de Moderación en Vivo. Podés activar la 'aprobación previa' con un solo clic: cada foto que manda un invitado queda esperando en una pantalla privada de control y solo sale al proyector cuando el moderador (o alguien del staff) toca 'Aprobar'.",
+    },
+    {
+      q: "¿Los invitados mayores o de tercera edad saben usarlo?",
+      a: "Sí, es tan simple como abrir la cámara del celular y apuntar al código QR que está en el cartelito de la mesa. No tienen que descargar ninguna aplicación pesada, ni crearse contraseñas, ni poner tarjetas de crédito. En 2 segundos ya están viendo la trivia o el mural.",
+    },
+    {
+      q: "¿Cómo es el cobro y la liquidación del costo mayorista?",
+      a: "Es flexible y transparente. Podés pagar cada evento a medida que se confirma o liquidar a mes vencido según la cantidad de servicios acumulados en el mes calendario para acceder a los tramos de descuento ($50.000, $40.000 o $30.000 c/u). Emitimos comprobante oficial.",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-[#060813] text-slate-100 selection:bg-indigo-500 selection:text-white">
       {/* ─── BARRA SUPERIOR ─── */}
@@ -80,108 +138,178 @@ export default function OrganizadoresClient() {
             <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-105 transition-transform">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
-            <span className="font-extrabold text-lg text-white">Eventos Kronitt</span>
-            <span className="hidden sm:inline-block px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-              Espacio B2B Organizadores
+            <div>
+              <span className="font-extrabold text-base sm:text-lg text-white tracking-tight">Eventos Kronitt</span>
+            </div>
+            <span className="hidden md:inline-block px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 uppercase tracking-wider">
+              Salones & Planners
             </span>
           </Link>
 
-          <a
-            href="https://wa.me/5492235851419?text=Hola!%20Soy%20organizador%20/%20tengo%20un%20sal%C3%B3n%20y%20quiero%20conocer%20la%20propuesta%20de%20alianza%20con%20Eventos%20Kronitt."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 text-xs sm:text-sm font-bold shadow-md transition-all transform hover:-translate-y-0.5"
-          >
-            <WhatsAppIcon className="w-4 h-4 shrink-0" />
-            <span>Hablar con un Asesor</span>
-          </a>
+          <div className="flex items-center gap-3">
+            <a
+              href="#simulador"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-300 hover:text-white rounded-lg hover:bg-slate-900 transition-colors"
+            >
+              <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Simulador de Ganancia</span>
+            </a>
+
+            <a
+              href="https://wa.me/5492235851419?text=Hola!%20Soy%20organizador%20/%20tengo%20un%20sal%C3%B3n%20y%20quiero%20conocer%20la%20propuesta%20de%20Eventos%20Kronitt."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 text-xs sm:text-sm font-bold shadow-md transition-all transform hover:-translate-y-0.5"
+            >
+              <WhatsAppIcon className="w-4 h-4 shrink-0" />
+              <span>Hablar por WhatsApp</span>
+            </a>
+          </div>
         </div>
       </header>
 
       {/* ─── HERO B2B ─── */}
-      <section className="relative pt-16 sm:pt-24 pb-16 px-4 sm:px-6 max-w-7xl mx-auto text-center">
+      <section className="relative pt-12 sm:pt-20 pb-12 px-4 sm:px-6 max-w-7xl mx-auto text-center">
+        {/* Glow de fondo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-gradient-to-tr from-indigo-600/15 via-purple-600/15 to-pink-600/15 blur-[120px] rounded-full pointer-events-none -z-10" />
+
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 text-xs font-bold uppercase tracking-wider mb-6">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>Alianzas con Salones, Wedding Planners & DJs</span>
+          <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+          <span>Propuesta para Salones de Fiestas & Organizadores</span>
         </div>
 
-        <h1 className="text-3xl sm:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto mb-6">
-          Llevá tus eventos al siguiente nivel con{" "}
-          <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            tecnología interactiva en vivo
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.15] max-w-4xl mx-auto mb-6">
+          Tecnología interactiva para tus fiestas:{" "}
+          <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">
+            hacé que cada evento sea inolvidable
           </span>
         </h1>
 
-        <p className="text-base sm:text-xl text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-          Ofrecé a tus clientes experiencias que impactan: invitaciones digitales de lujo, trivias en pantallas gigantes y mural de fotos rotativo por QR. Cero descargas, solución llave en mano y comisiones de hasta el 20%.
+        <p className="text-sm sm:text-lg text-slate-300 max-w-3xl mx-auto font-medium leading-relaxed mb-8">
+          Invitaciones con sobre 3D, Juegos en vivo en pantallas gigantes y Mural de fotos proyectadas por QR.
+          <strong> Cero descargas para los invitados</strong>, llave en mano para el salón y con <strong>ganancia escalada por mes</strong>.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* BOTONES PRINCIPALES */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 mb-10">
           <a
             href="#showroom-demo"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-extrabold text-sm sm:text-base shadow-[0_10px_30px_rgba(99,102,241,0.4)] transition-all transform hover:-translate-y-0.5"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-extrabold text-sm sm:text-base shadow-[0_8px_25px_rgba(99,102,241,0.35)] transition-all transform hover:-translate-y-0.5"
           >
-            Probar Showroom Demo con tu Celular
+            <Smartphone className="w-4 h-4" />
+            <span>Probar Showroom con tu Celular</span>
           </a>
 
           <a
-            href="https://wa.me/5492235851419?text=Hola!%20Quiero%20solicitar%20el%20Kit%20de%20Muestra%20y%20conocer%20las%20tarifas%20para%20salones%20de%20Eventos%20Kronitt."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-sm sm:text-base transition-colors"
+            href="#paso-a-paso"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-200 font-bold text-sm sm:text-base transition-colors"
           >
-            Pedir Kit de Muestra Comercial
+            <Layers className="w-4 h-4 text-purple-400" />
+            <span>Ver Cómo Funciona (Paso a Paso)</span>
           </a>
+
+          <a
+            href="#simulador"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-emerald-300 font-bold text-sm sm:text-base transition-colors"
+          >
+            <DollarSign className="w-4 h-4 text-emerald-400" />
+            <span>Simular Ganancia Salón</span>
+          </a>
+        </div>
+
+        {/* 4 PILLARS QUICK STRIP */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
+          <div className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0">
+              <Smartphone className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-white">Sin bajar apps</div>
+              <div className="text-[11px] text-slate-400">Escanean QR y juegan</div>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+              <Tv className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-white">Cualquier pantalla</div>
+              <div className="text-[11px] text-slate-400">TV, LED o Proyector HDMI</div>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center shrink-0">
+              <Shield className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-white">Moderación en vivo</div>
+              <div className="text-[11px] text-slate-400">Filtro previo de fotos</div>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <Zap className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-white">Apto Wi-Fi o 4G</div>
+              <div className="text-[11px] text-slate-400">Comprime fotos en el celu</div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ─── SECCIÓN SHOWROOM INTERACTIVO CON QR EN VIVO ─── */}
+      {/* ─── SECCIÓN 1: SHOWROOM INTERACTIVO CON QR EN VIVO ─── */}
       <section
         id="showroom-demo"
-        className="py-16 sm:py-24 bg-gradient-to-b from-[#090c1d] to-[#060813] border-y border-white/10 relative overflow-hidden"
+        className="py-16 sm:py-20 bg-gradient-to-b from-[#090c1d] to-[#060813] border-y border-white/10 relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mb-4">
-              Showroom Interactivo:{" "}
-              <span className="text-indigo-400">Escaneá y probalo ahora</span>
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">
+              Experiencia en Tiempo Real
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
+              Showroom Interactivo: <span className="text-indigo-400">Escaneá con tu celular</span>
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base">
-              Apuntá la cámara de tu smartphone a cualquiera de los códigos QR para experimentar lo mismo que vivirán tus clientes e invitados en la fiesta.
+            <p className="text-slate-300 text-xs sm:text-sm">
+              Apuntá con la cámara de tu teléfono a cualquiera de los códigos QR. Es la misma experiencia real que vivirán los invitados en el evento.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* DEMO 1: INVITACIÓN */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-amber-500/30 flex flex-col items-center text-center shadow-xl relative group">
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-4">
-                <PartyPopper className="w-6 h-6" />
+            <div className="p-6 rounded-2xl bg-slate-900/90 border border-amber-500/30 flex flex-col items-center text-center shadow-xl relative group">
+              <div className="w-11 h-11 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-3">
+                <PartyPopper className="w-5 h-5" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-1">
-                Servicio 01
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-400 mb-1">
+                Servicio 01 · Pre-Fiesta
               </span>
-              <h3 className="text-xl font-bold text-white mb-2">Invitación Digital & RSVP</h3>
-              <p className="text-xs text-slate-300 mb-5 leading-relaxed">
-                Sobre virtual 3D, música, geolocalización directa y confirmación de dietas especiales para el catering.
+              <h3 className="text-lg font-bold text-white mb-2">Invitación Digital 3D & RSVP</h3>
+              <p className="text-xs text-slate-300 mb-4 leading-relaxed">
+                Sobre virtual 3D interactivo con música, geolocalización directa y confirmación de dietas especiales para cocina.
               </p>
 
               {/* QR Container */}
-              <div className="bg-white p-3 rounded-2xl shadow-inner mb-5">
+              <div className="bg-white p-2.5 rounded-xl shadow-inner mb-4">
                 {qrInvitacion ? (
                   <Image
                     src={qrInvitacion}
                     alt="QR Demo Invitación"
-                    width={180}
-                    height={180}
-                    className="w-40 h-40 object-contain"
+                    width={160}
+                    height={160}
+                    className="w-36 h-36 object-contain"
                     unoptimized
                   />
                 ) : (
-                  <div className="w-40 h-40 bg-slate-200 animate-pulse rounded-lg" />
+                  <div className="w-36 h-36 bg-slate-200 animate-pulse rounded-lg" />
                 )}
               </div>
 
-              <span className="text-[11px] font-semibold text-amber-300/90 mb-4">
+              <span className="text-[11px] font-bold text-amber-300/90 mb-4">
                 📱 Escaneá para abrir el sobre en tu celu
               </span>
 
@@ -191,42 +319,42 @@ export default function OrganizadoresClient() {
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30 text-xs font-bold transition-colors"
               >
-                <span>Abrir en navegador</span>
+                <span>Probar en este navegador</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
 
             {/* DEMO 2: TRIVIA */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-purple-500/30 flex flex-col items-center text-center shadow-xl relative group">
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center mb-4">
-                <Trophy className="w-6 h-6" />
+            <div className="p-6 rounded-2xl bg-slate-900/90 border border-purple-500/30 flex flex-col items-center text-center shadow-xl relative group">
+              <div className="w-11 h-11 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center mb-3">
+                <Trophy className="w-5 h-5" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-widest text-purple-400 mb-1">
-                Servicio 02
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-purple-400 mb-1">
+                Servicio 02 · En la Fiesta
               </span>
-              <h3 className="text-xl font-bold text-white mb-2">Trivia Fiesta en Vivo</h3>
-              <p className="text-xs text-slate-300 mb-5 leading-relaxed">
-                Juego interactivo contra reloj desde el celular con ranking animado y confeti proyectado en pantalla gigante.
+              <h3 className="text-lg font-bold text-white mb-2">Trivia en Pantalla Gigante</h3>
+              <p className="text-xs text-slate-300 mb-4 leading-relaxed">
+                El show interactivo para animar la cena. Los invitados juegan contra reloj desde su mesa y el podio sale en la pantalla.
               </p>
 
               {/* QR Container */}
-              <div className="bg-white p-3 rounded-2xl shadow-inner mb-5">
+              <div className="bg-white p-2.5 rounded-xl shadow-inner mb-4">
                 {qrTrivia ? (
                   <Image
                     src={qrTrivia}
                     alt="QR Demo Trivia"
-                    width={180}
-                    height={180}
-                    className="w-40 h-40 object-contain"
+                    width={160}
+                    height={160}
+                    className="w-36 h-36 object-contain"
                     unoptimized
                   />
                 ) : (
-                  <div className="w-40 h-40 bg-slate-200 animate-pulse rounded-lg" />
+                  <div className="w-36 h-36 bg-slate-200 animate-pulse rounded-lg" />
                 )}
               </div>
 
-              <span className="text-[11px] font-semibold text-purple-300/90 mb-4">
-                📱 Escaneá para ingresar como jugador
+              <span className="text-[11px] font-bold text-purple-300/90 mb-4">
+                📱 Escaneá para entrar como jugador
               </span>
 
               <div className="w-full flex flex-col gap-2">
@@ -234,7 +362,7 @@ export default function OrganizadoresClient() {
                   href={origin ? `${origin}/demo-fiesta/trivia` : "/demo-fiesta/trivia"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 text-xs font-bold transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 border border-purple-500/30 text-xs font-bold transition-colors"
                 >
                   <Smartphone className="w-3.5 h-3.5" />
                   <span>Jugar desde la Web</span>
@@ -244,44 +372,44 @@ export default function OrganizadoresClient() {
                   href={origin ? `${origin}/demo-fiesta/pantalla/trivia` : "/demo-fiesta/pantalla/trivia"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors"
                 >
-                  <Tv className="w-3.5 h-3.5" />
-                  <span>Ver Pantalla TV / Proyector</span>
+                  <Tv className="w-3.5 h-3.5 text-indigo-400" />
+                  <span>Ver Pantalla de TV / Proyector</span>
                 </a>
               </div>
             </div>
 
             {/* DEMO 3: MURAL DE FOTOS */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-pink-500/30 flex flex-col items-center text-center shadow-xl relative group">
-              <div className="w-12 h-12 rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center mb-4">
-                <Camera className="w-6 h-6" />
+            <div className="p-6 rounded-2xl bg-slate-900/90 border border-pink-500/30 flex flex-col items-center text-center shadow-xl relative group">
+              <div className="w-11 h-11 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center mb-3">
+                <Camera className="w-5 h-5" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-widest text-pink-400 mb-1">
-                Servicio 03
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-pink-400 mb-1">
+                Servicio 03 · Toda la Fiesta
               </span>
-              <h3 className="text-xl font-bold text-white mb-2">Mural de Fotos por QR</h3>
-              <p className="text-xs text-slate-300 mb-5 leading-relaxed">
-                Cada mesa tiene su QR. Los invitados suben selfies y dedicatorias al instante con panel de moderación en vivo.
+              <h3 className="text-lg font-bold text-white mb-2">Mural de Fotos en Vivo por QR</h3>
+              <p className="text-xs text-slate-300 mb-4 leading-relaxed">
+                Cada mesa tiene su código QR. Los invitados sacan selfies y dedicatorias que se proyectan en pantalla gigante al instante.
               </p>
 
               {/* QR Container */}
-              <div className="bg-white p-3 rounded-2xl shadow-inner mb-5">
+              <div className="bg-white p-2.5 rounded-xl shadow-inner mb-4">
                 {qrFotos ? (
                   <Image
                     src={qrFotos}
                     alt="QR Demo Fotos"
-                    width={180}
-                    height={180}
-                    className="w-40 h-40 object-contain"
+                    width={160}
+                    height={160}
+                    className="w-36 h-36 object-contain"
                     unoptimized
                   />
                 ) : (
-                  <div className="w-40 h-40 bg-slate-200 animate-pulse rounded-lg" />
+                  <div className="w-36 h-36 bg-slate-200 animate-pulse rounded-lg" />
                 )}
               </div>
 
-              <span className="text-[11px] font-semibold text-pink-300/90 mb-4">
+              <span className="text-[11px] font-bold text-pink-300/90 mb-4">
                 📱 Escaneá para subir una foto de prueba
               </span>
 
@@ -290,20 +418,20 @@ export default function OrganizadoresClient() {
                   href={origin ? `${origin}/demo-fiesta/fotos` : "/demo-fiesta/fotos"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-500/30 text-xs font-bold transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-pink-500/15 hover:bg-pink-500/25 text-pink-300 border border-pink-500/30 text-xs font-bold transition-colors"
                 >
                   <Smartphone className="w-3.5 h-3.5" />
-                  <span>Subir Foto Web</span>
+                  <span>Subir Foto desde la Web</span>
                 </a>
 
                 <a
                   href={origin ? `${origin}/demo-fiesta/pantalla/mural` : "/demo-fiesta/pantalla/mural"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors"
                 >
-                  <Tv className="w-3.5 h-3.5" />
-                  <span>Ver Mural en Pantalla</span>
+                  <Tv className="w-3.5 h-3.5 text-pink-400" />
+                  <span>Ver Mural en Pantalla TV</span>
                 </a>
               </div>
             </div>
@@ -311,145 +439,736 @@ export default function OrganizadoresClient() {
         </div>
       </section>
 
-      {/* ─── MODELOS DE ALIANZA B2B ─── */}
-      <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="text-indigo-400 text-xs font-bold uppercase tracking-widest">
-            Rentabilidad & Asociación
+      {/* ─── SECCIÓN 2: PASO A PASO DE CÓMO FUNCIONA E IMPLEMENTAR ─── */}
+      <section id="paso-a-paso" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-purple-400">
+            Guía Práctica & Operativa
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-2 mb-4">
-            Modelos de Alianza Comercial
+          <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
+            Paso a Paso: ¿Cómo funciona y cómo se implementa?
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base">
-            Diseñados para que sumes valor y rentabilidad sin añadir carga operativa a tu equipo.
+          <p className="text-slate-300 text-xs sm:text-sm">
+            Elegí el servicio para ver exactamente qué hace el anfitrión, qué hacen los invitados y cómo lo activa el salón en 3 simples pasos.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1 */}
-          <div className="p-8 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col justify-between hover:border-indigo-500/40 transition-colors">
+        {/* SELECTOR DE TABS */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
+          <button
+            onClick={() => setActiveStepTab("invitacion")}
+            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+              activeStepTab === "invitacion"
+                ? "bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 scale-105"
+                : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
+            }`}
+          >
+            <PartyPopper className="w-4 h-4" />
+            <span>1. Invitación Digital 3D</span>
+          </button>
+
+          <button
+            onClick={() => setActiveStepTab("trivia")}
+            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+              activeStepTab === "trivia"
+                ? "bg-purple-600 text-white shadow-lg shadow-purple-600/25 scale-105"
+                : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
+            }`}
+          >
+            <Trophy className="w-4 h-4" />
+            <span>2. Trivia en Pantalla</span>
+          </button>
+
+          <button
+            onClick={() => setActiveStepTab("fotos")}
+            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+              activeStepTab === "fotos"
+                ? "bg-pink-600 text-white shadow-lg shadow-pink-600/25 scale-105"
+                : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
+            }`}
+          >
+            <Camera className="w-4 h-4" />
+            <span>3. Mural de Fotos QR</span>
+          </button>
+
+          <button
+            onClick={() => setActiveStepTab("salon")}
+            className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+              activeStepTab === "salon"
+                ? "bg-emerald-500 text-slate-950 shadow-lg shadow-emerald-500/25 scale-105"
+                : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
+            }`}
+          >
+            <Layers className="w-4 h-4" />
+            <span>4. Para el Salón / Organizador</span>
+          </button>
+        </div>
+
+        {/* CONTENIDO DEL TAB SELECCIONADO */}
+        <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-10 shadow-2xl">
+          {activeStepTab === "invitacion" && (
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-6">
-                <Percent className="w-6 h-6" />
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black">
+                  01
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-white">Invitación Digital Interactiva con Sobre 3D</h3>
+                  <p className="text-xs text-slate-300">Cómo se arma y cómo se envía semanas antes de la fiesta.</p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Comisión por Recomendación</h3>
-              <p className="text-sm text-slate-300 mb-6 leading-relaxed">
-                Recomendás Eventos Kronitt a tus clientes. Nosotros nos encargamos del asesoramiento, cobro y soporte, y vos recibís una **comisión fija del 15% al 20%** por cada evento contratado.
-              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 1: Armado en 5 min
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Carga de datos del evento</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    Se completan fecha, salón, código de vestimenta, música preferida y los datos de CBU/Alias para el cofre de regalos.
+                  </p>
+                  <div className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                    💡 Genera un enlace web personalizado con sobre 3D animado.
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 2: Envío en 1 Clic
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Compartir por WhatsApp</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    Los agasajados mandan el enlace directamente por WhatsApp a sus invitados. Al tocarlo, el invitado ve el sobre abrirse con música.
+                  </p>
+                  <div className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                    📱 Cero apps para instalar: abre al instante en Chrome o Safari.
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 3: Confirmación RSVP
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Control de dietas en vivo</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    El invitado confirma si asiste y selecciona si es celíaco, vegano o vegetariano. El anfitrión y el salón ven la lista en tiempo real.
+                  </p>
+                  <div className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                    🍽️ Lista de cocina exacta: sin desperdicio de platos ni confusiones.
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="pt-4 border-t border-slate-800 text-xs font-semibold text-indigo-300 flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-400" />
-              <span>Cero trabajo operativo</span>
+          )}
+
+          {activeStepTab === "trivia" && (
+            <div>
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-black">
+                  02
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-white">Trivia en Pantalla Gigante (Juego en Vivo)</h3>
+                  <p className="text-xs text-slate-300">El show colectivo que llena de risas la cena o los momentos entre platos.</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-purple-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 1: Preguntas a medida
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Personalización total</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    Elegimos o redactamos 5 a 10 preguntas divertidas sobre los novios, el cumpleañero de 15 o la empresa (anécdotas, gustos, secretos).
+                  </p>
+                  <div className="text-[11px] font-semibold text-purple-300/80 bg-purple-500/10 p-2.5 rounded-lg border border-purple-500/20">
+                    🎉 Preguntas con tiempo límite y 4 opciones con colores.
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-purple-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 2: Conectar la pantalla
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Conectar HDMI en el salón</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    El DJ o técnico del salón conecta la notebook a la pantalla gigante o TV, abre el link de transmisión y presiona F11 (pantalla completa).
+                  </p>
+                  <div className="text-[11px] font-semibold text-purple-300/80 bg-purple-500/10 p-2.5 rounded-lg border border-purple-500/20">
+                    📺 En la pantalla aparece un código QR gigante y cuenta regresiva.
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-purple-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 3: ¡A Jugar y Ganar!
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Podio y confeti animado</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    Todos juegan simultáneamente desde sus mesas. El sistema calcula velocidad y aciertos, mostrando el podio de ganadores con lluvia de confeti.
+                  </p>
+                  <div className="text-[11px] font-semibold text-purple-300/80 bg-purple-500/10 p-2.5 rounded-lg border border-purple-500/20">
+                    🏆 Clima de euforia garantizado durante la cena.
+                  </div>
+                </div>
+              </div>
             </div>
+          )}
+
+          {activeStepTab === "fotos" && (
+            <div>
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
+                <div className="w-10 h-10 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center font-black">
+                  03
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-white">Mural de Fotos Proyectadas por QR en Vivo</h3>
+                  <p className="text-xs text-slate-300">Transmisión de los momentos espontáneos que ningún fotógrafo llega a captar.</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-pink-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 1: Cartelitos en mesas
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Identificadores QR impresos</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    Se colocan pequeños cartelitos con código QR en cada mesa del salón (Kronitt te entrega el diseño en PDF listo para imprimir).
+                  </p>
+                  <div className="text-[11px] font-semibold text-pink-300/80 bg-pink-500/10 p-2.5 rounded-lg border border-pink-500/20">
+                    🖨️ Diseño elegante que combina con los números de mesa.
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-pink-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 2: Fotos y Dedicatorias
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Escaneo y subida instantánea</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    Los invitados escanean con la cámara de su celular, eligen una foto de su galería o sacan una selfie, escriben un mensaje y tocan enviar.
+                  </p>
+                  <div className="text-[11px] font-semibold text-pink-300/80 bg-pink-500/10 p-2.5 rounded-lg border border-pink-500/20">
+                    ⚡ Se comprime en el celular para no gastar datos ni saturar el Wi-Fi.
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-pink-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 3: Proyección y Álbum HD
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Mural dinámico y descarga ZIP</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    Las fotos se proyectan rotando en la pantalla gigante. Podés activar moderación previa y al finalizar la fiesta te descargás el álbum ZIP completo en HD.
+                  </p>
+                  <div className="text-[11px] font-semibold text-pink-300/80 bg-pink-500/10 p-2.5 rounded-lg border border-pink-500/20">
+                    📸 El mejor recuerdo digital para los agasajados.
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeStepTab === "salon" && (
+            <div>
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-black">
+                  04
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-white">Cómo Asociarte como Salón u Organizador</h3>
+                  <p className="text-xs text-slate-300">Empezá a comercializarlo sin costo de ingreso ni equipamiento especial.</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-emerald-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 1: Definí tu propuesta
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Elegí cómo ofrecerlo</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    Podés incluir los servicios dentro de tus paquetes "Todo Incluido" / "Premium" para diferenciar tu salón, o venderlos como opcionales con tu propio margen.
+                  </p>
+                  <div className="text-[11px] font-semibold text-emerald-300/80 bg-emerald-500/10 p-2.5 rounded-lg border border-emerald-500/20">
+                    💰 Vos decidís el precio final al cliente (sugerido: $70.000 c/u).
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-emerald-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 2: Nos pasás el evento
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Soporte Llave en Mano</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    Nos mandás la fecha y nombres de los agasajados por WhatsApp. Nosotros configuramos todo, te pasamos los links de pantalla y los QR listos para imprimir.
+                  </p>
+                  <div className="text-[11px] font-semibold text-emerald-300/80 bg-emerald-500/10 p-2.5 rounded-lg border border-emerald-500/20">
+                    🛡️ Cero horas de trabajo operativo para tu equipo.
+                  </div>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
+                  <div className="text-emerald-400 text-xs font-black uppercase tracking-wider mb-2">
+                    Paso 3: Liquidación Mensual
+                  </div>
+                  <h4 className="text-base font-bold text-white mb-2">Descuento por escala</h4>
+                  <p className="text-xs text-slate-300 leading-relaxed mb-3">
+                    A fin de mes se suman todos los servicios activados: de 1 a 3 pagás $50.000 c/u; de 4 a 8 pagás $40.000 c/u; y a partir de 9 baja a $30.000 c/u.
+                  </p>
+                  <div className="text-[11px] font-semibold text-emerald-300/80 bg-emerald-500/10 p-2.5 rounded-lg border border-emerald-500/20">
+                    📈 A mayor volumen mensual, mayor es tu ganancia neta.
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ─── SECCIÓN 3: SIMULADOR DE GANANCIA PARA SALONES (SLIDER INTERACTIVO) ─── */}
+      <section id="simulador" className="py-16 sm:py-24 bg-gradient-to-b from-[#060813] via-[#090f26] to-[#060813] border-y border-white/10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-400">
+              Calculadora de Rentabilidad B2B
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
+              Simulador de Ganancias para tu Salón
+            </h2>
+            <p className="text-slate-300 text-xs sm:text-sm">
+              Mové la barra para ver cuántos servicios podés activar por mes (entre trivias, murales e invitaciones) y calculá tu ingreso neto adicional.
+            </p>
           </div>
 
-          {/* Card 2 */}
-          <div className="p-8 rounded-3xl bg-slate-900 border border-purple-500/30 flex flex-col justify-between shadow-lg shadow-purple-500/10">
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center mb-6">
-                <Layers className="w-6 h-6" />
+          <div className="p-6 sm:p-10 rounded-3xl bg-slate-900/90 border border-emerald-500/30 shadow-2xl relative overflow-hidden">
+            {/* Header del Simulador */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-800">
+              <div>
+                <div className="text-xs text-slate-400 font-bold uppercase tracking-wider mb-1">
+                  Cantidad de Servicios Activados al Mes:
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl sm:text-5xl font-black text-white">{serviciosMes}</span>
+                  <span className="text-sm font-bold text-slate-400">servicios mensuales</span>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Tarifa Mayorista para Salones</h3>
-              <p className="text-sm text-slate-300 mb-6 leading-relaxed">
-                Integrás nuestros servicios interactivos en tus paquetes "Todo Incluido" o "Premium" con tarifa preferencial B2B. Vos definís tu propio precio final y margen de ganancia.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-slate-800 text-xs font-semibold text-purple-300 flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-400" />
-              <span>Mayor ticket promedio por fiesta</span>
-            </div>
-          </div>
 
-          {/* Card 3 */}
-          <div className="p-8 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col justify-between hover:border-pink-500/40 transition-colors">
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center mb-6">
-                <Zap className="w-6 h-6" />
+              <div className="flex flex-col items-start sm:items-end">
+                <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
+                  Tramo Mayorista Alcanzado:
+                </span>
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-black">
+                  <Flame className="w-3.5 h-3.5 text-emerald-400" />
+                  {tramoNombre}
+                </span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Evento Piloto de Lanzamiento</h3>
-              <p className="text-sm text-slate-300 mb-6 leading-relaxed">
-                Validá la recepción de tus anfitriones e invitados implementando la tecnología en tu próximo evento con una **tarifa bonificada de prueba**.
-              </p>
             </div>
-            <div className="pt-4 border-t border-slate-800 text-xs font-semibold text-pink-300 flex items-center gap-2">
-              <Check className="w-4 h-4 text-emerald-400" />
-              <span>Prueba sin riesgo inicial</span>
+
+            {/* Slider de control */}
+            <div className="mb-8">
+              <input
+                type="range"
+                min="1"
+                max="20"
+                value={serviciosMes}
+                onChange={(e) => setServiciosMes(Number(e.target.value))}
+                className="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+              />
+              <div className="flex justify-between text-[11px] font-bold text-slate-400 mt-2">
+                <span>1 servicio</span>
+                <span>Tramo 1 ($50k)</span>
+                <span>Tramo 2 ($40k)</span>
+                <span>Tramo 3 ($30k)</span>
+                <span>20 servicios</span>
+              </div>
+            </div>
+
+            {/* Botones rápidos */}
+            <div className="flex flex-wrap items-center gap-2 mb-8">
+              <span className="text-xs font-bold text-slate-400 mr-2">Valores rápidos:</span>
+              {[2, 4, 6, 9, 12, 16].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => setServiciosMes(num)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
+                    serviciosMes === num
+                      ? "bg-emerald-500 text-slate-950 font-black"
+                      : "bg-slate-800 text-slate-300 hover:bg-slate-700"
+                  }`}
+                >
+                  {num} servicios
+                </button>
+              ))}
+            </div>
+
+            {/* Tarjetas de Desglose de Números */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                  Tu Costo Mayorista por Servicio
+                </div>
+                <div className="text-2xl font-black text-white">
+                  ${costoUnitario.toLocaleString("es-AR")}
+                </div>
+                <div className="text-[11px] text-slate-400 mt-1">
+                  Total mayorista: ${costoTotalMayorista.toLocaleString("es-AR")}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800">
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                  Facturación Sugerida al Cliente
+                </div>
+                <div className="text-2xl font-black text-indigo-300">
+                  ${facturacionSugerida.toLocaleString("es-AR")}
+                </div>
+                <div className="text-[11px] text-slate-400 mt-1">
+                  Calculado a $70.000 por servicio suelto
+                </div>
+              </div>
+
+              <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/40">
+                <div className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider mb-1">
+                  Tu Margen por Servicio
+                </div>
+                <div className="text-2xl font-black text-emerald-400">
+                  ${margenUnitario.toLocaleString("es-AR")}{" "}
+                  <span className="text-xs font-bold">({porcentajeMargen}%)</span>
+                </div>
+                <div className="text-[11px] text-emerald-300/80 mt-1">
+                  Ganancia directa por cada activación
+                </div>
+              </div>
+            </div>
+
+            {/* GANANCIA TOTAL DESTACADA */}
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/80 via-emerald-900/40 to-slate-950 border border-emerald-500/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-400">
+                  Ingreso Extra Estimado para tu Salón
+                </span>
+                <div className="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">
+                  +${gananciaNetaEstimada.toLocaleString("es-AR")}{" "}
+                  <span className="text-base sm:text-lg font-bold text-emerald-400">/ mes netos</span>
+                </div>
+              </div>
+
+              <a
+                href={`https://wa.me/5492235851419?text=Hola!%20Estuve%20probando%20el%20simulador%20para%20${serviciosMes}%20servicios%20al%20mes%20y%20quiero%20coordinar%20una%20alianza%20con%20mi%20sal%C3%B3n.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm transition-all transform hover:-translate-y-0.5 shadow-lg shadow-emerald-500/30"
+              >
+                <WhatsAppIcon className="w-4 h-4" />
+                <span>Activar Alianza con este Volumen</span>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── DERRIBO DE OBJECIONES TÉCNICAS ─── */}
-      <section className="py-16 sm:py-24 bg-slate-950 border-t border-white/10">
+      {/* ─── SECCIÓN 4: TARIFARIO COMPLETO (B2C COMBOS VS B2B PARTNERS) ─── */}
+      <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-indigo-400">
+            Esquema Comercial Transparente
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
+            Precios, Combos y Tarifa Mayorista
+          </h2>
+          <p className="text-slate-300 text-xs sm:text-sm">
+            Elegí qué tarifario querés ver para entender cómo venderlo a tus clientes o qué costo mayorista te corresponde como salón.
+          </p>
+        </div>
+
+        {/* TOGGLE B2B / B2C */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex p-1.5 rounded-2xl bg-slate-900 border border-slate-800">
+            <button
+              onClick={() => setPricingTab("b2b")}
+              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                pricingTab === "b2b"
+                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              🏢 Salones & Planners (Tarifa Mayorista B2B)
+            </button>
+            <button
+              onClick={() => setPricingTab("b2c")}
+              className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                pricingTab === "b2c"
+                  ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              🎉 Quien Festeja (Combos Cliente Final)
+            </button>
+          </div>
+        </div>
+
+        {/* CONTENIDO TARIFARIO B2B */}
+        {pricingTab === "b2b" && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+              <div>
+                <span className="px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 text-[10px] font-bold uppercase tracking-wider">
+                  1 a 3 servicios / mes
+                </span>
+                <h3 className="text-xl font-bold text-white mt-3 mb-1">Tramo 1 (Base)</h3>
+                <div className="text-3xl font-black text-white mb-3">
+                  $50.000 <span className="text-xs text-slate-400 font-semibold">c/u</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed mb-5">
+                  Ideal para arrancar o salones con pocos eventos al mes.
+                </p>
+                <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs mb-4">
+                  <div className="text-slate-400">Margen vendiendo a $70k:</div>
+                  <div className="text-emerald-400 font-bold text-sm">$20.000 por servicio (29%)</div>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-400">
+                • Cero mínimo de permanencia
+              </div>
+            </div>
+
+            <div className="p-6 rounded-3xl bg-slate-900 border-2 border-purple-500/50 shadow-xl shadow-purple-500/10 flex flex-col justify-between relative">
+              <div className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-purple-600 text-white text-[10px] font-black uppercase tracking-wider">
+                Recomendado Planners
+              </div>
+              <div>
+                <span className="px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold uppercase tracking-wider">
+                  4 a 8 servicios / mes
+                </span>
+                <h3 className="text-xl font-bold text-white mt-3 mb-1">Tramo 2 (Activo)</h3>
+                <div className="text-3xl font-black text-purple-300 mb-3">
+                  $40.000 <span className="text-xs text-slate-400 font-semibold">c/u</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed mb-5">
+                  Para salones y planners con 2 a 3 fiestas al mes que ofrecen los combos.
+                </p>
+                <div className="p-3 rounded-xl bg-slate-950 border border-purple-500/30 text-xs mb-4">
+                  <div className="text-slate-400">Margen vendiendo a $70k:</div>
+                  <div className="text-emerald-400 font-bold text-sm">$30.000 por servicio (43%)</div>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-slate-800 text-[11px] text-purple-300">
+                • Descuento automático al 4to servicio
+              </div>
+            </div>
+
+            <div className="p-6 rounded-3xl bg-slate-900 border border-emerald-500/40 shadow-xl shadow-emerald-500/10 flex flex-col justify-between">
+              <div>
+                <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
+                  9 o más servicios / mes
+                </span>
+                <h3 className="text-xl font-bold text-white mt-3 mb-1">Tramo 3 (VIP / Salón)</h3>
+                <div className="text-3xl font-black text-emerald-400 mb-3">
+                  $30.000 <span className="text-xs text-slate-400 font-semibold">c/u</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed mb-5">
+                  Tarifa preferencial para salones que incluyen la tecnología en todos sus paquetes.
+                </p>
+                <div className="p-3 rounded-xl bg-slate-950 border border-emerald-500/30 text-xs mb-4">
+                  <div className="text-slate-400">Margen vendiendo a $70k:</div>
+                  <div className="text-emerald-400 font-bold text-sm">$40.000 por servicio (57%)</div>
+                </div>
+              </div>
+              <div className="pt-4 border-t border-slate-800 text-[11px] text-emerald-300">
+                • Máxima rentabilidad y soporte prioritario
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* CONTENIDO TARIFARIO B2C */}
+        {pricingTab === "b2c" && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-3xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+              <div>
+                <span className="px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 text-[10px] font-bold uppercase tracking-wider">
+                  Módulo Individual
+                </span>
+                <h3 className="text-xl font-bold text-white mt-3 mb-1">1 Servicio Suelto</h3>
+                <div className="text-3xl font-black text-white mb-3">$70.000</div>
+                <p className="text-xs text-slate-300 leading-relaxed mb-5">
+                  El cliente elige solo 1 módulo a necesidad: o la Invitación 3D, o la Trivia en vivo, o el Mural por QR.
+                </p>
+              </div>
+              <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-400">
+                • Precio de lista individual oficial
+              </div>
+            </div>
+
+            <div className="p-6 rounded-3xl bg-slate-900 border border-purple-500/30 flex flex-col justify-between">
+              <div>
+                <span className="px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold uppercase tracking-wider">
+                  Ahorro de $35.000
+                </span>
+                <h3 className="text-xl font-bold text-white mt-3 mb-1">Combo Dúo (2 Servicios)</h3>
+                <div className="text-3xl font-black text-purple-300 mb-3">$105.000</div>
+                <p className="text-xs text-slate-300 leading-relaxed mb-5">
+                  Combina 2 módulos a elección (ej: Invitación 3D + Mural de Fotos, o Trivia en pantalla + Mural).
+                </p>
+                <div className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-[11px] text-purple-300 font-bold mb-4">
+                  Precio de lista separado: $140.000
+                </div>
+              </div>
+              <div className="pt-4 border-t border-slate-800 text-[11px] text-purple-300">
+                • El más elegido para cumpleaños de 15
+              </div>
+            </div>
+
+            <div className="p-6 rounded-3xl bg-slate-900 border-2 border-pink-500/50 shadow-xl shadow-pink-500/15 flex flex-col justify-between relative">
+              <div className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-pink-600 text-white text-[10px] font-black uppercase tracking-wider">
+                Pack Completo
+              </div>
+              <div>
+                <span className="px-2.5 py-1 rounded-full bg-pink-500/20 text-pink-300 text-[10px] font-bold uppercase tracking-wider">
+                  Ahorro de $75.000
+                </span>
+                <h3 className="text-xl font-bold text-white mt-3 mb-1">Combo Full Suite (3 Servicios)</h3>
+                <div className="text-3xl font-black text-pink-400 mb-3">$135.000</div>
+                <p className="text-xs text-slate-300 leading-relaxed mb-5">
+                  La experiencia integral: Invitación 3D antes de la fiesta + Trivia animada en la cena + Mural de fotos en vivo por QR.
+                </p>
+                <div className="p-2.5 rounded-xl bg-pink-500/10 border border-pink-500/20 text-[11px] text-pink-300 font-bold mb-4">
+                  Precio de lista separado: $210.000
+                </div>
+              </div>
+              <div className="pt-4 border-t border-slate-800 text-[11px] text-pink-300">
+                • Experiencia 360° para bodas y eventos premium
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* ─── SECCIÓN 5: DESCARGA DE MATERIAL COMERCIAL EN PDF ─── */}
+      <section className="py-16 sm:py-20 bg-slate-950 border-t border-white/10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-black text-white">
-              Tranquilidad Operativa para Salones & Coordinadores
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">
+              Material para Descargar y Compartir
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-black text-white mt-1 mb-2">
+              Descargá los Documentos en PDF
             </h2>
+            <p className="text-slate-300 text-xs sm:text-sm">
+              Listos para compartir por WhatsApp con tus socios o clientes, con diseño profesional e interactivo.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
-              <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0 mt-1" />
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between hover:border-indigo-500/40 transition-colors">
               <div>
-                <h4 className="font-bold text-white mb-1">Sin descargas ni contraseñas</h4>
-                <p className="text-xs sm:text-sm text-slate-300">
-                  Los invitados abren la cámara de su celular, apuntan al código QR y están dentro en 2 segundos.
+                <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center mb-4">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-1">One-Pager Ejecutivo (1 Página A4)</h4>
+                <p className="text-xs text-slate-300 mb-4 leading-relaxed">
+                  Resumen de alto impacto con los 3 servicios, comparativa rápida y la tabla de precios y tramos mayoristas.
                 </p>
               </div>
+              <a
+                href="/docs/ONE_PAGER_EVENTOS_KRONITT.pdf"
+                download
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                <span>Descargar One-Pager PDF</span>
+              </a>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
-              <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0 mt-1" />
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between hover:border-purple-500/40 transition-colors">
               <div>
-                <h4 className="font-bold text-white mb-1">Compatible con cualquier pantalla</h4>
-                <p className="text-xs sm:text-sm text-slate-300">
-                  Cualquier TV, proyector o pantalla LED con conexión HDMI proyecta las experiencias desde un navegador web.
+                <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center mb-4">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-1">Dossier Comercial Completo (2 Páginas A4)</h4>
+                <p className="text-xs text-slate-300 mb-4 leading-relaxed">
+                  Ficha completa con los 3 servicios en profundidad, especificaciones técnicas de pantalla y detalle de alianzas.
                 </p>
               </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
-              <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0 mt-1" />
-              <div>
-                <h4 className="font-bold text-white mb-1">Panel de Moderación en Vivo</h4>
-                <p className="text-xs sm:text-sm text-slate-300">
-                  Podés activar la aprobación previa para que ninguna foto no deseada salga en las pantallas.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex items-start gap-4">
-              <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0 mt-1" />
-              <div>
-                <h4 className="font-bold text-white mb-1">Consumo ultraliviano de datos</h4>
-                <p className="text-xs sm:text-sm text-slate-300">
-                  Las imágenes se comprimen en el propio teléfono antes de subirse. Funciona perfecto con Wi-Fi estándar o 4G.
-                </p>
-              </div>
+              <a
+                href="/docs/DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf"
+                download
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                <span>Descargar Dossier PDF</span>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── BANNER FINAL WHATSAPP ─── */}
+      {/* ─── SECCIÓN 6: PREGUNTAS FRECUENTES (FAQ ACORDEÓN) ─── */}
+      <section className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <span className="text-xs font-bold uppercase tracking-widest text-indigo-400">
+            Dudas Habituales
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-black text-white mt-1 mb-2">
+            Preguntas Frecuentes de Salones y Planners
+          </h2>
+          <p className="text-slate-300 text-xs sm:text-sm">
+            Todo lo que necesitás saber sobre la implementación técnica y comercial.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              className="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden transition-colors"
+            >
+              <button
+                onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-indigo-300 transition-colors"
+              >
+                <span>{faq.q}</span>
+                {openFaq === index ? (
+                  <ChevronUp className="w-5 h-5 text-indigo-400 shrink-0" />
+                ) : (
+                  <ChevronDown className="w-5 h-5 text-slate-400 shrink-0" />
+                )}
+              </button>
+              {openFaq === index && (
+                <div className="px-5 pb-5 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/60 pt-3">
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── SECCIÓN 7: BANNER FINAL CON WHATSAPP ─── */}
       <section className="py-20 bg-gradient-to-tr from-indigo-950 via-purple-950 to-slate-950 border-t border-white/10 text-center px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-5xl font-black text-white mb-6">
-            ¿Querés sumar Eventos Kronitt a tu propuesta?
+          <div className="w-14 h-14 rounded-2xl bg-[#25D366]/20 text-[#25D366] flex items-center justify-center mx-auto mb-6">
+            <WhatsAppIcon className="w-8 h-8" />
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl font-black text-white mb-4 tracking-tight">
+            ¿Querés sumar Eventos Kronitt a tus fiestas?
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed">
-            Coordinemos una breve videollamada o conversación de 10 minutos. Te enviamos el Kit de Muestra con tarjetas QR para que las tengas en tu salón o reuniones con clientes.
+          <p className="text-slate-300 text-sm sm:text-base mb-8 leading-relaxed max-w-2xl mx-auto">
+            Hablemos por WhatsApp. Te enviamos el <strong>Kit de Muestra con tarjetas QR impresas</strong> para que las tengas en tu salón o en tus reuniones con clientes, y coordinamos una prueba para tu próximo evento.
           </p>
 
           <a
             href="https://wa.me/5492235851419?text=Hola!%20Soy%20organizador%20/%20tengo%20un%20sal%C3%B3n%20y%20quiero%20conocer%20la%20propuesta%20de%20alianza%20con%20Eventos%20Kronitt."
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black text-base shadow-[0_10px_30px_rgba(37,211,102,0.4)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-black text-sm sm:text-base shadow-[0_10px_30px_rgba(37,211,102,0.4)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
           >
-            <WhatsAppIcon className="w-6 h-6 shrink-0" />
-            <span>Hablar por WhatsApp con un Asesor Comercial</span>
+            <WhatsAppIcon className="w-5 h-5 shrink-0" />
+            <span>Hablar por WhatsApp con un Asesor</span>
           </a>
         </div>
       </section>

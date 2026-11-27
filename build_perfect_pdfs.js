@@ -449,14 +449,14 @@ const onePagerHtml = `<!DOCTYPE html>
             <div class="brand-sub">Tecnología Interactiva para Eventos</div>
           </div>
         </div>
-        <div class="badge-tag">Ficha Comercial B2B</div>
+        <div class="badge-tag">Propuesta para Salones & Planners</div>
       </div>
 
       <!-- HERO -->
       <div class="hero-section">
-        <h1 class="hero-title">Soluciones Tecnológicas para <span>Salones & Event Planners</span></h1>
+        <h1 class="hero-title">Tecnología Interactiva para <span>Fiestas y Eventos</span></h1>
         <p class="hero-desc">
-          Suite web en tiempo real que digitaliza cada fiesta: <strong>Antes</strong> (Invitación & RSVP de catering), <strong>Durante</strong> (Trivia en pantallas LED y fotos en vivo por QR) y <strong>Después</strong> (Descarga masiva en alta resolución).
+          Invitaciones 3D, Juegos en vivo en pantalla gigante y Mural de fotos por QR. Todo funciona desde el celular sin bajar aplicaciones y se proyecta en cualquier pantalla HDMI.
         </p>
       </div>
 
@@ -464,8 +464,8 @@ const onePagerHtml = `<!DOCTYPE html>
       <div class="services-grid">
         <div class="service-card card-amber">
           <div>
-            <span class="svc-badge badge-amber">Servicio 01 · Pre-Evento</span>
-            <div class="svc-name">Invitaciones & RSVP</div>
+            <span class="svc-badge badge-amber">Servicio 01 · Pre-Fiesta</span>
+            <div class="svc-name">Invitación Digital 3D & RSVP</div>
             <div class="svc-price-tag">PVP Individual: $70.000 ARS</div>
           </div>
           <ul class="svc-items">
@@ -486,8 +486,8 @@ const onePagerHtml = `<!DOCTYPE html>
 
         <div class="service-card card-purple">
           <div>
-            <span class="svc-badge badge-purple">Servicio 02 · Durante</span>
-            <div class="svc-name">Trivia Fiesta en Vivo</div>
+            <span class="svc-badge badge-purple">Servicio 02 · En la Fiesta</span>
+            <div class="svc-name">Trivia y Juegos en Pantalla</div>
             <div class="svc-price-tag">PVP Individual: $70.000 ARS</div>
           </div>
           <ul class="svc-items">
@@ -508,8 +508,8 @@ const onePagerHtml = `<!DOCTYPE html>
 
         <div class="service-card card-pink">
           <div>
-            <span class="svc-badge badge-pink">Servicio 03 · Durante & Post</span>
-            <div class="svc-name">Mural de Fotos por QR</div>
+            <span class="svc-badge badge-pink">Servicio 03 · Toda la Fiesta</span>
+            <div class="svc-name">Mural de Fotos en Vivo por QR</div>
             <div class="svc-price-tag">PVP Individual: $70.000 ARS</div>
           </div>
           <ul class="svc-items">
@@ -533,7 +533,7 @@ const onePagerHtml = `<!DOCTYPE html>
       <div>
         <div class="block-header">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-          <span>Packs & Combos para el Cliente Final (Valor de lista $210k)</span>
+          <span>Precios para el que Festeja (Combos y Servicios Sueltos)</span>
         </div>
         <div class="combos-b2c-grid">
           <div class="combo-box">
@@ -562,7 +562,7 @@ const onePagerHtml = `<!DOCTYPE html>
       <div>
         <div class="block-header">
           <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>Canal Partners B2B: Salones & Organizadores (Tarifa Mayorista Escalonada)</span>
+          <span>Alianza para Salones y Planners (Tarifa Mayorista por Cantidad al Mes)</span>
         </div>
         <div class="table-box">
           <table>
@@ -601,8 +601,8 @@ const onePagerHtml = `<!DOCTYPE html>
       <!-- BOTTOM DEMO STRIP WITH CLICKABLE LINK -->
       <div class="demo-strip">
         <div class="demo-left">
-          <h4>¿Querés probar la experiencia en vivo desde tu smartphone?</h4>
-          <p>Hacé clic para abrir el showroom interactivo y probar los 3 servicios con códigos QR.</p>
+          <h4>¿Querés ver cómo funciona en vivo desde tu celular?</h4>
+          <p>Tocá acá para abrir el Showroom y probar los 3 servicios con códigos QR en tiempo real.</p>
         </div>
         <a href="https://kronitt.com.ar/organizadores" target="_blank" class="demo-url-btn">
           <span>Abrir Demo en Vivo ↗</span>
@@ -847,22 +847,22 @@ const dossierHtml = `<!DOCTYPE html>
           </div>
           <div>
             <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Dossier de Servicios Interactivos</div>
+            <div class="brand-sub">Tecnología Interactiva para Fiestas</div>
           </div>
         </div>
-        <div class="badge-tag">Página 01 de 02</div>
+        <div class="badge-tag">Guía de Servicios · Pág. 01</div>
       </div>
 
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
         <div class="section-headline">
-          <h2>Los 3 Servicios Interactivos en Detalle</h2>
-          <p>Cada servicio tiene un valor individual de lista de $70.000 ARS. Diseñados para elevar la fiesta y simplificar la gestión.</p>
+          <h2>Los 3 Servicios que Hacen Brillar cada Fiesta</h2>
+          <p>Invitaciones 3D, Juegos en pantalla y Fotos por QR. Valor individual de lista: $70.000 ARS c/u.</p>
         </div>
 
         <!-- SERVICE 1 -->
         <div class="service-row-card sr-amber">
           <div class="sr-header">
-            <div class="sr-title">01. Invitaciones Digitales Interactivas & RSVP</div>
+            <div class="sr-title">01. Invitación Digital Interactiva con Sobre 3D (Antes de la Fiesta)</div>
             <div class="sr-tag">PVP: $70.000 ARS</div>
           </div>
           <div class="sr-body">
@@ -882,7 +882,7 @@ const dossierHtml = `<!DOCTYPE html>
         <!-- SERVICE 2 -->
         <div class="service-row-card sr-purple">
           <div class="sr-header">
-            <div class="sr-title">02. Trivia Fiesta en Vivo (Show en Pantallas LED)</div>
+            <div class="sr-title">02. Trivia en Pantalla Gigante: Show en Vivo (Durante la Cena)</div>
             <div class="sr-tag">PVP: $70.000 ARS</div>
           </div>
           <div class="sr-body">
@@ -902,7 +902,7 @@ const dossierHtml = `<!DOCTYPE html>
         <!-- SERVICE 3 -->
         <div class="service-row-card sr-pink">
           <div class="sr-header">
-            <div class="sr-title">03. Mural de Fotos Dinámicas por QR</div>
+            <div class="sr-title">03. Mural de Fotos en Vivo Proyectadas por QR (Toda la Fiesta)</div>
             <div class="sr-tag">PVP: $70.000 ARS</div>
           </div>
           <div class="sr-body">
@@ -940,16 +940,16 @@ const dossierHtml = `<!DOCTYPE html>
           </div>
           <div>
             <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Comercialización & Especificaciones</div>
+            <div class="brand-sub">Precios, Combos y Alianzas para Salones</div>
           </div>
         </div>
-        <div class="badge-tag">Página 02 de 02</div>
+        <div class="badge-tag">Precios & Alianzas · Pág. 02</div>
       </div>
 
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
         <div class="section-headline">
-          <h2>Modelos de Comercialización & Alianza B2B</h2>
-          <p>Un solo criterio unificado para Salones y Planners con tarifa mayorista decreciente por cantidad de servicios al mes.</p>
+          <h2>Precios, Combos y Alianzas para Salones</h2>
+          <p>Un esquema simple y transparente: $70.000 el servicio suelto, combos para el cliente final y escala mayorista por volumen mensual para salones.</p>
         </div>
 
         <!-- B2B SCALE TABLE -->
@@ -989,16 +989,16 @@ const dossierHtml = `<!DOCTYPE html>
         <!-- 2 EXPLANATION CARDS -->
         <div class="b2b-boxes-container">
           <div class="b2b-summary-card">
-            <h4>Packs Sugeridos al Cliente Final</h4>
+            <h4>Precios y Combos para el que Festeja (Cliente Final)</h4>
             <p>
               • <strong>1 Servicio Individual:</strong> $70.000 ARS.<br>
               • <strong>Combo Dúo (2 servicios):</strong> $105.000 ARS.<br>
               • <strong>Combo Full Suite (3 servicios):</strong> $135.000 ARS.<br>
-              El partner es libre de fijar su precio de venta o sumarlo a sus paquetes.
+              El salón o planner es libre de fijar su precio de venta o sumarlo a sus paquetes.
             </p>
           </div>
           <div class="b2b-summary-card">
-            <h4>Ventaja Operativa para el Partner</h4>
+            <h4>Ventaja Operativa para el Salón u Organizador</h4>
             <p>
               • <strong>Un solo criterio:</strong> Cada módulo vale exactamente lo mismo.<br>
               • <strong>Mayor volumen = menor costo:</strong> A partir de 4 servicios al mes el costo baja a $40.000 y luego a $30.000.<br>
@@ -1009,10 +1009,10 @@ const dossierHtml = `<!DOCTYPE html>
 
         <!-- DEMO CTA (CLICKABLE BUTTON) -->
         <div class="cta-strip-dossier">
-          <h3>Demostración Interactiva en Vivo</h3>
-          <p>Podés escanear con tu celular y probar los 3 servicios funcionando en tiempo real en nuestro showroom online.</p>
+          <h3>Showroom Interactivo con Códigos QR</h3>
+          <p>Probá los 3 servicios con tu celular en tiempo real escaneando los códigos QR de nuestro showroom online.</p>
           <a href="https://kronitt.com.ar/organizadores" target="_blank" class="cta-link-pill">
-            <span>Hacer Clic para Abrir Demo en Vivo ↗</span>
+            <span>Tocá acá para Abrir el Showroom Demo ↗</span>
           </a>
         </div>
       </div>
@@ -1248,10 +1248,10 @@ const playbookHtml = `<!DOCTYPE html>
           </div>
           <div>
             <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Playbook de Ventas B2B · Guía de Prospección</div>
+            <div class="brand-sub">Guía de Ventas para Salones & Planners</div>
           </div>
         </div>
-        <div class="playbook-badge">Uso Interno Comercial</div>
+        <div class="playbook-badge">Guía Comercial</div>
       </div>
 
       <div style="margin-top: 8px;">
@@ -1320,7 +1320,7 @@ const playbookHtml = `<!DOCTYPE html>
       </div>
 
       <div class="footer-bar">
-        <div><strong>EVENTOS KRONITT</strong> · Playbook de Ventas B2B</div>
+        <div><strong>EVENTOS KRONITT</strong> · Guía de Ventas & Argumentario</div>
         <div>Página 01 de 02 · Showroom: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
       </div>
     </div>
@@ -1436,7 +1436,7 @@ const playbookHtml = `<!DOCTYPE html>
       </div>
 
       <div class="footer-bar">
-        <div><strong>EVENTOS KRONITT</strong> · Playbook de Ventas B2B</div>
+        <div><strong>EVENTOS KRONITT</strong> · Guía de Ventas & Argumentario</div>
         <div>Página 02 de 02 · Showroom: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
       </div>
     </div>

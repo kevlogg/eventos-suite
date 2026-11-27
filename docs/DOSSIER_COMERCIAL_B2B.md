@@ -1,9 +1,9 @@
-# 🌟 DOSSIER COMERCIAL & MEDIA KIT B2B
-## EVENTOS KRONITT — TECNOLOGÍA INTERACTIVA PARA EVENTOS INOLVIDABLES
+# 🌟 PRESENTACIÓN DE SERVICIOS & PRECIOS
+## EVENTOS KRONITT — TECNOLOGÍA INTERACTIVA PARA FIESTAS Y EVENTOS
 
 ---
 
-> **Documento Estratégico B2B**: Diseñado específicamente para Salones de Fiestas, Wedding Planners y Coordinadores de Eventos Sociales y Corporativos.
+> **Propuesta para Salones de Fiestas, Wedding Planners y Organizadores**: Cero complicaciones técnicas, diversión en pantallas gigantes y fotos en vivo por QR sin descargar aplicaciones.
 
 ---
 

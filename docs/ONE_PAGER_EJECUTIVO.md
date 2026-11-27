@@ -1,10 +1,10 @@
-# ⚡ ONE-PAGER EJECUTIVO: EVENTOS KRONITT
-### Soluciones Tecnológicas Interactivas para Salones & Event Planners
+# ⚡ PROPUESTA COMERCIAL: EVENTOS KRONITT
+### Tecnología Interactiva para tus Fiestas y Eventos (Salones & Planners)
 
 ---
 
 ## ¿QUÉ ES EVENTOS KRONITT?
-Es la plataforma web integral que digitaliza y dinamiza la experiencia de un evento social o corporativo en sus tres fases: **Antes** (Invitaciones y confirmaciones RSVP), **Durante** (Trivia interactiva en vivo y Mural de fotos por QR en pantallas gigantes) y **Después** (Descarga completa de fotos del evento en alta definición).
+Es la plataforma web interactiva que transforma cada fiesta: **Antes** (Invitaciones 3D y confirmaciones RSVP con dietas), **Durante** (Trivia y juegos en vivo en pantalla gigante, y Mural de fotos proyectadas por QR) y **Después** (Descarga del álbum digital completo en alta definición). Todo funciona desde el celular sin instalar aplicaciones y se conecta a cualquier pantalla HDMI.
 
 ---
 
