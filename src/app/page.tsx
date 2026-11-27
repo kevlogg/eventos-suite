@@ -3,22 +3,7 @@ import DiscoBallHero from "@/components/home/DiscoBallHero";
 import DiscoMirrorHover from "@/components/home/DiscoMirrorHover";
 import TemplatesPhoneCarousel from "@/components/home/TemplatesPhoneCarousel";
 import {
-  PartyPopper,
-  Camera,
-  Trophy,
-  Shield,
-  ArrowRight,
   Sparkles,
-  CheckCircle2,
-  QrCode,
-  Music,
-  MapPin,
-  Gift,
-  Users,
-  Smartphone,
-  Tv,
-  Flame,
-  Check,
   ChevronRight,
 } from "lucide-react";
 
@@ -91,21 +76,18 @@ export default function HomePage() {
               <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={140} />
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#090a14]/95 border border-amber-500/50 flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-amber-500/25 backdrop-blur-md">
-                    <PartyPopper className="w-7 h-7" />
+                  <div className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-3">
+                    01 · Experiencia Web
                   </div>
-                  <div className="text-xs font-black uppercase tracking-widest text-amber-300 mb-2 drop-shadow-md">
-                    Servicio 01
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-amber-200 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-slate-100 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
                     Invitaciones Digitales & RSVP
                   </h3>
-                  <p className="text-sm sm:text-base text-slate-100 font-semibold leading-relaxed mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000,_0_4px_14px_rgba(0,0,0,0.95)]">
+                  <p className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000,_0_4px_14px_rgba(0,0,0,0.95)]">
                     Plantillas temáticas premium con apertura de sobre interactivo, cuenta regresiva, confirmación de asistencia en vivo, mapas y cofre de regalos.
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 text-sm font-bold text-amber-300 group-hover:translate-x-1 transition-transform drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_2px_#000]">
+                <div className="flex items-center gap-2 text-sm font-bold text-slate-300 group-hover:text-white group-hover:translate-x-1 transition-transform drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_2px_#000]">
                   <span>Ver detalles del servicio</span>
                   <ChevronRight size={16} />
                 </div>
@@ -120,16 +102,13 @@ export default function HomePage() {
               <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={140} />
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#090a14]/95 border border-slate-400/50 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-white/10 backdrop-blur-md">
-                    <Trophy className="w-7 h-7" />
+                  <div className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-3">
+                    02 · Show en Vivo
                   </div>
-                  <div className="text-xs font-black uppercase tracking-widest text-slate-300 mb-2 drop-shadow-md">
-                    Servicio 02
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-slate-200 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-slate-100 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
                     Trivia Fiesta en Vivo
                   </h3>
-                  <p className="text-sm sm:text-base text-slate-100 font-semibold leading-relaxed mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000,_0_4px_14px_rgba(0,0,0,0.95)]">
+                  <p className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000,_0_4px_14px_rgba(0,0,0,0.95)]">
                     Un juego interactivo donde los invitados compiten desde sus celulares en vivo. Preguntas personalizadas y ranking proyectado en pantalla gigante.
                   </p>
                 </div>
@@ -149,16 +128,13 @@ export default function HomePage() {
               <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={140} />
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#090a14]/95 border border-slate-300/50 flex items-center justify-center text-slate-100 mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-white/10 backdrop-blur-md">
-                    <Camera className="w-7 h-7" />
+                  <div className="text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 mb-3">
+                    03 · Transmisión QR
                   </div>
-                  <div className="text-xs font-black uppercase tracking-widest text-slate-300 mb-2 drop-shadow-md">
-                    Servicio 03
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-slate-200 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-slate-100 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
                     Fotos Dinámicas por QR
                   </h3>
-                  <p className="text-sm sm:text-base text-slate-100 font-semibold leading-relaxed mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000,_0_4px_14px_rgba(0,0,0,0.95)]">
+                  <p className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000,_0_4px_14px_rgba(0,0,0,0.95)]">
                     Cada mesa tiene su código QR. Los invitados suben fotos con dedicatorias al instante y se proyectan en el mural rotativo del salón con moderación en vivo.
                   </p>
                 </div>
@@ -238,56 +214,36 @@ export default function HomePage() {
                 {/* Card 1 */}
                 <div className="group relative p-6 sm:p-7 rounded-3xl bg-[#07080f] border border-white/20 hover:border-slate-200/90 transition-all duration-500 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-3px_8px_rgba(0,0,0,0.95),0_14px_36px_rgba(0,0,0,0.7)] hover:shadow-[inset_0_1px_3px_rgba(255,255,255,0.8),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between overflow-hidden">
                   <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={120} />
-                  <div className="relative z-10 flex flex-col gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#090a14]/95 border border-amber-500/50 flex items-center justify-center text-amber-400 shrink-0 shadow-lg shadow-amber-500/25 group-hover:scale-110 transition-transform backdrop-blur-md">
-                      <CheckCircle2 className="w-6 h-6 text-amber-400" />
-                    </div>
-                    <div>
-                      <h4 className="text-base sm:text-lg font-black text-white mb-1 group-hover:text-amber-200 transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Confirmación RSVP en Vivo</h4>
-                      <p className="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Dietas especiales, acompañantes y asistencia confirmada en tiempo real.</p>
-                    </div>
+                  <div className="relative z-10 flex flex-col gap-2">
+                    <h4 className="text-base sm:text-lg font-black text-white mb-1 group-hover:text-slate-100 transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Confirmación RSVP en Vivo</h4>
+                    <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Dietas especiales, acompañantes y asistencia confirmada en tiempo real.</p>
                   </div>
                 </div>
 
                 {/* Card 2 */}
                 <div className="group relative p-6 sm:p-7 rounded-3xl bg-[#07080f] border border-white/20 hover:border-slate-200/90 transition-all duration-500 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-3px_8px_rgba(0,0,0,0.95),0_14px_36px_rgba(0,0,0,0.7)] hover:shadow-[inset_0_1px_3px_rgba(255,255,255,0.8),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between overflow-hidden">
                   <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={120} />
-                  <div className="relative z-10 flex flex-col gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#090a14]/95 border border-amber-500/50 flex items-center justify-center text-amber-400 shrink-0 shadow-lg shadow-amber-500/25 group-hover:scale-110 transition-transform backdrop-blur-md">
-                      <MapPin className="w-6 h-6 text-amber-400" />
-                    </div>
-                    <div>
-                      <h4 className="text-base sm:text-lg font-black text-white mb-1 group-hover:text-amber-200 transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Salón & Geolocalización</h4>
-                      <p className="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Un clic para abrir Google Maps o Waze y llegar directo sin perderse.</p>
-                    </div>
+                  <div className="relative z-10 flex flex-col gap-2">
+                    <h4 className="text-base sm:text-lg font-black text-white mb-1 group-hover:text-slate-100 transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Salón & Geolocalización</h4>
+                    <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Un clic para abrir Google Maps o Waze y llegar directo sin perderse.</p>
                   </div>
                 </div>
 
                 {/* Card 3 */}
                 <div className="group relative p-6 sm:p-7 rounded-3xl bg-[#07080f] border border-white/20 hover:border-slate-200/90 transition-all duration-500 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-3px_8px_rgba(0,0,0,0.95),0_14px_36px_rgba(0,0,0,0.7)] hover:shadow-[inset_0_1px_3px_rgba(255,255,255,0.8),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between overflow-hidden">
                   <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={120} />
-                  <div className="relative z-10 flex flex-col gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#090a14]/95 border border-amber-500/50 flex items-center justify-center text-amber-400 shrink-0 shadow-lg shadow-amber-500/25 group-hover:scale-110 transition-transform backdrop-blur-md">
-                      <Gift className="w-6 h-6 text-amber-400" />
-                    </div>
-                    <div>
-                      <h4 className="text-base sm:text-lg font-black text-white mb-1 group-hover:text-amber-200 transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Cofre de Regalos & Alias</h4>
-                      <p className="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Copia de CBU/Alias con un solo toque o enlace a lista de regalos.</p>
-                    </div>
+                  <div className="relative z-10 flex flex-col gap-2">
+                    <h4 className="text-base sm:text-lg font-black text-white mb-1 group-hover:text-slate-100 transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Cofre de Regalos & Alias</h4>
+                    <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Copia de CBU/Alias con un solo toque o enlace a lista de regalos.</p>
                   </div>
                 </div>
 
                 {/* Card 4 */}
                 <div className="group relative p-6 sm:p-7 rounded-3xl bg-[#07080f] border border-white/20 hover:border-slate-200/90 transition-all duration-500 shadow-[inset_0_1px_2px_rgba(255,255,255,0.4),inset_0_-3px_8px_rgba(0,0,0,0.95),0_14px_36px_rgba(0,0,0,0.7)] hover:shadow-[inset_0_1px_3px_rgba(255,255,255,0.8),inset_0_-4px_10px_rgba(0,0,0,1),0_20px_50px_rgba(0,0,0,0.85)] flex flex-col justify-between overflow-hidden">
                   <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={120} />
-                  <div className="relative z-10 flex flex-col gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#090a14]/95 border border-amber-500/50 flex items-center justify-center text-amber-400 shrink-0 shadow-lg shadow-amber-500/25 group-hover:scale-110 transition-transform backdrop-blur-md">
-                      <Music className="w-6 h-6 text-amber-400" />
-                    </div>
-                    <div>
-                      <h4 className="text-base sm:text-lg font-black text-white mb-1 group-hover:text-amber-200 transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Música & Efectos Visuales</h4>
-                      <p className="text-xs sm:text-sm text-slate-100 font-semibold leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Audio track personalizado y animación de apertura temática inmersiva.</p>
-                    </div>
+                  <div className="relative z-10 flex flex-col gap-2">
+                    <h4 className="text-base sm:text-lg font-black text-white mb-1 group-hover:text-slate-100 transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Música & Efectos Visuales</h4>
+                    <p className="text-xs sm:text-sm text-slate-200 font-medium leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_6px_#000]">Audio track personalizado y animación de apertura temática inmersiva.</p>
                   </div>
                 </div>
               </div>
@@ -363,9 +319,7 @@ export default function HomePage() {
                 {/* Steps */}
                 <div className="flex flex-col gap-3.5 pt-2">
                   <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <div className="w-8 h-8 rounded-full bg-white/10 border border-white/25 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                      1
-                    </div>
+                    <span className="text-sm font-black text-slate-400 font-mono shrink-0 mt-0.5">01.</span>
                     <div>
                       <h4 className="text-sm font-bold text-white">Escanean el QR desde la mesa</h4>
                       <p className="text-xs text-slate-200 font-medium mt-0.5">Sin instalar nada. Solo abren la cámara, eligen su apodo o mesa e ingresan al juego.</p>
@@ -373,9 +327,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <div className="w-8 h-8 rounded-full bg-white/10 border border-white/25 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                      2
-                    </div>
+                    <span className="text-sm font-black text-slate-400 font-mono shrink-0 mt-0.5">02.</span>
                     <div>
                       <h4 className="text-sm font-bold text-white">Preguntas personalizadas y divertidas</h4>
                       <p className="text-xs text-slate-200 font-medium mt-0.5">Anécdotas de la pareja, secretos del homenajeado, momentos graciosos con tiempo límite.</p>
@@ -383,9 +335,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <div className="w-8 h-8 rounded-full bg-white/10 border border-white/25 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                      3
-                    </div>
+                    <span className="text-sm font-black text-slate-400 font-mono shrink-0 mt-0.5">03.</span>
                     <div>
                       <h4 className="text-sm font-bold text-white">Podio y ranking proyectado en vivo</h4>
                       <p className="text-xs text-slate-200 font-medium mt-0.5">Puntajes calculados por rapidez y acierto, con animación de coronación en pantalla gigante.</p>
@@ -449,7 +399,7 @@ export default function HomePage() {
                 {/* Bullets */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <QrCode className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
+                    <span className="text-slate-400 font-mono text-sm shrink-0 mt-0.5">—</span>
                     <div>
                       <h4 className="text-sm font-bold text-white">QR Exclusivo por Mesa</h4>
                       <p className="text-xs text-slate-200 font-medium mt-1">Escaneo instantáneo sin login ni registros pesados.</p>
@@ -457,7 +407,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <Shield className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
+                    <span className="text-slate-400 font-mono text-sm shrink-0 mt-0.5">—</span>
                     <div>
                       <h4 className="text-sm font-bold text-white">Panel de Moderación</h4>
                       <p className="text-xs text-slate-200 font-medium mt-1">Aprobá fotos antes de salir a pantalla si lo preferís.</p>
@@ -465,7 +415,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <Tv className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
+                    <span className="text-slate-400 font-mono text-sm shrink-0 mt-0.5">—</span>
                     <div>
                       <h4 className="text-sm font-bold text-white">Mural Rotativo Animado</h4>
                       <p className="text-xs text-slate-200 font-medium mt-1">Transiciones modernas para proyectores y Smart TVs.</p>
@@ -473,7 +423,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <Smartphone className="w-5 h-5 text-pink-400 shrink-0 mt-0.5" />
+                    <span className="text-slate-400 font-mono text-sm shrink-0 mt-0.5">—</span>
                     <div>
                       <h4 className="text-sm font-bold text-white">Descarga Completa al Final</h4>
                       <p className="text-xs text-slate-200 font-medium mt-1">Los anfitriones descargan todas las fotos en alta resolución.</p>

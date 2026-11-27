@@ -28,7 +28,6 @@ import {
   TrendingUp,
   Flame,
   Clock,
-  FileText,
   Sliders,
   DollarSign,
   Crown,
@@ -282,11 +281,8 @@ export default function OrganizadoresClient() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* DEMO 1: INVITACIÓN (PLATINO / BLANCO) */}
             <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-500/40 flex flex-col items-center text-center shadow-xl relative group">
-              <div className="w-11 h-11 rounded-xl bg-white/10 text-white flex items-center justify-center mb-3">
-                <PartyPopper className="w-5 h-5" />
-              </div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-300 mb-1">
-                Servicio 01 · Pre-Fiesta
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-2">
+                01 · Pre-Fiesta
               </span>
               <h3 className="text-lg font-bold text-white mb-2">Invitación Digital 3D & RSVP</h3>
               <p className="text-xs text-slate-300 mb-4 leading-relaxed">
@@ -326,11 +322,8 @@ export default function OrganizadoresClient() {
 
             {/* DEMO 2: TRIVIA (CHROME SILVER) */}
             <div className="p-6 rounded-2xl bg-slate-900/90 border border-white/35 flex flex-col items-center text-center shadow-xl relative group">
-              <div className="w-11 h-11 rounded-xl bg-slate-800 text-slate-100 flex items-center justify-center mb-3">
-                <Trophy className="w-5 h-5" />
-              </div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-white mb-1">
-                Servicio 02 · En la Fiesta
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-2">
+                02 · Durante la Fiesta
               </span>
               <h3 className="text-lg font-bold text-white mb-2">Trivia en Pantalla Gigante</h3>
               <p className="text-xs text-slate-300 mb-4 leading-relaxed">
@@ -382,11 +375,8 @@ export default function OrganizadoresClient() {
 
             {/* DEMO 3: MURAL DE FOTOS (TOQUE CHAMPAGNE SUTIL) */}
             <div className="p-6 rounded-2xl bg-slate-900/90 border border-amber-400/35 flex flex-col items-center text-center shadow-xl relative group">
-              <div className="w-11 h-11 rounded-xl bg-amber-400/15 text-amber-300 flex items-center justify-center mb-3">
-                <Camera className="w-5 h-5" />
-              </div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-300 mb-1">
-                Servicio 03 · Toda la Fiesta
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-2">
+                03 · Toda la Noche
               </span>
               <h3 className="text-lg font-bold text-white mb-2">Mural de Fotos en Vivo por QR</h3>
               <p className="text-xs text-slate-300 mb-4 leading-relaxed">
@@ -509,9 +499,7 @@ export default function OrganizadoresClient() {
           {activeStepTab === "invitacion" && (
             <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-                <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center font-black">
-                  01
-                </div>
+                <span className="text-2xl font-black text-slate-400 font-mono">01.</span>
                 <div>
                   <h3 className="text-xl font-black text-white">Invitación Digital Interactiva con Sobre 3D</h3>
                   <p className="text-xs text-slate-300">Cómo se arma y cómo se envía semanas antes de la fiesta.</p>
@@ -564,9 +552,7 @@ export default function OrganizadoresClient() {
           {activeStepTab === "trivia" && (
             <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-                <div className="w-10 h-10 rounded-xl bg-slate-800 text-slate-200 flex items-center justify-center font-black">
-                  02
-                </div>
+                <span className="text-2xl font-black text-slate-400 font-mono">02.</span>
                 <div>
                   <h3 className="text-xl font-black text-white">Trivia en Pantalla Gigante (Juego en Vivo)</h3>
                   <p className="text-xs text-slate-300">El show colectivo que llena de risas la cena o los momentos entre platos.</p>
@@ -619,9 +605,7 @@ export default function OrganizadoresClient() {
           {activeStepTab === "fotos" && (
             <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-                <div className="w-10 h-10 rounded-xl bg-slate-800 text-amber-300 flex items-center justify-center font-black">
-                  03
-                </div>
+                <span className="text-2xl font-black text-slate-400 font-mono">03.</span>
                 <div>
                   <h3 className="text-xl font-black text-white">Mural de Fotos Proyectadas por QR en Vivo</h3>
                   <p className="text-xs text-slate-300">Transmisión de los momentos espontáneos que ningún fotógrafo llega a captar.</p>
@@ -674,9 +658,7 @@ export default function OrganizadoresClient() {
           {activeStepTab === "salon" && (
             <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-                <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center font-black">
-                  04
-                </div>
+                <span className="text-2xl font-black text-slate-400 font-mono">04.</span>
                 <div>
                   <h3 className="text-xl font-black text-white">Cómo Asociarte como Salón u Organizador</h3>
                   <p className="text-xs text-slate-300">Empezá a comercializarlo sin costo de ingreso ni equipamiento especial.</p>
@@ -1068,10 +1050,7 @@ export default function OrganizadoresClient() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 rounded-2xl bg-slate-900 border border-slate-600/70 flex flex-col justify-between hover:border-slate-400 transition-colors">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center mb-4">
-                  <FileText className="w-5 h-5" />
-                </div>
-                <h4 className="text-lg font-bold text-white mb-1">Propuesta Comercial (1 Página)</h4>
+                <h4 className="text-lg font-bold text-white mb-2">Propuesta Comercial (1 Página)</h4>
                 <p className="text-xs text-slate-300 mb-4 leading-relaxed">
                   Resumen ejecutivo de alto impacto con los 3 servicios y la tabla de precios y tramos mayoristas.
                 </p>
@@ -1088,10 +1067,7 @@ export default function OrganizadoresClient() {
 
             <div className="p-6 rounded-2xl bg-slate-900 border border-slate-700 flex flex-col justify-between hover:border-slate-500 transition-colors">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-slate-800 text-slate-200 flex items-center justify-center mb-4">
-                  <FileText className="w-5 h-5" />
-                </div>
-                <h4 className="text-lg font-bold text-white mb-1">Presentación Completa (2 Páginas)</h4>
+                <h4 className="text-lg font-bold text-white mb-2">Presentación Completa (2 Páginas)</h4>
                 <p className="text-xs text-slate-300 mb-4 leading-relaxed">
                   Ficha completa con los 3 servicios en profundidad, requerimientos de pantalla y detalle de combos.
                 </p>
@@ -1108,10 +1084,7 @@ export default function OrganizadoresClient() {
 
             <div className="p-6 rounded-2xl bg-slate-900 border border-slate-700 flex flex-col justify-between hover:border-slate-500 transition-colors">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-white/10 text-slate-200 flex items-center justify-center mb-4">
-                  <FileText className="w-5 h-5" />
-                </div>
-                <h4 className="text-lg font-bold text-white mb-1">Guía de Ventas (2 Páginas)</h4>
+                <h4 className="text-lg font-bold text-white mb-2">Guía de Ventas (2 Páginas)</h4>
                 <p className="text-xs text-slate-300 mb-4 leading-relaxed">
                   Mensajes modelo para WhatsApp, guión de reunión de 15 min y manejo de objeciones para salones y planners.
                 </p>
@@ -1173,10 +1146,6 @@ export default function OrganizadoresClient() {
       {/* ─── SECCIÓN 7: BANNER FINAL CON WHATSAPP (FONDO OSCURO Y DETALLES EN PLATA) ─── */}
       <section className="py-20 bg-gradient-to-tr from-[#10121a] via-[#090b10] to-[#07080a] border-t border-white/15 text-center px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
-          <div className="w-14 h-14 rounded-2xl bg-[#25D366]/20 text-[#25D366] flex items-center justify-center mx-auto mb-6">
-            <WhatsAppIcon className="w-8 h-8" />
-          </div>
-
           <h2 className="text-3xl sm:text-5xl font-black text-white mb-4 tracking-tight">
             ¿Querés sumar Eventos Kronitt a tus fiestas?
           </h2>
