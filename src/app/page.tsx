@@ -564,6 +564,10 @@ export default function HomePage() {
               <a href="#servicio-fotos" className="hover:text-white transition-colors">
                 Fotos QR
               </a>
+              <span>·</span>
+              <Link href="/organizadores" className="text-indigo-400 hover:text-indigo-300 font-bold transition-colors">
+                Para Salones & Planners
+              </Link>
             </div>
 
             <div className="border-t border-white/10 w-full pt-8 text-xs text-slate-400">
