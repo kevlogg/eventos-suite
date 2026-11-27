@@ -10,9 +10,9 @@ const tempDir = path.join(docsDir, 'temp_pdf_src');
 if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
 if (!fs.existsSync(publicDocsDir)) fs.mkdirSync(publicDocsDir, { recursive: true });
 
-// Common CSS Styles for luxury dark theme, full bleed, generous padding
+// Common CSS: High-contrast, bold, clear typography, full-bleed A4
 const commonCss = `
-  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap');
   
   @page {
     size: A4 portrait;
@@ -31,8 +31,8 @@ const commonCss = `
     width: 210mm;
     margin: 0;
     padding: 0;
-    background-color: #070913;
-    color: #f1f5f9;
+    background-color: #060813;
+    color: #ffffff;
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
@@ -44,8 +44,8 @@ const commonCss = `
     page-break-after: always;
     page-break-inside: avoid;
     box-sizing: border-box;
-    padding: 16mm 18mm 14mm 18mm;
-    background-color: #070913;
+    padding: 14mm 16mm 12mm 16mm;
+    background-color: #060813;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -57,20 +57,19 @@ const commonCss = `
     page-break-after: avoid;
   }
 
-  /* Subtle ambient background glow */
   .bg-glow {
     position: absolute;
     width: 380px;
     height: 380px;
     border-radius: 50%;
     pointer-events: none;
-    filter: blur(90px);
-    opacity: 0.15;
+    filter: blur(95px);
+    opacity: 0.18;
     z-index: 0;
   }
-  .glow-purple { top: -80px; right: -80px; background: #8b5cf6; }
+  .glow-purple { top: -80px; right: -80px; background: #9333ea; }
   .glow-pink { bottom: -100px; left: -100px; background: #ec4899; }
-  .glow-indigo { top: 40%; left: -100px; background: #6366f1; }
+  .glow-indigo { top: 40%; left: -100px; background: #4f46e5; }
 
   .content-layer {
     position: relative;
@@ -81,13 +80,13 @@ const commonCss = `
     justify-content: space-between;
   }
 
-  /* Header Brand */
+  /* Header */
   .header-brand {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 11px;
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.14);
   }
   
   .brand-left {
@@ -97,14 +96,14 @@ const commonCss = `
   }
   
   .brand-logo {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
     background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
   }
   
   .brand-logo svg {
@@ -112,7 +111,7 @@ const commonCss = `
     height: 20px;
     fill: none;
     stroke: #ffffff;
-    stroke-width: 2;
+    stroke-width: 2.2;
   }
   
   .brand-name {
@@ -124,20 +123,20 @@ const commonCss = `
   }
   
   .brand-sub {
-    font-size: 9.5px;
-    font-weight: 700;
+    font-size: 10px;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.8px;
-    color: #94a3b8;
+    color: #cbd5e1;
   }
   
   .badge-tag {
-    background: rgba(99, 102, 241, 0.12);
-    border: 1px solid rgba(99, 102, 241, 0.35);
-    color: #c7d2fe;
+    background: rgba(99, 102, 241, 0.2);
+    border: 1.5px solid rgba(99, 102, 241, 0.5);
+    color: #e0e7ff;
     padding: 5px 12px;
     border-radius: 20px;
-    font-size: 9.5px;
+    font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.8px;
@@ -145,22 +144,23 @@ const commonCss = `
 
   /* Footer */
   .footer-bar {
-    padding-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 9px;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.12);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 9.5px;
-    font-weight: 600;
-    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+    color: #cbd5e1;
   }
   .footer-bar strong {
-    color: #94a3b8;
+    color: #ffffff;
+    font-weight: 800;
   }
 `;
 
 // =========================================================================
-// 1. ONE-PAGER EJECUTIVO (1 Sola Página A4, Full Bleed, Espaciosa y Elegante)
+// 1. ONE-PAGER EJECUTIVO (1 Sola Página A4, Full Bleed, 3 Modelos, Sin WSP)
 // =========================================================================
 const onePagerHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -171,8 +171,8 @@ const onePagerHtml = `<!DOCTYPE html>
     ${commonCss}
     
     .hero-section {
-      margin-top: 10px;
-      margin-bottom: 12px;
+      margin-top: 8px;
+      margin-bottom: 11px;
     }
     
     .hero-title {
@@ -180,70 +180,71 @@ const onePagerHtml = `<!DOCTYPE html>
       font-weight: 900;
       line-height: 1.2;
       color: #ffffff;
-      margin-bottom: 6px;
-      letter-spacing: -0.5px;
+      margin-bottom: 5px;
+      letter-spacing: -0.4px;
     }
     
     .hero-title span {
-      background: linear-gradient(90deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
+      background: linear-gradient(90deg, #93c5fd 0%, #c084fc 50%, #f472b6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     
     .hero-desc {
-      font-size: 11px;
-      color: #94a3b8;
+      font-size: 11.5px;
+      color: #e2e8f0;
+      font-weight: 600;
       line-height: 1.45;
-      max-width: 650px;
     }
     
     /* 3 Services Grid */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 11px;
+      margin-bottom: 12px;
     }
     
     .service-card {
-      background: #0d1120;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 14px 14px 14px 14px;
+      background: #0d1224;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 13px;
+      padding: 13px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
     }
     
-    .card-amber { border-top: 3.5px solid #f59e0b; }
-    .card-purple { border-top: 3.5px solid #a855f7; }
-    .card-pink { border-top: 3.5px solid #ec4899; }
+    .card-amber { border-top: 4px solid #f59e0b; }
+    .card-purple { border-top: 4px solid #a855f7; }
+    .card-pink { border-top: 4px solid #ec4899; }
     
     .svc-badge {
       display: inline-block;
-      font-size: 9px;
+      font-size: 9.5px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
-    .badge-amber { color: #fbbf24; }
-    .badge-purple { color: #c084fc; }
-    .badge-pink { color: #f472b6; }
+    .badge-amber { color: #fcd34d; }
+    .badge-purple { color: #d8b4fe; }
+    .badge-pink { color: #f9a8d4; }
     
     .svc-name {
-      font-size: 13px;
-      font-weight: 800;
+      font-size: 13.5px;
+      font-weight: 900;
       color: #ffffff;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       line-height: 1.25;
     }
     
     .svc-summary {
-      font-size: 10px;
-      color: #94a3b8;
-      margin-bottom: 10px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 9px;
       line-height: 1.35;
     }
     
@@ -255,19 +256,21 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     .svc-items li {
-      font-size: 9.8px;
-      color: #cbd5e1;
-      line-height: 1.3;
+      font-size: 10px;
+      font-weight: 600;
+      color: #f1f5f9;
+      line-height: 1.35;
       display: flex;
       align-items: flex-start;
       gap: 6px;
     }
     
     .svc-items li svg {
-      width: 12px;
-      height: 12px;
+      width: 13px;
+      height: 13px;
       flex-shrink: 0;
       margin-top: 1px;
+      stroke-width: 2.8;
     }
     .icon-amber { stroke: #fbbf24; }
     .icon-purple { stroke: #c084fc; }
@@ -276,11 +279,11 @@ const onePagerHtml = `<!DOCTYPE html>
     /* Section Headers */
     .block-header {
       font-size: 11.5px;
-      font-weight: 800;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      color: #e2e8f0;
-      margin-bottom: 8px;
+      color: #ffffff;
+      margin-bottom: 7px;
       display: flex;
       align-items: center;
       gap: 7px;
@@ -296,35 +299,36 @@ const onePagerHtml = `<!DOCTYPE html>
     
     /* Comparison Table */
     .table-box {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 11px;
       overflow: hidden;
-      margin-bottom: 14px;
-      background: #0d1120;
+      margin-bottom: 12px;
+      background: #0d1224;
     }
     
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 10px;
+      font-size: 10.5px;
     }
     
     th {
-      background: #13192e;
-      padding: 8px 12px;
+      background: #141c36;
+      padding: 7px 12px;
       text-align: left;
-      font-weight: 800;
-      font-size: 9.5px;
+      font-weight: 900;
+      font-size: 9.8px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #94a3b8;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);
     }
     
     td {
-      padding: 7px 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      color: #cbd5e1;
+      padding: 6.5px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      color: #f1f5f9;
+      font-weight: 600;
       line-height: 1.35;
     }
     
@@ -333,83 +337,94 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     .td-highlight {
-      color: #a5b4fc;
-      font-weight: 600;
-      background: rgba(99, 102, 241, 0.04);
+      color: #e0e7ff;
+      font-weight: 700;
+      background: rgba(99, 102, 241, 0.08);
     }
     
-    /* Commercial Models */
-    .models-grid {
+    /* 3 Commercial Models Grid */
+    .models-grid-3 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 14px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 11px;
     }
     
-    .model-card {
-      background: #0d1120;
-      border: 1px solid rgba(99, 102, 241, 0.25);
+    .model-card-3 {
+      background: #0d1224;
+      border: 1px solid rgba(99, 102, 241, 0.35);
       border-radius: 12px;
-      padding: 12px 14px;
+      padding: 11px 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .model-tag {
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: #93c5fd;
+      margin-bottom: 3px;
     }
     
     .model-title {
       font-size: 11.5px;
-      font-weight: 800;
-      color: #818cf8;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 5px;
+      line-height: 1.25;
     }
     
     .model-desc {
-      font-size: 9.8px;
-      color: #94a3b8;
+      font-size: 10px;
+      font-weight: 600;
+      color: #cbd5e1;
       line-height: 1.4;
     }
     
-    /* Bottom CTA Card */
-    .cta-strip {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.16) 0%, rgba(168, 85, 247, 0.16) 100%);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      border-radius: 14px;
-      padding: 12px 18px;
+    .model-highlight {
+      margin-top: 6px;
+      padding-top: 5px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #a5b4fc;
+    }
+    
+    /* Bottom Strip */
+    .demo-strip {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(168, 85, 247, 0.22) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.45);
+      border-radius: 12px;
+      padding: 10px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     
-    .cta-text h4 {
-      font-size: 12.5px;
-      font-weight: 800;
+    .demo-left h4 {
+      font-size: 12px;
+      font-weight: 900;
       color: #ffffff;
       margin-bottom: 2px;
     }
     
-    .cta-text p {
-      font-size: 10px;
-      color: #cbd5e1;
+    .demo-left p {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #e2e8f0;
     }
     
-    .cta-badge {
-      background: #25D366;
-      color: #032b12;
-      font-size: 11px;
+    .demo-url-badge {
+      background: #4f46e5;
+      color: #ffffff;
+      font-size: 10.5px;
       font-weight: 800;
-      padding: 7px 16px;
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
-      flex-shrink: 0;
-    }
-    
-    .cta-badge svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
+      padding: 6px 14px;
+      border-radius: 8px;
+      letter-spacing: 0.3px;
     }
   </style>
 </head>
@@ -452,11 +467,11 @@ const onePagerHtml = `<!DOCTYPE html>
           <ul class="svc-items">
             <li>
               <svg class="icon-amber" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Filtro de dietas:</strong> celíacos, veganos y alergias listo para catering.</span>
+              <span><strong>Filtro de dietas:</strong> celíacos, veganos y menúes para catering.</span>
             </li>
             <li>
               <svg class="icon-amber" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>GPS con 1 clic:</strong> ruta directa a Google Maps y Waze.</span>
+              <span><strong>GPS con 1 clic:</strong> llegada directa a Google Maps y Waze.</span>
             </li>
             <li>
               <svg class="icon-amber" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
@@ -464,7 +479,7 @@ const onePagerHtml = `<!DOCTYPE html>
             </li>
             <li>
               <svg class="icon-amber" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Ahorro total</strong> de imprenta tradicional y logística.</span>
+              <span><strong>Ahorro total</strong> de costos de imprenta tradicional.</span>
             </li>
           </ul>
         </div>
@@ -478,7 +493,7 @@ const onePagerHtml = `<!DOCTYPE html>
           <ul class="svc-items">
             <li>
               <svg class="icon-purple" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Cero descargas:</strong> juegan directo desde la cámara del celular.</span>
+              <span><strong>Cero descargas:</strong> juegan directo con la cámara del celu.</span>
             </li>
             <li>
               <svg class="icon-purple" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
@@ -516,7 +531,7 @@ const onePagerHtml = `<!DOCTYPE html>
             </li>
             <li>
               <svg class="icon-pink" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              <span><strong>Descarga ZIP:</strong> todas las fotos en alta resolución.</span>
+              <span><strong>Descarga ZIP:</strong> álbum completo en alta resolución.</span>
             </li>
           </ul>
         </div>
@@ -563,48 +578,69 @@ const onePagerHtml = `<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- COMMERCIAL MODELS -->
+      <!-- 3 COMMERCIAL MODELS -->
       <div>
         <div class="block-header">
           <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>Modelos de Alianza Comercial para Organizadores</span>
+          <span>Modelos de Comercialización & Alianza</span>
         </div>
-        <div class="models-grid">
-          <div class="model-card">
-            <div class="model-title">
-              <span>Modelo 1: Comisión Directa (15% al 20%)</span>
+        <div class="models-grid-3">
+          <div class="model-card-3">
+            <div>
+              <div class="model-tag">1. Para Organizadores</div>
+              <div class="model-title">Ganancia Escalada Mensual</div>
+              <div class="model-desc">
+                Comisión creciente según los servicios vendidos al mes. A mayor volumen de eventos cerrados, mayor es tu margen por fecha.
+              </div>
             </div>
-            <div class="model-desc">
-              Derivás el cliente a Kronitt; nosotros asesoramos, cobramos y operamos todo el servicio. Vos recibís una comisión fija por evento cerrado sin carga de trabajo.
+            <div class="model-highlight">
+              📈 Escala: 15% · 20% · 25% + Bonos
             </div>
           </div>
-          <div class="model-card">
-            <div class="model-title">
-              <span>Modelo 2: Tarifa Mayorista para Salones</span>
+
+          <div class="model-card-3">
+            <div>
+              <div class="model-tag">2. Para Salones de Fiesta</div>
+              <div class="model-title">Paquetes Mensuales (Abono)</div>
+              <div class="model-desc">
+                Tarifa plana por paquete de fechas o cobertura ilimitada mensual para incluir tecnología en todas tus propuestas "All-Inclusive".
+              </div>
             </div>
-            <div class="model-desc">
-              Integrás los servicios interactivos en tus paquetes "Todo Incluido" con tarifa preferencial B2B. El salón define su propio precio final y margen de ganancia.
+            <div class="model-highlight">
+              🏢 Tarifa mayorista fija por mes
+            </div>
+          </div>
+
+          <div class="model-card-3">
+            <div>
+              <div class="model-tag">3. Para Quien Festeja</div>
+              <div class="model-title">Combos de Servicios</div>
+              <div class="model-desc">
+                Packs promocionales accesibles para familias y parejas: Pack Invitación, Pack Show (Trivia + Mural) o Full Suite con los 3 módulos.
+              </div>
+            </div>
+            <div class="model-highlight">
+              🎉 Ahorro al combinar servicios
             </div>
           </div>
         </div>
       </div>
 
-      <!-- BOTTOM CTA -->
-      <div class="cta-strip">
-        <div class="cta-text">
-          <h4>¿Querés probar la experiencia en vivo o pedir un kit de muestra?</h4>
-          <p>Escaneá los códigos QR de demostración en: <strong>eventos-suite.vercel.app/organizadores</strong></p>
+      <!-- BOTTOM DEMO STRIP (SIN WHATSAPP) -->
+      <div class="demo-strip">
+        <div class="demo-left">
+          <h4>¿Querés probar la experiencia en vivo desde tu smartphone?</h4>
+          <p>Escaneá los códigos QR de demostración en el showroom interactivo.</p>
         </div>
-        <div class="cta-badge">
-          <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.04 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.04 20.16C10.66 20.16 9.3 19.8 8.1 19.11L7.81 18.94L4.69 19.76L5.52 16.72L5.33 16.42C4.58 15.22 4.19 13.82 4.19 11.91C4.19 7.37 7.89 3.67 12.04 3.67ZM8.63 7.33C8.44 7.33 8.24 7.34 8.06 7.69C7.87 8.04 7.33 8.56 7.33 9.61C7.33 10.66 8.1 11.67 8.21 11.82C8.32 11.97 9.71 14.11 11.83 15.03C13.59 15.79 13.95 15.64 14.33 15.6C14.71 15.56 15.57 15.09 15.75 14.59C15.93 14.09 15.93 13.66 15.88 13.57C15.83 13.48 15.69 13.43 15.46 13.31C15.23 13.19 14.12 12.65 13.91 12.58C13.7 12.5 13.55 12.46 13.4 12.69C13.25 12.92 12.82 13.43 12.69 13.58C12.56 13.73 12.43 13.75 12.2 13.63C11.97 13.51 11.23 13.27 10.35 12.49C9.66 11.88 9.2 11.13 9.07 10.9C8.94 10.67 9.06 10.55 9.17 10.44C9.27 10.34 9.39 10.18 9.51 10.04C9.63 9.9 9.67 9.79 9.75 9.63C9.83 9.47 9.79 9.33 9.73 9.21C9.67 9.09 9.21 7.97 9.02 7.51C8.83 7.06 8.64 7.12 8.5 7.11L8.63 7.33Z"/></svg>
-          <span>WhatsApp: +54 9 223 585-1419</span>
+        <div class="demo-url-badge">
+          eventos-suite.vercel.app/organizadores
         </div>
       </div>
 
       <!-- FOOTER -->
       <div class="footer-bar">
-        <div><strong>EVENTOS KRONITT</strong> · Suite de Experiencias Digitales B2B</div>
-        <div>Contacto Comercial: +54 9 223 585-1419</div>
+        <div><strong>EVENTOS KRONITT</strong> · Suite de Experiencias Digitales para Eventos</div>
+        <div>Showroom Interactivo: <strong>eventos-suite.vercel.app/organizadores</strong></div>
       </div>
     </div>
   </div>
@@ -612,7 +648,7 @@ const onePagerHtml = `<!DOCTYPE html>
 </html>`;
 
 // =========================================================================
-// 2. DOSSIER B2B COMPLETO (3 Páginas A4, Full Bleed, Espaciosa y Editorial)
+// 2. DOSSIER B2B COMPLETO (2 Páginas A4, Sin Portada, 3 Modelos, Sin WSP)
 // =========================================================================
 const dossierHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -622,89 +658,8 @@ const dossierHtml = `<!DOCTYPE html>
   <style>
     ${commonCss}
     
-    /* Cover styling */
-    .cover-top {
-      padding-top: 30px;
-    }
-    
-    .cover-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(99, 102, 241, 0.12);
-      border: 1px solid rgba(99, 102, 241, 0.35);
-      color: #c7d2fe;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 20px;
-    }
-    
-    .cover-title {
-      font-size: 38px;
-      font-weight: 900;
-      line-height: 1.15;
-      color: #ffffff;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
-    }
-    
-    .cover-title span {
-      background: linear-gradient(90deg, #818cf8 0%, #c084fc 50%, #f472b6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .cover-subtitle {
-      font-size: 13.5px;
-      color: #94a3b8;
-      line-height: 1.5;
-      max-width: 580px;
-      margin-bottom: 30px;
-    }
-    
-    .cover-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    
-    .c-card {
-      background: #0d1120;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 16px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    }
-    
-    .c-badge {
-      font-size: 9.5px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #818cf8;
-      margin-bottom: 6px;
-    }
-    
-    .c-title {
-      font-size: 14px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 6px;
-    }
-    
-    .c-desc {
-      font-size: 10.5px;
-      color: #94a3b8;
-      line-height: 1.4;
-    }
-    
-    /* Page 2 & 3 styles */
     .section-headline {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     
     .section-headline h2 {
@@ -712,26 +667,27 @@ const dossierHtml = `<!DOCTYPE html>
       font-weight: 900;
       color: #ffffff;
       margin-bottom: 4px;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.4px;
     }
     
     .section-headline p {
-      font-size: 11px;
-      color: #94a3b8;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #cbd5e1;
     }
     
     .service-row-card {
-      background: #0d1120;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0d1224;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 14px;
-      padding: 15px 18px;
-      margin-bottom: 13px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      padding: 16px 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
     }
     
-    .sr-amber { border-left: 4px solid #f59e0b; }
-    .sr-purple { border-left: 4px solid #a855f7; }
-    .sr-pink { border-left: 4px solid #ec4899; }
+    .sr-amber { border-left: 5px solid #f59e0b; }
+    .sr-purple { border-left: 5px solid #a855f7; }
+    .sr-pink { border-left: 5px solid #ec4899; }
     
     .sr-header {
       display: flex;
@@ -741,26 +697,27 @@ const dossierHtml = `<!DOCTYPE html>
     }
     
     .sr-title {
-      font-size: 14.5px;
-      font-weight: 800;
+      font-size: 15px;
+      font-weight: 900;
       color: #ffffff;
     }
     
     .sr-tag {
-      font-size: 9px;
-      font-weight: 800;
+      font-size: 9.5px;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      padding: 3px 8px;
+      letter-spacing: 0.7px;
+      padding: 4px 10px;
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.06);
-      color: #cbd5e1;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
     }
     
     .sr-body {
-      font-size: 11px;
-      color: #cbd5e1;
-      line-height: 1.4;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #e2e8f0;
+      line-height: 1.45;
       margin-bottom: 10px;
     }
     
@@ -768,195 +725,159 @@ const dossierHtml = `<!DOCTYPE html>
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 7px;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 8px 12px;
-      border-radius: 8px;
-      margin-bottom: 8px;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 9px 14px;
+      border-radius: 9px;
+      margin-bottom: 9px;
     }
     
     .f-item {
-      font-size: 10px;
-      color: #94a3b8;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #cbd5e1;
     }
     .f-item strong {
       color: #ffffff;
+      font-weight: 800;
     }
     
     .b2b-highlight {
-      background: rgba(99, 102, 241, 0.08);
-      border: 1px dashed rgba(99, 102, 241, 0.3);
-      padding: 7px 12px;
-      border-radius: 8px;
-      font-size: 10.5px;
-      color: #c7d2fe;
-      line-height: 1.35;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px dashed rgba(99, 102, 241, 0.4);
+      padding: 8px 14px;
+      border-radius: 9px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e0e7ff;
+      line-height: 1.4;
     }
     
-    /* Page 3 technical & models */
+    /* Page 2 Specs & 3 Models */
     .specs-table-box {
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 18px;
-      background: #0d1120;
+      margin-bottom: 16px;
+      background: #0d1224;
     }
     
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 10.5px;
+      font-size: 11px;
     }
     
     th {
-      background: #13192e;
+      background: #141c36;
       padding: 9px 14px;
       text-align: left;
-      font-weight: 800;
-      font-size: 9.5px;
+      font-weight: 900;
+      font-size: 9.8px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #94a3b8;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);
     }
     
     td {
       padding: 9px 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      color: #cbd5e1;
-      line-height: 1.35;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #f1f5f9;
+      font-weight: 600;
+      line-height: 1.4;
     }
     
     tr:last-child td { border-bottom: none; }
     
-    .alliances-container {
+    .models-grid-dossier {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 18px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 11px;
+      margin-bottom: 16px;
     }
     
-    .alliance-card {
-      background: #0d1120;
-      border: 1px solid rgba(99, 102, 241, 0.25);
+    .m-card-dossier {
+      background: #0d1224;
+      border: 1px solid rgba(99, 102, 241, 0.35);
       border-radius: 12px;
-      padding: 14px 16px;
+      padding: 13px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     
-    .alliance-title {
+    .m-badge-dossier {
+      font-size: 9px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: #93c5fd;
+      margin-bottom: 4px;
+    }
+    
+    .m-title-dossier {
       font-size: 12.5px;
-      font-weight: 800;
-      color: #818cf8;
-      margin-bottom: 5px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 6px;
+      line-height: 1.25;
     }
     
-    .alliance-desc {
+    .m-desc-dossier {
       font-size: 10.5px;
-      color: #94a3b8;
+      font-weight: 600;
+      color: #cbd5e1;
       line-height: 1.4;
+      margin-bottom: 8px;
     }
     
-    .big-cta-card {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.16) 0%, rgba(236, 72, 153, 0.16) 100%);
-      border: 1.5px solid rgba(99, 102, 241, 0.4);
-      border-radius: 16px;
-      padding: 18px 24px;
+    .m-callout-dossier {
+      padding-top: 6px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      font-size: 10px;
+      font-weight: 800;
+      color: #a5b4fc;
+    }
+    
+    .cta-strip-dossier {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(236, 72, 153, 0.22) 100%);
+      border: 1.5px solid rgba(99, 102, 241, 0.45);
+      border-radius: 14px;
+      padding: 16px 20px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     
-    .big-cta-card h3 {
-      font-size: 16px;
+    .cta-strip-dossier h3 {
+      font-size: 15px;
       font-weight: 900;
       color: #ffffff;
     }
     
-    .big-cta-card p {
+    .cta-strip-dossier p {
       font-size: 11.5px;
-      color: #cbd5e1;
-      max-width: 520px;
+      font-weight: 600;
+      color: #e2e8f0;
+      max-width: 580px;
     }
     
-    .big-cta-btn {
-      background: #25D366;
-      color: #032b12;
-      font-size: 12.5px;
+    .cta-link-pill {
+      background: #4f46e5;
+      color: #ffffff;
+      font-size: 11.5px;
       font-weight: 800;
-      padding: 9px 24px;
-      border-radius: 10px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      padding: 7px 18px;
+      border-radius: 9px;
       margin-top: 4px;
-      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35);
-    }
-    
-    .big-cta-btn svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
+      letter-spacing: 0.3px;
     }
   </style>
 </head>
 <body>
-  <!-- PAGE 1: COVER -->
-  <div class="page">
-    <div class="bg-glow glow-purple"></div>
-    <div class="bg-glow glow-pink"></div>
-    
-    <div class="content-layer">
-      <div class="header-brand">
-        <div class="brand-left">
-          <div class="brand-logo">
-            <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/></svg>
-          </div>
-          <div>
-            <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Suite Tecnológica B2B</div>
-          </div>
-        </div>
-        <div class="badge-tag">Dossier Comercial 2026</div>
-      </div>
-
-      <div class="cover-top">
-        <div class="cover-eyebrow">Alianzas con Salones & Event Planners</div>
-        <h1 class="cover-title">
-          Tecnología interactiva para<br>
-          <span>eventos inolvidables</span>
-        </h1>
-        <p class="cover-subtitle">
-          Unificamos la experiencia previa, durante y posterior de cada celebración con soluciones web en tiempo real. Invitaciones digitales 3D, trivia en pantallas gigantes y mural rotativo de fotos por QR.
-        </p>
-
-        <div class="cover-cards">
-          <div class="c-card">
-            <div class="c-badge">Fase 1 · Antes</div>
-            <div class="c-title">Invitación & RSVP</div>
-            <div class="c-desc">Sobre virtual con música, GPS y confirmación con dietas especiales para el catering.</div>
-          </div>
-          <div class="c-card">
-            <div class="c-badge">Fase 2 · Durante</div>
-            <div class="c-title">Trivia en Pantalla LED</div>
-            <div class="c-desc">Show interactivo donde los invitados juegan con su celular y compiten por un podio en TV.</div>
-          </div>
-          <div class="c-card">
-            <div class="c-badge">Fase 3 · Después</div>
-            <div class="c-title">Mural de Fotos QR</div>
-            <div class="c-desc">Transmisión en vivo en pantallas y descarga completa de todas las fotos en alta resolución (.ZIP).</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bar">
-        <div><strong>EVENTOS KRONITT</strong> · Dossier Comercial B2B</div>
-        <div>Página 01 de 03 · WhatsApp: +54 9 223 585-1419</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PAGE 2: SERVICES DETAIL -->
+  <!-- PAGE 1: LOS 3 SERVICIOS DETALLADOS -->
   <div class="page">
     <div class="bg-glow glow-indigo"></div>
     <div class="bg-glow glow-purple"></div>
@@ -969,10 +890,10 @@ const dossierHtml = `<!DOCTYPE html>
           </div>
           <div>
             <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Servicios Interactivos</div>
+            <div class="brand-sub">Dossier de Servicios Interactivos</div>
           </div>
         </div>
-        <div class="badge-tag">Página 02</div>
+        <div class="badge-tag">Página 01 de 02</div>
       </div>
 
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
@@ -1044,14 +965,15 @@ const dossierHtml = `<!DOCTYPE html>
 
       <div class="footer-bar">
         <div><strong>EVENTOS KRONITT</strong> · Dossier Comercial B2B</div>
-        <div>Página 02 de 03 · eventos-suite.vercel.app</div>
+        <div>Página 01 de 02 · eventos-suite.vercel.app/organizadores</div>
       </div>
     </div>
   </div>
 
-  <!-- PAGE 3: TECH & ALLIANCES -->
+  <!-- PAGE 2: TECH & 3 COMMERCIAL MODELS -->
   <div class="page">
     <div class="bg-glow glow-pink"></div>
+    <div class="bg-glow glow-purple"></div>
     
     <div class="content-layer">
       <div class="header-brand">
@@ -1061,75 +983,103 @@ const dossierHtml = `<!DOCTYPE html>
           </div>
           <div>
             <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Modelos de Alianza & Conectividad</div>
+            <div class="brand-sub">Especificaciones & Comercialización</div>
           </div>
         </div>
-        <div class="badge-tag">Página 03</div>
+        <div class="badge-tag">Página 02 de 02</div>
       </div>
 
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
         <div class="section-headline">
-          <h2>Simplicidad Técnica & Modelos de Alianza</h2>
-          <p>Cero fricción operativa para tu salón y beneficios comerciales directos.</p>
+          <h2>Simplicidad Técnica & Modelos de Comercialización</h2>
+          <p>Cero fricción operativa para tu salón y beneficios comerciales directos para cada tipo de cliente.</p>
         </div>
 
+        <!-- SPECS TABLE -->
         <div class="specs-table-box">
           <table>
             <thead>
               <tr>
-                <th style="width: 28%;">Aspecto</th>
+                <th style="width: 28%;">Aspecto Técnico</th>
                 <th style="width: 72%;">Garantía y Especificación Kronitt</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>Instalación</strong></td>
-                <td>100% Web moderna. No requiere descargar apps ni instalar programas.</td>
+                <td>100% Web moderna. No requiere descargar apps ni instalar programas en computadoras.</td>
               </tr>
               <tr>
                 <td><strong>Conectividad</strong></td>
-                <td>Optimizado para Wi-Fi estándar o 4G (compresión automática de fotos en el celular).</td>
+                <td>Optimizado para Wi-Fi estándar o 4G (compresión automática de imágenes en el celular).</td>
               </tr>
               <tr>
-                <td><strong>Pantallas</strong></td>
-                <td>Compatible con cualquier Smart TV, pantalla LED o proyector con conexión HDMI.</td>
+                <td><strong>Pantallas del Salón</strong></td>
+                <td>Compatible con cualquier Smart TV, pantalla LED modular o proyector con conexión HDMI.</td>
               </tr>
               <tr>
-                <td><strong>Soporte</strong></td>
-                <td>Kronitt entrega los links de pantalla listos para proyectar y los QRs para imprimir.</td>
+                <td><strong>Soporte Integral</strong></td>
+                <td>Kronitt entrega los links de pantalla listos para proyectar y los QRs listos para imprimir.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="alliances-container">
-          <div class="alliance-card">
-            <div class="alliance-title">Modelo 1: Comisión por Recomendación (15% al 20%)</div>
-            <div class="alliance-desc">
-              Nos derivás el contacto del cliente. Nosotros asesoramos, cobramos y operamos todo el evento. Vos recibís tu comisión fija sin añadir carga de trabajo a tu equipo.
+        <!-- 3 COMMERCIAL MODELS -->
+        <div class="models-grid-dossier">
+          <div class="m-card-dossier">
+            <div>
+              <div class="m-badge-dossier">1. Para Organizadores</div>
+              <div class="m-title-dossier">Ganancia Escalada Mensual</div>
+              <div class="m-desc-dossier">
+                Comisión creciente según los servicios vendidos al mes. A mayor volumen de eventos cerrados, mayor es tu margen por fecha.
+              </div>
+            </div>
+            <div class="m-callout-dossier">
+              📈 Escala: 15% · 20% · 25% + Bonos
             </div>
           </div>
-          <div class="alliance-card">
-            <div class="alliance-title">Modelo 2: Tarifa Mayorista para Salones</div>
-            <div class="alliance-desc">
-              El salón incluye los servicios dentro de sus paquetes "Todo Incluido". Facturamos al salón con tarifa preferencial B2B y vos decidís el margen comercial hacia el cliente.
+
+          <div class="m-card-dossier">
+            <div>
+              <div class="m-badge-dossier">2. Para Salones de Fiesta</div>
+              <div class="m-title-dossier">Paquetes Mensuales (Abono)</div>
+              <div class="m-desc-dossier">
+                Tarifa plana por paquete de fechas o cobertura ilimitada mensual para incluir tecnología en todas tus propuestas "All-Inclusive".
+              </div>
+            </div>
+            <div class="m-callout-dossier">
+              🏢 Tarifa mayorista fija por mes
+            </div>
+          </div>
+
+          <div class="m-card-dossier">
+            <div>
+              <div class="m-badge-dossier">3. Para Quien Festeja</div>
+              <div class="m-title-dossier">Combos de Servicios</div>
+              <div class="m-desc-dossier">
+                Packs promocionales accesibles para familias y parejas: Pack Invitación, Pack Show (Trivia + Mural) o Full Suite con los 3 módulos.
+              </div>
+            </div>
+            <div class="m-callout-dossier">
+              🎉 Ahorro al combinar servicios
             </div>
           </div>
         </div>
 
-        <div class="big-cta-card">
-          <h3>¿Querés activar una alianza o probar un evento piloto?</h3>
-          <p>Coordinemos una breve llamada de 10 minutos o pedí tu kit de muestra comercial con carteles QR para exhibir en tu salón.</p>
-          <div class="big-cta-btn">
-            <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.04 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.04 20.16C10.66 20.16 9.3 19.8 8.1 19.11L7.81 18.94L4.69 19.76L5.52 16.72L5.33 16.42C4.58 15.22 4.19 13.82 4.19 11.91C4.19 7.37 7.89 3.67 12.04 3.67ZM8.63 7.33C8.44 7.33 8.24 7.34 8.06 7.69C7.87 8.04 7.33 8.56 7.33 9.61C7.33 10.66 8.1 11.67 8.21 11.82C8.32 11.97 9.71 14.11 11.83 15.03C13.59 15.79 13.95 15.64 14.33 15.6C14.71 15.56 15.57 15.09 15.75 14.59C15.93 14.09 15.93 13.66 15.88 13.57C15.83 13.48 15.69 13.43 15.46 13.31C15.23 13.19 14.12 12.65 13.91 12.58C13.7 12.5 13.55 12.46 13.4 12.69C13.25 12.92 12.82 13.43 12.69 13.58C12.56 13.73 12.43 13.75 12.2 13.63C11.97 13.51 11.23 13.27 10.35 12.49C9.66 11.88 9.2 11.13 9.07 10.9C8.94 10.67 9.06 10.55 9.17 10.44C9.27 10.34 9.39 10.18 9.51 10.04C9.63 9.9 9.67 9.79 9.75 9.63C9.83 9.47 9.79 9.33 9.73 9.21C9.67 9.09 9.21 7.97 9.02 7.51C8.83 7.06 8.64 7.12 8.5 7.11L8.63 7.33Z"/></svg>
-            <span>WhatsApp Comercial: +54 9 223 585-1419</span>
+        <!-- DEMO CTA (SIN WHATSAPP) -->
+        <div class="cta-strip-dossier">
+          <h3>Demostración Interactiva en Vivo</h3>
+          <p>Podés escanear con tu celular y probar los 3 servicios funcionando en tiempo real en nuestro showroom online.</p>
+          <div class="cta-link-pill">
+            eventos-suite.vercel.app/organizadores
           </div>
         </div>
       </div>
 
       <div class="footer-bar">
         <div><strong>EVENTOS KRONITT</strong> · Dossier Comercial B2B</div>
-        <div>Página 03 de 03 · WhatsApp: +54 9 223 585-1419</div>
+        <div>Página 02 de 02 · Showroom: <strong>eventos-suite.vercel.app/organizadores</strong></div>
       </div>
     </div>
   </div>
@@ -1137,7 +1087,7 @@ const dossierHtml = `<!DOCTYPE html>
 </html>`;
 
 // =========================================================================
-// 3. PLAYBOOK DE VENTAS (2 Páginas A4, Full Bleed, Espaciosa)
+// 3. PLAYBOOK DE VENTAS (2 Páginas A4, Texto Grueso y Claro, Sin WSP)
 // =========================================================================
 const playbookHtml = `<!DOCTYPE html>
 <html lang="es">
@@ -1148,7 +1098,7 @@ const playbookHtml = `<!DOCTYPE html>
     ${commonCss}
     
     .section-title-bar {
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     
     .section-title-bar h2 {
@@ -1156,38 +1106,42 @@ const playbookHtml = `<!DOCTYPE html>
       font-weight: 900;
       color: #ffffff;
       margin-bottom: 3px;
+      letter-spacing: -0.3px;
     }
     
     .section-title-bar p {
-      font-size: 11px;
-      color: #94a3b8;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #cbd5e1;
     }
     
     .script-box {
-      background: #0d1120;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0d1224;
+      border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 12px;
-      padding: 12px 14px;
+      padding: 12px 15px;
       margin-bottom: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
     }
     
     .script-tag {
-      font-size: 10px;
-      font-weight: 800;
+      font-size: 10.5px;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: #818cf8;
+      letter-spacing: 0.7px;
+      color: #93c5fd;
       margin-bottom: 6px;
     }
     
     .script-quote {
-      background: rgba(0, 0, 0, 0.35);
-      border-left: 3px solid #818cf8;
-      padding: 9px 12px;
-      border-radius: 6px;
-      font-size: 10px;
-      color: #cbd5e1;
-      line-height: 1.45;
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 3.5px solid #818cf8;
+      padding: 10px 14px;
+      border-radius: 7px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #f1f5f9;
+      line-height: 1.5;
       white-space: pre-wrap;
     }
     
@@ -1198,65 +1152,68 @@ const playbookHtml = `<!DOCTYPE html>
     }
     
     .step-card {
-      background: #0d1120;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #0d1224;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 10px;
-      padding: 9px 12px;
+      padding: 9px 14px;
       display: flex;
       gap: 12px;
       align-items: center;
     }
     
     .step-num {
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       background: linear-gradient(135deg, #6366f1, #a855f7);
       color: #ffffff;
       border-radius: 50%;
-      font-weight: 800;
+      font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 11.5px;
       flex-shrink: 0;
     }
     
     .step-info strong {
-      font-size: 11px;
+      font-size: 11.5px;
+      font-weight: 800;
       color: #ffffff;
       display: block;
       margin-bottom: 2px;
     }
     
     .step-info p {
-      font-size: 10px;
-      color: #94a3b8;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #cbd5e1;
       line-height: 1.35;
     }
     
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 10px;
+      font-size: 10.5px;
     }
     
     th {
-      background: #13192e;
+      background: #141c36;
       padding: 8px 12px;
       text-align: left;
-      font-weight: 800;
-      font-size: 9.5px;
+      font-weight: 900;
+      font-size: 9.8px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #94a3b8;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);
     }
     
     td {
       padding: 8px 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-      color: #cbd5e1;
-      line-height: 1.35;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #f1f5f9;
+      font-weight: 600;
+      line-height: 1.4;
     }
     
     tr:last-child td { border-bottom: none; }
@@ -1284,7 +1241,7 @@ const playbookHtml = `<!DOCTYPE html>
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
         <div class="section-title-bar">
           <h2>Scripts de Prospección Comercial</h2>
-          <p>Mensajes directos para contactar salones y planners por WhatsApp o Instagram.</p>
+          <p>Mensajes directos para contactar salones y planners por WhatsApp o redes sociales.</p>
         </div>
 
         <div class="script-box">
@@ -1312,7 +1269,7 @@ Te dejo el demo para que lo chusmees en 1 minuto: 👉 [Link a /organizadores]"<
         </div>
 
         <div class="section-title-bar" style="margin-top: 10px; margin-bottom: 8px;">
-          <h2 style="font-size: 14px;">Estructura de Reunión o Videollamada (15 Minutos)</h2>
+          <h2 style="font-size: 14.5px;">Estructura de Reunión o Videollamada (15 Minutos)</h2>
         </div>
 
         <div class="steps-grid">
@@ -1334,7 +1291,7 @@ Te dejo el demo para que lo chusmees en 1 minuto: 👉 [Link a /organizadores]"<
             <div class="step-num">3</div>
             <div class="step-info">
               <strong>Propuesta Comercial & Cierre de Evento Piloto (7 min)</strong>
-              <p>Presentar el modelo de comisión (15-20%) o tarifa de salón y ofrecer el primer evento bonificado.</p>
+              <p>Presentar el modelo de comisión escalada mensual o paquete de salón y ofrecer el primer evento bonificado.</p>
             </div>
           </div>
         </div>
@@ -1342,7 +1299,7 @@ Te dejo el demo para que lo chusmees en 1 minuto: 👉 [Link a /organizadores]"<
 
       <div class="footer-bar">
         <div><strong>EVENTOS KRONITT</strong> · Playbook de Ventas B2B</div>
-        <div>Página 01 de 02 · Uso Interno</div>
+        <div>Página 01 de 02 · Uso Interno Comercial</div>
       </div>
     </div>
   </div>
@@ -1383,10 +1340,10 @@ Miren este link para probarlo: [Link Demo]
         </div>
 
         <div class="section-title-bar" style="margin-top: 10px; margin-bottom: 8px;">
-          <h2 style="font-size: 14px;">Matriz de Manejo de Objeciones</h2>
+          <h2 style="font-size: 14.5px;">Matriz de Manejo de Objeciones</h2>
         </div>
 
-        <div style="border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; overflow: hidden; background: #0d1120;">
+        <div style="border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 12px; overflow: hidden; background: #0d1224;">
           <table>
             <thead>
               <tr>
@@ -1409,7 +1366,7 @@ Miren este link para probarlo: [Link Demo]
               </tr>
               <tr>
                 <td><strong>"Presupuesto ajustado de los clientes."</strong></td>
-                <td>Se puede contratar por módulos individuales (solo la Trivia o solo la Invitación) y la invitación ahorra el costo total de imprenta tradicional.</td>
+                <td>Se puede contratar por combos o módulos individuales (solo la Trivia o solo la Invitación) y la invitación ahorra el costo total de imprenta tradicional.</td>
               </tr>
             </tbody>
           </table>
@@ -1418,7 +1375,7 @@ Miren este link para probarlo: [Link Demo]
 
       <div class="footer-bar">
         <div><strong>EVENTOS KRONITT</strong> · Playbook de Ventas B2B</div>
-        <div>Página 02 de 02 · WhatsApp: +54 9 223 585-1419</div>
+        <div>Página 02 de 02 · Showroom: <strong>eventos-suite.vercel.app/organizadores</strong></div>
       </div>
     </div>
   </div>
@@ -1456,7 +1413,7 @@ try {
   fs.copyFileSync(outDossier, path.join(publicDocsDir, 'DOSSIER_COMERCIAL_EVENTOS_KRONITT.pdf'));
   fs.copyFileSync(outPlaybook, path.join(publicDocsDir, 'PLAYBOOK_VENTAS_EVENTOS_KRONITT.pdf'));
 
-  console.log('All 3 PDFs regenerated with FULL BLEED and PERFECT PADDING!');
+  console.log('All 3 PDFs regenerated with high-contrast text, 3 commercial models, no WhatsApp, and 2-page Dossier!');
 } catch (err) {
   console.error('Error generating PDFs:', err);
   process.exit(1);
