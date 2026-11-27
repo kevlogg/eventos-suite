@@ -450,7 +450,7 @@ const onePagerHtml = `<!DOCTYPE html>
             <div class="brand-sub">Tecnología Interactiva para Eventos</div>
           </div>
         </div>
-        <div class="badge-tag">Propuesta para Salones & Planners</div>
+        <div class="badge-tag">Propuesta para Salones y Organizadores</div>
       </div>
 
       <!-- HERO -->
@@ -563,39 +563,46 @@ const onePagerHtml = `<!DOCTYPE html>
       <div>
         <div class="block-header">
           <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span>Alianza para Salones y Planners (Tarifa Mayorista por Cantidad al Mes)</span>
+          <span>Alianza para Salones y Organizadores (Tarifa Mayorista y Rentabilidad)</span>
         </div>
         <div class="table-box">
           <table>
             <thead>
               <tr>
-                <th style="width: 25%;">Tramo Mensual</th>
-                <th style="width: 25%;">Servicios en el Mes</th>
-                <th style="width: 25%;">Tu Costo Mayorista</th>
-                <th style="width: 25%;">Margen servicio suelto ($70k)</th>
+                <th style="width: 24%;">Tramo y Volumen</th>
+                <th style="width: 19%;">Costo Mayorista</th>
+                <th style="width: 19%; text-align: center;">Ganancia a $70k</th>
+                <th style="width: 19%; text-align: center;">Ganancia a $85k</th>
+                <th style="width: 19%; text-align: center;">Ganancia a $100k</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Tramo 1 (Base)</strong></td>
-                <td>1 a 3 servicios</td>
+                <td><strong>Tramo 1 Base</strong> (1 a 3 serv.)</td>
                 <td><strong>$50.000</strong> c/u</td>
-                <td><span class="td-highlight">$20.000 por servicio</span></td>
+                <td style="text-align: center;"><span class="td-highlight">+$20.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#ffffff;font-weight:700;">+$35.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#fde047;font-weight:800;">+$50.000 / serv</span></td>
               </tr>
               <tr>
-                <td><strong>Tramo 2 (Activo)</strong></td>
-                <td>4 a 8 servicios</td>
+                <td><strong>Tramo 2 Activo</strong> (4 a 6 serv.)</td>
                 <td><strong>$40.000</strong> c/u</td>
-                <td><span class="td-highlight">$30.000 por servicio (43%)</span></td>
+                <td style="text-align: center;"><span class="td-highlight">+$30.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#ffffff;font-weight:700;">+$45.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#fde047;font-weight:800;">+$60.000 / serv</span></td>
               </tr>
               <tr>
-                <td><strong>Tramo 3 (VIP / Salón)</strong></td>
-                <td>9 o más servicios</td>
+                <td><strong>Tramo 3 VIP</strong> (7+ serv.)</td>
                 <td><strong>$30.000</strong> c/u</td>
-                <td><span class="td-highlight">$40.000 por servicio (57%)</span></td>
+                <td style="text-align: center;"><span class="td-highlight">+$40.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#ffffff;font-weight:700;">+$55.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#fde047;font-weight:800;">+$70.000 / serv</span></td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <div style="font-size: 8px; color: #cbd5e1; margin-top: 3px; line-height: 1.25;">
+          💡 <strong>Libertad total de precios:</strong> $70.000 es el PVP oficial de Kronitt. Como salón u organizador tenés total libertad para cobrar el valor que consideres (ej. $85k, $100k o incluirlo en tu tarjeta sin desglosar). Toda la diferencia es tu ganancia neta.
         </div>
       </div>
 
@@ -950,8 +957,8 @@ const dossierHtml = `<!DOCTYPE html>
 
       <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
         <div class="section-headline">
-          <h2>Precios, Combos y Alianzas para Salones</h2>
-          <p>Un esquema simple y transparente: $70.000 el servicio suelto, combos para el cliente final y escala mayorista por volumen mensual para salones.</p>
+          <h2>Precios, Combos y Alianzas para Salones y Organizadores</h2>
+          <p>Un esquema simple y transparente: $70.000 el servicio suelto, combos para el cliente final y escala mayorista ($50k / $40k / $30k) con libertad total de precios para organizadores.</p>
         </div>
 
         <!-- B2B SCALE TABLE -->
@@ -959,30 +966,34 @@ const dossierHtml = `<!DOCTYPE html>
           <table>
             <thead>
               <tr>
-                <th style="width: 25%;">Tramo Mensual</th>
-                <th style="width: 25%;">Servicios Acumulados</th>
-                <th style="width: 25%;">Costo por Servicio</th>
-                <th style="width: 25%;">Margen servicio suelto ($70k)</th>
+                <th style="width: 24%;">Tramo Mensual</th>
+                <th style="width: 19%;">Costo por Servicio</th>
+                <th style="width: 19%; text-align: center;">Ganancia a $70k (PVP)</th>
+                <th style="width: 19%; text-align: center;">Ganancia a $85k</th>
+                <th style="width: 19%; text-align: center;">Ganancia a $100k</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Tramo 1 (Base)</strong></td>
-                <td>1 a 3 servicios/mes</td>
+                <td><strong>Tramo 1 Base</strong> (1 a 3 serv./mes)</td>
                 <td><strong>$50.000</strong> c/u</td>
-                <td><span style="color:#4ade80;font-weight:800;">$20.000 por servicio</span></td>
+                <td style="text-align: center;"><span style="color:#4ade80;font-weight:800;">+$20.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#ffffff;font-weight:700;">+$35.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#fde047;font-weight:800;">+$50.000 / serv</span></td>
               </tr>
               <tr>
-                <td><strong>Tramo 2 (Activo)</strong></td>
-                <td>4 a 8 servicios/mes</td>
+                <td><strong>Tramo 2 Activo</strong> (4 a 6 serv./mes)</td>
                 <td><strong>$40.000</strong> c/u</td>
-                <td><span style="color:#4ade80;font-weight:800;">$30.000 por servicio (43%)</span></td>
+                <td style="text-align: center;"><span style="color:#4ade80;font-weight:800;">+$30.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#ffffff;font-weight:700;">+$45.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#fde047;font-weight:800;">+$60.000 / serv</span></td>
               </tr>
               <tr>
-                <td><strong>Tramo 3 (VIP / Salón)</strong></td>
-                <td>9 o más servicios/mes</td>
+                <td><strong>Tramo 3 VIP</strong> (7+ serv./mes)</td>
                 <td><strong>$30.000</strong> c/u</td>
-                <td><span style="color:#4ade80;font-weight:800;">$40.000 por servicio (57%)</span></td>
+                <td style="text-align: center;"><span style="color:#4ade80;font-weight:800;">+$40.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#ffffff;font-weight:700;">+$55.000 / serv</span></td>
+                <td style="text-align: center;"><span style="color:#fde047;font-weight:800;">+$70.000 / serv</span></td>
               </tr>
             </tbody>
           </table>
@@ -996,14 +1007,14 @@ const dossierHtml = `<!DOCTYPE html>
               • <strong>1 Servicio Individual:</strong> $70.000 ARS.<br>
               • <strong>Combo Dúo (2 servicios):</strong> $105.000 ARS.<br>
               • <strong>Combo Full Suite (3 servicios):</strong> $135.000 ARS.<br>
-              El salón o planner es libre de fijar su precio de venta o sumarlo a sus paquetes.
+              El salón u organizador es 100% libre de fijar su precio de venta o sumarlo a sus paquetes.
             </p>
           </div>
           <div class="b2b-summary-card">
             <h4>Ventaja Operativa para el Salón u Organizador</h4>
             <p>
               • <strong>Un solo criterio:</strong> Cada módulo vale exactamente lo mismo.<br>
-              • <strong>Mayor volumen = menor costo:</strong> A partir de 4 servicios al mes el costo baja a $40.000 y luego a $30.000.<br>
+              • <strong>Mayor volumen = menor costo:</strong> A partir de 4 servicios al mes el costo baja a $40.000 y desde 7 a $30.000.<br>
               • <strong>Cero complejidad técnica:</strong> Kronitt entrega todo configurado y listo para proyectar.
             </p>
           </div>
@@ -1250,7 +1261,7 @@ const playbookHtml = `<!DOCTYPE html>
           </div>
           <div>
             <div class="brand-name">EVENTOS KRONITT</div>
-            <div class="brand-sub">Guía de Ventas para Salones & Planners</div>
+            <div class="brand-sub">Guía de Ventas para Salones y Organizadores</div>
           </div>
         </div>
         <div class="playbook-badge">Guía Comercial</div>
@@ -1275,10 +1286,10 @@ const playbookHtml = `<!DOCTYPE html>
         </div>
 
         <div class="script-box">
-          <div class="script-target">Opción B: Para Wedding Planners & Organizadores (Ahorro de Tiempo & Diferenciación)</div>
+          <div class="script-target">Opción B: Para Organizadores de Eventos (Ahorro de Tiempo & Diferenciación)</div>
           <div class="script-quote">
             "¡Hola [Nombre]! Sigo tu trabajo organizando eventos, impecable la dedicación que le ponés a cada detalle.<br>
-            Te escribo porque creamos <strong>Eventos Kronitt</strong> para solucionar dos dolores de cabeza típicos de planners:<br>
+            Te escribo porque creamos <strong>Eventos Kronitt</strong> para solucionar dos dolores de cabeza típicos de organizadores:<br>
             1. <strong>Catering ordenado:</strong> Invitación digital con formulario RSVP interactivo y reporte en vivo de dietas especiales.<br>
             2. <strong>Cena dinámica:</strong> Trivia en vivo en pantalla gigante y mural rotativo de fotos por QR en cada mesa.<br>
             Lo mejor: los invitados no descargan apps y vos podés sumar una ganancia directa por evento o integrarlo a tu propuesta.<br>
@@ -1350,7 +1361,7 @@ const playbookHtml = `<!DOCTYPE html>
       <div style="margin-top: 8px;">
         <div class="section-title">
           <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          3. Mensajes Listos para que el Planner / Salón Reenvíe a sus Clientes
+          3. Mensajes Listos para que el Salón u Organizador Reenvíe a sus Clientes
         </div>
 
         <div class="script-box">
@@ -1419,9 +1430,9 @@ const playbookHtml = `<!DOCTYPE html>
           <div class="summary-card">
             <h4>Escala Mayorista Partners B2B</h4>
             <p>
-              • <strong>Tramo 1 (1-3 serv.):</strong> $50.000 c/u (Margen $20k).<br>
-              • <strong>Tramo 2 (4-8 serv.):</strong> $40.000 c/u ($30k margen / 43%).<br>
-              • <strong>Tramo 3 (9+ serv.):</strong> $30.000 c/u ($40k margen / 57%).
+              • <strong>Tramo 1 (1-3 serv.):</strong> $50.000 c/u (Margen $20k a $50k).<br>
+              • <strong>Tramo 2 (4-6 serv.):</strong> $40.000 c/u (Margen $30k a $60k).<br>
+              • <strong>Tramo 3 (7+ serv.):</strong> $30.000 c/u (Margen $40k a $70k VIP).
             </p>
           </div>
         </div>
