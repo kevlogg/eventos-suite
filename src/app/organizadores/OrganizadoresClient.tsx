@@ -67,7 +67,7 @@ export default function OrganizadoresClient() {
       const qrOptions = {
         width: 240,
         margin: 1.5,
-        color: { dark: "#0b0c10", light: "#ffffff" },
+        color: { dark: "#090a0f", light: "#ffffff" },
       };
 
       QRCode.toDataURL(`${currentOrigin}/demo-fiesta`, qrOptions)
@@ -130,18 +130,18 @@ export default function OrganizadoresClient() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#07080c] text-slate-100 selection:bg-amber-400 selection:text-slate-950">
+    <div className="min-h-screen bg-[#07080a] text-slate-100 selection:bg-white selection:text-slate-950">
       {/* ─── BARRA SUPERIOR ─── */}
-      <header className="border-b border-amber-500/20 bg-[#0b0d13]/85 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-white/15 bg-[#0a0c10]/85 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 via-yellow-300 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/25 group-hover:scale-105 transition-transform">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-white via-slate-200 to-slate-400 flex items-center justify-center shadow-lg shadow-white/20 group-hover:scale-105 transition-transform">
               <Sparkles className="w-4 h-4 text-slate-950" />
             </div>
             <div>
               <span className="font-extrabold text-base sm:text-lg text-white tracking-tight">Eventos Kronitt</span>
             </div>
-            <span className="hidden md:inline-block px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/35 uppercase tracking-wider">
+            <span className="hidden md:inline-block px-2.5 py-0.5 text-[10px] font-extrabold rounded-full bg-white/10 text-slate-200 border border-white/25 uppercase tracking-wider">
               Salones & Planners
             </span>
           </Link>
@@ -149,9 +149,9 @@ export default function OrganizadoresClient() {
           <div className="flex items-center gap-3">
             <a
               href="#simulador"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-amber-300/90 hover:text-amber-200 rounded-lg hover:bg-amber-500/10 transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-300 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
             >
-              <DollarSign className="w-3.5 h-3.5 text-amber-400" />
+              <DollarSign className="w-3.5 h-3.5 text-slate-300" />
               <span>Simulador de Ganancia</span>
             </a>
 
@@ -168,19 +168,19 @@ export default function OrganizadoresClient() {
         </div>
       </header>
 
-      {/* ─── HERO B2B: DORADO & PLATEADO FIESTA ─── */}
+      {/* ─── HERO B2B: PLATEADO / PLATINO PREDOMINANTE ─── */}
       <section className="relative pt-12 sm:pt-20 pb-12 px-4 sm:px-6 max-w-7xl mx-auto text-center">
-        {/* Glow de fondo cálido / platino */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[320px] bg-gradient-to-tr from-amber-500/10 via-yellow-400/10 to-slate-300/10 blur-[130px] rounded-full pointer-events-none -z-10" />
+        {/* Glow de fondo plateado y sutil platino */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[320px] bg-gradient-to-tr from-white/10 via-slate-300/10 to-amber-400/5 blur-[130px] rounded-full pointer-events-none -z-10" />
 
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/35 text-amber-300 text-xs font-bold uppercase tracking-wider mb-6">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/25 text-slate-200 text-xs font-bold uppercase tracking-wider mb-6">
+          <Sparkles className="w-3.5 h-3.5 text-white" />
           <span>Propuesta Exclusiva para Salones & Organizadores</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.15] max-w-4xl mx-auto mb-6">
           Tecnología interactiva para tus fiestas:{" "}
-          <span className="bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
             hacé que cada evento sea inolvidable
           </span>
         </h1>
@@ -194,7 +194,7 @@ export default function OrganizadoresClient() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 mb-10">
           <a
             href="#showroom-demo"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm sm:text-base shadow-[0_8px_25px_rgba(217,119,6,0.35)] transition-all transform hover:-translate-y-0.5"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-white via-slate-100 to-slate-300 hover:from-slate-100 hover:to-white text-slate-950 font-black text-sm sm:text-base shadow-[0_8px_25px_rgba(255,255,255,0.22)] border border-white/80 transition-all transform hover:-translate-y-0.5"
           >
             <Smartphone className="w-4 h-4" />
             <span>Probar Showroom con tu Celular</span>
@@ -210,7 +210,7 @@ export default function OrganizadoresClient() {
 
           <a
             href="#simulador"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-amber-500/10 border border-amber-500/35 hover:bg-amber-500/20 text-amber-300 font-bold text-sm sm:text-base transition-colors"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white/5 border border-white/20 hover:bg-white/10 text-slate-200 font-bold text-sm sm:text-base transition-colors"
           >
             <DollarSign className="w-4 h-4 text-amber-400" />
             <span>Simular Ganancia Salón</span>
@@ -219,8 +219,8 @@ export default function OrganizadoresClient() {
 
         {/* 4 PILLARS QUICK STRIP */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto text-left">
-          <div className="p-3.5 rounded-xl bg-slate-900/80 border border-amber-500/20 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
+          <div className="p-3.5 rounded-xl bg-slate-900/80 border border-white/15 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-white/10 text-white flex items-center justify-center shrink-0">
               <Smartphone className="w-5 h-5" />
             </div>
             <div>
@@ -239,8 +239,8 @@ export default function OrganizadoresClient() {
             </div>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-900/80 border border-amber-500/20 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-yellow-500/15 text-yellow-300 flex items-center justify-center shrink-0">
+          <div className="p-3.5 rounded-xl bg-slate-900/80 border border-white/15 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-lg bg-white/10 text-slate-100 flex items-center justify-center shrink-0">
               <Shield className="w-5 h-5" />
             </div>
             <div>
@@ -264,15 +264,15 @@ export default function OrganizadoresClient() {
       {/* ─── SECCIÓN 1: SHOWROOM INTERACTIVO CON QR EN VIVO ─── */}
       <section
         id="showroom-demo"
-        className="py-16 sm:py-20 bg-gradient-to-b from-[#090b10] to-[#07080c] border-y border-amber-500/20 relative overflow-hidden"
+        className="py-16 sm:py-20 bg-gradient-to-b from-[#090b10] to-[#07080a] border-y border-white/15 relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-400">
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-300">
               Experiencia en Tiempo Real
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
-              Showroom Interactivo: <span className="text-amber-300">Escaneá con tu celular</span>
+              Showroom Interactivo: <span className="text-slate-200">Escaneá con tu celular</span>
             </h2>
             <p className="text-slate-300 text-xs sm:text-sm">
               Apuntá con la cámara de tu teléfono a cualquiera de los códigos QR. Es la misma experiencia real que vivirán los invitados en el evento.
@@ -280,12 +280,12 @@ export default function OrganizadoresClient() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {/* DEMO 1: INVITACIÓN (ORO CÁLIDO) */}
-            <div className="p-6 rounded-2xl bg-slate-900/90 border border-amber-500/40 flex flex-col items-center text-center shadow-xl relative group">
-              <div className="w-11 h-11 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-3">
+            {/* DEMO 1: INVITACIÓN (PLATINO / BLANCO) */}
+            <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-500/40 flex flex-col items-center text-center shadow-xl relative group">
+              <div className="w-11 h-11 rounded-xl bg-white/10 text-white flex items-center justify-center mb-3">
                 <PartyPopper className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-400 mb-1">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-300 mb-1">
                 Servicio 01 · Pre-Fiesta
               </span>
               <h3 className="text-lg font-bold text-white mb-2">Invitación Digital 3D & RSVP</h3>
@@ -309,7 +309,7 @@ export default function OrganizadoresClient() {
                 )}
               </div>
 
-              <span className="text-[11px] font-bold text-amber-300/90 mb-4">
+              <span className="text-[11px] font-bold text-slate-300 mb-4">
                 📱 Escaneá para abrir el sobre en tu celu
               </span>
 
@@ -317,19 +317,19 @@ export default function OrganizadoresClient() {
                 href={origin ? `${origin}/demo-fiesta` : "/demo-fiesta"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/35 text-xs font-bold transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-bold transition-colors"
               >
                 <span>Probar en este navegador</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
 
-            {/* DEMO 2: TRIVIA (PLATINO / SILVER) */}
-            <div className="p-6 rounded-2xl bg-slate-900/90 border border-slate-500/40 flex flex-col items-center text-center shadow-xl relative group">
+            {/* DEMO 2: TRIVIA (CHROME SILVER) */}
+            <div className="p-6 rounded-2xl bg-slate-900/90 border border-white/35 flex flex-col items-center text-center shadow-xl relative group">
               <div className="w-11 h-11 rounded-xl bg-slate-800 text-slate-100 flex items-center justify-center mb-3">
                 <Trophy className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-300 mb-1">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-white mb-1">
                 Servicio 02 · En la Fiesta
               </span>
               <h3 className="text-lg font-bold text-white mb-2">Trivia en Pantalla Gigante</h3>
@@ -362,7 +362,7 @@ export default function OrganizadoresClient() {
                   href={origin ? `${origin}/demo-fiesta/trivia` : "/demo-fiesta/trivia"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-bold transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white border border-white/30 text-xs font-bold transition-colors"
                 >
                   <Smartphone className="w-3.5 h-3.5" />
                   <span>Jugar desde la Web</span>
@@ -380,12 +380,12 @@ export default function OrganizadoresClient() {
               </div>
             </div>
 
-            {/* DEMO 3: MURAL DE FOTOS (CHAMPAGNE GOLD) */}
-            <div className="p-6 rounded-2xl bg-slate-900/90 border border-yellow-500/40 flex flex-col items-center text-center shadow-xl relative group">
-              <div className="w-11 h-11 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center mb-3">
+            {/* DEMO 3: MURAL DE FOTOS (TOQUE CHAMPAGNE SUTIL) */}
+            <div className="p-6 rounded-2xl bg-slate-900/90 border border-amber-400/35 flex flex-col items-center text-center shadow-xl relative group">
+              <div className="w-11 h-11 rounded-xl bg-amber-400/15 text-amber-300 flex items-center justify-center mb-3">
                 <Camera className="w-5 h-5" />
               </div>
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-yellow-400 mb-1">
+              <span className="text-[10px] font-extrabold uppercase tracking-widest text-amber-300 mb-1">
                 Servicio 03 · Toda la Fiesta
               </span>
               <h3 className="text-lg font-bold text-white mb-2">Mural de Fotos en Vivo por QR</h3>
@@ -409,7 +409,7 @@ export default function OrganizadoresClient() {
                 )}
               </div>
 
-              <span className="text-[11px] font-bold text-yellow-300/90 mb-4">
+              <span className="text-[11px] font-bold text-amber-200/90 mb-4">
                 📱 Escaneá para subir una foto de prueba
               </span>
 
@@ -418,7 +418,7 @@ export default function OrganizadoresClient() {
                   href={origin ? `${origin}/demo-fiesta/fotos` : "/demo-fiesta/fotos"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-yellow-500/15 hover:bg-yellow-500/25 text-yellow-300 border border-yellow-500/35 text-xs font-bold transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-amber-400/10 hover:bg-amber-400/20 text-amber-200 border border-amber-400/30 text-xs font-bold transition-colors"
                 >
                   <Smartphone className="w-3.5 h-3.5" />
                   <span>Subir Foto desde la Web</span>
@@ -430,7 +430,7 @@ export default function OrganizadoresClient() {
                   rel="noopener noreferrer"
                   className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-colors"
                 >
-                  <Tv className="w-3.5 h-3.5 text-yellow-400" />
+                  <Tv className="w-3.5 h-3.5 text-slate-300" />
                   <span>Ver Mural en Pantalla TV</span>
                 </a>
               </div>
@@ -442,7 +442,7 @@ export default function OrganizadoresClient() {
       {/* ─── SECCIÓN 2: PASO A PASO DE CÓMO FUNCIONA E IMPLEMENTAR ─── */}
       <section id="paso-a-paso" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-amber-400">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-slate-300">
             Guía Práctica & Operativa
           </span>
           <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
@@ -459,7 +459,7 @@ export default function OrganizadoresClient() {
             onClick={() => setActiveStepTab("invitacion")}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
               activeStepTab === "invitacion"
-                ? "bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 scale-105 font-black"
+                ? "bg-gradient-to-r from-white via-slate-100 to-slate-300 text-slate-950 shadow-lg shadow-white/20 scale-105 font-black"
                 : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
             }`}
           >
@@ -471,7 +471,7 @@ export default function OrganizadoresClient() {
             onClick={() => setActiveStepTab("trivia")}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
               activeStepTab === "trivia"
-                ? "bg-gradient-to-r from-slate-100 to-slate-300 text-slate-950 shadow-lg shadow-slate-300/25 scale-105 font-black"
+                ? "bg-gradient-to-r from-slate-200 to-slate-400 text-slate-950 shadow-lg shadow-slate-300/20 scale-105 font-black"
                 : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
             }`}
           >
@@ -483,7 +483,7 @@ export default function OrganizadoresClient() {
             onClick={() => setActiveStepTab("fotos")}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
               activeStepTab === "fotos"
-                ? "bg-gradient-to-r from-yellow-300 to-amber-400 text-slate-950 shadow-lg shadow-yellow-500/25 scale-105 font-black"
+                ? "bg-gradient-to-r from-slate-100 via-slate-200 to-amber-200 text-slate-950 shadow-lg shadow-slate-200/20 scale-105 font-black"
                 : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
             }`}
           >
@@ -495,7 +495,7 @@ export default function OrganizadoresClient() {
             onClick={() => setActiveStepTab("salon")}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all ${
               activeStepTab === "salon"
-                ? "bg-gradient-to-r from-amber-400 to-slate-200 text-slate-950 shadow-lg shadow-amber-500/25 scale-105 font-black"
+                ? "bg-gradient-to-r from-white to-slate-300 text-slate-950 shadow-lg shadow-white/20 scale-105 font-black"
                 : "bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800"
             }`}
           >
@@ -505,11 +505,11 @@ export default function OrganizadoresClient() {
         </div>
 
         {/* CONTENIDO DEL TAB SELECCIONADO */}
-        <div className="bg-slate-900/80 border border-amber-500/20 rounded-3xl p-6 sm:p-10 shadow-2xl">
+        <div className="bg-slate-900/80 border border-white/15 rounded-3xl p-6 sm:p-10 shadow-2xl">
           {activeStepTab === "invitacion" && (
             <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-black">
+                <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center font-black">
                   01
                 </div>
                 <div>
@@ -520,40 +520,40 @@ export default function OrganizadoresClient() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 1: Armado en 5 min
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Carga de datos del evento</h4>
                   <p className="text-xs text-slate-300 leading-relaxed mb-3">
                     Se completan fecha, salón, código de vestimenta, música preferida y los datos de CBU/Alias para el cofre de regalos.
                   </p>
-                  <div className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                  <div className="text-[11px] font-semibold text-slate-200 bg-white/10 p-2.5 rounded-lg border border-white/20">
                     💡 Genera un enlace web personalizado con sobre 3D animado.
                   </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 2: Envío en 1 Clic
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Compartir por WhatsApp</h4>
                   <p className="text-xs text-slate-300 leading-relaxed mb-3">
                     Los agasajados mandan el enlace directamente por WhatsApp a sus invitados. Al tocarlo, el invitado ve el sobre abrirse con música.
                   </p>
-                  <div className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                  <div className="text-[11px] font-semibold text-slate-200 bg-white/10 p-2.5 rounded-lg border border-white/20">
                     📱 Cero apps para instalar: abre al instante en Chrome o Safari.
                   </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 3: Confirmación RSVP
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Control de dietas en vivo</h4>
                   <p className="text-xs text-slate-300 leading-relaxed mb-3">
                     El invitado confirma si asiste y selecciona si es celíaco, vegano o vegetariano. El anfitrión y el salón ven la lista en tiempo real.
                   </p>
-                  <div className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                  <div className="text-[11px] font-semibold text-slate-200 bg-white/10 p-2.5 rounded-lg border border-white/20">
                     🍽️ Lista de cocina exacta: sin desperdicio de platos ni confusiones.
                   </div>
                 </div>
@@ -575,7 +575,7 @@ export default function OrganizadoresClient() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-slate-300 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 1: Preguntas a medida
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Personalización total</h4>
@@ -588,7 +588,7 @@ export default function OrganizadoresClient() {
                 </div>
 
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-slate-300 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 2: Conectar la pantalla
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Conectar HDMI en el salón</h4>
@@ -601,7 +601,7 @@ export default function OrganizadoresClient() {
                 </div>
 
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-slate-300 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 3: ¡A Jugar y Ganar!
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Podio y confeti animado</h4>
@@ -619,7 +619,7 @@ export default function OrganizadoresClient() {
           {activeStepTab === "fotos" && (
             <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-                <div className="w-10 h-10 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-black">
+                <div className="w-10 h-10 rounded-xl bg-slate-800 text-amber-300 flex items-center justify-center font-black">
                   03
                 </div>
                 <div>
@@ -630,40 +630,40 @@ export default function OrganizadoresClient() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-yellow-400 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 1: Cartelitos en mesas
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Identificadores QR impresos</h4>
                   <p className="text-xs text-slate-300 leading-relaxed mb-3">
                     Se colocan pequeños cartelitos con código QR en cada mesa del salón (Kronitt te entrega el diseño en PDF listo para imprimir).
                   </p>
-                  <div className="text-[11px] font-semibold text-yellow-300/80 bg-yellow-500/10 p-2.5 rounded-lg border border-yellow-500/20">
+                  <div className="text-[11px] font-semibold text-slate-200 bg-white/10 p-2.5 rounded-lg border border-white/20">
                     🖨️ Diseño elegante que combina con los números de mesa.
                   </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-yellow-400 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 2: Fotos y Dedicatorias
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Escaneo y subida instantánea</h4>
                   <p className="text-xs text-slate-300 leading-relaxed mb-3">
                     Los invitados escanean con la cámara de su celular, eligen una foto de su galería o sacan una selfie, escriben un mensaje y tocan enviar.
                   </p>
-                  <div className="text-[11px] font-semibold text-yellow-300/80 bg-yellow-500/10 p-2.5 rounded-lg border border-yellow-500/20">
+                  <div className="text-[11px] font-semibold text-slate-200 bg-white/10 p-2.5 rounded-lg border border-white/20">
                     ⚡ Se comprime en el celular para no gastar datos ni saturar el Wi-Fi.
                   </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-yellow-400 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 3: Proyección y Álbum HD
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Mural dinámico y descarga ZIP</h4>
                   <p className="text-xs text-slate-300 leading-relaxed mb-3">
                     Las fotos se proyectan rotando en la pantalla gigante. Podés activar moderación previa y al finalizar la fiesta te descargás el álbum ZIP completo en HD.
                   </p>
-                  <div className="text-[11px] font-semibold text-yellow-300/80 bg-yellow-500/10 p-2.5 rounded-lg border border-yellow-500/20">
+                  <div className="text-[11px] font-semibold text-amber-300/90 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
                     📸 El mejor recuerdo digital para los agasajados.
                   </div>
                 </div>
@@ -674,7 +674,7 @@ export default function OrganizadoresClient() {
           {activeStepTab === "salon" && (
             <div>
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-800">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center font-black">
+                <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center font-black">
                   04
                 </div>
                 <div>
@@ -685,40 +685,40 @@ export default function OrganizadoresClient() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 1: Definí tu propuesta
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Elegí cómo ofrecerlo</h4>
                   <p className="text-xs text-slate-300 leading-relaxed mb-3">
                     Podés incluir los servicios dentro de tus paquetes "Todo Incluido" / "Premium" para diferenciar tu salón, o venderlos como opcionales con tu propio margen.
                   </p>
-                  <div className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                  <div className="text-[11px] font-semibold text-slate-200 bg-white/10 p-2.5 rounded-lg border border-white/20">
                     💰 Vos decidís el precio final al cliente (sugerido: $70.000 c/u).
                   </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 2: Nos pasás el evento
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Soporte Llave en Mano</h4>
                   <p className="text-xs text-slate-300 leading-relaxed mb-3">
                     Nos mandás la fecha y nombres de los agasajados por WhatsApp. Nosotros configuramos todo, te pasamos los links de pantalla y los QR listos para imprimir.
                   </p>
-                  <div className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                  <div className="text-[11px] font-semibold text-slate-200 bg-white/10 p-2.5 rounded-lg border border-white/20">
                     🛡️ Cero horas de trabajo operativo para tu equipo.
                   </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-slate-950/60 border border-slate-800">
-                  <div className="text-amber-400 text-xs font-black uppercase tracking-wider mb-2">
+                  <div className="text-slate-200 text-xs font-black uppercase tracking-wider mb-2">
                     Paso 3: Liquidación Mensual
                   </div>
                   <h4 className="text-base font-bold text-white mb-2">Descuento por escala</h4>
                   <p className="text-xs text-slate-300 leading-relaxed mb-3">
                     A fin de mes se suman todos los servicios activados: de 1 a 3 pagás $50.000 c/u; de 4 a 8 pagás $40.000 c/u; y a partir de 9 baja a $30.000 c/u.
                   </p>
-                  <div className="text-[11px] font-semibold text-amber-300/80 bg-amber-500/10 p-2.5 rounded-lg border border-amber-500/20">
+                  <div className="text-[11px] font-semibold text-slate-200 bg-white/10 p-2.5 rounded-lg border border-white/20">
                     📈 A mayor volumen mensual, mayor es tu ganancia neta.
                   </div>
                 </div>
@@ -728,11 +728,11 @@ export default function OrganizadoresClient() {
         </div>
       </section>
 
-      {/* ─── SECCIÓN 3: SIMULADOR DE GANANCIA PARA SALONES (SLIDER INTERACTIVO DORADO) ─── */}
-      <section id="simulador" className="py-16 sm:py-24 bg-gradient-to-b from-[#07080c] via-[#0e1017] to-[#07080c] border-y border-amber-500/20">
+      {/* ─── SECCIÓN 3: SIMULADOR DE GANANCIA PARA SALONES (SLIDER PLATEADO / CHROME) ─── */}
+      <section id="simulador" className="py-16 sm:py-24 bg-gradient-to-b from-[#07080a] via-[#0d1017] to-[#07080a] border-y border-white/15">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-amber-400">
+            <span className="text-xs font-extrabold uppercase tracking-widest text-slate-300">
               Calculadora de Rentabilidad B2B
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
@@ -743,7 +743,7 @@ export default function OrganizadoresClient() {
             </p>
           </div>
 
-          <div className="p-6 sm:p-10 rounded-3xl bg-slate-900/90 border border-amber-500/35 shadow-2xl relative overflow-hidden">
+          <div className="p-6 sm:p-10 rounded-3xl bg-slate-900/90 border border-slate-700/80 shadow-2xl relative overflow-hidden">
             {/* Header del Simulador */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-800">
               <div>
@@ -760,7 +760,7 @@ export default function OrganizadoresClient() {
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">
                   Tramo Mayorista Alcanzado:
                 </span>
-                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-black">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white border border-white/25 text-xs font-black">
                   <Flame className="w-3.5 h-3.5 text-amber-400" />
                   {tramoNombre}
                 </span>
@@ -775,7 +775,7 @@ export default function OrganizadoresClient() {
                 max="20"
                 value={serviciosMes}
                 onChange={(e) => setServiciosMes(Number(e.target.value))}
-                className="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                className="w-full h-3 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-slate-200"
               />
               <div className="flex justify-between text-[11px] font-bold text-slate-400 mt-2">
                 <span>1 servicio</span>
@@ -795,7 +795,7 @@ export default function OrganizadoresClient() {
                   onClick={() => setServiciosMes(num)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                     serviciosMes === num
-                      ? "bg-amber-400 text-slate-950 font-black"
+                      ? "bg-white text-slate-950 font-black shadow-md"
                       : "bg-slate-800 text-slate-300 hover:bg-slate-700"
                   }`}
                 >
@@ -822,7 +822,7 @@ export default function OrganizadoresClient() {
                 <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                   Facturación Sugerida al Cliente
                 </div>
-                <div className="text-2xl font-black text-amber-200">
+                <div className="text-2xl font-black text-slate-100">
                   ${facturacionSugerida.toLocaleString("es-AR")}
                 </div>
                 <div className="text-[11px] text-slate-400 mt-1">
@@ -830,29 +830,29 @@ export default function OrganizadoresClient() {
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/40">
-                <div className="text-[11px] font-bold text-amber-400 uppercase tracking-wider mb-1">
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/20">
+                <div className="text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1">
                   Tu Margen por Servicio
                 </div>
-                <div className="text-2xl font-black text-amber-300">
+                <div className="text-2xl font-black text-emerald-400">
                   ${margenUnitario.toLocaleString("es-AR")}{" "}
-                  <span className="text-xs font-bold">({porcentajeMargen}%)</span>
+                  <span className="text-xs font-bold text-slate-300">({porcentajeMargen}%)</span>
                 </div>
-                <div className="text-[11px] text-amber-300/80 mt-1">
+                <div className="text-[11px] text-slate-400 mt-1">
                   Ganancia directa por cada activación
                 </div>
               </div>
             </div>
 
             {/* GANANCIA TOTAL DESTACADA */}
-            <div className="p-6 rounded-2xl bg-gradient-to-r from-amber-950/80 via-yellow-950/40 to-slate-950 border border-amber-500/50 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800/60 to-slate-950 border border-slate-600/60 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <span className="text-xs font-extrabold uppercase tracking-widest text-amber-400">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-slate-300">
                   Ingreso Extra Estimado para tu Salón
                 </span>
                 <div className="text-3xl sm:text-5xl font-black text-white tracking-tight mt-1">
                   +${gananciaNetaEstimada.toLocaleString("es-AR")}{" "}
-                  <span className="text-base sm:text-lg font-bold text-amber-300">/ mes netos</span>
+                  <span className="text-base sm:text-lg font-bold text-slate-300">/ mes netos</span>
                 </div>
               </div>
 
@@ -860,7 +860,7 @@ export default function OrganizadoresClient() {
                 href={`https://wa.me/5492235851419?text=Hola!%20Estuve%20probando%20el%20simulador%20para%20${serviciosMes}%20servicios%20al%20mes%20y%20quiero%20coordinar%20una%20alianza%20con%20mi%20sal%C3%B3n.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm transition-all transform hover:-translate-y-0.5 shadow-lg shadow-amber-500/30"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-white via-slate-100 to-slate-300 hover:from-slate-100 hover:to-white text-slate-950 font-black text-sm transition-all transform hover:-translate-y-0.5 shadow-lg shadow-white/20"
               >
                 <WhatsAppIcon className="w-4 h-4" />
                 <span>Activar Alianza con este Volumen</span>
@@ -873,7 +873,7 @@ export default function OrganizadoresClient() {
       {/* ─── SECCIÓN 4: TARIFARIO COMPLETO (B2C COMBOS VS B2B PARTNERS) ─── */}
       <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-amber-400">
+          <span className="text-xs font-extrabold uppercase tracking-widest text-slate-300">
             Esquema Comercial Transparente
           </span>
           <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight mt-1 mb-3">
@@ -891,7 +891,7 @@ export default function OrganizadoresClient() {
               onClick={() => setPricingTab("b2b")}
               className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 pricingTab === "b2b"
-                  ? "bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-slate-950 font-black shadow-lg"
+                  ? "bg-gradient-to-r from-white to-slate-200 text-slate-950 font-black shadow-lg"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -901,7 +901,7 @@ export default function OrganizadoresClient() {
               onClick={() => setPricingTab("b2c")}
               className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all ${
                 pricingTab === "b2c"
-                  ? "bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-slate-950 font-black shadow-lg"
+                  ? "bg-gradient-to-r from-white to-slate-200 text-slate-950 font-black shadow-lg"
                   : "text-slate-400 hover:text-white"
               }`}
             >
@@ -927,7 +927,7 @@ export default function OrganizadoresClient() {
                 </p>
                 <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs mb-4">
                   <div className="text-slate-400">Margen vendiendo a $70k:</div>
-                  <div className="text-amber-300 font-bold text-sm">$20.000 por servicio (29%)</div>
+                  <div className="text-slate-200 font-bold text-sm">$20.000 por servicio (29%)</div>
                 </div>
               </div>
               <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-400">
@@ -952,7 +952,7 @@ export default function OrganizadoresClient() {
                 </p>
                 <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs mb-4">
                   <div className="text-slate-400">Margen vendiendo a $70k:</div>
-                  <div className="text-amber-300 font-bold text-sm">$30.000 por servicio (43%)</div>
+                  <div className="text-slate-200 font-bold text-sm">$30.000 por servicio (43%)</div>
                 </div>
               </div>
               <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-300">
@@ -960,27 +960,27 @@ export default function OrganizadoresClient() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-slate-900 border-2 border-amber-400/60 shadow-xl shadow-amber-500/20 flex flex-col justify-between relative">
-              <div className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-300 text-slate-950 text-[10px] font-black uppercase tracking-wider">
+            <div className="p-6 rounded-3xl bg-slate-900 border-2 border-white/80 shadow-xl shadow-white/10 flex flex-col justify-between relative">
+              <div className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-white text-slate-950 text-[10px] font-black uppercase tracking-wider">
                 Tarifa Salón VIP
               </div>
               <div>
-                <span className="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold uppercase tracking-wider">
+                <span className="px-2.5 py-1 rounded-full bg-white/10 text-white border border-white/30 text-[10px] font-bold uppercase tracking-wider">
                   9 o más servicios / mes
                 </span>
                 <h3 className="text-xl font-bold text-white mt-3 mb-1">Tramo 3 (VIP / Salón)</h3>
-                <div className="text-3xl font-black text-amber-300 mb-3">
+                <div className="text-3xl font-black text-white mb-3">
                   $30.000 <span className="text-xs text-slate-400 font-semibold">c/u</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed mb-5">
                   Tarifa preferencial para salones que incluyen la tecnología en todos sus paquetes.
                 </p>
-                <div className="p-3 rounded-xl bg-slate-950 border border-amber-500/30 text-xs mb-4">
+                <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs mb-4">
                   <div className="text-slate-400">Margen vendiendo a $70k:</div>
-                  <div className="text-amber-300 font-bold text-sm">$40.000 por servicio (57%)</div>
+                  <div className="text-emerald-400 font-bold text-sm">$40.000 por servicio (57%)</div>
                 </div>
               </div>
-              <div className="pt-4 border-t border-slate-800 text-[11px] text-amber-300">
+              <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-300">
                 • Máxima rentabilidad y soporte prioritario
               </div>
             </div>
@@ -1025,24 +1025,24 @@ export default function OrganizadoresClient() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-slate-900 border-2 border-amber-400/70 shadow-xl shadow-amber-500/20 flex flex-col justify-between relative">
-              <div className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-300 text-slate-950 text-[10px] font-black uppercase tracking-wider">
+            <div className="p-6 rounded-3xl bg-slate-900 border-2 border-white/80 shadow-xl shadow-white/10 flex flex-col justify-between relative">
+              <div className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-white text-slate-950 text-[10px] font-black uppercase tracking-wider">
                 Pack Estrella
               </div>
               <div>
-                <span className="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-bold uppercase tracking-wider">
+                <span className="px-2.5 py-1 rounded-full bg-white/10 text-white border border-white/30 text-[10px] font-bold uppercase tracking-wider">
                   Ahorro de $75.000
                 </span>
                 <h3 className="text-xl font-bold text-white mt-3 mb-1">Combo Full Suite (3 Servicios)</h3>
-                <div className="text-3xl font-black text-amber-300 mb-3">$135.000</div>
+                <div className="text-3xl font-black text-white mb-3">$135.000</div>
                 <p className="text-xs text-slate-300 leading-relaxed mb-5">
                   La experiencia integral: Invitación 3D antes de la fiesta + Trivia animada en la cena + Mural de fotos en vivo por QR.
                 </p>
-                <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[11px] text-amber-300 font-bold mb-4">
+                <div className="p-2.5 rounded-xl bg-white/5 border border-white/15 text-[11px] text-slate-200 font-bold mb-4">
                   Precio de lista separado: $210.000
                 </div>
               </div>
-              <div className="pt-4 border-t border-slate-800 text-[11px] text-amber-300">
+              <div className="pt-4 border-t border-slate-800 text-[11px] text-slate-300">
                 • Experiencia 360° para bodas y eventos premium
               </div>
             </div>
@@ -1050,11 +1050,11 @@ export default function OrganizadoresClient() {
         )}
       </section>
 
-      {/* ─── SECCIÓN 5: DESCARGA DE MATERIAL COMERCIAL EN PDF (DORADO Y PLATEADO) ─── */}
-      <section className="py-16 sm:py-20 bg-[#090b10] border-t border-amber-500/20">
+      {/* ─── SECCIÓN 5: DESCARGA DE MATERIAL COMERCIAL EN PDF (PLATEADO Y PLATINO) ─── */}
+      <section className="py-16 sm:py-20 bg-[#090b10] border-t border-white/15">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs font-bold uppercase tracking-widest text-amber-400">
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-300">
               Material para Descargar y Compartir
             </span>
             <h2 className="text-2xl sm:text-3xl font-black text-white mt-1 mb-2">
@@ -1065,24 +1065,24 @@ export default function OrganizadoresClient() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl bg-slate-900 border border-amber-500/30 flex flex-col justify-between hover:border-amber-400/50 transition-colors">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-600/70 flex flex-col justify-between hover:border-slate-400 transition-colors">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center mb-4">
                   <FileText className="w-5 h-5" />
                 </div>
-                <h4 className="text-lg font-bold text-white mb-1">Propuesta Comercial (1 Página A4)</h4>
+                <h4 className="text-lg font-bold text-white mb-1">Propuesta Comercial (1 Página)</h4>
                 <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-                  Resumen de alto impacto con los 3 servicios, comparativa rápida y la tabla de precios y tramos mayoristas.
+                  Resumen ejecutivo de alto impacto con los 3 servicios y la tabla de precios y tramos mayoristas.
                 </p>
               </div>
               <a
                 href="/docs/Propuesta_Comercial_Eventos_Kronitt.pdf"
                 download
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-slate-950 text-xs font-black transition-all shadow-md hover:from-amber-300 hover:to-amber-400"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-white via-slate-100 to-slate-300 text-slate-950 text-xs font-black transition-all shadow-md hover:from-slate-100 hover:to-white"
               >
                 <Download className="w-4 h-4" />
-                <span>Descargar Propuesta Comercial (PDF)</span>
+                <span>Descargar Propuesta (PDF)</span>
               </a>
             </div>
 
@@ -1091,9 +1091,9 @@ export default function OrganizadoresClient() {
                 <div className="w-10 h-10 rounded-xl bg-slate-800 text-slate-200 flex items-center justify-center mb-4">
                   <FileText className="w-5 h-5" />
                 </div>
-                <h4 className="text-lg font-bold text-white mb-1">Presentación Completa de Servicios (2 Páginas A4)</h4>
+                <h4 className="text-lg font-bold text-white mb-1">Presentación Completa (2 Páginas)</h4>
                 <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-                  Ficha completa con los 3 servicios en profundidad, especificaciones técnicas de pantalla y detalle de alianzas.
+                  Ficha completa con los 3 servicios en profundidad, requerimientos de pantalla y detalle de combos.
                 </p>
               </div>
               <a
@@ -1102,7 +1102,27 @@ export default function OrganizadoresClient() {
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-600 text-xs font-bold transition-colors"
               >
                 <Download className="w-4 h-4" />
-                <span>Descargar Presentación de Servicios (PDF)</span>
+                <span>Descargar Presentación (PDF)</span>
+              </a>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-slate-900 border border-slate-700 flex flex-col justify-between hover:border-slate-500 transition-colors">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-white/10 text-slate-200 flex items-center justify-center mb-4">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-1">Guía de Ventas (2 Páginas)</h4>
+                <p className="text-xs text-slate-300 mb-4 leading-relaxed">
+                  Mensajes modelo para WhatsApp, guión de reunión de 15 min y manejo de objeciones para salones y planners.
+                </p>
+              </div>
+              <a
+                href="/docs/Guia_Ventas_Eventos_Kronitt.pdf"
+                download
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-600 text-xs font-bold transition-colors"
+              >
+                <Download className="w-4 h-4" />
+                <span>Descargar Guía de Ventas (PDF)</span>
               </a>
             </div>
           </div>
@@ -1112,7 +1132,7 @@ export default function OrganizadoresClient() {
       {/* ─── SECCIÓN 6: PREGUNTAS FRECUENTES (FAQ ACORDEÓN) ─── */}
       <section className="py-16 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-400">
+          <span className="text-xs font-bold uppercase tracking-widest text-slate-300">
             Dudas Habituales
           </span>
           <h2 className="text-2xl sm:text-3xl font-black text-white mt-1 mb-2">
@@ -1131,11 +1151,11 @@ export default function OrganizadoresClient() {
             >
               <button
                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-amber-300 transition-colors"
+                className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-white hover:text-slate-200 transition-colors"
               >
                 <span>{faq.q}</span>
                 {openFaq === index ? (
-                  <ChevronUp className="w-5 h-5 text-amber-400 shrink-0" />
+                  <ChevronUp className="w-5 h-5 text-slate-300 shrink-0" />
                 ) : (
                   <ChevronDown className="w-5 h-5 text-slate-400 shrink-0" />
                 )}
@@ -1150,8 +1170,8 @@ export default function OrganizadoresClient() {
         </div>
       </section>
 
-      {/* ─── SECCIÓN 7: BANNER FINAL CON WHATSAPP (FONDO OSCURO Y DETALLES ORO/PLATA) ─── */}
-      <section className="py-20 bg-gradient-to-tr from-[#12141c] via-[#0b0c10] to-[#07080c] border-t border-amber-500/20 text-center px-4 sm:px-6">
+      {/* ─── SECCIÓN 7: BANNER FINAL CON WHATSAPP (FONDO OSCURO Y DETALLES EN PLATA) ─── */}
+      <section className="py-20 bg-gradient-to-tr from-[#10121a] via-[#090b10] to-[#07080a] border-t border-white/15 text-center px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <div className="w-14 h-14 rounded-2xl bg-[#25D366]/20 text-[#25D366] flex items-center justify-center mx-auto mb-6">
             <WhatsAppIcon className="w-8 h-8" />

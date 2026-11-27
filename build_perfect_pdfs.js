@@ -64,12 +64,12 @@ const commonCss = `
     border-radius: 50%;
     pointer-events: none;
     filter: blur(95px);
-    opacity: 0.14;
+    opacity: 0.12;
     z-index: 0;
   }
-  .glow-gold { top: -80px; right: -80px; background: #d4af37; opacity: 0.12; }
-  .glow-silver { bottom: -100px; left: -100px; background: #cbd5e1; opacity: 0.08; }
-  .glow-champagne { top: 40%; left: -100px; background: #fef08a; opacity: 0.09; }
+  .glow-gold { top: 40%; left: -100px; background: #d4af37; opacity: 0.05; }
+  .glow-silver { top: -80px; right: -80px; background: #ffffff; opacity: 0.10; }
+  .glow-champagne { bottom: -100px; left: -100px; background: #cbd5e1; opacity: 0.08; }
 
   .content-layer {
     position: relative;
@@ -86,7 +86,7 @@ const commonCss = `
     justify-content: space-between;
     align-items: center;
     padding-bottom: 10px;
-    border-bottom: 1.5px solid rgba(212, 175, 55, 0.25);
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
   }
   
   .brand-left {
@@ -99,18 +99,18 @@ const commonCss = `
     width: 36px;
     height: 36px;
     border-radius: 10px;
-    background: linear-gradient(135deg, #d4af37 0%, #fef08a 50%, #b8860b 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 45%, #94a3b8 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.45);
+    box-shadow: 0 4px 14px rgba(255, 255, 255, 0.25);
   }
   
   .brand-logo svg {
     width: 20px;
     height: 20px;
-    fill: #0c0d12;
-    stroke: #0c0d12;
+    fill: #08090e;
+    stroke: #08090e;
     stroke-width: 1.5;
   }
   
@@ -131,9 +131,9 @@ const commonCss = `
   }
   
   .badge-tag {
-    background: rgba(212, 175, 55, 0.12);
-    border: 1.5px solid rgba(212, 175, 55, 0.45);
-    color: #fef08a;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(226, 232, 240, 0.45);
+    color: #ffffff;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 10px;
@@ -158,7 +158,7 @@ const commonCss = `
     font-weight: 800;
   }
   .footer-bar a {
-    color: #fde047;
+    color: #ffffff;
     text-decoration: underline;
     font-weight: 800;
   }
@@ -171,7 +171,7 @@ const onePagerHtml = `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>One-Pager Ejecutivo - Eventos Kronitt</title>
+  <title>Propuesta Comercial - Eventos Kronitt</title>
   <style>
     ${commonCss}
     
@@ -190,7 +190,7 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     .hero-title span {
-      background: linear-gradient(90deg, #fef08a 0%, #d4af37 50%, #ffffff 100%);
+      background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 45%, #cbd5e1 75%, #fde047 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -221,9 +221,9 @@ const onePagerHtml = `<!DOCTYPE html>
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
     }
     
-    .card-amber { border-top: 4px solid #d4af37; }
-    .card-purple { border-top: 4px solid #e2e8f0; }
-    .card-pink { border-top: 4px solid #f59e0b; }
+    .card-amber { border-top: 4px solid #ffffff; }
+    .card-purple { border-top: 4px solid #cbd5e1; }
+    .card-pink { border-top: 4px solid #d4af37; }
     
     .svc-badge {
       display: inline-block;
@@ -233,9 +233,9 @@ const onePagerHtml = `<!DOCTYPE html>
       letter-spacing: 0.8px;
       margin-bottom: 3px;
     }
-    .badge-amber { color: #fde047; }
-    .badge-purple { color: #ffffff; }
-    .badge-pink { color: #fde68a; }
+    .badge-amber { color: #ffffff; }
+    .badge-purple { color: #e2e8f0; }
+    .badge-pink { color: #fde047; }
     
     .svc-name {
       font-size: 13px;
@@ -248,7 +248,7 @@ const onePagerHtml = `<!DOCTYPE html>
     .svc-price-tag {
       font-size: 10px;
       font-weight: 800;
-      color: #fef08a;
+      color: #ffffff;
       margin-bottom: 5px;
     }
     
@@ -276,9 +276,9 @@ const onePagerHtml = `<!DOCTYPE html>
       margin-top: 1px;
       stroke-width: 2.8;
     }
-    .icon-amber { stroke: #fde047; }
-    .icon-purple { stroke: #e2e8f0; }
-    .icon-pink { stroke: #fde68a; }
+    .icon-amber { stroke: #ffffff; }
+    .icon-purple { stroke: #cbd5e1; }
+    .icon-pink { stroke: #fde047; }
     
     .block-header {
       font-size: 11px;
@@ -295,7 +295,7 @@ const onePagerHtml = `<!DOCTYPE html>
     .block-header svg {
       width: 14px;
       height: 14px;
-      stroke: #d4af37;
+      stroke: #cbd5e1;
       fill: none;
       stroke-width: 2.5;
     }
@@ -315,9 +315,9 @@ const onePagerHtml = `<!DOCTYPE html>
       padding: 10px 12px;
     }
     .combo-box.featured {
-      border: 1.5px solid #d4af37;
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, #0d1224 100%);
-      box-shadow: 0 4px 18px rgba(212, 175, 55, 0.2);
+      border: 1.5px solid #ffffff;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, #0d1224 100%);
+      box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15);
     }
 
     .combo-tag {
@@ -325,7 +325,7 @@ const onePagerHtml = `<!DOCTYPE html>
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      color: #fde68a;
+      color: #ffffff;
       margin-bottom: 2px;
     }
     .combo-price {
@@ -349,7 +349,7 @@ const onePagerHtml = `<!DOCTYPE html>
 
     /* B2B Partner Table */
     .table-box {
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.22);
       border-radius: 11px;
       overflow: hidden;
       margin-bottom: 11px;
@@ -363,15 +363,15 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     th {
-      background: #151824;
+      background: #141724;
       padding: 7px 12px;
       text-align: left;
       font-weight: 900;
       font-size: 9.5px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #fde68a;
-      border-bottom: 1.5px solid rgba(212, 175, 55, 0.25);
+      color: #ffffff;
+      border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
     }
     
     td {
@@ -393,8 +393,8 @@ const onePagerHtml = `<!DOCTYPE html>
 
     /* Bottom Strip */
     .demo-strip {
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(226, 232, 240, 0.08) 100%);
-      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(203, 213, 225, 0.05) 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
       border-radius: 12px;
       padding: 9px 16px;
       display: flex;
@@ -416,8 +416,8 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     .demo-url-btn {
-      background: linear-gradient(135deg, #d4af37 0%, #fef08a 50%, #b8860b 100%);
-      color: #0c0d12 !important;
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 45%, #cbd5e1 100%);
+      color: #08090e !important;
       font-size: 11px;
       font-weight: 900;
       padding: 7px 16px;
@@ -427,9 +427,9 @@ const onePagerHtml = `<!DOCTYPE html>
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.45);
+      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
       cursor: pointer;
-      border: 1px solid rgba(254, 240, 138, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.9);
     }
   </style>
 </head>
@@ -627,7 +627,7 @@ const dossierHtml = `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Dossier Comercial B2B - Eventos Kronitt</title>
+  <title>Presentación de Servicios - Eventos Kronitt</title>
   <style>
     ${commonCss}
     
@@ -658,9 +658,9 @@ const dossierHtml = `<!DOCTYPE html>
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
     }
     
-    .sr-amber { border-left: 5px solid #d4af37; }
-    .sr-purple { border-left: 5px solid #e2e8f0; }
-    .sr-pink { border-left: 5px solid #f59e0b; }
+    .sr-amber { border-left: 5px solid #ffffff; }
+    .sr-purple { border-left: 5px solid #cbd5e1; }
+    .sr-pink { border-left: 5px solid #d4af37; }
     
     .sr-header {
       display: flex;
@@ -682,9 +682,9 @@ const dossierHtml = `<!DOCTYPE html>
       letter-spacing: 0.7px;
       padding: 3px 9px;
       border-radius: 6px;
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid rgba(212, 175, 55, 0.4);
-      color: #fef08a;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
     }
     
     .sr-body {
@@ -716,13 +716,13 @@ const dossierHtml = `<!DOCTYPE html>
     }
     
     .b2b-highlight {
-      background: rgba(212, 175, 55, 0.08);
-      border: 1px dashed rgba(212, 175, 55, 0.4);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px dashed rgba(255, 255, 255, 0.3);
       padding: 7px 12px;
       border-radius: 8px;
       font-size: 10.5px;
       font-weight: 700;
-      color: #fef3c7;
+      color: #f8fafc;
       line-height: 1.35;
     }
     
@@ -817,8 +817,8 @@ const dossierHtml = `<!DOCTYPE html>
     }
     
     .cta-link-pill {
-      background: linear-gradient(135deg, #d4af37 0%, #fef08a 50%, #b8860b 100%);
-      color: #0c0d12 !important;
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 45%, #cbd5e1 100%);
+      color: #08090e !important;
       font-size: 11.5px;
       font-weight: 900;
       padding: 8px 20px;
@@ -829,9 +829,9 @@ const dossierHtml = `<!DOCTYPE html>
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.45);
+      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
       cursor: pointer;
-      border: 1px solid rgba(254, 240, 138, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.9);
     }
   </style>
 </head>
@@ -923,7 +923,7 @@ const dossierHtml = `<!DOCTYPE html>
       </div>
 
       <div class="footer-bar">
-        <div><strong>EVENTOS KRONITT</strong> · Dossier Comercial B2B</div>
+        <div><strong>EVENTOS KRONITT</strong> · Presentación de Servicios</div>
         <div>Página 01 de 02 · Showroom: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
       </div>
     </div>
@@ -1020,7 +1020,7 @@ const dossierHtml = `<!DOCTYPE html>
       </div>
 
       <div class="footer-bar">
-        <div><strong>EVENTOS KRONITT</strong> · Dossier Comercial B2B</div>
+        <div><strong>EVENTOS KRONITT</strong> · Presentación de Servicios</div>
         <div>Showroom Interactivo: <a href="https://kronitt.com.ar/organizadores" target="_blank">kronitt.com.ar/organizadores</a></div>
       </div>
     </div>
@@ -1035,7 +1035,7 @@ const playbookHtml = `<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Playbook de Ventas B2B - Eventos Kronitt</title>
+  <title>Guía de Ventas para Organizadores - Eventos Kronitt</title>
   <style>
     ${commonCss}
 
@@ -1065,7 +1065,7 @@ const playbookHtml = `<!DOCTYPE html>
     .section-title svg {
       width: 15px;
       height: 15px;
-      stroke: #a855f7;
+      stroke: #ffffff;
       fill: none;
       stroke-width: 2.2;
     }
@@ -1081,7 +1081,7 @@ const playbookHtml = `<!DOCTYPE html>
       font-size: 10px;
       font-weight: 800;
       text-transform: uppercase;
-      color: #818cf8;
+      color: #ffffff;
       letter-spacing: 0.5px;
       margin-bottom: 5px;
     }
@@ -1123,8 +1123,8 @@ const playbookHtml = `<!DOCTYPE html>
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #d4af37, #fef08a);
-      color: #0c0d12;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1);
+      color: #08090e;
       font-weight: 900;
       font-size: 11px;
       display: flex;
@@ -1315,7 +1315,7 @@ const playbookHtml = `<!DOCTYPE html>
             <div class="step-number">3</div>
             <div class="step-info">
               <strong>Propuesta Comercial & Evento Piloto (7 min)</strong>
-              <p>Presentar el esquema mayorista ($50k / $35k / $25k). Ofrecer un primer evento piloto bonificado para que comprueben la satisfacción de los clientes y la sencillez técnica.</p>
+              <p>Presentar el esquema mayorista ($50k / $40k / $30k). Ofrecer un primer evento piloto bonificado para que comprueben la satisfacción de los clientes y la sencillez técnica.</p>
             </div>
           </div>
         </div>

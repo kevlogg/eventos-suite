@@ -56,7 +56,7 @@ function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
 
 export default function HomePage() {
   return (
-    <div className="relative bg-transparent text-slate-100 selection:bg-indigo-500 selection:text-white min-h-screen w-full max-w-full overflow-x-hidden">
+    <div className="relative bg-transparent text-slate-100 selection:bg-slate-300 selection:text-slate-950 min-h-screen w-full max-w-full overflow-x-hidden">
       {/* ─── PANTALLA 1: BOLA DE BOLICHE 3D & CANVAS DE LUCES PERSISTENTE ─── */}
       <DiscoBallHero />
 
@@ -120,13 +120,13 @@ export default function HomePage() {
               <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={140} />
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#090a14]/95 border border-purple-500/50 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-purple-500/25 backdrop-blur-md">
+                  <div className="w-14 h-14 rounded-2xl bg-[#090a14]/95 border border-slate-400/50 flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-white/10 backdrop-blur-md">
                     <Trophy className="w-7 h-7" />
                   </div>
-                  <div className="text-xs font-black uppercase tracking-widest text-purple-300 mb-2 drop-shadow-md">
+                  <div className="text-xs font-black uppercase tracking-widest text-slate-300 mb-2 drop-shadow-md">
                     Servicio 02
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-purple-200 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-slate-200 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
                     Trivia Fiesta en Vivo
                   </h3>
                   <p className="text-sm sm:text-base text-slate-100 font-semibold leading-relaxed mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000,_0_4px_14px_rgba(0,0,0,0.95)]">
@@ -134,7 +134,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 text-sm font-bold text-purple-300 group-hover:translate-x-1 transition-transform drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_2px_#000]">
+                <div className="flex items-center gap-2 text-sm font-bold text-slate-300 group-hover:text-white group-hover:translate-x-1 transition-transform drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_2px_#000]">
                   <span>Ver detalles del servicio</span>
                   <ChevronRight size={16} />
                 </div>
@@ -149,13 +149,13 @@ export default function HomePage() {
               <DiscoMirrorHover tileSize={18} gap={2} spotlightRadius={140} />
               <div className="relative z-10 flex flex-col justify-between h-full">
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#090a14]/95 border border-pink-500/50 flex items-center justify-center text-pink-400 mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-pink-500/25 backdrop-blur-md">
+                  <div className="w-14 h-14 rounded-2xl bg-[#090a14]/95 border border-slate-300/50 flex items-center justify-center text-slate-100 mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-white/10 backdrop-blur-md">
                     <Camera className="w-7 h-7" />
                   </div>
-                  <div className="text-xs font-black uppercase tracking-widest text-pink-300 mb-2 drop-shadow-md">
+                  <div className="text-xs font-black uppercase tracking-widest text-slate-300 mb-2 drop-shadow-md">
                     Servicio 03
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-pink-200 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 group-hover:text-slate-200 transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000]">
                     Fotos Dinámicas por QR
                   </h3>
                   <p className="text-sm sm:text-base text-slate-100 font-semibold leading-relaxed mb-6 drop-shadow-[0_2px_6px_rgba(0,0,0,1)] [text-shadow:_0_1px_3px_#000,_0_2px_8px_#000,_0_4px_14px_rgba(0,0,0,0.95)]">
@@ -163,7 +163,7 @@ export default function HomePage() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 text-sm font-bold text-pink-300 group-hover:translate-x-1 transition-transform drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_2px_#000]">
+                <div className="flex items-center gap-2 text-sm font-bold text-slate-300 group-hover:text-white group-hover:translate-x-1 transition-transform drop-shadow-[0_2px_4px_rgba(0,0,0,1)] [text-shadow:_0_1px_2px_#000]">
                   <span>Ver detalles del servicio</span>
                   <ChevronRight size={16} />
                 </div>
@@ -308,14 +308,14 @@ export default function HomePage() {
           {/* Ambient Glow */}
           <div
             aria-hidden="true"
-            className="absolute top-1/3 -right-32 w-96 h-96 rounded-full bg-purple-600/10 blur-3xl pointer-events-none"
+            className="absolute top-1/3 -right-32 w-96 h-96 rounded-full bg-slate-300/5 blur-3xl pointer-events-none"
           />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               {/* Visual: Presentador en Vivo, Pantalla Gigante con Podio y Mesas con QR */}
               <div className="lg:col-span-6 order-2 lg:order-1">
-                <div className="relative rounded-[32px] p-1.5 bg-gradient-to-br from-purple-500/50 via-indigo-500/30 to-pink-500/40 shadow-[0_25px_60px_rgba(0,0,0,0.85)] group">
+                <div className="relative rounded-[32px] p-1.5 bg-gradient-to-br from-white/40 via-slate-300/20 to-slate-500/30 shadow-[0_25px_60px_rgba(0,0,0,0.85)] group">
                   <div className="relative rounded-[26px] overflow-hidden bg-slate-950 aspect-[4/3] sm:aspect-[16/11]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -327,7 +327,7 @@ export default function HomePage() {
                     />
 
                     {/* Live Badge Overlay */}
-                    <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-purple-400/50 flex items-center gap-2 text-[11px] font-black tracking-wider uppercase text-purple-200 shadow-lg">
+                    <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/30 flex items-center gap-2 text-[11px] font-black tracking-wider uppercase text-slate-100 shadow-lg">
                       <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
                       <span>En Vivo en el Evento</span>
                     </div>
@@ -337,7 +337,7 @@ export default function HomePage() {
                       <span className="text-xs sm:text-sm font-black text-white drop-shadow-md">
                         🎤 Conducción en Vivo + Pantalla Gigante LED + Mesas Jugando por QR
                       </span>
-                      <span className="text-[10px] sm:text-xs text-purple-200/90 font-medium drop-shadow-sm">
+                      <span className="text-[10px] sm:text-xs text-slate-300 font-medium drop-shadow-sm">
                         Los invitados compiten en tiempo real desde sus celulares mientras el podio se actualiza al instante en la pantalla.
                       </span>
                     </div>
@@ -349,12 +349,12 @@ export default function HomePage() {
               <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col gap-6">
                 <h3 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
                   Trivia Fiesta:{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
                     el show que hace jugar a todos
                   </span>
                 </h3>
 
-                <div className="p-4 sm:p-5 rounded-2xl bg-[#080812]/85 border-l-4 border-purple-400 border border-white/12 backdrop-blur-md shadow-lg shadow-black/50">
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#080812]/85 border-l-4 border-slate-300 border border-white/12 backdrop-blur-md shadow-lg shadow-black/50">
                   <p className="text-base sm:text-lg text-slate-100 font-medium leading-relaxed drop-shadow-sm">
                     Transformá el momento de la cena o la recepción en un programa de televisión interactivo. Los invitados escanean el código QR proyectado en la pantalla gigante y responden preguntas desde su smartphone contra el reloj.
                   </p>
@@ -363,7 +363,7 @@ export default function HomePage() {
                 {/* Steps */}
                 <div className="flex flex-col gap-3.5 pt-2">
                   <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <div className="w-8 h-8 rounded-full bg-purple-600/25 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-full bg-white/10 border border-white/25 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                       1
                     </div>
                     <div>
@@ -373,7 +373,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <div className="w-8 h-8 rounded-full bg-purple-600/25 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-full bg-white/10 border border-white/25 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                       2
                     </div>
                     <div>
@@ -383,7 +383,7 @@ export default function HomePage() {
                   </div>
 
                   <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#0c0c16]/80 border border-white/12 backdrop-blur-md shadow-sm">
-                    <div className="w-8 h-8 rounded-full bg-purple-600/25 border border-purple-500/40 text-purple-300 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-full bg-white/10 border border-white/25 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                       3
                     </div>
                     <div>
@@ -497,7 +497,7 @@ export default function HomePage() {
 
               {/* Visual: Mural de Fotos en Vivo en Pantalla Gigante & Mesa con QR */}
               <div className="lg:col-span-6">
-                <div className="relative rounded-[32px] p-1.5 bg-gradient-to-br from-pink-500/50 via-rose-500/30 to-purple-500/40 shadow-[0_25px_60px_rgba(0,0,0,0.85)] group">
+                <div className="relative rounded-[32px] p-1.5 bg-gradient-to-br from-white/30 via-slate-400/20 to-slate-600/30 shadow-[0_25px_60px_rgba(0,0,0,0.85)] group">
                   <div className="relative rounded-[26px] overflow-hidden bg-slate-950 aspect-[4/3] sm:aspect-[16/11]">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -509,8 +509,8 @@ export default function HomePage() {
                     />
 
                     {/* Live Badge Overlay */}
-                    <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-pink-400/50 flex items-center gap-2 text-[11px] font-black tracking-wider uppercase text-pink-200 shadow-lg">
-                      <span className="w-2 h-2 rounded-full bg-pink-500 animate-ping" />
+                    <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/30 flex items-center gap-2 text-[11px] font-black tracking-wider uppercase text-slate-100 shadow-lg">
+                      <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
                       <span>Transmisión en Vivo</span>
                     </div>
 
@@ -519,7 +519,7 @@ export default function HomePage() {
                       <span className="text-xs sm:text-sm font-black text-white drop-shadow-md">
                         📸 QR en Cada Mesa + Fotos Proyectadas al Instante en Pantalla
                       </span>
-                      <span className="text-[10px] sm:text-xs text-pink-200/90 font-medium drop-shadow-sm">
+                      <span className="text-[10px] sm:text-xs text-slate-300 font-medium drop-shadow-sm">
                         Los invitados capturan momentos únicos desde sus celulares y se proyectan al instante con dedicatorias.
                       </span>
                     </div>
@@ -534,11 +534,11 @@ export default function HomePage() {
         <footer className="border-t border-white/10 py-12 sm:py-16 bg-black/35 backdrop-blur-md w-full max-w-full overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-8">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
-                <Sparkles className="w-5 h-5 text-white" />
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-white via-slate-200 to-slate-400 flex items-center justify-center shadow-lg shadow-white/10 text-slate-950">
+                <Sparkles className="w-5 h-5" />
               </div>
               <span className="font-extrabold text-xl tracking-tight text-white">
-                Eventos Suite
+                Eventos Kronitt
               </span>
             </div>
 
@@ -565,7 +565,7 @@ export default function HomePage() {
                 Fotos QR
               </a>
               <span>·</span>
-              <Link href="/organizadores" className="text-indigo-400 hover:text-indigo-300 font-bold transition-colors">
+              <Link href="/organizadores" className="text-slate-200 hover:text-white font-bold transition-colors">
                 Para Salones & Planners
               </Link>
             </div>
@@ -576,7 +576,7 @@ export default function HomePage() {
                 href="https://kevdev.net.ar"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-white hover:text-indigo-400 transition-colors underline decoration-indigo-500/50 underline-offset-4"
+                className="font-bold text-white hover:text-slate-200 transition-colors underline decoration-white/30 underline-offset-4"
               >
                 kevdev
               </a>
