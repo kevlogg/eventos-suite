@@ -8,13 +8,13 @@
 }
 
 :root {
-  --background: #090d16;
+  --background: #08090d;
   --foreground: #f8fafc;
-  --primary: #6366f1;
-  --primary-hover: #4f46e5;
-  --accent: #ec4899;
-  --surface: #131b2e;
-  --surface-border: rgba(255, 255, 255, 0.08);
+  --primary: #d4af37;
+  --primary-hover: #b8860b;
+  --accent: #f59e0b;
+  --surface: #10121a;
+  --surface-border: rgba(212, 175, 55, 0.15);
 
   /* Invitation Theme Tokens */
   --cream:        #FDFBF7;

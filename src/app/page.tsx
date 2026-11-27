@@ -70,7 +70,7 @@ export default function HomePage() {
           <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
             <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-6 leading-tight drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
               Servicios interactivos para{" "}
-              <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-400 bg-clip-text text-transparent">
                 eventos inolvidables
               </span>
             </h2>
@@ -534,7 +534,7 @@ export default function HomePage() {
         <footer className="border-t border-white/10 py-12 sm:py-16 bg-black/35 backdrop-blur-md w-full max-w-full overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center gap-8">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <span className="font-extrabold text-xl tracking-tight text-white">

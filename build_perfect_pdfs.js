@@ -64,12 +64,12 @@ const commonCss = `
     border-radius: 50%;
     pointer-events: none;
     filter: blur(95px);
-    opacity: 0.18;
+    opacity: 0.14;
     z-index: 0;
   }
-  .glow-purple { top: -80px; right: -80px; background: #9333ea; }
-  .glow-pink { bottom: -100px; left: -100px; background: #ec4899; }
-  .glow-indigo { top: 40%; left: -100px; background: #4f46e5; }
+  .glow-gold { top: -80px; right: -80px; background: #d4af37; opacity: 0.12; }
+  .glow-silver { bottom: -100px; left: -100px; background: #cbd5e1; opacity: 0.08; }
+  .glow-champagne { top: 40%; left: -100px; background: #fef08a; opacity: 0.09; }
 
   .content-layer {
     position: relative;
@@ -86,7 +86,7 @@ const commonCss = `
     justify-content: space-between;
     align-items: center;
     padding-bottom: 10px;
-    border-bottom: 1.5px solid rgba(255, 255, 255, 0.14);
+    border-bottom: 1.5px solid rgba(212, 175, 55, 0.25);
   }
   
   .brand-left {
@@ -99,19 +99,19 @@ const commonCss = `
     width: 36px;
     height: 36px;
     border-radius: 10px;
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    background: linear-gradient(135deg, #d4af37 0%, #fef08a 50%, #b8860b 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.45);
   }
   
   .brand-logo svg {
     width: 20px;
     height: 20px;
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 2.2;
+    fill: #0c0d12;
+    stroke: #0c0d12;
+    stroke-width: 1.5;
   }
   
   .brand-name {
@@ -131,9 +131,9 @@ const commonCss = `
   }
   
   .badge-tag {
-    background: rgba(99, 102, 241, 0.2);
-    border: 1.5px solid rgba(99, 102, 241, 0.5);
-    color: #e0e7ff;
+    background: rgba(212, 175, 55, 0.12);
+    border: 1.5px solid rgba(212, 175, 55, 0.45);
+    color: #fef08a;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 10px;
@@ -158,7 +158,7 @@ const commonCss = `
     font-weight: 800;
   }
   .footer-bar a {
-    color: #a5b4fc;
+    color: #fde047;
     text-decoration: underline;
     font-weight: 800;
   }
@@ -190,7 +190,7 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     .hero-title span {
-      background: linear-gradient(90deg, #93c5fd 0%, #c084fc 50%, #f472b6 100%);
+      background: linear-gradient(90deg, #fef08a 0%, #d4af37 50%, #ffffff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -221,9 +221,9 @@ const onePagerHtml = `<!DOCTYPE html>
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
     }
     
-    .card-amber { border-top: 4px solid #f59e0b; }
-    .card-purple { border-top: 4px solid #a855f7; }
-    .card-pink { border-top: 4px solid #ec4899; }
+    .card-amber { border-top: 4px solid #d4af37; }
+    .card-purple { border-top: 4px solid #e2e8f0; }
+    .card-pink { border-top: 4px solid #f59e0b; }
     
     .svc-badge {
       display: inline-block;
@@ -233,9 +233,9 @@ const onePagerHtml = `<!DOCTYPE html>
       letter-spacing: 0.8px;
       margin-bottom: 3px;
     }
-    .badge-amber { color: #fcd34d; }
-    .badge-purple { color: #d8b4fe; }
-    .badge-pink { color: #f9a8d4; }
+    .badge-amber { color: #fde047; }
+    .badge-purple { color: #ffffff; }
+    .badge-pink { color: #fde68a; }
     
     .svc-name {
       font-size: 13px;
@@ -248,7 +248,7 @@ const onePagerHtml = `<!DOCTYPE html>
     .svc-price-tag {
       font-size: 10px;
       font-weight: 800;
-      color: #38bdf8;
+      color: #fef08a;
       margin-bottom: 5px;
     }
     
@@ -276,9 +276,9 @@ const onePagerHtml = `<!DOCTYPE html>
       margin-top: 1px;
       stroke-width: 2.8;
     }
-    .icon-amber { stroke: #fbbf24; }
-    .icon-purple { stroke: #c084fc; }
-    .icon-pink { stroke: #f472b6; }
+    .icon-amber { stroke: #fde047; }
+    .icon-purple { stroke: #e2e8f0; }
+    .icon-pink { stroke: #fde68a; }
     
     .block-header {
       font-size: 11px;
@@ -295,7 +295,7 @@ const onePagerHtml = `<!DOCTYPE html>
     .block-header svg {
       width: 14px;
       height: 14px;
-      stroke: #818cf8;
+      stroke: #d4af37;
       fill: none;
       stroke-width: 2.5;
     }
@@ -315,8 +315,9 @@ const onePagerHtml = `<!DOCTYPE html>
       padding: 10px 12px;
     }
     .combo-box.featured {
-      border: 1.5px solid #a855f7;
-      background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, #0d1224 100%);
+      border: 1.5px solid #d4af37;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, #0d1224 100%);
+      box-shadow: 0 4px 18px rgba(212, 175, 55, 0.2);
     }
 
     .combo-tag {
@@ -324,7 +325,7 @@ const onePagerHtml = `<!DOCTYPE html>
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      color: #93c5fd;
+      color: #fde68a;
       margin-bottom: 2px;
     }
     .combo-price {
@@ -348,7 +349,7 @@ const onePagerHtml = `<!DOCTYPE html>
 
     /* B2B Partner Table */
     .table-box {
-      border: 1px solid rgba(99, 102, 241, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 11px;
       overflow: hidden;
       margin-bottom: 11px;
@@ -362,15 +363,15 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     th {
-      background: #141c36;
+      background: #151824;
       padding: 7px 12px;
       text-align: left;
       font-weight: 900;
       font-size: 9.5px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #cbd5e1;
-      border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);
+      color: #fde68a;
+      border-bottom: 1.5px solid rgba(212, 175, 55, 0.25);
     }
     
     td {
@@ -392,8 +393,8 @@ const onePagerHtml = `<!DOCTYPE html>
 
     /* Bottom Strip */
     .demo-strip {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.22) 0%, rgba(168, 85, 247, 0.22) 100%);
-      border: 1.5px solid rgba(99, 102, 241, 0.45);
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(226, 232, 240, 0.08) 100%);
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
       border-radius: 12px;
       padding: 9px 16px;
       display: flex;
@@ -415,10 +416,10 @@ const onePagerHtml = `<!DOCTYPE html>
     }
     
     .demo-url-btn {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      color: #ffffff !important;
+      background: linear-gradient(135deg, #d4af37 0%, #fef08a 50%, #b8860b 100%);
+      color: #0c0d12 !important;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       padding: 7px 16px;
       border-radius: 9px;
       letter-spacing: 0.3px;
@@ -426,16 +427,16 @@ const onePagerHtml = `<!DOCTYPE html>
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.45);
       cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(254, 240, 138, 0.9);
     }
   </style>
 </head>
 <body>
   <div class="page">
-    <div class="bg-glow glow-purple"></div>
-    <div class="bg-glow glow-pink"></div>
+    <div class="bg-glow glow-gold"></div>
+    <div class="bg-glow glow-silver"></div>
     
     <div class="content-layer">
       <!-- HEADER -->
@@ -657,9 +658,9 @@ const dossierHtml = `<!DOCTYPE html>
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
     }
     
-    .sr-amber { border-left: 5px solid #f59e0b; }
-    .sr-purple { border-left: 5px solid #a855f7; }
-    .sr-pink { border-left: 5px solid #ec4899; }
+    .sr-amber { border-left: 5px solid #d4af37; }
+    .sr-purple { border-left: 5px solid #e2e8f0; }
+    .sr-pink { border-left: 5px solid #f59e0b; }
     
     .sr-header {
       display: flex;
@@ -681,8 +682,9 @@ const dossierHtml = `<!DOCTYPE html>
       letter-spacing: 0.7px;
       padding: 3px 9px;
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.08);
-      color: #38bdf8;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: #fef08a;
     }
     
     .sr-body {
@@ -714,13 +716,13 @@ const dossierHtml = `<!DOCTYPE html>
     }
     
     .b2b-highlight {
-      background: rgba(99, 102, 241, 0.12);
-      border: 1px dashed rgba(99, 102, 241, 0.4);
+      background: rgba(212, 175, 55, 0.08);
+      border: 1px dashed rgba(212, 175, 55, 0.4);
       padding: 7px 12px;
       border-radius: 8px;
       font-size: 10.5px;
       font-weight: 700;
-      color: #e0e7ff;
+      color: #fef3c7;
       line-height: 1.35;
     }
     
@@ -815,10 +817,10 @@ const dossierHtml = `<!DOCTYPE html>
     }
     
     .cta-link-pill {
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      color: #ffffff !important;
+      background: linear-gradient(135deg, #d4af37 0%, #fef08a 50%, #b8860b 100%);
+      color: #0c0d12 !important;
       font-size: 11.5px;
-      font-weight: 800;
+      font-weight: 900;
       padding: 8px 20px;
       border-radius: 9px;
       margin-top: 3px;
@@ -827,17 +829,17 @@ const dossierHtml = `<!DOCTYPE html>
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.4);
+      box-shadow: 0 4px 16px rgba(212, 175, 55, 0.45);
       cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(254, 240, 138, 0.9);
     }
   </style>
 </head>
 <body>
   <!-- PAGE 1: LOS 3 SERVICIOS DETALLADOS -->
   <div class="page">
-    <div class="bg-glow glow-indigo"></div>
-    <div class="bg-glow glow-purple"></div>
+    <div class="bg-glow glow-gold"></div>
+    <div class="bg-glow glow-silver"></div>
     
     <div class="content-layer">
       <div class="header-brand">
@@ -929,8 +931,8 @@ const dossierHtml = `<!DOCTYPE html>
 
   <!-- PAGE 2: TECH & 3 COMMERCIAL MODELS -->
   <div class="page">
-    <div class="bg-glow glow-pink"></div>
-    <div class="bg-glow glow-purple"></div>
+    <div class="bg-glow glow-champagne"></div>
+    <div class="bg-glow glow-silver"></div>
     
     <div class="content-layer">
       <div class="header-brand">
@@ -1121,8 +1123,8 @@ const playbookHtml = `<!DOCTYPE html>
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #6366f1, #a855f7);
-      color: #ffffff;
+      background: linear-gradient(135deg, #d4af37, #fef08a);
+      color: #0c0d12;
       font-weight: 900;
       font-size: 11px;
       display: flex;
@@ -1237,8 +1239,8 @@ const playbookHtml = `<!DOCTYPE html>
 <body>
   <!-- PAGE 1: PROSPECCIÓN INICIAL & PITCH DE DEMO -->
   <div class="page">
-    <div class="bg-glow glow-purple"></div>
-    <div class="bg-glow glow-pink"></div>
+    <div class="bg-glow glow-gold"></div>
+    <div class="bg-glow glow-silver"></div>
 
     <div class="content-layer">
       <div class="header-brand">
@@ -1328,8 +1330,8 @@ const playbookHtml = `<!DOCTYPE html>
 
   <!-- PAGE 2: REENVÍO A CLIENTES & MANEJO DE OBJECIONES -->
   <div class="page">
-    <div class="bg-glow glow-indigo"></div>
-    <div class="bg-glow glow-pink"></div>
+    <div class="bg-glow glow-champagne"></div>
+    <div class="bg-glow glow-silver"></div>
 
     <div class="content-layer">
       <div class="header-brand">
